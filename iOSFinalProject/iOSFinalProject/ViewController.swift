@@ -16,10 +16,6 @@ class ViewController: UIViewController {
     // Header
     @IBOutlet weak var dateButton: UIButton!
     
-    @IBOutlet weak var backArrowButton: UIButton!
-    
-    @IBOutlet weak var forwardArrowButton: UIButton!
-    
     @IBOutlet weak var settingsButton: UIButton!
     
     
@@ -28,16 +24,32 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Set date
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd, yyyy"
+        updateDate()
+    }
+    
+    @IBAction func arrowButtonTapped(_ sender: UIButton) {
+        
+        
+        let calendar = Calendar.current
+        // Back arrow
+        if sender.tag == 0 {
+            displayedDate = calendar.date(byAdding: .day, value: -1, to: displayedDate)!
+        }
+            
+        // Forward arrow
+        else {
+            displayedDate = calendar.date(byAdding: .day, value: 1, to: displayedDate)!
+        }
+        updateDate()
+    }
+    
+    func updateDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
         let dateString = dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 
 
 }

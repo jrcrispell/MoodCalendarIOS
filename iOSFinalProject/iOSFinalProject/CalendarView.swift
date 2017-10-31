@@ -9,6 +9,30 @@
 import Foundation
 import UIKit
 
-class CalendarView: UIButton {
+class CalendarView: UIView {
     
+    var viewControllerDelegate: ViewControllerDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+
+
+    }
+    
+    override func draw(_ rect: CGRect) {
+
+        if let daysEvents = viewControllerDelegate?.getDaysEvents() {
+        for event in daysEvents {
+            print(event.eventDescription)
+        }
+        }
+    }
+}
+
+protocol ViewControllerDelegate {
+    func getDaysEvents() -> [CalendarActivity]
 }

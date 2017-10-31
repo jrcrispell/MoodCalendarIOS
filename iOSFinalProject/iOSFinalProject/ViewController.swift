@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ViewControllerDelegate {
     
     // Date data
     var displayedDate = Date()
@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var settingsButton: UIButton!
     
+    var daysEvents = [CalendarActivity]()
+    
+    @IBOutlet weak var calendarView: CalendarView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +28,11 @@ class ViewController: UIViewController {
         
         // Set date
         updateDate()
+        
+        daysEvents.append(CalendarActivity(startTime: 8, endTime: 9, eventDescription: "Test", moodScore: 8))
+        
+        // Set delegate
+        calendarView.viewControllerDelegate = self
     }
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {
@@ -48,6 +56,10 @@ class ViewController: UIViewController {
         dateFormatter.dateFormat = "MMM d, yyyy"
         let dateString = dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
+    }
+    
+    func getDaysEvents() -> [CalendarActivity] {
+        return daysEvents
     }
     
 

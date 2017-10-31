@@ -9,3 +9,18 @@
 import Foundation
 import UIKit
 
+class CalendarActivity: NSObject {
+    
+    var startTime: Double
+    var endTime: Double
+    var description: String
+    var moodScore: Int
+    
+    required init(startTime: Double, endTime: Double, description: String, moodScore: Int) {
+        self.startTime = startTime
+        self.endTime = endTime
+        self.description = description
+        self.moodScore = moodScore
+    }
+    
+}

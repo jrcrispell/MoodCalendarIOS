@@ -55,10 +55,8 @@
                                 </constraints>
                                 <state key="normal" image="SettingsIcon"/>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
-                                <rect key="frame" x="103" y="181" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="75.5" width="375" height="591.5"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -66,13 +64,17 @@
                             <constraint firstItem="FxP-8z-toi" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="0O3-Fi-8or"/>
                             <constraint firstAttribute="trailing" secondItem="enr-Fw-NDa" secondAttribute="trailing" id="0g6-Dz-w9I"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="2u8-Eo-w3Q"/>
+                            <constraint firstAttribute="trailing" secondItem="Xcz-R0-hWw" secondAttribute="trailing" id="4WZ-31-BNy"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" id="BuW-GZ-9U7"/>
+                            <constraint firstItem="Xcz-R0-hWw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CUT-hm-uwV"/>
                             <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="F4j-AR-38a"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="enr-Fw-NDa" secondAttribute="centerX" id="K9t-hQ-589"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="MkJ-kT-KZv"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OBC-QS-c5G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FxP-8z-toi" secondAttribute="trailing" constant="16" id="Uqw-WY-XJB"/>
+                            <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="eIX-bE-ODj" secondAttribute="bottom" constant="8" id="Vly-SB-tnT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xcz-R0-hWw" secondAttribute="bottom" id="dej-i1-FHi"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="leading" secondItem="6g9-h5-Nna" secondAttribute="trailing" id="tSv-ce-Rel"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="width" secondItem="enr-Fw-NDa" secondAttribute="width" multiplier="0.45" id="xeP-Wh-zqQ"/>

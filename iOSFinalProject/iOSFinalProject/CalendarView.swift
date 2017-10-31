@@ -13,34 +13,36 @@ class CalendarView: UIView {
     
     var viewControllerDelegate: ViewControllerDelegate?
     
+    // Instantiating drawable objects here so it's not done in draw()
     var hourBezier = UIBezierPath()
     var halfHourBezier = UIBezierPath()
+    var eventRectangles: [CGRect] = []
     
-    var lineStartX: Double = 75
-    var lineEndX: Double = 600
-    var firstLineY: Double = 11
-    var hourVerticalPoints: Double = 48.7
+    // Location values
+    let lineStartX: Double = 75
+    let lineEndX: Double = 600
+    let firstLineY: Double = 11
+    let hourVerticalPoints: Double = 48.7
+    let activityStartX: Double = 86
+    let activityWidth: Double = 215
+    
 
     
     // Old globals
-//    var g_oneHourVerticalPoints: Double = 48.7
 //    var g_moodRectangleXPosition = 315
 //    var g_moodValueIndentation = 17
-//    var g_firstLineYPosition: Double = 11
 //    var g_moodRectangleWidth = 120
-//    var g_eventRectangleLeadingX: Double = 86
-//    var g_eventRectangleWidth: Double = 215
 //    var g_draggableLineHeight: Double = 10
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        makeEventRectangles()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
-
+        makeEventRectangles()
     }
     
     override func draw(_ rect: CGRect) {
@@ -69,11 +71,23 @@ class CalendarView: UIView {
         }
 
 
+        for rect in eventRectangles {
+            //TODO: - draw rectangle
+        }
+    }
+
+    
+    func makeEventRectangles() {
         if let daysEvents = viewControllerDelegate?.getDaysEvents() {
-        for event in daysEvents {
-            print(event.eventDescription)
+            for event in daysEvents {
+                let rectangleStartY = activityTimeToY(time: event.startTime)
+                eventRectangles.append(CGRect(x: activityStartX, y: rectangleStartY, width: activityWidth, height: activityTimeToY(time: event.endTime) - rectangleStartY))
+            }
         }
-        }
+    }
+    
+    func activityTimeToY(time: Double) -> Double {
+        return firstLineY + hourVerticalPoints * time
     }
 }
 

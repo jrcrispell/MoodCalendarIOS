@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			children = (
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
 				868F699F1FA10B9A0060016F /* CalendarView.swift */,
+				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
 				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
 				86E242081F7C1A5700C1B63C /* ViewController.swift */,
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
@@ -150,6 +153,7 @@
 				86E242091F7C1A5700C1B63C /* ViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
+				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

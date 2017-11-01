@@ -9,6 +9,15 @@
 import Foundation
 import UIKit
 
+// Global Location values
+let g_lineStartX: Double = 75
+let g_lineEndX: Double = 600
+let g_firstLineY: Double = 11
+let g_hourVerticalPoints: Double = 48.7
+let g_activityStartX: Double = 86
+let g_activityWidth: Double = 215
+
+
 class CalendarView: UIView {
     
     var viewControllerDelegate: ViewControllerDelegate?
@@ -18,13 +27,7 @@ class CalendarView: UIView {
     var halfHourBezier = UIBezierPath()
     var activityRectanglePaths: [UIBezierPath] = []
     
-    // Location values
-    let lineStartX: Double = 75
-    let lineEndX: Double = 600
-    let firstLineY: Double = 11
-    let hourVerticalPoints: Double = 48.7
-    let activityStartX: Double = 86
-    let activityWidth: Double = 215
+
     
 
     
@@ -50,8 +53,8 @@ class CalendarView: UIView {
         // Draw hour lines
         for index in 0...23 {
             
-            hourBezier.move(to: CGPoint(x: lineStartX, y: firstLineY + hourVerticalPoints * Double(index)))
-            hourBezier.addLine(to: CGPoint(x: lineEndX, y: firstLineY + hourVerticalPoints * Double(index)))
+            hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
+            hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.close()
             hourBezier.stroke()
             hourBezier.fill()
@@ -61,8 +64,8 @@ class CalendarView: UIView {
         
         for index in 0...23 {
             
-            halfHourBezier.move(to: CGPoint(x: lineStartX, y: firstLineY + hourVerticalPoints / 2 + hourVerticalPoints * Double(index)))
-            halfHourBezier.addLine(to: CGPoint(x: lineEndX, y: firstLineY + hourVerticalPoints / 2 + hourVerticalPoints * Double(index)))
+            halfHourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints / 2 + g_hourVerticalPoints * Double(index)))
+            halfHourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints / 2 + g_hourVerticalPoints * Double(index)))
             halfHourBezier.close()
             halfHourBezier.stroke()
             halfHourBezier.fill()
@@ -78,22 +81,19 @@ class CalendarView: UIView {
     }
 
     // Create list of paths to be drawn
-    public func makeActivityRectangles() {
+    public func makeActivityDrawables() {
         if let daysActivities = viewControllerDelegate?.getDaysActivities() {
             for activity in daysActivities {
-                let rectangleStartY = activityTimeToY(time: activity.startTime)
-                let rect = CGRect(x: activityStartX, y: rectangleStartY, width: activityWidth, height: activityTimeToY(time: activity.endTime) - rectangleStartY)
-                
-                let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
-                path.close()
-                activityRectanglePaths.append(path)
+
+                //activityRectanglePaths.append(path)
             }
         }
     }
     
-    func activityTimeToY(time: Double) -> Double {
-        return firstLineY + hourVerticalPoints * time
+    public static func activityTimeToY(time: Double) -> Double {
+        return g_firstLineY + g_hourVerticalPoints * time
     }
+
 }
 
 protocol ViewControllerDelegate {

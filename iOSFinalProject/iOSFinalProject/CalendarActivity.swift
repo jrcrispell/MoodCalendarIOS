@@ -13,13 +13,13 @@ class CalendarActivity: NSObject {
     
     var startTime: Double
     var endTime: Double
-    var eventDescription: String
+    var activityDescription: String
     var moodScore: Int
     
-    required init(startTime: Double, endTime: Double, eventDescription: String, moodScore: Int) {
+    required init(startTime: Double, endTime: Double, activityDescription: String, moodScore: Int) {
         self.startTime = startTime
         self.endTime = endTime
-        self.eventDescription = eventDescription
+        self.activityDescription = activityDescription
         self.moodScore = moodScore
     }
     

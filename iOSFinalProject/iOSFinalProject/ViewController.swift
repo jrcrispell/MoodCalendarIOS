@@ -30,9 +30,14 @@ class ViewController: UIViewController, ViewControllerDelegate {
         updateDate()
         
         daysEvents.append(CalendarActivity(startTime: 8, endTime: 9, eventDescription: "Test", moodScore: 8))
+        daysEvents.append(CalendarActivity(startTime: 9, endTime: 10, eventDescription: "Test2", moodScore: 6))
+
+        daysEvents.append(CalendarActivity(startTime: 9.5, endTime: 12, eventDescription: "Test3", moodScore: 2))
+
         
         // Set delegate
         calendarView.viewControllerDelegate = self
+        calendarView.makeEventRectangles()
     }
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {

@@ -16,7 +16,7 @@ class CalendarView: UIView {
     // Instantiating drawable objects here so it's not done in draw()
     var hourBezier = UIBezierPath()
     var halfHourBezier = UIBezierPath()
-    var eventRectanglePaths: [UIBezierPath] = []
+    var activityRectanglePaths: [UIBezierPath] = []
     
     // Location values
     let lineStartX: Double = 75
@@ -70,22 +70,23 @@ class CalendarView: UIView {
 
         UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
 
-        for path in eventRectanglePaths {
+        // Draw activity rectangles
+        for path in activityRectanglePaths {
             path.stroke()
             path.fill()
         }
     }
 
     // Create list of paths to be drawn
-    public func makeEventRectangles() {
-        if let daysEvents = viewControllerDelegate?.getDaysEvents() {
-            for event in daysEvents {
-                let rectangleStartY = activityTimeToY(time: event.startTime)
-                let rect = CGRect(x: activityStartX, y: rectangleStartY, width: activityWidth, height: activityTimeToY(time: event.endTime) - rectangleStartY)
+    public func makeActivityRectangles() {
+        if let daysActivities = viewControllerDelegate?.getDaysActivities() {
+            for activity in daysActivities {
+                let rectangleStartY = activityTimeToY(time: activity.startTime)
+                let rect = CGRect(x: activityStartX, y: rectangleStartY, width: activityWidth, height: activityTimeToY(time: activity.endTime) - rectangleStartY)
                 
                 let path = UIBezierPath(roundedRect: rect, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
                 path.close()
-                eventRectanglePaths.append(path)
+                activityRectanglePaths.append(path)
             }
         }
     }
@@ -96,5 +97,5 @@ class CalendarView: UIView {
 }
 
 protocol ViewControllerDelegate {
-    func getDaysEvents() -> [CalendarActivity]
+    func getDaysActivities() -> [CalendarActivity]
 }

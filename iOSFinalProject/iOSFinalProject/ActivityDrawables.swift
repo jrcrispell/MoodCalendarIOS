@@ -15,13 +15,14 @@ public class ActivityDrawables: NSObject {
     let rectanglePath: UIBezierPath
     let activityDescription: NSString
     let mood: NSString
+    let moodPoint: CGPoint
     let rectangle: CGRect
     
     // Attributes
     let textColor = UIColor.darkGray
     let textFont = UIFont(name: "Helvetica Neue", size: 18)
     let textStyle = NSMutableParagraphStyle()
-    let textAttributes: NSDictionary
+    let textAttributes: [String : Any]
     
     init(activity: CalendarActivity) {
         
@@ -29,9 +30,12 @@ public class ActivityDrawables: NSObject {
         
         textAttributes = [NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
         
-        mood = String(activity.moodScore) as NSString
-        
         let rectangleStartY = CalendarView.activityTimeToY(time: activity.startTime)
+
+        
+        mood = String(activity.moodScore) as NSString
+        moodPoint = CGPoint(x: g_moodXPosition, y: rectangleStartY)
+        
         rectangle = CGRect(x: g_activityStartX, y: rectangleStartY, width: g_activityWidth, height: CalendarView.activityTimeToY(time: activity.endTime) - rectangleStartY)
         
         rectanglePath = UIBezierPath(roundedRect: rectangle, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
@@ -44,6 +48,13 @@ public class ActivityDrawables: NSObject {
     }
     
     func draw() {
-        activityDescription.draw(in: rectangle, withAttributes: textAttributes as? [String : Any])
+        
+        UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
+        
+        rectanglePath.stroke()
+        rectanglePath.fill()
+        
+        activityDescription.draw(in: rectangle, withAttributes: textAttributes)
+        mood.draw(at: moodPoint, withAttributes: textAttributes)
     }
 }

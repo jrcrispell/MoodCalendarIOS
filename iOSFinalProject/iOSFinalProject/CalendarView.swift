@@ -16,6 +16,7 @@ let g_firstLineY: Double = 11
 let g_hourVerticalPoints: Double = 48.7
 let g_activityStartX: Double = 86
 let g_activityWidth: Double = 215
+let g_moodXPosition:Double = 332
 
 
 class CalendarView: UIView {
@@ -25,7 +26,7 @@ class CalendarView: UIView {
     // Instantiating drawable objects here so it's not done in draw()
     var hourBezier = UIBezierPath()
     var halfHourBezier = UIBezierPath()
-    var activityRectanglePaths: [UIBezierPath] = []
+    var activityDrawables: [ActivityDrawables] = []
     
 
     
@@ -71,21 +72,17 @@ class CalendarView: UIView {
             halfHourBezier.fill()
         }
 
-        UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
-
         // Draw activity rectangles
-        for path in activityRectanglePaths {
-            path.stroke()
-            path.fill()
+        for drawable in activityDrawables {
+            drawable.draw()
         }
     }
 
-    // Create list of paths to be drawn
     public func makeActivityDrawables() {
         if let daysActivities = viewControllerDelegate?.getDaysActivities() {
             for activity in daysActivities {
 
-                //activityRectanglePaths.append(path)
+                activityDrawables.append(ActivityDrawables(activity: activity))
             }
         }
     }

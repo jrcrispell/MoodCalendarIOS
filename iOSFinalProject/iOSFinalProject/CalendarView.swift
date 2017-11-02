@@ -14,8 +14,7 @@ let g_lineStartX: Double = 75
 let g_lineEndX: Double = 600
 let g_firstLineY: Double = 11
 let g_hourVerticalPoints: Double = 48.7
-let g_activityStartX: Double = 86
-let g_activityWidth: Double = 215
+let g_activityWidth: Double = 400
 let g_moodXPosition:Double = 332
 
 
@@ -28,10 +27,11 @@ class CalendarView: UIView {
     var halfHourBezier = UIBezierPath()
     var activityDrawables: [ActivityDrawables] = []
     
-
+    
+    // Colors
+    var white20Percent = UIColor.init(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
     
 
-    
     // Old globals
 //    var g_moodRectangleXPosition = 315
 //    var g_moodValueIndentation = 17
@@ -49,7 +49,7 @@ class CalendarView: UIView {
     
     override func draw(_ rect: CGRect) {
 
-        UIColor.black.set()
+        white20Percent.set()
         
         // Draw hour lines
         for index in 0...23 {
@@ -57,19 +57,7 @@ class CalendarView: UIView {
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.close()
-            hourBezier.stroke()
-            hourBezier.fill()
-        }
-        
-        UIColor.lightGray.set()
-        
-        for index in 0...23 {
-            
-            halfHourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints / 2 + g_hourVerticalPoints * Double(index)))
-            halfHourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints / 2 + g_hourVerticalPoints * Double(index)))
-            halfHourBezier.close()
-            halfHourBezier.stroke()
-            halfHourBezier.fill()
+            hourBezier.stroke(with: .normal, alpha: 0.2)
         }
 
         // Draw activity rectangles

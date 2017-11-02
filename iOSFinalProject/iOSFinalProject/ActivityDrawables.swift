@@ -36,7 +36,7 @@ public class ActivityDrawables: NSObject {
         mood = String(activity.moodScore) as NSString
         moodPoint = CGPoint(x: g_moodXPosition, y: rectangleStartY)
         
-        rectangle = CGRect(x: g_activityStartX, y: rectangleStartY, width: g_activityWidth, height: CalendarView.activityTimeToY(time: activity.endTime) - rectangleStartY)
+        rectangle = CGRect(x: g_lineStartX, y: rectangleStartY, width: g_activityWidth, height: CalendarView.activityTimeToY(time: activity.endTime) - rectangleStartY)
         
         rectanglePath = UIBezierPath(roundedRect: rectangle, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
         rectanglePath.close()

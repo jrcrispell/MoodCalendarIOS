@@ -15,14 +15,13 @@ let g_lineEndX: Double = 600
 let g_firstLineY: Double = 11
 let g_hourVerticalPoints: Double = 48.7
 let g_activityWidth: Double = 400
-let g_moodXPosition:Double = 332
+let g_moodXPosition:Double = 380
 let g_hourLabelX: Double = 16
 let g_firstTextLabelY: Double = 0
 
 class CalendarView: UIView {
     
     // Attributes
-    let textColor = UIColor.darkGray
     let textFont = UIFont(name: "Helvetica Neue", size: 18)
     let textStyle = NSMutableParagraphStyle()
     var textAttributes: [String : Any]?
@@ -37,8 +36,10 @@ class CalendarView: UIView {
     
     
     // Colors
-    var white20Percent = UIColor.init(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
-    
+    let white20Percent = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
+    //let white80Percent = UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.8)
+    let white80Percent = UIColor.white.withAlphaComponent(0.80)
+
 
     // Old globals
 //    var g_moodRectangleXPosition = 315
@@ -65,12 +66,13 @@ class CalendarView: UIView {
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.close()
-            hourBezier.stroke(with: .normal, alpha: 0.2)
+            hourBezier.stroke()
+            //hourBezier.stroke(with: .normal, alpha: 0.2)
         }
 
         // Draw hour labels
         textStyle.lineSpacing = 6.0
-        textAttributes = [NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
+        textAttributes = [NSForegroundColorAttributeName: white80Percent, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
         
         for (index, label) in hourLabels.enumerated() {
             label.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + g_hourVerticalPoints * Double (index)), withAttributes: textAttributes)

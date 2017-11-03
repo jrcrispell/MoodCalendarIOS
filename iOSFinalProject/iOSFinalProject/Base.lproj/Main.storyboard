@@ -28,7 +28,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="44" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
                                 <rect key="frame" x="103.5" y="28" width="168.5" height="44"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <state key="normal" title="Oct 24, 2017">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -55,27 +55,40 @@
                                 </constraints>
                                 <state key="normal" image="SettingsIcon"/>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75.5" width="375" height="591.5"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <subviews>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1174"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Xcz-R0-hWw" secondAttribute="bottom" id="0bP-4E-nfP"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="height" secondItem="ezs-Uc-Js5" secondAttribute="height" multiplier="2" id="8DA-uE-QrZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xcz-R0-hWw" secondAttribute="trailing" id="RAk-hR-o94"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="top" id="VXw-CR-IAy"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="leading" secondItem="ezs-Uc-Js5" secondAttribute="leading" id="lB8-GS-tx5"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="width" secondItem="ezs-Uc-Js5" secondAttribute="width" id="ncf-Cj-19Q"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="FxP-8z-toi" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="0O3-Fi-8or"/>
+                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0cm-5G-VbX"/>
                             <constraint firstAttribute="trailing" secondItem="enr-Fw-NDa" secondAttribute="trailing" id="0g6-Dz-w9I"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="2u8-Eo-w3Q"/>
-                            <constraint firstAttribute="trailing" secondItem="Xcz-R0-hWw" secondAttribute="trailing" id="4WZ-31-BNy"/>
+                            <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" id="BuW-GZ-9U7"/>
-                            <constraint firstItem="Xcz-R0-hWw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="CUT-hm-uwV"/>
                             <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="F4j-AR-38a"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="enr-Fw-NDa" secondAttribute="centerX" id="K9t-hQ-589"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="MkJ-kT-KZv"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OBC-QS-c5G"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="bottom" id="QOX-rg-PBp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FxP-8z-toi" secondAttribute="trailing" constant="16" id="Uqw-WY-XJB"/>
-                            <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="eIX-bE-ODj" secondAttribute="bottom" constant="8" id="Vly-SB-tnT"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xcz-R0-hWw" secondAttribute="bottom" id="dej-i1-FHi"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
+                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="6g9-h5-Nna" secondAttribute="bottom" constant="8" id="mXK-cP-jf0"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="leading" secondItem="6g9-h5-Nna" secondAttribute="trailing" id="tSv-ce-Rel"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="width" secondItem="enr-Fw-NDa" secondAttribute="width" multiplier="0.45" id="xeP-Wh-zqQ"/>
                         </constraints>

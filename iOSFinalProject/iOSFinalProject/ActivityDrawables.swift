@@ -19,7 +19,7 @@ public class ActivityDrawables: NSObject {
     let rectangle: CGRect
     
     // Attributes
-    let textColor = UIColor.darkGray
+    let textColor = UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.8)
     let textFont = UIFont(name: "Helvetica Neue", size: 18)
     let textStyle = NSMutableParagraphStyle()
     let textAttributes: [String : Any]

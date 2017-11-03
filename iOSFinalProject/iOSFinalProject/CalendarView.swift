@@ -29,15 +29,14 @@ class CalendarView: UIView {
     var viewControllerDelegate: ViewControllerDelegate?
     
     // Instantiating drawable objects here so it's not done in draw()
-    var hourBezier = UIBezierPath()
+    //var hourBezier = UIBezierPath()
     var halfHourBezier = UIBezierPath()
     var activityDrawables: [ActivityDrawables] = []
     var hourLabels: [NSString] = []
     
     
     // Colors
-    let white20Percent = UIColor(colorLiteralRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.2)
-    //let white80Percent = UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.8)
+    let white50Percent = UIColor.white.withAlphaComponent(0.5)
     let white80Percent = UIColor.white.withAlphaComponent(0.80)
 
 
@@ -58,16 +57,15 @@ class CalendarView: UIView {
     
     override func draw(_ rect: CGRect) {
 
-        white20Percent.set()
+        white50Percent.setStroke()
+
         
         // Draw hour lines
         for index in 0...23 {
-            
+            let hourBezier = UIBezierPath()
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
-            hourBezier.close()
             hourBezier.stroke()
-            //hourBezier.stroke(with: .normal, alpha: 0.2)
         }
 
         // Draw hour labels

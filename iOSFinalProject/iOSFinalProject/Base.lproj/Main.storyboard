@@ -59,12 +59,12 @@
                                 <rect key="frame" x="67" y="269" width="240" height="128"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1174"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1056.5"/>
                                     </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Xcz-R0-hWw" secondAttribute="bottom" id="0bP-4E-nfP"/>
-                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="height" secondItem="ezs-Uc-Js5" secondAttribute="height" multiplier="2" id="8DA-uE-QrZ"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="height" secondItem="ezs-Uc-Js5" secondAttribute="height" multiplier="1.8" id="8DA-uE-QrZ"/>
                                     <constraint firstAttribute="trailing" secondItem="Xcz-R0-hWw" secondAttribute="trailing" id="RAk-hR-o94"/>
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="top" id="VXw-CR-IAy"/>
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="leading" secondItem="ezs-Uc-Js5" secondAttribute="leading" id="lB8-GS-tx5"/>

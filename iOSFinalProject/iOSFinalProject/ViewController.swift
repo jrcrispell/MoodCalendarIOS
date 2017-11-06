@@ -71,6 +71,9 @@ class ViewController: UIViewController, ViewControllerDelegate {
         print(sender.description)
         let point = sender.location(in: calendarView)
         print(point.x.description + " , " + point.y.description)
+        if let activity = calendarView.getSelectedActivity(location: point) {
+            performSegue(withIdentifier: "toLogger", sender: sender)
+        }
     }
 
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {

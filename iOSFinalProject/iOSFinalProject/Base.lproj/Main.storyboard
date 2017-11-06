@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -102,6 +103,7 @@
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
                         <outlet property="settingsButton" destination="FxP-8z-toi" id="zXQ-WT-aCi"/>
+                        <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -116,7 +118,66 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+            <point key="canvasLocation" x="1144.8" y="-24.7376311844078"/>
+        </scene>
+        <!--Logger View Controller-->
+        <scene sceneID="VGs-do-Xzw">
+            <objects>
+                <viewController id="vKY-3Z-Ll0" customClass="LoggerViewController" customModule="iOSFinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yth-1i-OGv"/>
+                        <viewControllerLayoutGuide type="bottom" id="5CG-im-HGe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R3P-AX-ygC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="LSQ-rQ-joE">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1v-x6-tEq">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Oct 24, 2017" id="ZH2-4E-LaB">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="noi-fO-Zbf"/>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="save" id="0zY-Cb-NGd"/>
+                                            <barButtonItem systemItem="trash" id="B30-D7-hZ9"/>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="LSQ-rQ-joE" secondAttribute="bottom" id="6Xq-C9-Zv8"/>
+                            <constraint firstItem="R1v-x6-tEq" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="FLZ-jJ-f9Z"/>
+                            <constraint firstItem="LSQ-rQ-joE" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="Fq5-bN-ORU"/>
+                            <constraint firstAttribute="trailing" secondItem="R1v-x6-tEq" secondAttribute="trailing" id="L1E-ge-s4h"/>
+                            <constraint firstItem="R1v-x6-tEq" firstAttribute="top" secondItem="yth-1i-OGv" secondAttribute="bottom" id="Qrh-8J-lZF"/>
+                            <constraint firstItem="LSQ-rQ-joE" firstAttribute="top" secondItem="yth-1i-OGv" secondAttribute="bottom" id="XcC-dq-Ago"/>
+                            <constraint firstAttribute="trailing" secondItem="LSQ-rQ-joE" secondAttribute="trailing" id="dVU-BH-70B"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QDv-yn-tPf"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="R1v-x6-tEq" id="A85-nL-syx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U7O-Jf-ZcB" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7ey-zq-J3B">
+                    <connections>
+                        <action selector="calendarViewTapped:" destination="vKY-3Z-Ll0" id="5Jl-ZU-bu3"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="tAA-26-GtB">
+                    <connections>
+                        <action selector="calendarViewLongPress:" destination="vKY-3Z-Ll0" id="sNB-Qx-fEX"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1850" y="-25"/>
         </scene>
     </scenes>
     <resources>

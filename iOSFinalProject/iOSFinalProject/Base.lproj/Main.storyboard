@@ -60,6 +60,11 @@
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1056.5"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="DRO-8d-KFE" appends="YES" id="HYY-TN-CQg"/>
+                                            <outletCollection property="gestureRecognizers" destination="Izm-2B-Cbx" appends="YES" id="WQY-fm-SP2"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -100,6 +105,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="DRO-8d-KFE">
+                    <connections>
+                        <action selector="calendarViewTapped:" destination="BYZ-38-t0r" id="VLd-Gu-dbT"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Izm-2B-Cbx">
+                    <connections>
+                        <action selector="calendarViewLongPress:" destination="BYZ-38-t0r" id="Hgp-EU-2iy"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>

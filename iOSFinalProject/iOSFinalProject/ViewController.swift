@@ -66,7 +66,18 @@ class ViewController: UIViewController, ViewControllerDelegate {
         return daysActivities
     }
     
+    @IBAction func calendarViewTapped(_ sender: UITapGestureRecognizer) {
+        print("Tap")
+        print(sender.description)
+        let point = sender.location(in: calendarView)
+        print(point.x.description + " , " + point.y.description)
+    }
 
+    @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {
+        print("Long Press")
+    }
+    
+    
 
 }
 

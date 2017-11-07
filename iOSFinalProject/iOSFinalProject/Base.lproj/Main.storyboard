@@ -56,8 +56,8 @@
                                 </constraints>
                                 <state key="normal" image="SettingsIcon"/>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1056.5"/>
@@ -160,23 +160,77 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fJg-Qi-gAR" userLabel="Start Date Picker">
+                                <rect key="frame" x="8" y="80" width="150" height="129.5"/>
+                                <date key="date" timeIntervalSinceReferenceDate="531783621.118653">
+                                    <!--2017-11-07 21:40:21 +0000-->
+                                </date>
+                            </datePicker>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="HoO-HJ-Zd3" userLabel="End Date Picker">
+                                <rect key="frame" x="217" y="80" width="150" height="129.5"/>
+                                <date key="date" timeIntervalSinceReferenceDate="531783621.118653">
+                                    <!--2017-11-07 21:40:21 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csf-M8-TTa">
+                                <rect key="frame" x="181" y="129" width="12" height="31.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Activity Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ie5-Jp-XQw">
+                                <rect key="frame" x="47" y="249" width="281" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vKY-3Z-Ll0" id="i6E-cq-d8h"/>
+                                </connections>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6z-Nl-gGb">
+                                <rect key="frame" x="47" y="295" width="281" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vKY-3Z-Ll0" id="cGz-Yp-IsI"/>
+                                    <outlet property="delegate" destination="vKY-3Z-Ll0" id="tSL-yA-6zW"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="LSQ-rQ-joE" secondAttribute="bottom" id="6Xq-C9-Zv8"/>
+                            <constraint firstItem="ie5-Jp-XQw" firstAttribute="width" secondItem="J6z-Nl-gGb" secondAttribute="width" id="78c-cX-6Tf"/>
+                            <constraint firstItem="HoO-HJ-Zd3" firstAttribute="width" secondItem="fJg-Qi-gAR" secondAttribute="width" id="9TP-6Q-sEa"/>
                             <constraint firstItem="R1v-x6-tEq" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="FLZ-jJ-f9Z"/>
                             <constraint firstItem="LSQ-rQ-joE" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="Fq5-bN-ORU"/>
                             <constraint firstAttribute="trailing" secondItem="R1v-x6-tEq" secondAttribute="trailing" id="L1E-ge-s4h"/>
+                            <constraint firstItem="HoO-HJ-Zd3" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="N1U-mi-vG6"/>
+                            <constraint firstItem="csf-M8-TTa" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="NSR-pi-0td"/>
+                            <constraint firstItem="fJg-Qi-gAR" firstAttribute="height" secondItem="LSQ-rQ-joE" secondAttribute="height" multiplier="0.2" id="Oti-3M-etr"/>
+                            <constraint firstItem="fJg-Qi-gAR" firstAttribute="top" secondItem="R1v-x6-tEq" secondAttribute="bottom" constant="16" id="P9A-AZ-Ig0"/>
                             <constraint firstItem="R1v-x6-tEq" firstAttribute="top" secondItem="yth-1i-OGv" secondAttribute="bottom" id="Qrh-8J-lZF"/>
+                            <constraint firstItem="ie5-Jp-XQw" firstAttribute="centerX" secondItem="J6z-Nl-gGb" secondAttribute="centerX" id="Rtg-rQ-HIK"/>
                             <constraint firstItem="LSQ-rQ-joE" firstAttribute="top" secondItem="yth-1i-OGv" secondAttribute="bottom" id="XcC-dq-Ago"/>
+                            <constraint firstItem="J6z-Nl-gGb" firstAttribute="width" secondItem="LSQ-rQ-joE" secondAttribute="width" multiplier="0.75" id="Yhd-VR-Io8"/>
+                            <constraint firstItem="fJg-Qi-gAR" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" constant="8" id="a2d-xG-lDR"/>
+                            <constraint firstAttribute="trailing" secondItem="HoO-HJ-Zd3" secondAttribute="trailing" constant="8" id="aaB-wl-f6b"/>
+                            <constraint firstItem="ie5-Jp-XQw" firstAttribute="top" secondItem="fJg-Qi-gAR" secondAttribute="bottom" constant="39.5" id="bBt-OT-DHj"/>
+                            <constraint firstItem="J6z-Nl-gGb" firstAttribute="top" secondItem="ie5-Jp-XQw" secondAttribute="bottom" constant="16" id="bTS-u3-p9t"/>
                             <constraint firstAttribute="trailing" secondItem="LSQ-rQ-joE" secondAttribute="trailing" id="dVU-BH-70B"/>
+                            <constraint firstItem="fJg-Qi-gAR" firstAttribute="width" secondItem="LSQ-rQ-joE" secondAttribute="width" multiplier="0.4" id="kdK-rz-qdQ"/>
+                            <constraint firstItem="HoO-HJ-Zd3" firstAttribute="height" secondItem="fJg-Qi-gAR" secondAttribute="height" id="u4O-Xh-LsN"/>
+                            <constraint firstItem="csf-M8-TTa" firstAttribute="centerX" secondItem="LSQ-rQ-joE" secondAttribute="centerX" id="umc-XO-yfM"/>
+                            <constraint firstItem="J6z-Nl-gGb" firstAttribute="centerX" secondItem="LSQ-rQ-joE" secondAttribute="centerX" id="zGO-tX-wf7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QDv-yn-tPf"/>
                     <connections>
                         <outlet property="dateLabel" destination="ZH2-4E-LaB" id="ae8-n9-1Im"/>
                         <outlet property="deleteButton" destination="B30-D7-hZ9" id="vi6-P3-iUV"/>
+                        <outlet property="descriptionField" destination="ie5-Jp-XQw" id="kQO-1s-4un"/>
+                        <outlet property="endTimePicker" destination="HoO-HJ-Zd3" id="LbO-KU-Ips"/>
+                        <outlet property="moodPicker" destination="J6z-Nl-gGb" id="ham-hC-reZ"/>
                         <outlet property="navigationBar" destination="R1v-x6-tEq" id="A85-nL-syx"/>
+                        <outlet property="startTimePicker" destination="fJg-Qi-gAR" id="X8u-Ge-SXZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U7O-Jf-ZcB" sceneMemberID="firstResponder"/>

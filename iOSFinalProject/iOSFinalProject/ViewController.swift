@@ -22,6 +22,8 @@ class ViewController: UIViewController, ViewControllerDelegate {
     
     @IBOutlet weak var calendarView: CalendarView!
     
+    var editingActivity: CalendarActivity!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,15 +74,29 @@ class ViewController: UIViewController, ViewControllerDelegate {
         let point = sender.location(in: calendarView)
         print(point.x.description + " , " + point.y.description)
         if let activity = calendarView.getSelectedActivity(location: point) {
-            performSegue(withIdentifier: "toLogger", sender: sender)
+            editingActivity = activity
         }
+        performSegue(withIdentifier: "toLogger", sender: sender)
+
     }
 
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {
         print("Long Press")
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toLogger" {
+            guard let loggerView = segue.destination as? LoggerViewController else {return}
+            if editingActivity != nil {
+                loggerView.editingActivity = editingActivity
+            }
+            loggerView.displayedDate = displayedDate
+            
+        }
+    }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        editingActivity = nil
+    }
 }
 

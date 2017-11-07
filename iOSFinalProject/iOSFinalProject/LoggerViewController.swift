@@ -12,10 +12,22 @@ class LoggerViewController: UIViewController {
 
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
+    var editingActivity: CalendarActivity!
+    
+    var displayedDate = Date()
+
+    @IBOutlet weak var dateLabel: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont.systemFont(ofSize: 26), NSForegroundColorAttributeName : UIColor.white]
+        if editingActivity == nil {
+            deleteButton.isEnabled = false
+        }
+        
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         navigationBar.isTranslucent = true
         navigationBar.isOpaque = true
         navigationBar.backgroundColor = UIColor.clear
@@ -29,12 +41,29 @@ class LoggerViewController: UIViewController {
         else {
             print("nope")
         }
-        // Do any additional setup after loading the view.
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"        
+        dateLabel.title = dateFormatter.string(from: displayedDate)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveTapped(_ sender:UIBarButtonItem) {
+    }
+    
+    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
     }
     
 

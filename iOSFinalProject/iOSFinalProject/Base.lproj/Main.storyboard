@@ -139,11 +139,23 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="Oct 24, 2017" id="ZH2-4E-LaB">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="noi-fO-Zbf"/>
+                                    <navigationItem title="Oct 24, 2017" id="ZH2-4E-LaB" userLabel="Date">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="noi-fO-Zbf">
+                                            <connections>
+                                                <action selector="cancelTapped:" destination="vKY-3Z-Ll0" id="c1U-15-R7p"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem systemItem="save" id="0zY-Cb-NGd"/>
-                                            <barButtonItem systemItem="trash" id="B30-D7-hZ9"/>
+                                            <barButtonItem systemItem="save" id="0zY-Cb-NGd">
+                                                <connections>
+                                                    <action selector="saveTapped:" destination="vKY-3Z-Ll0" id="SvY-XS-z7d"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="trash" id="B30-D7-hZ9" userLabel="Delete">
+                                                <connections>
+                                                    <action selector="deleteTapped:" destination="vKY-3Z-Ll0" id="GYI-ca-66X"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -162,6 +174,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="QDv-yn-tPf"/>
                     <connections>
+                        <outlet property="dateLabel" destination="ZH2-4E-LaB" id="ae8-n9-1Im"/>
+                        <outlet property="deleteButton" destination="B30-D7-hZ9" id="vi6-P3-iUV"/>
                         <outlet property="navigationBar" destination="R1v-x6-tEq" id="A85-nL-syx"/>
                     </connections>
                 </viewController>

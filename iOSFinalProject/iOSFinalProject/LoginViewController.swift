@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -22,6 +23,31 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func registerTapped(_ sender: Any) {
+        
+        let email = emailField.text!
+        let password = passwordField.text!
+        
+        let alert = UIAlertController(title: "Verify Password", message: "Please re-enter password to confirm", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let confirmButton = UIAlertAction(title: "Confirm", style: .default) { (action) in
+
+            let textField = alert.textFields![0] as UITextField
+            let typed = textField.text!
+            print("verify" + typed)
+
+//            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+//                // Error handling
+//            }
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Password"
+        }
+        alert.addAction(cancelButton)
+        alert.addAction(confirmButton)
+        present(alert, animated: true, completion: nil)
+        
+        
+
     }
     
     @IBAction func loginTapped(_ sender: Any) {

@@ -32,12 +32,19 @@ class LoginViewController: UIViewController {
         let confirmButton = UIAlertAction(title: "Confirm", style: .default) { (action) in
 
             let textField = alert.textFields![0] as UITextField
-            let typed = textField.text!
-            print("verify" + typed)
+            
+            // Confirm passwords match
+            if textField.text! != password {
+                self.present(self.makeErrorAlert(message: "Passwords do not match"), animated: true, completion: nil)
+            }
 
-//            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-//                // Error handling
-//            }
+            // Create user
+            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                // Error handling
+                if error != nil {
+                    self.present(self.makeErrorAlert(message: error!.localizedDescription), animated: true, completion: nil)
+                }
+            }
         }
         alert.addTextField { (textField) in
             textField.placeholder = "Password"
@@ -46,8 +53,13 @@ class LoginViewController: UIViewController {
         alert.addAction(confirmButton)
         present(alert, animated: true, completion: nil)
         
-        
-
+    }
+    
+    func makeErrorAlert(message: String) -> UIAlertController {
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+        errorAlert.addAction(okButton)
+        return errorAlert
     }
     
     @IBAction func loginTapped(_ sender: Any) {

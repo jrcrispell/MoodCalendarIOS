@@ -341,6 +341,7 @@
                     <connections>
                         <outlet property="emailField" destination="Cie-s7-Qie" id="zXv-CC-JAy"/>
                         <outlet property="passwordField" destination="bYZ-ul-lt7" id="S4A-G0-fwq"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toCalendarView" id="SyZ-mF-gYR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v24-mP-TfC" sceneMemberID="firstResponder"/>

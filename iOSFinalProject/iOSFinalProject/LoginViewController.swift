@@ -14,18 +14,21 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
-    
+    var email = ""
+    var password = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        email = emailField.text!
+        password = passwordField.text!
 
         // Do any additional setup after loading the view.
     }
 
     @IBAction func registerTapped(_ sender: Any) {
         
-        let email = emailField.text!
-        let password = passwordField.text!
+
         
         let alert = UIAlertController(title: "Verify Password", message: "Please re-enter password to confirm", preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -34,12 +37,12 @@ class LoginViewController: UIViewController {
             let textField = alert.textFields![0] as UITextField
             
             // Confirm passwords match
-            if textField.text! != password {
+            if textField.text! != self.password {
                 self.present(self.makeErrorAlert(message: "Passwords do not match"), animated: true, completion: nil)
             }
 
             // Create user
-            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            Auth.auth().createUser(withEmail: self.email, password: self.password) { (user, error) in
                 // Error handling
                 if error != nil {
                     self.present(self.makeErrorAlert(message: error!.localizedDescription), animated: true, completion: nil)
@@ -55,16 +58,30 @@ class LoginViewController: UIViewController {
         
     }
     
+
+    
+    @IBAction func loginTapped(_ sender: Any) {
+        //segue id: toCalendarView
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                self.present(self.makeErrorAlert(message: error!.localizedDescription), animated: true, completion: nil)
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    @IBAction func forgotTapped(_ sender: Any) {
+    }
+    
+    //MARK: Helper Methods
+    
     func makeErrorAlert(message: String) -> UIAlertController {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(okButton)
         return errorAlert
-    }
-    
-    @IBAction func loginTapped(_ sender: Any) {
-    }
-    @IBAction func forgotTapped(_ sender: Any) {
     }
 
     /*

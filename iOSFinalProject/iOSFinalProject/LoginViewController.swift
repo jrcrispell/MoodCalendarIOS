@@ -14,21 +14,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
+    var user: User!
     var email = ""
     var password = ""
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        email = emailField.text!
-        password = passwordField.text!
-
-        // Do any additional setup after loading the view.
-    }
 
     @IBAction func registerTapped(_ sender: Any) {
         
-
+        email = emailField.text!
+        password = passwordField.text!
         
         let alert = UIAlertController(title: "Verify Password", message: "Please re-enter password to confirm", preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -58,21 +51,29 @@ class LoginViewController: UIViewController {
         
     }
     
-
-    
     @IBAction func loginTapped(_ sender: Any) {
-        //segue id: toCalendarView
+        
+        email = emailField.text!
+        password = passwordField.text!
+        
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
                 self.present(self.makeErrorAlert(message: error!.localizedDescription), animated: true, completion: nil)
             }
+                // Success
             else {
-                
+                self.user = user
+                self.performSegue(withIdentifier: "toCalendarView", sender: sender)
             }
         }
-        
     }
+    
     @IBAction func forgotTapped(_ sender: Any) {
+        
+        email = emailField.text!
+        password = passwordField.text!
+
+        
     }
     
     //MARK: Helper Methods
@@ -84,14 +85,13 @@ class LoginViewController: UIViewController {
         return errorAlert
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+     //MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+         let calendarViewController = segue.destination as! CalendarViewController
+        calendarViewController.user = self.user
     }
-    */
+ 
 
 }

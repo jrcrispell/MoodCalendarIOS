@@ -7,15 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
-class ViewController: UIViewController, ViewControllerDelegate {
+class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     // Date data
     var displayedDate = Date()
 
     // Header
     @IBOutlet weak var dateButton: UIButton!
-    
     @IBOutlet weak var settingsButton: UIButton!
     
     var daysActivities = [CalendarActivity]()
@@ -23,6 +23,7 @@ class ViewController: UIViewController, ViewControllerDelegate {
     @IBOutlet weak var calendarView: CalendarView!
     
     var editingActivity: CalendarActivity!
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()

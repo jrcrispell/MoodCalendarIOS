@@ -15,7 +15,7 @@
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
-		86E242091F7C1A5700C1B63C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242081F7C1A5700C1B63C /* ViewController.swift */; };
+		86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242081F7C1A5700C1B63C /* CalendarViewController.swift */; };
 		86E2420C1F7C1A5700C1B63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E2420A1F7C1A5700C1B63C /* Main.storyboard */; };
 		86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */; };
 		86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E242101F7C1A5700C1B63C /* Assets.xcassets */; };
@@ -34,7 +34,7 @@
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E242061F7C1A5700C1B63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		86E242081F7C1A5700C1B63C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		86E242081F7C1A5700C1B63C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		86E2420B1F7C1A5700C1B63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		86E2420E1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iOSFinalProject.xcdatamodel; sourceTree = "<group>"; };
 		86E242101F7C1A5700C1B63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,18 +93,18 @@
 			isa = PBXGroup;
 			children = (
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
+				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
+				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
+				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
 				868F699F1FA10B9A0060016F /* CalendarView.swift */,
 				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
 				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
-				86E242081F7C1A5700C1B63C /* ViewController.swift */,
-				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86E242101F7C1A5700C1B63C /* Assets.xcassets */,
-				86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */,
-				86E242151F7C1A5700C1B63C /* Info.plist */,
 				86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */,
-				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
+				86E242151F7C1A5700C1B63C /* Info.plist */,
 				867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */,
-				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
+				86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */,
+				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */,
-				86E242091F7C1A5700C1B63C /* ViewController.swift in Sources */,
+				86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,

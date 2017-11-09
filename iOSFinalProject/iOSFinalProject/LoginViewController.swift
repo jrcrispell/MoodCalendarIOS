@@ -17,6 +17,25 @@ class LoginViewController: UIViewController {
     var user: User!
     var email = ""
     var password = ""
+    
+    override func viewDidLoad() {
+        
+        user = Auth.auth().currentUser
+        
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if user != nil {
+                self.performSegue(withIdentifier: "toCalendarView", sender: self)
+            }
+            else {
+                // Pop to root
+                
+                //TODO: - probably bugged since it only pops one VC
+                if let presentedViewController = self.presentedViewController {
+                    presentedViewController.dismiss(animated: false, completion: nil)
+                }
+            }
+        }
+    }
 
     @IBAction func registerTapped(_ sender: Any) {
         
@@ -63,7 +82,7 @@ class LoginViewController: UIViewController {
             }
                 // Success
             else {
-                self.user = user
+                //self.user = user
                 self.performSegue(withIdentifier: "toCalendarView", sender: sender)
             }
         }

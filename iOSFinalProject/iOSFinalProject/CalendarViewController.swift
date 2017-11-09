@@ -58,6 +58,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         updateDate()
     }
     
+    @IBAction func logOutTapped(_ sender: Any) {
+    }
+    
+    
     func updateDate() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, yyyy"

@@ -59,6 +59,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
     
     @IBAction func logOutTapped(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        }
+        catch let error as NSError {
+            self.present(AlertUtils.makeSimpleAlert(title: "Sign out error", message: error.localizedDescription), animated: true, completion: nil)
+        }
     }
     
     

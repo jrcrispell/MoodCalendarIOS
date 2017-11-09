@@ -29,7 +29,8 @@ class LoginViewController: UIViewController {
             else {
                 // Pop to root
                 
-                //TODO: - probably bugged since it only pops one VC
+                //TODO: - probably bugged if user somehow signs out from somewhere other than
+                // CalendarViewController
                 if let presentedViewController = self.presentedViewController {
                     presentedViewController.dismiss(animated: false, completion: nil)
                 }
@@ -50,14 +51,14 @@ class LoginViewController: UIViewController {
             
             // Confirm passwords match
             if textField.text! != self.password {
-                self.present(self.makeSimpleAlert(title: "Error", message: "Passwords do not match"), animated: true, completion: nil)
+                self.present(AlertUtils.makeSimpleAlert(title: "Error", message: "Passwords do not match"), animated: true, completion: nil)
             }
 
             // Create user
             Auth.auth().createUser(withEmail: self.email, password: self.password) { (user, error) in
                 // Error handling
                 if error != nil {
-                    self.present(self.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
+                    self.present(AlertUtils.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
                 }
             }
         }
@@ -78,7 +79,7 @@ class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
-                self.present(self.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
+                self.present(AlertUtils.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
             }
                 // Success
             else {
@@ -94,16 +95,16 @@ class LoginViewController: UIViewController {
         password = passwordField.text!
         
         if email == "" {
-            self.present(makeSimpleAlert(title: "Error", message: "Enter email address before clicking Forgot Password"), animated: true, completion: nil)
+            self.present(AlertUtils.makeSimpleAlert(title: "Error", message: "Enter email address before clicking Forgot Password"), animated: true, completion: nil)
         }
             // Send reset email
         else {
             Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
                 if error != nil {
-                    self.present(self.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
+                    self.present(AlertUtils.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
                 }
                 else {
-                    self.present(self.makeSimpleAlert(title: "Email sent", message: "Reset password email has been sent"), animated: true, completion: nil)
+                    self.present(AlertUtils.makeSimpleAlert(title: "Email sent", message: "Reset password email has been sent"), animated: true, completion: nil)
                 }
             })
         }
@@ -111,12 +112,7 @@ class LoginViewController: UIViewController {
     
     //MARK: Helper Methods
     
-    func makeSimpleAlert(title: String, message: String) -> UIAlertController {
-        let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-        errorAlert.addAction(okButton)
-        return errorAlert
-    }
+
 
     
      //MARK: - Navigation

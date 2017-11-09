@@ -30,11 +30,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         // Set date
         updateDate()
-        
-        daysActivities.append(CalendarActivity(startTime: 8, endTime: 9, activityDescription: "Test", moodScore: 8))
-        daysActivities.append(CalendarActivity(startTime: 9, endTime: 10, activityDescription: "Test2", moodScore: 6))
-
-        daysActivities.append(CalendarActivity(startTime: 9.5, endTime: 12, activityDescription: "Test3", moodScore: 2))
+//        
+//        daysActivities.append(CalendarActivity(startTime: 8, endTime: 9, activityDescription: "Test", moodScore: 8))
+//        daysActivities.append(CalendarActivity(startTime: 9, endTime: 10, activityDescription: "Test2", moodScore: 6))
+//
+//        daysActivities.append(CalendarActivity(startTime: 9.5, endTime: 12, activityDescription: "Test3", moodScore: 2))
 
         
         // Set delegate
@@ -91,6 +91,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             if editingActivity != nil {
                 loggerView.editingActivity = editingActivity
             }
+            // Making new activity
+            print(Date().timeIntervalSince1970.hashValue.description)
             loggerView.displayedDate = displayedDate
             
         }

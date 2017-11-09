@@ -76,6 +76,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func saveTapped(_ sender:UIBarButtonItem) {
+        let start = startTimePicker.date.description
+        print(start)
     }
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {

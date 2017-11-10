@@ -81,11 +81,6 @@ class LoginViewController: UIViewController {
             if error != nil {
                 self.present(AlertUtils.makeSimpleAlert(title: "Error", message: error!.localizedDescription), animated: true, completion: nil)
             }
-                // Success
-            else {
-                //self.user = user
-                self.performSegue(withIdentifier: "toCalendarView", sender: sender)
-            }
         }
     }
     
@@ -118,8 +113,8 @@ class LoginViewController: UIViewController {
      //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         let calendarViewController = segue.destination as! CalendarViewController
-        calendarViewController.user = self.user
+//         let calendarViewController = segue.destination as! CalendarViewController
+//        calendarViewController.user = self.user
     }
  
 

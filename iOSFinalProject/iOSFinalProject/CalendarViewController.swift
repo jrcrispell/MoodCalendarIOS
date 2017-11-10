@@ -8,6 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+
+
 
 class CalendarViewController: UIViewController, ViewControllerDelegate {
     
@@ -28,6 +31,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        user = Auth.auth().currentUser
+        
         // Set date
         updateDate()
 //        
@@ -35,11 +40,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 //        daysActivities.append(CalendarActivity(startTime: 9, endTime: 10, activityDescription: "Test2", moodScore: 6))
 //
 //        daysActivities.append(CalendarActivity(startTime: 9.5, endTime: 12, activityDescription: "Test3", moodScore: 2))
+        
+        daysActivities = loadEvents()
 
         
         // Set delegate
         calendarView.viewControllerDelegate = self
         calendarView.makeActivityDrawables()
+    }
+    
+    func loadEvents() -> [CalendarActivity] {
+        let ref = Database.database().reference()
+        let userRef = ref.child(user.uid)
+        print (userRef.description())
+        return []
     }
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {

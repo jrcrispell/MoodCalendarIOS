@@ -46,7 +46,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         // Set delegate
         calendarView.viewControllerDelegate = self
-        calendarView.makeActivityDrawables()
     }
     
     func loadEvents() {
@@ -73,9 +72,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 //TODO: - get database ID
                 self.daysActivities.append(CalendarActivity(databaseID: "1", startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: moodScore))
             }
-            
+            self.calendarView.makeActivityDrawables()
+            self.calendarView.setNeedsDisplay()
+
         })
-        
         return
     }
     

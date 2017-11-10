@@ -41,7 +41,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         // Authorized Firebase user
         user = Auth.auth().currentUser
         
-        daysActivities = loadEvents()
+        loadEvents()
 
         
         // Set delegate
@@ -49,23 +49,34 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         calendarView.makeActivityDrawables()
     }
     
-    func loadEvents() -> [CalendarActivity] {
+    func loadEvents() {
         
         //TODO: - this is unsecure, set up database rules
         let ref = Database.database().reference()
         let displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observe(.value, with:{ (snapshot) in
             
+            self.daysActivities = []
+
             guard let activityDictionary = snapshot.value as? [String:Any] else {
                 print("activityDictionaryERROR")
                 return
             }
-            for string in activityDictionary {
-                print(string)
+            let keys = Array(activityDictionary.keys)
+            for key in keys {
+                let values = activityDictionary[key] as! [String:Any]
+                let startTime = values["startTime"] as! Double
+                let endTime = values["endTime"] as! Double
+                let activityDescription = values["activityDescription"] as! String
+                let moodScore = values["moodScore"] as! Int
+                
+                //TODO: - get database ID
+                self.daysActivities.append(CalendarActivity(databaseID: "1", startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: moodScore))
             }
+            
         })
         
-        return []
+        return
     }
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {

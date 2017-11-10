@@ -14,8 +14,11 @@ import FirebaseDatabase
 
 class CalendarViewController: UIViewController, ViewControllerDelegate {
     
+    let dateFormatter = DateFormatter()
+    
     // Date data
     var displayedDate = Date()
+    var dateString = ""
 
     // Header
     @IBOutlet weak var dateButton: UIButton!
@@ -31,15 +34,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user = Auth.auth().currentUser
-        
         // Set date
+        dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
-//        
-//        daysActivities.append(CalendarActivity(startTime: 8, endTime: 9, activityDescription: "Test", moodScore: 8))
-//        daysActivities.append(CalendarActivity(startTime: 9, endTime: 10, activityDescription: "Test2", moodScore: 6))
-//
-//        daysActivities.append(CalendarActivity(startTime: 9.5, endTime: 12, activityDescription: "Test3", moodScore: 2))
+        
+        // Authorized Firebase user
+        user = Auth.auth().currentUser
         
         daysActivities = loadEvents()
 
@@ -50,9 +50,21 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
     
     func loadEvents() -> [CalendarActivity] {
+        
+        //TODO: - this is unsecure, set up database rules
         let ref = Database.database().reference()
-        let userRef = ref.child(user.uid)
-        print (userRef.description())
+        let displayedDateRef = ref.child(user.uid).child(dateString)
+        displayedDateRef.observe(.value, with:{ (snapshot) in
+            
+            guard let activityDictionary = snapshot.value as? [String:Any] else {
+                print("activityDictionaryERROR")
+                return
+            }
+            for string in activityDictionary {
+                print(string)
+            }
+        })
+        
         return []
     }
     
@@ -83,9 +95,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     
     func updateDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"
-        let dateString = dateFormatter.string(from: displayedDate)
+        dateString = dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
     }
     

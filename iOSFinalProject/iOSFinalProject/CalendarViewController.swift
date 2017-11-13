@@ -10,11 +10,11 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
+let g_dateFormatter = DateFormatter()
 
 
 class CalendarViewController: UIViewController, ViewControllerDelegate {
     
-    let dateFormatter = DateFormatter()
     
     // Date data
     var displayedDate = Date()
@@ -35,27 +35,25 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         super.viewDidLoad()
         
         // Set date
-        dateFormatter.dateFormat = "MMM d, yyyy"
+        g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
         
         // Authorized Firebase user
         user = Auth.auth().currentUser
         
-        loadEvents()
-
-        
         // Set delegate
         calendarView.viewControllerDelegate = self
+        
     }
     
     func loadEvents() {
         
+        
         //TODO: - this is unsecure, set up database rules
         let ref = Database.database().reference()
         let displayedDateRef = ref.child(user.uid).child(dateString)
-        displayedDateRef.observe(.value, with:{ (snapshot) in
-            
-            self.daysActivities = []
+        displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
+            self.daysActivities = []            
 
             guard let activityDictionary = snapshot.value as? [String:Any] else {
                 print("No existing activities")
@@ -65,13 +63,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             }
             let activityIds = Array(activityDictionary.keys)
             for id in activityIds {
-                let values = activityDictionary[id] as! [String:Any]
-                let startTime = values["startTime"] as! Double
-                let endTime = values["endTime"] as! Double
-                let activityDescription = values["activityDescription"] as! String
-                let moodScore = values["moodScore"] as! Int
+                guard let values = activityDictionary[id] as? [String:Any],
+                let startTime = values["startTime"] as? Double,
+                let endTime = values["endTime"] as? Double,
+                let activityDescription = values["activityDescription"] as? String,
+                    let moodScore = values["moodScore"] as? Double else {continue}
                 
-                self.daysActivities.append(CalendarActivity(databaseID: id, startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: moodScore))
+                self.daysActivities.append(CalendarActivity(databaseID: id, startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: Int(moodScore)))
             }
             self.calendarView.makeActivityDrawables()
             self.calendarView.setNeedsDisplay()
@@ -108,7 +106,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     
     func updateDate() {
-        dateString = dateFormatter.string(from: displayedDate)
+        dateString = g_dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
     }
     
@@ -147,6 +145,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         editingActivity = nil
+        loadEvents()
     }
 }
 

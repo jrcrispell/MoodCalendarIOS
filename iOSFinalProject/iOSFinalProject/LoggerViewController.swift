@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
@@ -29,10 +31,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // Misc
     let calendar = Calendar.current
     let moodPickerData = ["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
-
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        user = Auth.auth().currentUser
         
         if editingActivity == nil {
             deleteButton.isEnabled = false
@@ -55,9 +59,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         navigationBar.backgroundColor = UIColor.clear
         navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, yyyy"        
-        dateLabel.title = dateFormatter.string(from: displayedDate)
+        dateLabel.title = g_dateFormatter.string(from: displayedDate)
         
         
     }
@@ -78,6 +80,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBAction func saveTapped(_ sender:UIBarButtonItem) {
         let startTime = startTimePicker.date
         let endTime = endTimePicker.date
+        let moodScore = 10 - moodPicker.selectedRow(inComponent: 0)
         
         // Make sure start time is before end time.
         if startTime > endTime{
@@ -85,7 +88,22 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
+        let ref = Database.database().reference()
+        let displayedDateRef = ref.child(user.uid).child(g_dateFormatter.string(from: displayedDate))
+        let newActivityRef = displayedDateRef.childByAutoId()
+        newActivityRef.child("startTime").setValue(dateToTime(date: startTime))
+        newActivityRef.child("endTime").setValue(dateToTime(date: endTime))
+        newActivityRef.child("activityDescription").setValue(descriptionField.text)
+        newActivityRef.child("moodScore").setValue(Double(moodScore))
         
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    
+    func dateToTime(date: Date) -> Double {
+        let hour = Double(calendar.component(.hour, from: date))
+        let fractional = Double(calendar.component(.minute, from: date))/60.0
+        return hour + fractional
         
     }
     

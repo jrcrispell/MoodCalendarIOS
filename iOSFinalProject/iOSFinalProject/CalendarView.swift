@@ -57,23 +57,34 @@ class CalendarView: UIView {
     
     override func draw(_ rect: CGRect) {
 
-        white50Percent.setStroke()
+        
+        textStyle.lineSpacing = 6.0
+        textAttributes = [NSForegroundColorAttributeName: white80Percent, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
 
         
         // Draw hour lines
         for index in 0...23 {
+            white50Percent.setStroke()
             let hourBezier = UIBezierPath()
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.stroke()
-        }
-
-        // Draw hour labels
-        textStyle.lineSpacing = 6.0
-        textAttributes = [NSForegroundColorAttributeName: white80Percent, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
-        
-        for (index, label) in hourLabels.enumerated() {
-            label.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + g_hourVerticalPoints * Double (index)), withAttributes: textAttributes)
+            
+            // Draw label
+            var hourString = NSString()
+            if index == 0 {
+                hourString = "12:00"
+            }
+            else if index == 12 {
+                hourString = "12:00"
+            }
+            else if index < 12 {
+                hourString = String(index) + ":00" as NSString
+            }
+            else {
+                hourString = String(index - 12) + ":00" as NSString
+            }
+            hourString.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + Double(index) * g_hourVerticalPoints), withAttributes: textAttributes)
         }
 
         // Draw activity rectangles
@@ -88,24 +99,6 @@ class CalendarView: UIView {
                 activityDrawables.append(ActivityDrawables(activity: activity))
             }
         }
-        
-        // Configure hour labels
-        for index in 0...23 {
-            var hourString = NSString()
-                    if index == 0 {
-                        hourString = "12:00"
-                    }
-                    else if index == 12 {
-                        hourString = "12:00"
-                    }
-                    else if index < 12 {
-                        hourString = String(index) + ":00" as NSString
-                    }
-                    else {
-                        hourString = String(index - 12) + ":00" as NSString
-                    }
-            hourLabels.append(hourString)
-                }
     }
     
     public static func activityTimeToY(time: Double) -> Double {

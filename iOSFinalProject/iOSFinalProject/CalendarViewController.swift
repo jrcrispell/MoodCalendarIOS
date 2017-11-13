@@ -31,6 +31,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var editingActivity: CalendarActivity!
     var user: User!
     
+    var sendStartTime: Double = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,6 +124,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         if let activity = calendarView.getSelectedActivity(location: point) {
             editingActivity = activity
         }
+        
+        // Calculate start hour where user clicked, will be sent in prepare function
+        sendStartTime = Double(Int(CalendarView.convertYToHour(point.y)))
         performSegue(withIdentifier: "toLogger", sender: sender)
 
     }
@@ -137,8 +142,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 loggerView.editingActivity = editingActivity
             }
             // Making new activity
-            print(Date().timeIntervalSince1970.hashValue.description)
             loggerView.displayedDate = displayedDate
+            loggerView.incomingStartTime = sendStartTime
+            loggerView.incomingEndTime = sendStartTime + 1
             
         }
     }

@@ -109,7 +109,7 @@ class CalendarView: UIView {
     public func getSelectedActivity(location: CGPoint) -> CalendarActivity? {
         // Verify x position
         if Double(location.x) < g_lineStartX {return nil}
-        let timeClicked = convertYToHour(location.y)
+        let timeClicked = CalendarView.convertYToHour(location.y)
         guard let daysActivities = viewControllerDelegate?.getDaysActivities() else { return nil }
             for activity in daysActivities {
                 if timeClicked > activity.startTime && timeClicked < activity.endTime {
@@ -120,7 +120,7 @@ class CalendarView: UIView {
     }
     
     // Converts the CGFloat value of a Y coordinate to a double that corresponds to the hour on the calendarView
-    func convertYToHour(_ y: CGFloat) -> Double {
+    static func convertYToHour(_ y: CGFloat) -> Double {
         return (Double(y) - g_firstLineY)/g_hourVerticalPoints
     }
 }

@@ -76,8 +76,17 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func saveTapped(_ sender:UIBarButtonItem) {
-        let start = startTimePicker.date.description
-        print(start)
+        let startTime = startTimePicker.date
+        let endTime = endTimePicker.date
+        
+        // Make sure start time is before end time.
+        if startTime > endTime{
+            self.present(AlertUtils.makeSimpleAlert(title: "Alert", message: "Start date can not be after end date"), animated: true, completion: nil)
+            return
+        }
+        
+        
+        
     }
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {

@@ -94,6 +94,7 @@ class CalendarView: UIView {
     }
 
     public func makeActivityDrawables() {
+        activityDrawables = []
         if let daysActivities = viewControllerDelegate?.getDaysActivities() {
             for activity in daysActivities {
                 activityDrawables.append(ActivityDrawables(activity: activity))

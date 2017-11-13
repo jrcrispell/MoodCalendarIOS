@@ -58,19 +58,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             self.daysActivities = []
 
             guard let activityDictionary = snapshot.value as? [String:Any] else {
-                print("activityDictionaryERROR")
+                print("No existing activities")
+                self.calendarView.makeActivityDrawables()
+                self.calendarView.setNeedsDisplay()
                 return
             }
-            let keys = Array(activityDictionary.keys)
-            for key in keys {
-                let values = activityDictionary[key] as! [String:Any]
+            let activityIds = Array(activityDictionary.keys)
+            for id in activityIds {
+                let values = activityDictionary[id] as! [String:Any]
                 let startTime = values["startTime"] as! Double
                 let endTime = values["endTime"] as! Double
                 let activityDescription = values["activityDescription"] as! String
                 let moodScore = values["moodScore"] as! Int
                 
-                //TODO: - get database ID
-                self.daysActivities.append(CalendarActivity(databaseID: "1", startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: moodScore))
+                self.daysActivities.append(CalendarActivity(databaseID: id, startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: moodScore))
             }
             self.calendarView.makeActivityDrawables()
             self.calendarView.setNeedsDisplay()
@@ -93,6 +94,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             displayedDate = calendar.date(byAdding: .day, value: 1, to: displayedDate)!
         }
         updateDate()
+        loadEvents()
     }
     
     @IBAction func logOutTapped(_ sender: Any) {

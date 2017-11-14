@@ -28,25 +28,42 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var incomingStartTime: Double = 8
     var incomingEndTime: Double = 9
     
+    // Database
+    var ref: DatabaseReference!
+    var displayedDateRef: DatabaseReference!
+    var activityRef: DatabaseReference!
+
+    
     // Misc
     let calendar = Calendar.current
     let moodPickerData = ["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
     var user: User!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Database references
         user = Auth.auth().currentUser
+        ref = Database.database().reference()
+        displayedDateRef = ref.child(user.uid).child(g_dateFormatter.string(from: displayedDate))
         
+        // Making new Activity
         if editingActivity == nil {
             deleteButton.isEnabled = false
             moodPicker.selectRow(5, inComponent: 0, animated: true)
+            activityRef = displayedDateRef.childByAutoId()
+
         }
         else {
+            // Editing existing Activity
             incomingStartTime = editingActivity.startTime
             incomingEndTime = editingActivity.endTime
             descriptionField.text = editingActivity.activityDescription
             moodPicker.selectRow(10 - editingActivity.moodScore, inComponent: 0, animated: true)
+            activityRef = displayedDateRef.child(editingActivity.databaseID)
+
         }
         
         startTimePicker.setDate(doubleToDate(time: incomingStartTime), animated: true)
@@ -88,13 +105,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
-        let ref = Database.database().reference()
-        let displayedDateRef = ref.child(user.uid).child(g_dateFormatter.string(from: displayedDate))
-        let newActivityRef = displayedDateRef.childByAutoId()
-        newActivityRef.child("startTime").setValue(dateToTime(date: startTime))
-        newActivityRef.child("endTime").setValue(dateToTime(date: endTime))
-        newActivityRef.child("activityDescription").setValue(descriptionField.text)
-        newActivityRef.child("moodScore").setValue(Double(moodScore))
+        // Save values to database
+        activityRef.child("startTime").setValue(dateToTime(date: startTime))
+        activityRef.child("endTime").setValue(dateToTime(date: endTime))
+        activityRef.child("activityDescription").setValue(descriptionField.text)
+        activityRef.child("moodScore").setValue(Double(moodScore))
         
         self.dismiss(animated: true, completion: nil)
 
@@ -108,6 +123,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
+        activityRef.removeValue()
+        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Slider setup

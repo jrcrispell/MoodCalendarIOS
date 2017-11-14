@@ -21,11 +21,6 @@ let g_firstTextLabelY: Double = 0
 
 class CalendarView: UIView {
     
-    // Attributes
-    let textFont = UIFont(name: "Helvetica Neue", size: 18)
-    let textStyle = NSMutableParagraphStyle()
-    var textAttributes: [String : Any]?
-    
     var viewControllerDelegate: ViewControllerDelegate?
     
     // Instantiating drawable objects here so it's not done in draw()
@@ -33,12 +28,6 @@ class CalendarView: UIView {
     var halfHourBezier = UIBezierPath()
     var activityDrawables: [ActivityDrawables] = []
     var hourLabels: [NSString] = []
-    
-    
-    // Colors
-    let white50Percent = UIColor.white.withAlphaComponent(0.5)
-    let white80Percent = UIColor.white.withAlphaComponent(0.80)
-
 
     // Old globals
 //    var g_moodRectangleXPosition = 315
@@ -56,15 +45,10 @@ class CalendarView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-
-        
-        textStyle.lineSpacing = 6.0
-        textAttributes = [NSForegroundColorAttributeName: white80Percent, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
-
         
         // Draw hour lines
         for index in 0...23 {
-            white50Percent.setStroke()
+            Styles.white50Percent.setStroke()
             let hourBezier = UIBezierPath()
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
@@ -84,7 +68,7 @@ class CalendarView: UIView {
             else {
                 hourString = String(index - 12) + ":00" as NSString
             }
-            hourString.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + Double(index) * g_hourVerticalPoints), withAttributes: textAttributes)
+            hourString.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + Double(index) * g_hourVerticalPoints), withAttributes: Styles.textAttributes)
         }
 
         // Draw activity rectangles

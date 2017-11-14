@@ -38,6 +38,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     let calendar = Calendar.current
     let moodPickerData = ["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
     var user: User!
+    let white80Percent = UIColor.white.withAlphaComponent(0.80)
     
     
     
@@ -68,6 +69,9 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         startTimePicker.setDate(doubleToDate(time: incomingStartTime), animated: true)
         endTimePicker.setDate(doubleToDate(time: incomingEndTime), animated: true)
+        startTimePicker.setValue(UIColor.white, forKey: "textColor")
+        endTimePicker.setValue(UIColor.white, forKey: "textColor")
+        moodPicker.setValue(UIColor.white, forKey: "textColor")
 
         // Navigation Bar
         navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
@@ -151,6 +155,13 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return true
     }
     
+    // Color for mood score picker
+
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let rowData = moodPickerData[row]
+        
+        return NSAttributedString(string: rowData, attributes: Styles.moodPickerAttributes)
+    }
 
     /*
     // MARK: - Navigation

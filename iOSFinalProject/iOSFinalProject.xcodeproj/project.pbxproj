@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		36EA7DA3C45DBD7D22E1F5DD /* Pods_iOSFinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1949709BE776F6F08B287F6C /* Pods_iOSFinalProject.framework */; };
+		8619C0BD1FBB507600444763 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619C0BC1FBB507600444763 /* Styles.swift */; };
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
@@ -27,6 +28,7 @@
 		1949709BE776F6F08B287F6C /* Pods_iOSFinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSFinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		350036251DFAE520990B9FC6 /* Pods-iOSFinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalProject/Pods-iOSFinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		47C1A6EB4A75376348F9B7CA /* Pods-iOSFinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalProject/Pods-iOSFinalProject.release.xcconfig"; sourceTree = "<group>"; };
+		8619C0BC1FBB507600444763 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */,
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86FB52B11FB518E300C612B7 /* AlertUtils.swift */,
+				8619C0BC1FBB507600444763 /* Styles.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */,
+				8619C0BD1FBB507600444763 /* Styles.swift in Sources */,
 				86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,

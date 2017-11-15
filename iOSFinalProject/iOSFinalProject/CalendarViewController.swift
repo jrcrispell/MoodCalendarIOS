@@ -239,11 +239,16 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         
+        // Date Setting
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents(in: .current, from: date)
+        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute, second: components.second)
+        
         // Making notification content
         let content = UNMutableNotificationContent()
         content.title = "Mood Calendar Reminder"
         
-        let hour = calendar.component(.hour, from: date)
+        let hour = newComponents.hour!
 
         // Encode what hour is being logged (the previous hour to the time of the notification)
         if hour == 0 {
@@ -273,8 +278,9 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         content.sound = UNNotificationSound.default()
         
         content.categoryIdentifier = "moodCalendarNotification"
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents(in: .current, from: date), repeats: false)
+
+        // Trigger
+        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
         
         let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
         
@@ -284,14 +290,18 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             if let error = error {
                 print("Error: \(error)")
             }
+            else {
+                let string = request.trigger.debugDescription
+                print(string)
+            }
             
             let center = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests { (request) in
-                print(request.count.description)
+            center.getPendingNotificationRequests { (request2) in
+                print(request2.count.description)
             }
             let center2 = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests { (request) in
-                print(request.count.description)
+            center2.getPendingNotificationRequests { (request3) in
+                print(request3.count.description)
             }
         }
     }

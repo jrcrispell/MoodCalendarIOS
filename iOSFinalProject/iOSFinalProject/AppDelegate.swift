@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Firebase Pod
         FirebaseApp.configure()
-        // Override point for customization after application launch.
+        
+        //MARK: - Setup for Notifications
+
+        // Custom button actions
+        let snoozeAction = UNNotificationAction(identifier: "snoozeAction", title: "Snooze 15 minutes", options: [])
+        let settingsAction = UNNotificationAction(identifier: "settingsAction", title: "Change notification settings", options: [.foreground])
+        let quicklogAction = UNTextInputNotificationAction(identifier: "quickLogAction", title: "Quick Log", options: [], textInputButtonTitle: "Save", textInputPlaceholder: "Activity + Mood Score - Example: 'Schoolwork 6'")
+        
+        // Set custom notification category
+        let category = UNNotificationCategory(identifier: "moodCalendarNotification", actions: [settingsAction, quicklogAction, snoozeAction], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+        
+        // Ask user to allow notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (accepted, error) in
+            if !accepted {
+                print("Notification access denied")
+            }
+        }
+        
+        
         return true
     }
 
@@ -92,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
+
+
 

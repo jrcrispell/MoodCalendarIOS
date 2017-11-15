@@ -53,7 +53,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         // Set delegate
         calendarView.viewControllerDelegate = self
-        
     }
     
     func loadEvents() {
@@ -159,6 +158,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         editingActivity = nil
         loadEvents()
+        makeNextNotification(incomingDate: Date())
+
     }
     
     func makeNextNotification(incomingDate: Date) {
@@ -166,10 +167,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         let calendar = Calendar.current
         
         // Find incoming hour, schedule notification for 5 minutes after the following hour
-        let dateComponents = calendar.dateComponents(in: .current, from: incomingDate)
-        
         let todaysDate = Date()
         let todaysKey = g_dateFormatter.string(from: todaysDate)
+        
+        let dateComponents = calendar.dateComponents(in: .current, from: incomingDate)
+        
         
         let notificationHour = Double(dateComponents.hour!)
         var shouldSchedule = true

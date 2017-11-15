@@ -174,44 +174,50 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         let displayedDateRef = ref.child(user.uid).child(todaysKey)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
             
-            guard let activityDictionary = snapshot.value as? [String:Any] else {
-                print("No existing activities")
-            }
+            // Now check to see if we even have any events for today
+            
+            if let activityDictionary = snapshot.value as? [String:Any]  {
+
             let activityIds = Array(activityDictionary.keys)
             for id in activityIds {
                 guard let values = activityDictionary[id] as? [String:Any],
                     let startTime = values["startTime"] as? Double,
                     let endTime = values["endTime"] as? Double else {continue}
-                
-                // Check logic goes here
+
+                // Don't schedule if there's a notification in the previous hour
                 if notificationHour >= startTime && notificationHour <= endTime {
                     shouldSchedule = false
                 }
+                }
             }
+            
+            //TODO: - Check to see if we're during the hours the user wants notifications.
+            //        if notificationHour < Double(preferencesData.notificationStartTime) || notificationHour > Double(preferencesData.notificationEndTime) {
+            //            shouldSchedule = false
+            //        }
+            
+            if shouldSchedule == false {
+                // An event exists for this hour. Now we'll use recursion to try to schedule a notification for the following hour
+                self.makeNextNotification(incomingDate: Date(timeInterval: 3600, since: incomingDate))
+            }
+            
+            // Schedule the notification
+            if shouldSchedule == true {
+                let nextHourPlusFiveMin = calendar.date(from: DateComponents(calendar: .current, timeZone: dateComponents.timeZone, year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!, hour: dateComponents.hour! + 1, minute: 5))
+                self.scheduleNotification(date: nextHourPlusFiveMin!)
+            }
+            
+            
         })
         
         //LEFT OFF HERE - this might be a little tricky handling the async, especially if no days exists. make sure to go through the whole thing
 
         
         
-        //TODO: - Check to see if we're during the hours the user wants notifications.
-//        if notificationHour < Double(preferencesData.notificationStartTime) || notificationHour > Double(preferencesData.notificationEndTime) {
-//            shouldSchedule = false
-//        }
-        
-        // Now check to see if we even have any events for today
-            
-            if shouldSchedule == false {
-                // An event exists for this hour. Now we'll use recursion to try to schedule a notification for the following hour
-                checkThenScheduleNotification(incomingDate: Date(timeInterval: 3600, since: incomingDate))
-            }
+
         
         
-        // Schedule the notification
-        if shouldSchedule == true {
-            let nextHourPlusFiveMin = calendar.date(from: DateComponents(calendar: .current, timeZone: dateComponents.timeZone, year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!, hour: dateComponents.hour! + 1, minute: 5))
-            scheduleNotification(at: nextHourPlusFiveMin!)
-        }
+
     }
     
 }
@@ -219,12 +225,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 //MARK: - Notifications
 extension CalendarViewController: UNUserNotificationCenterDelegate {
     
+    let calendar = Calendar.current
+    
     func scheduleNotification(date: Date) {
         
         UNUserNotificationCenter.current().delegate = self
-        
-        // Date Setting
-        let calendar = Calendar(identifier: .gregorian)
         
         // Making notification content
         let content = UNMutableNotificationContent()
@@ -308,17 +313,9 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             }
             performSegue(withIdentifier: "toLogger", sender: self)
         }
-        
         //LEFT OFF HERE
         
-        
-        
-        
-        
-        
-        
-        
-        checkThenScheduleNotification(incomingDate: Date())
+        makeNextNotification(incomingDate: Date())
         completionHandler()
     }
     
@@ -338,12 +335,10 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
                 eventDescription += textArray[index] + " "
             }
             
-            let loggerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Logger View") as! LoggerView
-            
-            loggerViewController.incomingStartHour = response.notification.request.content.userInfo["hour"] as! Double
-            loggerViewController.incomingDuration = 1
+            let startTime = response.notification.request.content.userInfo["hour"] as! Double
             
             let date = Date()
+            let dateKey = g_dateFormatter.string(from: date)
             
             
             let dateComponents = calendar.dateComponents(in: .current, from: date)

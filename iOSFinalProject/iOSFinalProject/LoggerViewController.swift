@@ -119,7 +119,10 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     }
     
-    func dateToTime(date: Date) -> Double {
+    static func dateToTime(date: Date) -> Double {
+        
+        let calendar = Calendar.current
+        
         let hour = Double(calendar.component(.hour, from: date))
         let fractional = Double(calendar.component(.minute, from: date))/60.0
         return hour + fractional

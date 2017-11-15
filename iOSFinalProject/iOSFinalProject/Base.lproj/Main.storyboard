@@ -137,10 +137,10 @@
             </objects>
             <point key="canvasLocation" x="1144.8" y="-24.7376311844078"/>
         </scene>
-        <!--Logger View Controller-->
+        <!--LoggerViewController-->
         <scene sceneID="VGs-do-Xzw">
             <objects>
-                <viewController id="vKY-3Z-Ll0" customClass="LoggerViewController" customModule="iOSFinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoggerViewController" title="LoggerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vKY-3Z-Ll0" customClass="LoggerViewController" customModule="iOSFinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yth-1i-OGv"/>
                         <viewControllerLayoutGuide type="bottom" id="5CG-im-HGe"/>

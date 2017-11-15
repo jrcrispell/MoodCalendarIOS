@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import UserNotifications
+import FirebaseAuth
 
 let g_dateFormatter = DateFormatter()
 
@@ -25,6 +26,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
+    
+    let calendar = Calendar.current
 
     
     
@@ -225,8 +228,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 //MARK: - Notifications
 extension CalendarViewController: UNUserNotificationCenterDelegate {
     
-    let calendar = Calendar.current
-    
     func scheduleNotification(date: Date) {
         
         UNUserNotificationCenter.current().delegate = self
@@ -340,19 +341,19 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             let date = Date()
             let dateKey = g_dateFormatter.string(from: date)
             
+            // Database references
+            user = Auth.auth().currentUser
+            let ref = Database.database().reference()
+            let todaysRef = ref.child(user.uid).child(dateKey)
+            let activityRef = todaysRef.childByAutoId()
+
+            // Save values to database
+            activityRef.child("startTime").setValue(startTime)
+            activityRef.child("endTime").setValue(startTime + 1)
+            activityRef.child("activityDescription").setValue(eventDescription)
+            activityRef.child("moodScore").setValue(Double(moodScore))
             
-            let dateComponents = calendar.dateComponents(in: .current, from: date)
-            let eventKey = String(dateComponents.month!) + "-" + String(dateComponents.day!) + "-" + String(dateComponents.year!)
-            
-            loggerViewController.eventDictionary = eventDictionary
-            loggerViewController.mainViewController = self
-            loggerViewController.addToEventDictionary(eventKey: eventKey, startTime: response.notification.request.content.userInfo["hour"] as! Double, duration: 1, eventDescription: eventDescription, mood: moodScore)
-            
-            loggerViewController.saveDictionary(loggerViewController.eventDictionary)
-            
-            eventDictionary = loggerViewController.eventDictionary
-            updateCalendar()
-            
+            loadEvents()
         }
             
         else {

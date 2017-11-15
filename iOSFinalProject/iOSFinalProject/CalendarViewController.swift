@@ -18,6 +18,7 @@ let g_dateFormatter = DateFormatter()
 class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     
+    
     // Date data
     var displayedDate = Date()
     var dateString = ""
@@ -29,12 +30,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     let calendar = Calendar.current
 
-    
-    
     let ref = Database.database().reference()
 
     var daysActivities = [CalendarActivity]()
-    
     
     var editingActivity: CalendarActivity!
     var user: User!
@@ -43,6 +41,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
@@ -138,7 +138,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
 
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {
-        print("Long Press")
+        
+        // Only act on the "release" touch
+        if sender.state.rawValue != 3 {return}
+            
+        
+        print("Long Press - \(sender.state.rawValue.description)")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -278,6 +283,15 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().add(request) {(error) in
             if let error = error {
                 print("Error: \(error)")
+            }
+            
+            let center = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests { (request) in
+                print(request.count.description)
+            }
+            let center2 = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests { (request) in
+                print(request.count.description)
             }
         }
     }

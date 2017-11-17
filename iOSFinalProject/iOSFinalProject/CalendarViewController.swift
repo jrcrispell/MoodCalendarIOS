@@ -37,7 +37,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     var sendStartTime: Double = 0
     
-    
+    //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
         
         // Schedule notification for 5 seconds from now
@@ -168,12 +168,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
-
     }
     
+    
+    
     func makeNextNotification(incomingDate: Date) {
-        
-        let calendar = Calendar.current
         
         // Find incoming hour, schedule notification for 5 minutes after the following hour
         let todaysDate = Date()
@@ -216,7 +215,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             
             // Schedule the notification
             if shouldSchedule == true {
-                let nextHourPlusFiveMin = calendar.date(from: DateComponents(calendar: .current, timeZone: dateComponents.timeZone, year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!, hour: dateComponents.hour! + 1, minute: 5))
+                let nextHourPlusFiveMin = self.calendar.date(from: DateComponents(calendar: .current, timeZone: dateComponents.timeZone, year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!, hour: dateComponents.hour! + 1, minute: 5))
                 self.scheduleNotification(date: nextHourPlusFiveMin!)
             }
         })
@@ -275,19 +274,11 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
         
         // Delete any pre-exisiting notification requests
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        UNUserNotificationCenter.current().add(request) {(error) in
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+        center.add(request) {(error) in
             if let error = error {
                 print("Error: \(error)")
-            }
-            else {
-                let string = request.trigger.debugDescription
-                print(string)
-            }
-            
-            let center = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests { (request2) in
-                print(request2.count.description)
             }
         }
     }
@@ -364,12 +355,10 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             
             let startTime = response.notification.request.content.userInfo["hour"] as! Double
             
-            let date = Date()
-            let dateKey = g_dateFormatter.string(from: date)
+            let dateKey = g_dateFormatter.string(from: Date())
             
             // Database references
             user = Auth.auth().currentUser
-            let ref = Database.database().reference()
             let todaysRef = ref.child(user.uid).child(dateKey)
             let activityRef = todaysRef.childByAutoId()
 

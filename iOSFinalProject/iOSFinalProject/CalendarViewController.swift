@@ -17,8 +17,6 @@ let g_dateFormatter = DateFormatter()
 
 class CalendarViewController: UIViewController, ViewControllerDelegate {
     
-    
-    
     // Date data
     var displayedDate = Date()
     var dateString = ""
@@ -45,14 +43,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         // Schedule notification for 5 seconds from now
         let fiveSecondsFromNow = Date().addingTimeInterval(5)
         scheduleNotification(date: fiveSecondsFromNow)
-        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
@@ -66,7 +61,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
     
     func loadEvents() {
-        
         
         //TODO: - this is unsecure, set up database rules
         let displayedDateRef = ref.child(user.uid).child(dateString)
@@ -187,7 +181,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         let dateComponents = calendar.dateComponents(in: .current, from: incomingDate)
         
-        
         let notificationHour = Double(dateComponents.hour!)
         var shouldSchedule = true
         
@@ -226,20 +219,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 let nextHourPlusFiveMin = calendar.date(from: DateComponents(calendar: .current, timeZone: dateComponents.timeZone, year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!, hour: dateComponents.hour! + 1, minute: 5))
                 self.scheduleNotification(date: nextHourPlusFiveMin!)
             }
-            
-            
         })
-        
-        //LEFT OFF HERE - this might be a little tricky handling the async, especially if no days exists. make sure to go through the whole thing
-
-        
-        
-
-        
-        
-
     }
-    
 }
 
 //MARK: - Notifications
@@ -250,27 +231,26 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = self
         
         // Date Setting
-        let calendar = Calendar(identifier: .gregorian)
-        let components = calendar.dateComponents(in: .current, from: date)
-        let newComponents = DateComponents(calendar: calendar, timeZone: .current, month: components.month, day: components.day, hour: components.hour, minute: components.minute, second: components.second)
+        let fullComponents = calendar.dateComponents(in: .current, from: date)
+        
+        // Needed to make new components because including the year seems to bug notifications
+        let simpleComponents = DateComponents(calendar: calendar, timeZone: .current, month: fullComponents.month, day: fullComponents.day, hour: fullComponents.hour, minute: fullComponents.minute, second: fullComponents.second)
         
         // Making notification content
         let content = UNMutableNotificationContent()
         content.title = "Mood Calendar Reminder"
         
-        let hour = newComponents.hour!
+        let hour = simpleComponents.hour!
 
         // Encode what hour is being logged (the previous hour to the time of the notification)
-        if hour == 0 {
-            // Handle midnight
-            content.userInfo = ["hour":Double(23)]
-        }
         content.userInfo = ["hour":Double(hour - 1)]
         
         // Hour refers to the hour when the notification is schedule. The activity to be logged will be for the previous hour
         switch hour {
         case 0:
             content.body = "Log activity for 11:00PM - 12:00AM"
+            // This prevents -1 from being saved as the hour
+            content.userInfo = ["hour":Double(23)]
         case 1:
             content.body = "Log activity for 12:00AM - 1:00AM"
             break
@@ -290,7 +270,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         content.categoryIdentifier = "moodCalendarNotification"
 
         // Trigger
-        let trigger = UNCalendarNotificationTrigger(dateMatching: newComponents, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: simpleComponents, repeats: false)
         
         let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
         
@@ -308,10 +288,6 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             let center = UNUserNotificationCenter.current()
             center.getPendingNotificationRequests { (request2) in
                 print(request2.count.description)
-            }
-            let center2 = UNUserNotificationCenter.current()
-            center2.getPendingNotificationRequests { (request3) in
-                print(request3.count.description)
             }
         }
     }
@@ -368,9 +344,20 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
     
     func handleQuickLogResponse(userText: String, response: UNNotificationResponse) {
         
+        // Break down the response so we can extract the score
         let textArray = userText.components(separatedBy: " ")
-        if let moodScore: Int = Int(textArray[textArray.count - 1]) {
+        if var moodScore: Int = Int(textArray[textArray.count - 1]) {
+            
+            // Handle cheeky users trying to crash the app
+            if moodScore > 10 {
+                moodScore = 10
+            }
+            else if moodScore < 1 {
+                moodScore = 1
+            }
             var eventDescription = ""
+            
+            // the -2 is to ignore the mood score and preceding space
             for index in 0...textArray.count-2 {
                 eventDescription += textArray[index] + " "
             }
@@ -396,17 +383,9 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         }
             
         else {
-            //
-            let alert = UIAlertController(title: "Invalid QuickLog", message: "Your event could not be saved. Please make sure to type the event description, then a space, then the mood score", preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okButton)
-            
-            
-            present(alert, animated: true, completion: nil)
+            present(AlertUtils.makeSimpleAlert(title: "Invalid QuickLog", message: "Your event could not be saved. Please make sure to type the event description, then a space, then the mood score"), animated: true, completion: nil)
         }
-        
     }
-    
 }
 
 

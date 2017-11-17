@@ -92,6 +92,15 @@
                                     <action selector="logOutTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oIg-5r-bZF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
+                                <rect key="frame" x="345" y="58" width="30" height="30"/>
+                                <state key="normal" title="Test">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="testNotificationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dRV-y6-xNj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -101,6 +110,7 @@
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="2u8-Eo-w3Q"/>
                             <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="4rA-Zk-Xhx"/>
                             <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
+                            <constraint firstAttribute="trailing" secondItem="htd-5Z-dnD" secondAttribute="trailing" id="AbV-OM-EQV"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" id="BuW-GZ-9U7"/>
                             <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="F4j-AR-38a"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="enr-Fw-NDa" secondAttribute="centerX" id="K9t-hQ-589"/>
@@ -109,6 +119,7 @@
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OBC-QS-c5G"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="bottom" id="QOX-rg-PBp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FxP-8z-toi" secondAttribute="trailing" constant="8" id="Uqw-WY-XJB"/>
+                            <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="htd-5Z-dnD" secondAttribute="bottom" constant="-8" id="ZYT-Cj-VgH"/>
                             <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="FxP-8z-toi" secondAttribute="centerY" id="bd8-JZ-8Mg"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="6g9-h5-Nna" secondAttribute="bottom" constant="8" id="mXK-cP-jf0"/>

@@ -39,6 +39,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     var sendStartTime: Double = 0
     
+    
+    @IBAction func testNotificationTapped(_ sender: Any) {
+        
+        // Schedule notification for 5 seconds from now
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -334,13 +344,16 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             //Go to log page with hour filled out            
             sendStartTime = response.notification.request.content.userInfo["hour"] as! Double
             
-            // If a view has been presented (such as another Logger View), dismiss
-            if let test = self.presentedViewController {
-                test.dismiss(animated: false, completion: nil)
+            // If a view has been presented (such as another Logger View), dismiss first
+            if let viewController = self.presentedViewController {
+                viewController.dismiss(animated: false, completion: {
+                    self.performSegue(withIdentifier: "toLogger", sender: self)
+                })
             }
-            performSegue(withIdentifier: "toLogger", sender: self)
+            else {
+                performSegue(withIdentifier: "toLogger", sender: self)
+            }
         }
-        //LEFT OFF HERE
         
         makeNextNotification(incomingDate: Date())
         completionHandler()

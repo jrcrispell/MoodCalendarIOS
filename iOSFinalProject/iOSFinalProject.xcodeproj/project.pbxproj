@@ -12,6 +12,7 @@
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
+		8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8685FC1B1FBF91FC004B39FB /* Settings.bundle */; };
 		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
@@ -32,6 +33,7 @@
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8685FC1B1FBF91FC004B39FB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				868F699F1FA10B9A0060016F /* CalendarView.swift */,
 				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
 				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
+				8685FC1B1FBF91FC004B39FB /* Settings.bundle */,
 				86E242101F7C1A5700C1B63C /* Assets.xcassets */,
 				86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */,
 				86E242151F7C1A5700C1B63C /* Info.plist */,
@@ -180,6 +183,7 @@
 			files = (
 				867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */,
 				86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */,
+				8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */,
 				86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */,
 				86E2420C1F7C1A5700C1B63C /* Main.storyboard in Resources */,
 			);

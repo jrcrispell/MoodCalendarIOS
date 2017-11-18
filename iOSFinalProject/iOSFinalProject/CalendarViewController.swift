@@ -23,7 +23,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 
     // Header
     @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
     
     let calendar = Calendar.current
@@ -115,6 +114,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             self.present(AlertUtils.makeSimpleAlert(title: "Sign out error", message: error.localizedDescription), animated: true, completion: nil)
         }
     }
+    
+    @IBAction func settingsTapped(_ sender: Any) {
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
     
     
     func updateDate() {

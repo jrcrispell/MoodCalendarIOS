@@ -61,7 +61,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     func loadEvents() {
         
-        //TODO: - this is unsecure, set up database rules
         let displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
             self.daysActivities = []            

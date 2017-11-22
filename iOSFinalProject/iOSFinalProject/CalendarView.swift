@@ -28,6 +28,8 @@ class CalendarView: UIView {
     var halfHourBezier = UIBezierPath()
     var activityDrawables: [ActivityDrawables] = []
     var hourLabels: [NSString] = []
+    
+    var daysActivities: [CalendarActivity]?
 
     // Old globals
 //    var g_moodRectangleXPosition = 315
@@ -48,12 +50,25 @@ class CalendarView: UIView {
         
         // Draw hour lines
         for index in 0...23 {
+            
+            var shouldDraw = true
+            
+            if daysActivities != nil {
+                for activity in daysActivities! {
+                    if activity.startTime < Double(index) && activity.endTime > Double(index) {
+                        shouldDraw = false
+                    }
+                }
+            }
+            
+            if (shouldDraw) {
             Styles.white50Percent.setStroke()
             let hourBezier = UIBezierPath()
             hourBezier.move(to: CGPoint(x: g_lineStartX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.addLine(to: CGPoint(x: g_lineEndX, y: g_firstLineY + g_hourVerticalPoints * Double(index)))
             hourBezier.stroke()
             
+            }
             // Draw label
             var hourString = NSString()
             if index == 0 {
@@ -70,6 +85,7 @@ class CalendarView: UIView {
             }
             hourString.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + Double(index) * g_hourVerticalPoints), withAttributes: Styles.textAttributes)
         }
+        
 
         // Draw activity rectangles
         for drawable in activityDrawables {
@@ -79,11 +95,14 @@ class CalendarView: UIView {
 
     public func makeActivityDrawables() {
         activityDrawables = []
-        if let daysActivities = viewControllerDelegate?.getDaysActivities() {
-            for activity in daysActivities {
+        daysActivities = (viewControllerDelegate?.getDaysActivities())
+        
+        if daysActivities != nil {
+            for activity in daysActivities! {
                 activityDrawables.append(ActivityDrawables(activity: activity))
             }
         }
+        
     }
     
     public static func activityTimeToY(time: Double) -> Double {

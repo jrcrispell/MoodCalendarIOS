@@ -19,10 +19,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var dateLabel: UINavigationItem!
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var moodPicker: UIPickerView!
-
-    
-    // git test 1
-    
     
     // Incoming data
     var editingActivity: CalendarActivity!

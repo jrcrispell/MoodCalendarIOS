@@ -97,32 +97,21 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func saveTapped(_ sender:UIBarButtonItem) {
-        let startTime = startTimePicker.date
-        let endTime = endTimePicker.date
+        let startDate = startTimePicker.date
+        let endDate = endTimePicker.date
         let moodScore = 10 - moodPicker.selectedRow(inComponent: 0)
         
         // Make sure start time is before end time.
-        if startTime > endTime{
-            self.present(AlertUtils.makeSimpleAlert(title: "Alert", message: "Start date can not be after end date"), animated: true, completion: nil)
+        if startDate > endDate{
+            self.present(Utils.makeSimpleAlert(title: "Alert", message: "Start date can not be after end date"), animated: true, completion: nil)
             return
         }
         
         // Save values to database
-        activityRef.child("startTime").setValue(dateToTime(date: startTime))
-        activityRef.child("endTime").setValue(dateToTime(date: endTime))
-        activityRef.child("activityDescription").setValue(descriptionField.text)
-        activityRef.child("moodScore").setValue(Double(moodScore))
+        Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.dateToTime(calendar: calendar, date: startDate), endTime: Utils.dateToTime(calendar: calendar, date: endDate), eventDescription: descriptionField.text!, moodScore: moodScore)
         
         self.dismiss(animated: true, completion: nil)
 
-    }
-    
-    func dateToTime(date: Date) -> Double {
-                
-        let hour = Double(calendar.component(.hour, from: date))
-        let fractional = Double(calendar.component(.minute, from: date))/60.0
-        return hour + fractional
-        
     }
     
     @IBAction func deleteTapped(_ sender: UIBarButtonItem) {

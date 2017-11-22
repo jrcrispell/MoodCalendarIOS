@@ -110,7 +110,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             try Auth.auth().signOut()
         }
         catch let error as NSError {
-            self.present(AlertUtils.makeSimpleAlert(title: "Sign out error", message: error.localizedDescription), animated: true, completion: nil)
+            self.present(Utils.makeSimpleAlert(title: "Sign out error", message: error.localizedDescription), animated: true, completion: nil)
         }
     }
     
@@ -360,22 +360,13 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             
             let dateKey = g_dateFormatter.string(from: Date())
             
-            // Database references
-            user = Auth.auth().currentUser
-            let todaysRef = ref.child(user.uid).child(dateKey)
-            let activityRef = todaysRef.childByAutoId()
-
-            // Save values to database
-            activityRef.child("startTime").setValue(startTime)
-            activityRef.child("endTime").setValue(startTime + 1)
-            activityRef.child("activityDescription").setValue(eventDescription)
-            activityRef.child("moodScore").setValue(Double(moodScore))
+            Utils.saveNewActivity(startTime: startTime, endTime: startTime + 1, eventDescription: eventDescription, moodScore: moodScore, dateKey: dateKey)
             
             loadEvents()
         }
             
         else {
-            present(AlertUtils.makeSimpleAlert(title: "Invalid QuickLog", message: "Your event could not be saved. Please make sure to type the event description, then a space, then the mood score"), animated: true, completion: nil)
+            present(Utils.makeSimpleAlert(title: "Invalid QuickLog", message: "Your event could not be saved. Please make sure to type the event description, then a space, then the mood score"), animated: true, completion: nil)
         }
     }
 }

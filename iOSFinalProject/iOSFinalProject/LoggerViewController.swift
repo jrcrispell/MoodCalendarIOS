@@ -21,6 +21,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var moodPicker: UIPickerView!
 
     
+    // git test 1
+    
     
     // Incoming data
     var editingActivity: CalendarActivity!

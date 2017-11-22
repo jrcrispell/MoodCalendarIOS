@@ -53,6 +53,7 @@ class CalendarView: UIView {
             
             var shouldDraw = true
             
+            // Don't draw the hour line if it's behind an activity
             if daysActivities != nil {
                 for activity in daysActivities! {
                     if activity.startTime < Double(index) && activity.endTime > Double(index) {

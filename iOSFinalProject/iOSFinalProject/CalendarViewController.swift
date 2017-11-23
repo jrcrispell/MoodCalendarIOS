@@ -170,8 +170,31 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         print("Long Press - \(sender.state.rawValue.description)")
     }
     
-    func dragHandle(_ sender: UIPanGestureRecognizer) {
-        print("DragHandle Activated")
+    func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
+
+        let translation = sender.translation(in: calendarView)
+        
+        if let senderView = sender.view {
+            var shouldDrag = true
+            
+            // Move handle
+            let newY = view.center.y + translation.y
+            
+            if view.tag == 2 {
+                // Top handle
+                
+                let botLineY = Utils.converHourToY(time: editingActivity.endTime)
+                
+                // Don't get too close to bottom line
+                if Double(newY) > (botLineY - 0.15 * g_hourVerticalPoints) {
+                    shouldDrag = false
+                }
+                
+                //TODO: - left off here
+            }
+        }
+
+    
     }
     
     func editActivity(activity: CalendarActivity) {
@@ -179,6 +202,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         
         let topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+        
+        
+        // Gesture recognizers
+        let topGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
+        topHandle.addGestureRecognizer(topGestureRecognizer)
         
         topHandle.tag = 2
         let handleHalfWidth = Double(topHandle.frame.width) / 2
@@ -188,6 +216,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         let botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
         botHandle.tag = 3
         botHandle.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
+        
+        
+        let viewTester = UIView(frame: CGRect(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime), width: 100, height: 100))
+        viewTester.backgroundColor = UIColor.black
+
+        topHandle.isUserInteractionEnabled = true
+        botHandle.isUserInteractionEnabled = true
         
         calendarView.addSubview(topHandle)
         calendarView.addSubview(botHandle)

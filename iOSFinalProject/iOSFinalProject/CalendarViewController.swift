@@ -21,6 +21,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var displayedDate = Date()
     var dateString = ""
     
+    // Draggable handles
+    var topHandle: UIImageView?
+    var botHandle: UIImageView?
+    
     // Header
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
@@ -171,61 +175,80 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
     
     func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
-
-        let translation = sender.translation(in: calendarView)
+        
+        guard let topHandle = self.topHandle,
+            let botHandle = self.botHandle else {return}
+        
+        let translation = sender.translation(in: self.view)
+        
+        print("translation: " + translation.debugDescription)
         
         if let senderView = sender.view {
             var shouldDrag = true
             
+            print("senderView center y = " + senderView.center.y.description)
             // Move handle
-            let newY = view.center.y + translation.y
+            let newY = senderView.center.y + translation.y
             
-            if view.tag == 2 {
+            print("NewY = " + newY.description)
+            
+            if senderView.tag == 2 {
                 // Top handle
                 
-                let botLineY = Utils.converHourToY(time: editingActivity.endTime)
-                
                 // Don't get too close to bottom line
-                if Double(newY) > (botLineY - 0.15 * g_hourVerticalPoints) {
+                if Double(newY) > (Double(botHandle.center.y) - 0.15 * g_hourVerticalPoints) {
                     shouldDrag = false
                 }
+            }
+            
+            else if senderView.tag == 3 {
+                // Bot handle
                 
-                //TODO: - left off here
+                // Don't get too close to top line
+                if Double(newY) < (Double(topHandle.center.y) + 0.15 * g_hourVerticalPoints) {
+                    shouldDrag = false
+                }
+            }
+            
+            if (shouldDrag) {
+                senderView.center = CGPoint(x: senderView.center.x, y: newY)
             }
         }
-
-    
+        
+        // Reset translation
+        sender.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
+        
+        
     }
     
     func editActivity(activity: CalendarActivity) {
         editMode = true
         
         
-        let topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
-        
+        topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+        botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+
         
         // Gesture recognizers
         let topGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
-        topHandle.addGestureRecognizer(topGestureRecognizer)
+        let botGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
+
+        topHandle!.addGestureRecognizer(topGestureRecognizer)
         
-        topHandle.tag = 2
-        let handleHalfWidth = Double(topHandle.frame.width) / 2
+        topHandle!.tag = 2
+        let handleHalfWidth = Double(topHandle!.frame.width) / 2
         let rectangleCenterX = Double(calendarView.center.x) + g_lineStartX/2 - handleHalfWidth
-        topHandle.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime))
-
-        let botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
-        botHandle.tag = 3
-        botHandle.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
+        topHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime))
         
+        botHandle!.tag = 3
+        botHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
+        botHandle!.addGestureRecognizer(botGestureRecognizer)
         
-        let viewTester = UIView(frame: CGRect(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime), width: 100, height: 100))
-        viewTester.backgroundColor = UIColor.black
-
-        topHandle.isUserInteractionEnabled = true
-        botHandle.isUserInteractionEnabled = true
+        topHandle!.isUserInteractionEnabled = true
+        botHandle!.isUserInteractionEnabled = true
         
-        calendarView.addSubview(topHandle)
-        calendarView.addSubview(botHandle)
+        calendarView.addSubview(topHandle!)
+        calendarView.addSubview(botHandle!)
     }
     
     func endEditMode() {

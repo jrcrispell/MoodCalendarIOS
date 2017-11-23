@@ -20,21 +20,23 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     // Date data
     var displayedDate = Date()
     var dateString = ""
-
+    
     // Header
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
     
     let calendar = Calendar.current
-
+    
     let ref = Database.database().reference()
-
+    
     var daysActivities = [CalendarActivity]()
     
     var editingActivity: CalendarActivity!
     var user: User!
     
     var sendStartTime: Double = 0
+    
+    var editMode = false
     
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
@@ -63,8 +65,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         let displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
-            self.daysActivities = []            
-
+            self.daysActivities = []
+            
             guard let activityDictionary = snapshot.value as? [String:Any] else {
                 print("No existing activities")
                 self.calendarView.makeActivityDrawables()
@@ -74,16 +76,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             let activityIds = Array(activityDictionary.keys)
             for id in activityIds {
                 guard let values = activityDictionary[id] as? [String:Any],
-                let startTime = values["startTime"] as? Double,
-                let endTime = values["endTime"] as? Double,
-                let activityDescription = values["activityDescription"] as? String,
+                    let startTime = values["startTime"] as? Double,
+                    let endTime = values["endTime"] as? Double,
+                    let activityDescription = values["activityDescription"] as? String,
                     let moodScore = values["moodScore"] as? Double else {continue}
                 
                 self.daysActivities.append(CalendarActivity(databaseID: id, startTime: startTime, endTime: endTime, activityDescription: activityDescription, moodScore: Int(moodScore)))
             }
             self.calendarView.makeActivityDrawables()
             self.calendarView.setNeedsDisplay()
-
+            
         })
         return
     }
@@ -97,7 +99,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             displayedDate = calendar.date(byAdding: .day, value: -1, to: displayedDate)!
         }
             
-        // Forward arrow
+            // Forward arrow
         else {
             displayedDate = calendar.date(byAdding: .day, value: 1, to: displayedDate)!
         }
@@ -139,18 +141,41 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         }
         
         // Calculate start hour where user clicked, will be sent in prepare function
-        sendStartTime = Double(Int(CalendarView.convertYToHour(point.y)))
+        sendStartTime = Double(Int(Utils.convertYToHour(point.y)))
         performSegue(withIdentifier: "toLogger", sender: sender)
-
+        
     }
-
+    
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {
         
         // Only act on the "release" touch
         if sender.state.rawValue != 3 {return}
-            
+        
+        let timeTapped = Utils.convertYToHour(sender.location(in: calendarView).y)
+        
+        var activityTouched = false
+        
+        for activity in daysActivities {
+            if timeTapped >= activity.startTime && timeTapped <= activity.endTime {
+                editActivity(activity: activity)
+                activityTouched = true
+                editingActivity = activity
+            }
+            if (!activityTouched) {
+                endEditMode()
+            }
+        }
+        
         
         print("Long Press - \(sender.state.rawValue.description)")
+    }
+    
+    func editActivity(activity: CalendarActivity) {
+        editMode = true
+    }
+    
+    func endEditMode() {
+        editMode = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -192,17 +217,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             // Now check to see if we even have any events for today
             
             if let activityDictionary = snapshot.value as? [String:Any]  {
-
-            let activityIds = Array(activityDictionary.keys)
-            for id in activityIds {
-                guard let values = activityDictionary[id] as? [String:Any],
-                    let startTime = values["startTime"] as? Double,
-                    let endTime = values["endTime"] as? Double else {continue}
-
-                // Don't schedule if there's a notification in the previous hour
-                if notificationHour >= startTime && notificationHour <= endTime {
-                    shouldSchedule = false
-                }
+                
+                let activityIds = Array(activityDictionary.keys)
+                for id in activityIds {
+                    guard let values = activityDictionary[id] as? [String:Any],
+                        let startTime = values["startTime"] as? Double,
+                        let endTime = values["endTime"] as? Double else {continue}
+                    
+                    // Don't schedule if there's a notification in the previous hour
+                    if notificationHour >= startTime && notificationHour <= endTime {
+                        shouldSchedule = false
+                    }
                 }
             }
             
@@ -243,7 +268,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         content.title = "Mood Calendar Reminder"
         
         let hour = simpleComponents.hour!
-
+        
         // Encode what hour is being logged (the previous hour to the time of the notification)
         content.userInfo = ["hour":Double(hour - 1)]
         
@@ -270,7 +295,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         content.sound = UNNotificationSound.default()
         
         content.categoryIdentifier = "moodCalendarNotification"
-
+        
         // Trigger
         let trigger = UNCalendarNotificationTrigger(dateMatching: simpleComponents, repeats: false)
         
@@ -311,7 +336,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             performSegue(withIdentifier: "toSettingsView", sender: self)
             
         default:
-            //Go to log page with hour filled out            
+            //Go to log page with hour filled out
             sendStartTime = response.notification.request.content.userInfo["hour"] as! Double
             
             // If a view has been presented (such as another Logger View), dismiss first

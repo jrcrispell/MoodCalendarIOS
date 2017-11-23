@@ -17,8 +17,6 @@ class Utils {
         let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
         errorAlert.addAction(okButton)
         return errorAlert
-        
-
     }
     static func saveNewActivity(startTime: Double, endTime: Double, eventDescription: String, moodScore: Int, dateKey: String) {
         
@@ -50,5 +48,10 @@ class Utils {
         let fractional = Double(calendar.component(.minute, from: date))/60.0
         return hour + fractional
         
+    }
+    
+        // Converts the CGFloat value of a Y coordinate to a double that corresponds to the hour on the calendarView
+    static func convertYToHour(_ y: CGFloat) -> Double {
+        return (Double(y) - g_firstLineY)/g_hourVerticalPoints
     }
 }

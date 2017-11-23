@@ -54,4 +54,8 @@ class Utils {
     static func convertYToHour(_ y: CGFloat) -> Double {
         return (Double(y) - g_firstLineY)/g_hourVerticalPoints
     }
+    
+    public static func converHourToY(time: Double) -> Double {
+        return g_firstLineY + g_hourVerticalPoints * time
+    }
 }

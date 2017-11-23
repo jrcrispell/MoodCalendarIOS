@@ -30,13 +30,13 @@ public class ActivityDrawables: NSObject {
         
         textAttributes = [NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
         
-        let rectangleStartY = CalendarView.activityTimeToY(time: activity.startTime)
+        let rectangleStartY = Utils.converHourToY(time: activity.startTime)
 
         
         mood = String(activity.moodScore) as NSString
         moodPoint = CGPoint(x: g_moodXPosition, y: rectangleStartY)
         
-        rectangle = CGRect(x: g_lineStartX, y: rectangleStartY, width: g_activityWidth, height: CalendarView.activityTimeToY(time: activity.endTime) - rectangleStartY)
+        rectangle = CGRect(x: g_lineStartX, y: rectangleStartY, width: g_activityWidth, height: Utils.converHourToY(time: activity.endTime) - rectangleStartY)
         
         rectanglePath = UIBezierPath(roundedRect: rectangle, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
         rectanglePath.close()

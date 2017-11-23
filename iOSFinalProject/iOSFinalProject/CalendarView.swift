@@ -106,10 +106,6 @@ class CalendarView: UIView {
         
     }
     
-    public static func activityTimeToY(time: Double) -> Double {
-        return g_firstLineY + g_hourVerticalPoints * time
-    }
-    
     public func getSelectedActivity(location: CGPoint) -> CalendarActivity? {
         // Verify x position
         if Double(location.x) < g_lineStartX {return nil}

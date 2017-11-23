@@ -170,8 +170,27 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         print("Long Press - \(sender.state.rawValue.description)")
     }
     
+    func dragHandle(_ sender: UIPanGestureRecognizer) {
+        print("DragHandle Activated")
+    }
+    
     func editActivity(activity: CalendarActivity) {
         editMode = true
+        
+        
+        let topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+        
+        topHandle.tag = 2
+        let handleHalfWidth = Double(topHandle.frame.width) / 2
+        let rectangleCenterX = Double(calendarView.center.x) + g_lineStartX/2 - handleHalfWidth
+        topHandle.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime))
+
+        let botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+        botHandle.tag = 3
+        botHandle.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
+        
+        calendarView.addSubview(topHandle)
+        calendarView.addSubview(botHandle)
     }
     
     func endEditMode() {

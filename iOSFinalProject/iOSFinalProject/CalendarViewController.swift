@@ -32,6 +32,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     let calendar = Calendar.current
     
     let ref = Database.database().reference()
+    var displayedDateRef: DatabaseReference!
+
     
     var daysActivities = [CalendarActivity]()
     
@@ -41,6 +43,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var sendStartTime: Double = 0
     
     var editMode = false
+    
     
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
@@ -67,7 +70,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     func loadEvents() {
         
-        let displayedDateRef = ref.child(user.uid).child(dateString)
+        displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
             self.daysActivities = []
             
@@ -136,6 +139,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     }
     
     @IBAction func calendarViewTapped(_ sender: UITapGestureRecognizer) {
+        
+        if (editMode) {
+            endEditMode()
+            return
+        }
+        
         print("Tap")
         print(sender.description)
         let point = sender.location(in: calendarView)
@@ -171,7 +180,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         }
         
         
-        print("Long Press - \(sender.state.rawValue.description)")
     }
     
     func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
@@ -181,16 +189,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         let translation = sender.translation(in: self.view)
         
-        print("translation: " + translation.debugDescription)
         
         if let senderView = sender.view {
             var shouldDrag = true
             
-            print("senderView center y = " + senderView.center.y.description)
             // Move handle
             let newY = senderView.center.y + translation.y
             
-            print("NewY = " + newY.description)
             
             if senderView.tag == 2 {
                 // Top handle
@@ -198,6 +203,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 // Don't get too close to bottom line
                 if Double(newY) > (Double(botHandle.center.y) - 0.15 * g_hourVerticalPoints) {
                     shouldDrag = false
+                }
+                else {
+                    editingActivity.startTime = Utils.convertYToHour(newY)
+                    calendarView.makeActivityDrawables()
+                    calendarView.setNeedsDisplay()
                 }
             }
             
@@ -207,6 +217,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 // Don't get too close to top line
                 if Double(newY) < (Double(topHandle.center.y) + 0.15 * g_hourVerticalPoints) {
                     shouldDrag = false
+                }
+                else {
+                    editingActivity.endTime = Utils.convertYToHour(newY)
+                    calendarView.makeActivityDrawables()
+                    calendarView.setNeedsDisplay()
                 }
             }
             
@@ -218,7 +233,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         // Reset translation
         sender.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
         
-        
+        // Save when the gesture is complete
+        if sender.state.rawValue == 3 {
+            let activityRef = displayedDateRef.child(editingActivity.databaseID)
+            Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore)
+        }
     }
     
     func editActivity(activity: CalendarActivity) {
@@ -253,6 +272,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     func endEditMode() {
         editMode = false
+        // Remove draggable lines
+        for view in calendarView.subviews {
+            if view.tag == 2 || view.tag == 3 {
+                view.removeFromSuperview()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

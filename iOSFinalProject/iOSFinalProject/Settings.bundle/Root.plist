@@ -117,12 +117,12 @@
 		<dict>
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
+			<key>DefaultValue</key>
+			<integer>22</integer>
 			<key>Title</key>
 			<string>Notifications end time</string>
 			<key>Key</key>
 			<string>notifications_end</string>
-			<key>DefaultValue</key>
-			<integer>22</integer>
 			<key>Values</key>
 			<array>
 				<integer>0</integer>

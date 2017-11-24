@@ -31,18 +31,18 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     let calendar = Calendar.current
     
+    // Firebase
     let ref = Database.database().reference()
     var displayedDateRef: DatabaseReference!
+    var user: User!
 
     
     var daysActivities = [CalendarActivity]()
-    
     var editingActivity: CalendarActivity!
-    var user: User!
-    
     var sendStartTime: Double = 0
-    
     var editMode = false
+    
+    let userDefaults = UserDefaults.standard
     
     
     //TODO: - For debug only, make sure to delete button from storyboard too
@@ -66,6 +66,31 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         // Set delegate
         calendarView.viewControllerDelegate = self
+        
+        // Set up user preferences
+        
+        let defaults: [String : Any] = ["notifications_start" : 8, "notifications_end" : 22]
+        UserDefaults.standard.register(defaults: defaults)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toLogger" {
+            guard let loggerView = segue.destination as? LoggerViewController else {return}
+            if editingActivity != nil {
+                loggerView.editingActivity = editingActivity
+            }
+            // Making new activity
+            loggerView.displayedDate = displayedDate
+            loggerView.incomingStartTime = sendStartTime
+            loggerView.incomingEndTime = sendStartTime + 1
+            
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        editingActivity = nil
+        loadEvents()
+        makeNextNotification(incomingDate: Date())
     }
     
     func loadEvents() {
@@ -97,6 +122,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         return
     }
     
+    //MARK: - IBActions
     @IBAction func arrowButtonTapped(_ sender: UIButton) {
         
         
@@ -125,17 +151,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     @IBAction func settingsTapped(_ sender: Any) {
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
-    }
-    
-    
-    
-    func updateDate() {
-        dateString = g_dateFormatter.string(from: displayedDate)
-        dateButton.setTitle(dateString, for: .normal)
-    }
-    
-    func getDaysActivities() -> [CalendarActivity] {
-        return daysActivities
     }
     
     @IBAction func calendarViewTapped(_ sender: UITapGestureRecognizer) {
@@ -180,6 +195,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         }
         
         
+    }
+
+    func updateDate() {
+        dateString = g_dateFormatter.string(from: displayedDate)
+        dateButton.setTitle(dateString, for: .normal)
+    }
+    
+    func getDaysActivities() -> [CalendarActivity] {
+        return daysActivities
     }
     
     func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
@@ -279,29 +303,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toLogger" {
-            guard let loggerView = segue.destination as? LoggerViewController else {return}
-            if editingActivity != nil {
-                loggerView.editingActivity = editingActivity
-            }
-            // Making new activity
-            loggerView.displayedDate = displayedDate
-            loggerView.incomingStartTime = sendStartTime
-            loggerView.incomingEndTime = sendStartTime + 1
-            
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        editingActivity = nil
-        loadEvents()
-        makeNextNotification(incomingDate: Date())
-    }
-    
-    
-    
+
     func makeNextNotification(incomingDate: Date) {
         
         // Find incoming hour, schedule notification for 5 minutes after the following hour
@@ -333,10 +335,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                 }
             }
             
-            //TODO: - Check to see if we're during the hours the user wants notifications.
-            //        if notificationHour < Double(preferencesData.notificationStartTime) || notificationHour > Double(preferencesData.notificationEndTime) {
-            //            shouldSchedule = false
-            //        }
+            let startTimePreference = self.userDefaults.integer(forKey: "notifications_start")
+            let endTimePreference = self.userDefaults.integer(forKey: "notifications_end")
+
+
+            
+            //TODO - protect against overflow in case no notifications should be scheduled, or schedule for the next day somehow
+            
+            //Check to see if we're during the hours the user wants notifications.
+                    if notificationHour < Double(startTimePreference) || notificationHour > Double(endTimePreference) {
+                        shouldSchedule = false
+                    }
             
             if shouldSchedule == false {
                 // An event exists for this hour. Now we'll use recursion to try to schedule a notification for the following hour

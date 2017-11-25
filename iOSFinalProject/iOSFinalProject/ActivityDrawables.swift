@@ -19,16 +19,16 @@ public class ActivityDrawables: NSObject {
     let rectangle: CGRect
     
     // Attributes
-    let textColor = UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.8)
+    let textColor = UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 0.8)
     let textFont = UIFont(name: "Helvetica Neue", size: 18)
     let textStyle = NSMutableParagraphStyle()
-    let textAttributes: [String : Any]
+    let textAttributes: [NSAttributedStringKey : Any]
     
     init(activity: CalendarActivity) {
         
         textStyle.lineSpacing = 6.0
         
-        textAttributes = [NSForegroundColorAttributeName: textColor, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
+        textAttributes = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): textColor, NSAttributedStringKey(rawValue: NSAttributedStringKey.paragraphStyle.rawValue): textStyle, NSAttributedStringKey(rawValue: NSAttributedStringKey.obliqueness.rawValue): 0.1, NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): textFont!]
         
         let rectangleStartY = Utils.converHourToY(time: activity.startTime)
 
@@ -49,7 +49,7 @@ public class ActivityDrawables: NSObject {
     
     func draw() {
         
-        UIColor(colorLiteralRed: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
+        UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
         
         rectanglePath.stroke()
         rectanglePath.fill()

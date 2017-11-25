@@ -15,7 +15,7 @@ import FirebaseAuth
 let g_dateFormatter = DateFormatter()
 
 
-class CalendarViewController: BaseViewController, ViewControllerDelegate {
+class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     // Date data
     var displayedDate = Date()
@@ -57,9 +57,7 @@ class CalendarViewController: BaseViewController, ViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.addSlideMenuButton(btnShowMenu: logOutButton)
-        
+                
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
@@ -209,7 +207,7 @@ class CalendarViewController: BaseViewController, ViewControllerDelegate {
         return daysActivities
     }
     
-    func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
+    @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
         
         guard let topHandle = self.topHandle,
             let botHandle = self.botHandle else {return}

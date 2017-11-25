@@ -25,8 +25,8 @@ class Styles {
     static let white80Percent = UIColor.white.withAlphaComponent(0.80)
     
     
-    static var textAttributes: [String : Any] = [NSForegroundColorAttributeName: white80Percent, NSParagraphStyleAttributeName: textStyle, NSObliquenessAttributeName: 0.1, NSFontAttributeName: textFont!]
+    static var textAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): white80Percent, NSAttributedStringKey(rawValue: NSAttributedStringKey.paragraphStyle.rawValue): textStyle, NSAttributedStringKey(rawValue: NSAttributedStringKey.obliqueness.rawValue): 0.1, NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): textFont!]
     
-    static var moodPickerAttributes: [String : Any] = [NSForegroundColorAttributeName: white80Percent, NSFontAttributeName: textFont!]
+    static var moodPickerAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): white80Percent, NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): textFont!]
     
 }

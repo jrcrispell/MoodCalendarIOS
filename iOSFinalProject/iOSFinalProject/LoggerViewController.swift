@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class LoggerViewController: BaseViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
@@ -72,7 +72,7 @@ class LoggerViewController: BaseViewController, UIPickerViewDelegate, UIPickerVi
         moodPicker.setValue(UIColor.white, forKey: "textColor")
 
         // Navigation Bar
-        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         navigationBar.isTranslucent = true
         navigationBar.isOpaque = true
         navigationBar.backgroundColor = UIColor.clear

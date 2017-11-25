@@ -22,8 +22,6 @@
 		86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */; };
 		86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E242101F7C1A5700C1B63C /* Assets.xcassets */; };
 		86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */; };
-		86E59CE51FC904A500D30A5D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E59CE31FC904A500D30A5D /* BaseViewController.swift */; };
-		86E59CE61FC904A500D30A5D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E59CE41FC904A500D30A5D /* MenuViewController.swift */; };
 		86FB52B21FB518E300C612B7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FB52B11FB518E300C612B7 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +45,6 @@
 		86E242101F7C1A5700C1B63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86E242131F7C1A5700C1B63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86E242151F7C1A5700C1B63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		86E59CE31FC904A500D30A5D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		86E59CE41FC904A500D30A5D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		86FB52B11FB518E300C612B7 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,8 +114,6 @@
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86FB52B11FB518E300C612B7 /* Utils.swift */,
 				8619C0BC1FBB507600444763 /* Styles.swift */,
-				86E59CE31FC904A500D30A5D /* BaseViewController.swift */,
-				86E59CE41FC904A500D30A5D /* MenuViewController.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -160,6 +154,7 @@
 					86E242021F7C1A5700C1B63C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 4KG8K63RLZ;
+						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -252,12 +247,10 @@
 			files = (
 				86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */,
 				8619C0BD1FBB507600444763 /* Styles.swift in Sources */,
-				86E59CE51FC904A500D30A5D /* BaseViewController.swift in Sources */,
 				86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,
-				86E59CE61FC904A500D30A5D /* MenuViewController.swift in Sources */,
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
@@ -390,7 +383,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lagweaver.MoodCalendarIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -404,7 +398,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lagweaver.MoodCalendarIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

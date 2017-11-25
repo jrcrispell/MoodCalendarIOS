@@ -50,8 +50,23 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     @IBAction func testNotificationTapped(_ sender: Any) {
         
         // Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
+//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+//        scheduleNotification(date: fiveSecondsFromNow)
+        
+        let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        
+        let myView = allViewsInXib?.first as! MenuView
+        let bounds = self.view.bounds
+        print(bounds.debugDescription)
+        self.view.addSubview(myView)
+        myView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
+    
+
+        UIView.animate(withDuration: 0.3, animations: {
+            myView.frame = CGRect(x: 0, y: 0, width: bounds.width * 0.8, height: bounds.height)
+
+        }) { (finished) in
+        }
     }
     
     

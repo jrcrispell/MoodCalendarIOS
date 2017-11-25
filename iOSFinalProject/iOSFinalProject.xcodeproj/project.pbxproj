@@ -22,6 +22,8 @@
 		86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */; };
 		86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E242101F7C1A5700C1B63C /* Assets.xcassets */; };
 		86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */; };
+		86F83D021FC9F7C100C5B8EF /* MenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 86F83D011FC9F7C100C5B8EF /* MenuView.xib */; };
+		86F83D041FC9F9B200C5B8EF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F83D031FC9F9B200C5B8EF /* MenuView.swift */; };
 		86FB52B21FB518E300C612B7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FB52B11FB518E300C612B7 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,8 @@
 		86E242101F7C1A5700C1B63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86E242131F7C1A5700C1B63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86E242151F7C1A5700C1B63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86F83D011FC9F7C100C5B8EF /* MenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuView.xib; sourceTree = "<group>"; };
+		86F83D031FC9F9B200C5B8EF /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		86FB52B11FB518E300C612B7 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +118,8 @@
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86FB52B11FB518E300C612B7 /* Utils.swift */,
 				8619C0BC1FBB507600444763 /* Styles.swift */,
+				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
+				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 				86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */,
 				8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */,
 				86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */,
+				86F83D021FC9F7C100C5B8EF /* MenuView.xib in Resources */,
 				86E2420C1F7C1A5700C1B63C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +259,7 @@
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,
+				86F83D041FC9F9B200C5B8EF /* MenuView.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,

@@ -91,9 +91,6 @@
                                 <state key="normal" title="Log out">
                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="logOutTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oIg-5r-bZF"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
                                 <rect key="frame" x="345" y="58" width="30" height="30"/>
@@ -133,6 +130,7 @@
                     <connections>
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
+                        <outlet property="logOutButton" destination="xQI-xJ-AG4" id="bnK-yR-lny"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
                     </connections>
                 </viewController>
@@ -277,10 +275,10 @@
             </objects>
             <point key="canvasLocation" x="1850" y="-25"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="SNS-Pq-jbQ">
             <objects>
-                <viewController id="Imo-Zj-WIC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Imo-Zj-WIC" customClass="MenuViewController" customModule="iOSFinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ENI-Ga-tpa"/>
                         <viewControllerLayoutGuide type="bottom" id="rjF-Tx-pTI"/>
@@ -297,7 +295,7 @@
                                         <rect key="frame" x="0.0" y="28" width="337.5" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vrt-Pi-EkP" id="hPU-Qb-LMY">
-                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="337.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drv-79-y0s">
@@ -324,6 +322,9 @@
                             <constraint firstItem="jYC-dN-14p" firstAttribute="leading" secondItem="OpQ-R4-Uxn" secondAttribute="leading" id="wK4-FC-wuk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tblMenuOptions" destination="jYC-dN-14p" id="KOB-fZ-DEI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWv-jZ-DDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

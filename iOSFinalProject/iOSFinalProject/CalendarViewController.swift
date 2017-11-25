@@ -15,7 +15,7 @@ import FirebaseAuth
 let g_dateFormatter = DateFormatter()
 
 
-class CalendarViewController: UIViewController, ViewControllerDelegate {
+class CalendarViewController: BaseViewController, ViewControllerDelegate {
     
     // Date data
     var displayedDate = Date()
@@ -29,6 +29,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
     
+    @IBOutlet weak var logOutButton: UIButton!
     let calendar = Calendar.current
     
     // Firebase
@@ -56,6 +57,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.addSlideMenuButton(btnShowMenu: logOutButton)
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"

@@ -12,7 +12,6 @@
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
-		868443911FC8F2CB00AAB043 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868443901FC8F2CB00AAB043 /* MenuViewController.swift */; };
 		8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8685FC1B1FBF91FC004B39FB /* Settings.bundle */; };
 		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
@@ -23,6 +22,8 @@
 		86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */; };
 		86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86E242101F7C1A5700C1B63C /* Assets.xcassets */; };
 		86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */; };
+		86E59CE51FC904A500D30A5D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E59CE31FC904A500D30A5D /* BaseViewController.swift */; };
+		86E59CE61FC904A500D30A5D /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E59CE41FC904A500D30A5D /* MenuViewController.swift */; };
 		86FB52B21FB518E300C612B7 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FB52B11FB518E300C612B7 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +35,6 @@
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		868443901FC8F2CB00AAB043 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8685FC1B1FBF91FC004B39FB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -47,6 +47,8 @@
 		86E242101F7C1A5700C1B63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86E242131F7C1A5700C1B63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86E242151F7C1A5700C1B63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86E59CE31FC904A500D30A5D /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		86E59CE41FC904A500D30A5D /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		86FB52B11FB518E300C612B7 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +118,8 @@
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86FB52B11FB518E300C612B7 /* Utils.swift */,
 				8619C0BC1FBB507600444763 /* Styles.swift */,
-				868443901FC8F2CB00AAB043 /* MenuViewController.swift */,
+				86E59CE31FC904A500D30A5D /* BaseViewController.swift */,
+				86E59CE41FC904A500D30A5D /* MenuViewController.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -249,11 +252,12 @@
 			files = (
 				86E2420F1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld in Sources */,
 				8619C0BD1FBB507600444763 /* Styles.swift in Sources */,
+				86E59CE51FC904A500D30A5D /* BaseViewController.swift in Sources */,
 				86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
-				868443911FC8F2CB00AAB043 /* MenuViewController.swift in Sources */,
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,
+				86E59CE61FC904A500D30A5D /* MenuViewController.swift in Sources */,
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,

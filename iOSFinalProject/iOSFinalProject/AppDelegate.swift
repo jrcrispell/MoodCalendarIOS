@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import Firebase
 import UserNotifications
-import SlideMenuControllerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Firebase Pod
         FirebaseApp.configure()
-        
-        //blet slideMenuController = SlideMenuController(mainViewController: mainViewController, leftMenuViewController: leftViewController, rightMenuViewController: rightViewController)
 
 
         //MARK: - Setup for Notifications

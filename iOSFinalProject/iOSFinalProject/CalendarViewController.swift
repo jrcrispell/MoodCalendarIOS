@@ -45,6 +45,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     let userDefaults = UserDefaults.standard
     
+    var myView: MenuView!
+    
     
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
@@ -52,22 +54,61 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         // Schedule notification for 5 seconds from now
 //        let fiveSecondsFromNow = Date().addingTimeInterval(5)
 //        scheduleNotification(date: fiveSecondsFromNow)
-        
+        makeMenu()
+
+    }
+    
+    func makeMenu() {
         let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
-        let myView = allViewsInXib?.first as! MenuView
+        myView = allViewsInXib?.first as! MenuView
         let bounds = self.view.bounds
         print(bounds.debugDescription)
         self.view.addSubview(myView)
         myView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
-    
-
+        
+        
         UIView.animate(withDuration: 0.3, animations: {
-            myView.frame = CGRect(x: 0, y: 0, width: bounds.width * 0.8, height: bounds.height)
-
+            self.myView.frame = CGRect(x: 0, y: 0, width: bounds.width * 0.8, height: bounds.height)
+            
         }) { (finished) in
         }
+        
+        let clickOutside = UIButton(frame: CGRect(x: bounds.width * 0.8, y: 0, width: bounds.width * 0.2, height: bounds.height))
+        clickOutside.backgroundColor = UIColor.black
+        self.view.addSubview(clickOutside)
+        clickOutside.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
+
     }
+    
+    
+    @objc func handleSend(_ sender: UIButton){
+        
+
+            print(sender.description)
+            sender.removeFromSuperview()
+        
+        //TODO add animation
+        myView.removeFromSuperview()
+            
+        }
+
+        
+        
+//        UIView.animate(withDuration: 1.8, animations: {
+//
+//            let button = sender as UIButton
+//            
+//            sender.view!.frame = CGRect(x: -sender.view!.bounds.width, y: 0, width: sender.view!.bounds.width * 0.8, height: sender.view!.bounds.height)
+//
+//        }) { (finished) in
+//
+//            sender.view!.removeFromSuperview()
+//        }
+        
+        
+    
+    
     
     
     override func viewDidLoad() {

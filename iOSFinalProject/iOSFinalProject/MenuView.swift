@@ -10,8 +10,24 @@ import UIKit
 
 class MenuView: UIView {
 
-    @IBOutlet weak var containerView: UIView!
-
-
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var dataVisButton: UIButton!
+    
+    @IBOutlet weak var settingsButton: UIButton!
+    
+    @IBOutlet weak var logOutButton: UIButton!
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        commonInit()
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        commonInit()
+//    }
+//    
+//    private func commonInit() {
+//        self.view
+//    }
     
 }

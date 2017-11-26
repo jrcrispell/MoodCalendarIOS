@@ -25,6 +25,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var topHandle: UIImageView?
     var botHandle: UIImageView?
     
+    var bounds:CGRect!
+    
+    
     // Header
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
@@ -37,7 +40,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     let ref = Database.database().reference()
     var displayedDateRef: DatabaseReference!
     var user: User!
-
+    
     
     var daysActivities = [CalendarActivity]()
     var editingActivity: CalendarActivity!
@@ -46,17 +49,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     let userDefaults = UserDefaults.standard
     
-    var myView: MenuView!
+    var menuView: MenuView!
+    var menuOutsideButton: UIButton!
     
     
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
         
-         //Schedule notification for 5 seconds from now
+        
+        
+        //Schedule notification for 5 seconds from now
         let fiveSecondsFromNow = Date().addingTimeInterval(5)
         scheduleNotification(date: fiveSecondsFromNow)
         //makeMenu()
-
+        
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -66,71 +72,83 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     func makeMenu() {
         let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
-        myView = allViewsInXib?.first as! MenuView
-        let bounds = self.view.bounds
+        menuView = allViewsInXib?.first as! MenuView
         
-        let clickOutside = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        clickOutside.backgroundColor = UIColor.black
-        clickOutside.alpha = 0.0
-        self.view.addSubview(clickOutside)
+        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         
-        UIView.animate(withDuration: 0.3) {
-            clickOutside.alpha = 0.5
-        }
+        menuOutsideButton = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        menuOutsideButton.backgroundColor = UIColor.black
+        menuOutsideButton.alpha = 0.0
+        self.view.addSubview(menuOutsideButton)
         
-        
-        print(bounds.debugDescription)
-        self.view.addSubview(myView)
-        myView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
+        self.view.addSubview(menuView)
+        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
         
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.myView.frame = CGRect(x: 0, y: 0, width: bounds.width * 0.8, height: bounds.height)
-            
+            self.menuOutsideButton.alpha = 0.5
+            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
+        })
+        
+        
+        
+        menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
+        
+    }
+    
+    @objc func handleLogOut(_ sender: UIButton){
+        closeMenu()
+        logOutTapped(sender)
+    }
+    
+    @objc func handleSend(_ sender: UIButton){
+        
+        print(sender.description)
+        closeMenu()
+    }
+    
+    func closeMenu() {
+        //TODO add animation
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.menuOutsideButton.alpha = 0.0
+            self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
         }) { (finished) in
+            self.menuOutsideButton.removeFromSuperview()
+            
+            self.menuView.removeFromSuperview()
         }
-        
-
-        
-        clickOutside.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
-
     }
     
     
-    @objc func handleSend(_ sender: UIButton){
-
-            print(sender.description)
-            sender.removeFromSuperview()
-        
-        //TODO add animation
-        myView.removeFromSuperview()
-            
-        }
-
-        
-        
-//        UIView.animate(withDuration: 1.8, animations: {
-//
-//            let button = sender as UIButton
-//            
-//            sender.view!.frame = CGRect(x: -sender.view!.bounds.width, y: 0, width: sender.view!.bounds.width * 0.8, height: sender.view!.bounds.height)
-//
-//        }) { (finished) in
-//
-//            sender.view!.removeFromSuperview()
-//        }
-        
-        
+    
+    
+    
+    //        UIView.animate(withDuration: 1.8, animations: {
+    //
+    //            let button = sender as UIButton
+    //            
+    //            sender.view!.frame = CGRect(x: -sender.view!.bounds.width, y: 0, width: sender.view!.bounds.width * 0.8, height: sender.view!.bounds.height)
+    //
+    //        }) { (finished) in
+    //
+    //            sender.view!.removeFromSuperview()
+    //        }
+    
+    
     
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
+        
+        bounds = self.view.bounds
+        
         
         // Authorized Firebase user
         user = Auth.auth().currentUser
@@ -269,7 +287,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         
     }
-
+    
     func updateDate() {
         dateString = g_dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
@@ -307,7 +325,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
                     calendarView.setNeedsDisplay()
                 }
             }
-            
+                
             else if senderView.tag == 3 {
                 // Bot handle
                 
@@ -343,12 +361,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
         botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
-
+        
         
         // Gesture recognizers
         let topGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
         let botGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
-
+        
         topHandle!.addGestureRecognizer(topGestureRecognizer)
         
         topHandle!.tag = 2
@@ -376,7 +394,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             }
         }
     }
-
+    
     func makeNextNotification(incomingDate: Date) {
         
         // Find incoming hour, schedule notification for 5 minutes after the following hour
@@ -410,15 +428,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             
             let startTimePreference = self.userDefaults.integer(forKey: "notifications_start")
             let endTimePreference = self.userDefaults.integer(forKey: "notifications_end")
-
-
+            
+            
             
             //TODO - protect against overflow in case no notifications should be scheduled, or schedule for the next day somehow
             
             //Check to see if we're during the hours the user wants notifications.
-                    if notificationHour < Double(startTimePreference) || notificationHour > Double(endTimePreference) {
-                        shouldSchedule = false
-                    }
+            if notificationHour < Double(startTimePreference) || notificationHour > Double(endTimePreference) {
+                shouldSchedule = false
+            }
             
             if shouldSchedule == false {
                 // An event exists for this hour. Now we'll use recursion to try to schedule a notification for the following hour

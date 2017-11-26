@@ -70,7 +70,6 @@ class Utils {
         UIBezierPath(rect: CGRect(x: 0, y: 17, width: 30, height: 1)).fill()
         
         Styles.white50Percent.setFill()
-        //UIColor.white.setFill()
         UIBezierPath(rect: CGRect(x: 0, y: 4, width: 30, height: 1)).fill()
         UIBezierPath(rect: CGRect(x: 0, y: 11,  width: 30, height: 1)).fill()
         UIBezierPath(rect: CGRect(x: 0, y: 18, width: 30, height: 1)).fill()

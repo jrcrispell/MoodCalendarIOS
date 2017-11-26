@@ -81,7 +81,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         menuOutsideButton.alpha = 0.0
         self.view.addSubview(menuOutsideButton)
         
+        
         self.view.addSubview(menuView)
+        
         menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
         
         
@@ -119,26 +121,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
             self.menuView.removeFromSuperview()
         }
     }
-    
-    
-    
-    
-    
-    //        UIView.animate(withDuration: 1.8, animations: {
-    //
-    //            let button = sender as UIButton
-    //            
-    //            sender.view!.frame = CGRect(x: -sender.view!.bounds.width, y: 0, width: sender.view!.bounds.width * 0.8, height: sender.view!.bounds.height)
-    //
-    //        }) { (finished) in
-    //
-    //            sender.view!.removeFromSuperview()
-    //        }
-    
-    
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

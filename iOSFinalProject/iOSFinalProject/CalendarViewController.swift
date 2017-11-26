@@ -25,12 +25,18 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var topHandle: UIImageView?
     var botHandle: UIImageView?
     
+    @IBOutlet weak var datePickerHeight: NSLayoutConstraint!
     var bounds:CGRect!
     
+    @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
+    var datePickerVisibile = false
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     // Header
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
+    @IBOutlet weak var datePickerTop: NSLayoutConstraint!
     
     @IBOutlet weak var hamburger: UIButton!
     
@@ -96,6 +102,24 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
         
+    }
+    @IBAction func dateTapped(_ sender: Any) {
+        
+        if !datePickerVisibile {
+            datePickerTop.constant = 8
+            scrollViewTopSpace.constant = 8
+            
+        }
+        else {
+            datePickerTop.constant = -308
+            scrollViewTopSpace.constant = 150
+
+            //self.datePickerHeight.constant = 0
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        datePickerVisibile = !datePickerVisibile
     }
     
     @objc func handleLogOut(_ sender: UIButton){

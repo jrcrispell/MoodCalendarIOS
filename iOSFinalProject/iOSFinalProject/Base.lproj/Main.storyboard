@@ -33,6 +33,9 @@
                                 <state key="normal" title="Oct 24, 2017">
                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Za2-CG-bbC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-Fc-6hx" userLabel="BackArrowButton">
                                 <rect key="frame" x="83.5" y="32.5" width="20" height="35"/>
@@ -52,6 +55,12 @@
                                     <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pDF-jt-ayg"/>
                                 </connections>
                             </button>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVV-E1-lu6">
+                                <rect key="frame" x="0.0" y="-236" width="375" height="167"/>
+                                <date key="date" timeIntervalSinceReferenceDate="533428018.12384897">
+                                    <!--2017-11-26 22:26:58 +0000-->
+                                </date>
+                            </datePicker>
                             <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" placeholderIntrinsicWidth="30" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxP-8z-toi" userLabel="SettingsButton">
                                 <rect key="frame" x="321" y="35" width="30" height="30"/>
                                 <constraints>
@@ -66,10 +75,10 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
-                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="81" width="375" height="667"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1056.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1201"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="DRO-8d-KFE" appends="YES" id="HYY-TN-CQg"/>
@@ -97,7 +106,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
-                                <rect key="frame" x="345" y="58" width="30" height="30"/>
+                                <rect key="frame" x="345" y="59" width="30" height="30"/>
                                 <state key="normal" title="Test">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -116,17 +125,22 @@
                             <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
                             <constraint firstAttribute="trailing" secondItem="htd-5Z-dnD" secondAttribute="trailing" id="AbV-OM-EQV"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" id="BuW-GZ-9U7"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="top" secondItem="6g9-h5-Nna" secondAttribute="bottom" constant="-308" id="Ejd-Vf-O78"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="Xcz-R0-hWw" secondAttribute="width" id="ExV-59-Vt9"/>
                             <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="F4j-AR-38a"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="enr-Fw-NDa" secondAttribute="centerX" id="K9t-hQ-589"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="MkJ-kT-KZv"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OBC-QS-c5G"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="bottom" id="QOX-rg-PBp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FxP-8z-toi" secondAttribute="trailing" constant="8" id="Uqw-WY-XJB"/>
                             <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="htd-5Z-dnD" secondAttribute="bottom" constant="-8" id="ZYT-Cj-VgH"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="b4f-0T-Xh0"/>
                             <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="FxP-8z-toi" secondAttribute="centerY" id="bd8-JZ-8Mg"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gTx-qu-zhd"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
-                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="6g9-h5-Nna" secondAttribute="bottom" constant="8" id="mXK-cP-jf0"/>
+                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="IVV-E1-lu6" secondAttribute="bottom" constant="150" id="mXK-cP-jf0"/>
+                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qzv-hs-lzX"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sgU-nA-Z7Z"/>
                             <constraint firstItem="eIX-bE-ODj" firstAttribute="leading" secondItem="6g9-h5-Nna" secondAttribute="trailing" id="tSv-ce-Rel"/>
                             <constraint firstItem="6g9-h5-Nna" firstAttribute="width" secondItem="enr-Fw-NDa" secondAttribute="width" multiplier="0.45" id="xeP-Wh-zqQ"/>
                         </constraints>
@@ -134,7 +148,10 @@
                     <connections>
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
+                        <outlet property="datePicker" destination="IVV-E1-lu6" id="tMv-AH-ndK"/>
+                        <outlet property="datePickerTop" destination="Ejd-Vf-O78" id="2w0-91-KX5"/>
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
+                        <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
                     </connections>
                 </viewController>

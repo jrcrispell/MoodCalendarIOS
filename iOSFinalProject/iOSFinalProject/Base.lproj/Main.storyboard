@@ -92,11 +92,15 @@
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="width" secondItem="ezs-Uc-Js5" secondAttribute="width" id="ncf-Cj-19Q"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4">
-                                <rect key="frame" x="8" y="35" width="52" height="30"/>
-                                <state key="normal" title="Log out">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
+                                <rect key="frame" x="8" y="35" width="30" height="30"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYX-Qs-NIn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
                                 <rect key="frame" x="345" y="58" width="30" height="30"/>
@@ -136,7 +140,7 @@
                     <connections>
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
-                        <outlet property="logOutButton" destination="xQI-xJ-AG4" id="bnK-yR-lny"/>
+                        <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
                     </connections>
                 </viewController>

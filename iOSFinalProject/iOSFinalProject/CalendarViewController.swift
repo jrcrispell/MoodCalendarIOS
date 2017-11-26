@@ -29,7 +29,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
     
-    @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var hamburger: UIButton!
+    
     let calendar = Calendar.current
     
     // Firebase
@@ -51,11 +52,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
         
-        // Schedule notification for 5 seconds from now
-//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-//        scheduleNotification(date: fiveSecondsFromNow)
-        makeMenu()
+         //Schedule notification for 5 seconds from now
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
+        //makeMenu()
 
+    }
+    
+    @IBAction func hamburgerTapped(_ sender: Any) {
+        makeMenu()
     }
     
     func makeMenu() {
@@ -63,6 +68,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         myView = allViewsInXib?.first as! MenuView
         let bounds = self.view.bounds
+        
+        let clickOutside = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+        clickOutside.backgroundColor = UIColor.black
+        clickOutside.alpha = 0.0
+        self.view.addSubview(clickOutside)
+        
+        UIView.animate(withDuration: 0.3) {
+            clickOutside.alpha = 0.5
+        }
+        
+        
         print(bounds.debugDescription)
         self.view.addSubview(myView)
         myView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
@@ -74,16 +90,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         }) { (finished) in
         }
         
-        let clickOutside = UIButton(frame: CGRect(x: bounds.width * 0.8, y: 0, width: bounds.width * 0.2, height: bounds.height))
-        clickOutside.backgroundColor = UIColor.black
-        self.view.addSubview(clickOutside)
+
+        
         clickOutside.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
 
     }
     
     
     @objc func handleSend(_ sender: UIButton){
-        
 
             print(sender.description)
             sender.removeFromSuperview()
@@ -128,6 +142,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         let defaults: [String : Any] = ["notifications_start" : 8, "notifications_end" : 22]
         UserDefaults.standard.register(defaults: defaults)
+        
+        hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

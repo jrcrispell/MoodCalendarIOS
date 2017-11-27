@@ -64,11 +64,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         
         
-        //Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
-        //makeMenu()
+//        //Schedule notification for 5 seconds from now
+//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+//        scheduleNotification(date: fiveSecondsFromNow)
         
+        makeMenu()
+
+ 
+
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -77,32 +80,53 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     func makeMenu() {
         let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+   
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         
+        let backgroundView = UIView(frame: view.frame)
+        backgroundView.backgroundColor = UIColor.black
+        self.view.addSubview(backgroundView)
+        
+        let snapshotView = UIImageView(frame: view.frame)
+        snapshotView.image = image
+        
+        snapshotView.backgroundColor = UIColor.white
+        self.view.addSubview(snapshotView)
+
+        
+        // Make menu
         menuView = allViewsInXib?.first as! MenuView
-        
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
-        
+
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
-        
-        menuOutsideButton = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        menuOutsideButton.backgroundColor = UIColor.black
-        menuOutsideButton.alpha = 0.0
-        self.view.addSubview(menuOutsideButton)
-        
-        
         self.view.addSubview(menuView)
         
+        // Clickable outside area
+//        menuOutsideButton = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
+//        menuOutsideButton.backgroundColor = UIColor.black
+//        menuOutsideButton.alpha = 0.0
+//        self.view.addSubview(menuOutsideButton)
+
+
+
         menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.7, height: bounds.height)
-        
-        
+
+
         UIView.animate(withDuration: 0.3, animations: {
-            self.menuOutsideButton.alpha = 0.5
+//            snapshotView.transform = CGAffineTransform(
+            snapshotView.frame = (CGRect(x: 300, y: 300, width: self.view.bounds.width * 0.5, height: self.view.bounds.height * 0.5))
             self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
         })
-        
-        
-        
-        menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
+
+
+
+
+
+//
+//        menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
         
     }
     @IBAction func dateTapped(_ sender: Any) {

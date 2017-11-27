@@ -25,9 +25,14 @@ class MenuView: UIView {
 //        super.init(coder: aDecoder)
 //        commonInit()
 //    }
-//    
+//
 //    private func commonInit() {
-//        self.view
+//
 //    }
+    
+    override func layoutSubviews() {
+        homeButton.layer.borderColor = UIColor.black.cgColor
+        homeButton.layer.borderWidth = 1.0
+    }
     
 }

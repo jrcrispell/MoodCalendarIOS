@@ -82,6 +82,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         
+        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        
         menuOutsideButton = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
         menuOutsideButton.backgroundColor = UIColor.black
         menuOutsideButton.alpha = 0.0
@@ -125,6 +127,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     @objc func handleLogOut(_ sender: UIButton){
         closeMenu()
         logOutTapped(sender)
+    }
+    
+    @objc func handleHome(_ sender: UIButton){
+        closeMenu()
     }
     
     @objc func handleSend(_ sender: UIButton){

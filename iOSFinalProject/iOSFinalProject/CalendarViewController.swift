@@ -92,12 +92,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         
         self.view.addSubview(menuView)
         
-        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.8, height: bounds.height)
+        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.7, height: bounds.height)
         
         
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.5
-            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
+            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
         })
         
         

@@ -86,8 +86,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let backgroundView = UIView(frame: view.frame)
-        backgroundView.backgroundColor = UIColor.black
+        let backgroundView = UIImageView(frame: view.frame)
+        backgroundView.image = #imageLiteral(resourceName: "Deep Background 2")
         self.view.addSubview(backgroundView)
         
         let snapshotView = UIImageView(frame: view.frame)
@@ -113,11 +113,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 
 
         menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.7, height: bounds.height)
+        
+        let smallSnapshotWidth = view.bounds.width * 0.5
+        let smallSnapshotHeight = view.bounds.height * 0.5
+
 
 
         UIView.animate(withDuration: 0.3, animations: {
 //            snapshotView.transform = CGAffineTransform(
-            snapshotView.frame = (CGRect(x: 300, y: 300, width: self.view.bounds.width * 0.5, height: self.view.bounds.height * 0.5))
+            snapshotView.frame = (CGRect(x: 300, y: self.view.bounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight))
             self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
         })
 

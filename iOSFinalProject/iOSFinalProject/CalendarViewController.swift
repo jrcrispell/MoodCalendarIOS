@@ -114,14 +114,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 
         menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.7, height: bounds.height)
         
-        let smallSnapshotWidth = view.bounds.width * 0.5
-        let smallSnapshotHeight = view.bounds.height * 0.5
+        let smallSnapshotWidth = view.bounds.width * 0.4
+        let smallSnapshotHeight = view.bounds.height * 0.4
 
 
 
         UIView.animate(withDuration: 0.3, animations: {
 //            snapshotView.transform = CGAffineTransform(
-            snapshotView.frame = (CGRect(x: 300, y: self.view.bounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight))
+            snapshotView.frame = (CGRect(x: self.view.bounds.width - smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight))
             self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
         })
 
@@ -171,7 +171,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
         //TODO add animation
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.menuOutsideButton.alpha = 0.0
+            //self.menuOutsideButton.alpha = 0.0
             self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
         }) { (finished) in
             self.menuOutsideButton.removeFromSuperview()

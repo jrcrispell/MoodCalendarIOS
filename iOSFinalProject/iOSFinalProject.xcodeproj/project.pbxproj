@@ -115,11 +115,11 @@
 				86E242151F7C1A5700C1B63C /* Info.plist */,
 				867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */,
 				86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */,
-				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86FB52B11FB518E300C612B7 /* Utils.swift */,
 				8619C0BC1FBB507600444763 /* Styles.swift */,
 				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
 				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
+				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";

@@ -87,13 +87,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 //        scheduleNotification(date: fiveSecondsFromNow)
         
         //makeMenu()
-        self.calendarView.isHidden = true
         
-        self.view.backgroundColor = nil
-        background.image = nil
-        background.isHidden = true
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.isOpaque = false
+        //self.calendarView.isHidden = true
+        //background.image = nil
+        //background.isHidden = true
+        
+        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //appDelegate.window?.isOpaque = false
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -196,10 +196,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         //TODO add animation
         
         
-        
+        //TODO - fix bug
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.1
-            self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
+            self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 100, height: self.bounds.height)
             self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width, height: self.bounds.height)
             self.snapshotView.frame = self.view.frame
         }) { (finished) in
@@ -219,6 +219,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.white
+
         
         smallSnapshotWidth = view.bounds.width * 0.4
         smallSnapshotHeight = view.bounds.height * 0.4

@@ -132,12 +132,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
 
 
-        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.6, height: bounds.height)
+        menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
 
 
         UIView.animate(withDuration: 0.3, animations: {
             self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
-            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.6, height: self.bounds.height)
+            self.menuView.frame = CGRect(x: 0, y:  self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
         })
         
         
@@ -206,7 +206,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         //TODO - fix bug
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.1
-            self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 100, height: self.bounds.height)
+            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
             self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width, height: self.bounds.height)
             self.snapshotView.frame = self.view.frame
         }) { (finished) in

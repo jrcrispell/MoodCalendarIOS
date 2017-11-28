@@ -124,6 +124,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
 
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        
+        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
         self.view.addSubview(menuView)
         
 
@@ -180,6 +182,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @objc func handleLogOut(_ sender: UIButton){
         closeMenu()
         logOutTapped(sender)
+    }
+    
+    @objc func handleSettings(_ sender: UIButton){
+        closeMenu()
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
     }
     
     @objc func handleHome(_ sender: UIButton){
@@ -323,9 +330,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
-    @IBAction func settingsTapped(_ sender: Any) {
-        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
-    }
     
     @IBAction func calendarViewTapped(_ sender: UITapGestureRecognizer) {
         

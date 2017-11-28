@@ -15,7 +15,8 @@ import FirebaseAuth
 let g_dateFormatter = DateFormatter()
 
 
-class CalendarViewController: UIViewController, ViewControllerDelegate {
+class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
+ {
     
     // Date data
     var displayedDate = Date()
@@ -32,6 +33,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     var datePickerVisibile = false
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    @IBOutlet weak var background: UIImageView!
+    
     
     // Header
     @IBOutlet weak var dateButton: UIButton!
@@ -57,6 +61,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
     
     var menuView: MenuView!
     var menuOutsideButton: UIButton!
+
+    
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        displayedDate = sender.date
+        updateDate()
+        loadEvents()
+        
+    }
     
     
     //TODO: - For debug only, make sure to delete button from storyboard too
@@ -68,10 +80,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 //        let fiveSecondsFromNow = Date().addingTimeInterval(5)
 //        scheduleNotification(date: fiveSecondsFromNow)
         
-        makeMenu()
-
- 
-
+        //makeMenu()
+        self.calendarView.isHidden = true
+        
+        self.view.backgroundColor = nil
+        background.image = nil
+        background.isHidden = true
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.isOpaque = false
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -133,7 +149,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate {
 //        menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
         
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("SUCCESS")
+    }
     @IBAction func dateTapped(_ sender: Any) {
+        
+        datePicker.date = displayedDate
+        //datePicker.
         
         if !datePickerVisibile {
             datePickerTop.constant = 8

@@ -61,6 +61,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     var menuView: MenuView!
     var menuOutsideButton: UIButton!
+    var snapshotView: UIImageView!
+    var backgroundView: UIImageView!
+    
+    var smallSnapshotWidth: CGFloat!
+    var smallSnapshotHeight: CGFloat!
+    
 
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
@@ -102,11 +108,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        let backgroundView = UIImageView(frame: view.frame)
+        backgroundView = UIImageView(frame: view.frame)
         backgroundView.image = #imageLiteral(resourceName: "Deep Background 2")
         self.view.addSubview(backgroundView)
         
-        let snapshotView = UIImageView(frame: view.frame)
+        snapshotView = UIImageView(frame: view.frame)
         snapshotView.image = image
         
         snapshotView.backgroundColor = UIColor.white
@@ -120,33 +126,29 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
         self.view.addSubview(menuView)
         
-        // Clickable outside area
-//        menuOutsideButton = UIButton(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-//        menuOutsideButton.backgroundColor = UIColor.black
-//        menuOutsideButton.alpha = 0.0
-//        self.view.addSubview(menuOutsideButton)
 
 
 
-        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.7, height: bounds.height)
-        
-        let smallSnapshotWidth = view.bounds.width * 0.4
-        let smallSnapshotHeight = view.bounds.height * 0.4
 
+        menuView.frame = CGRect(x: -bounds.width, y: 0, width: bounds.width * 0.6, height: bounds.height)
 
 
         UIView.animate(withDuration: 0.3, animations: {
-//            snapshotView.transform = CGAffineTransform(
-            snapshotView.frame = (CGRect(x: self.view.bounds.width - smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight))
-            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.7, height: self.bounds.height)
+            self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
+            self.menuView.frame = CGRect(x: 0, y: 0, width: self.bounds.width * 0.6, height: self.bounds.height)
         })
+        
+        
+
+        // Clickable outside area
+        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
+        menuOutsideButton.backgroundColor = nil
+        self.view.addSubview(menuOutsideButton)
 
 
 
 
-
-//
-//        menuOutsideButton.addTarget(self, action: #selector(handleSend(_: ) ), for: .touchUpInside)
+        menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
         
     }
     
@@ -184,7 +186,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         closeMenu()
     }
     
-    @objc func handleSend(_ sender: UIButton){
+    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
         
         print(sender.description)
         closeMenu()
@@ -193,10 +195,22 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func closeMenu() {
         //TODO add animation
         
+        
+        
         UIView.animate(withDuration: 0.3, animations: {
-            //self.menuOutsideButton.alpha = 0.0
+            self.menuOutsideButton.alpha = 0.1
             self.menuView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 0.8, height: self.bounds.height)
+            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width, height: self.bounds.height)
+            self.snapshotView.frame = self.view.frame
         }) { (finished) in
+            
+            
+
+                self.snapshotView.removeFromSuperview()
+
+
+            self.backgroundView.removeFromSuperview()
+            
             self.menuOutsideButton.removeFromSuperview()
             
             self.menuView.removeFromSuperview()
@@ -205,6 +219,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        smallSnapshotWidth = view.bounds.width * 0.4
+        smallSnapshotHeight = view.bounds.height * 0.4
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"

@@ -207,7 +207,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.1
             self.menuView.frame = CGRect(x: -self.bounds.width, y: self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
-            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width, height: self.bounds.height)
+            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 4, height: self.bounds.height)
             self.snapshotView.frame = self.view.frame
         }) { (finished) in
             

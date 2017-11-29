@@ -457,8 +457,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         editMode = true
         
         
-        topHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
-        botHandle = UIImageView(image: #imageLiteral(resourceName: "handle"))
+        topHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
+        botHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
         
         
         // Gesture recognizers

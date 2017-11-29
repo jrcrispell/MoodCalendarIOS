@@ -18,6 +18,8 @@ let g_dateFormatter = DateFormatter()
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
  {
     
+    //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
+    
     // Date data
     var displayedDate = Date()
     var dateString = ""

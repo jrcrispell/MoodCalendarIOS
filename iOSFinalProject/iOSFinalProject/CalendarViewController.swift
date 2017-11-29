@@ -51,7 +51,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var displayedDateRef: DatabaseReference!
     var user: User!
     
-    
     var daysActivities = [CalendarActivity]()
     var editingActivity: CalendarActivity!
     var sendStartTime: Double = 0
@@ -67,15 +66,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var smallSnapshotWidth: CGFloat!
     var smallSnapshotHeight: CGFloat!
     
-
-    
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
         displayedDate = sender.date
         updateDate()
         loadEvents()
         
     }
-    
     
     //TODO: - For debug only, make sure to delete button from storyboard too
     @IBAction func testNotificationTapped(_ sender: Any) {
@@ -97,7 +93,19 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
+        if (datePickerVisibile) {
+            datePickerTop.constant = -308
+            scrollViewTopSpace.constant = 150
+            datePickerVisibile = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.makeMenu()
+            })
+        }
+        else {
         makeMenu()
+        }
     }
     
     func makeMenu() {
@@ -127,20 +135,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
         self.view.addSubview(menuView)
-        
-
-
-
 
         menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
-
 
         UIView.animate(withDuration: 0.3, animations: {
             self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
             self.menuView.frame = CGRect(x: 0, y:  self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
         })
-        
-        
 
         // Clickable outside area
         menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
@@ -154,29 +155,34 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("SUCCESS")
-    }
-    @IBAction func dateTapped(_ sender: Any) {
-        
-        datePicker.date = displayedDate
-        //datePicker.
-        
-        if !datePickerVisibile {
-            datePickerTop.constant = 8
-            scrollViewTopSpace.constant = 8
-            
-        }
-        else {
-            datePickerTop.constant = -308
-            scrollViewTopSpace.constant = 150
-
-            //self.datePickerHeight.constant = 0
-        }
+    func animateConstraints() {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
-        datePickerVisibile = !datePickerVisibile
+    }
+    
+    func showDatePicker() {
+        datePickerTop.constant = 8
+        scrollViewTopSpace.constant = 8
+        datePickerVisibile = true
+        animateConstraints()
+    }
+    
+    func hideDatePicker() {
+        datePickerTop.constant = -308
+        scrollViewTopSpace.constant = 150
+        datePickerVisibile = false
+        animateConstraints()
+    }
+    
+    @IBAction func dateTapped(_ sender: Any) {
+        
+        if !datePickerVisibile {
+            showDatePicker()
+        }
+        else {
+            hideDatePicker()
+        }
     }
     
     @objc func handleLogOut(_ sender: UIButton){
@@ -226,6 +232,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        datePicker.date = displayedDate
+        
+        datePicker.setValue(UIColor.white, forKey: "textColor")
         
         self.view.backgroundColor = UIColor.white
 
@@ -376,6 +386,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     func updateDate() {
+        datePicker.date = displayedDate
         dateString = g_dateFormatter.string(from: displayedDate)
         dateButton.setTitle(dateString, for: .normal)
     }

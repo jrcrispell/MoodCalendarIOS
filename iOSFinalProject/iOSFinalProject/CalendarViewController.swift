@@ -4,7 +4,6 @@
 //
 //  Created by Jason Crispell on 9/27/17.
 //  Copyright © 2017 Crispell Apps. All rights reserved.
-//
 
 import UIKit
 import Firebase
@@ -81,17 +80,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         
 //        //Schedule notification for 5 seconds from now
-//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-//        scheduleNotification(date: fiveSecondsFromNow)
-        
-        //makeMenu()
-        
-        //self.calendarView.isHidden = true
-        //background.image = nil
-        //background.isHidden = true
-        
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //appDelegate.window?.isOpaque = false
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -119,7 +109,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         UIGraphicsEndImageContext()
         
         backgroundView = UIImageView(frame: view.frame)
-        backgroundView.image = #imageLiteral(resourceName: "Deep Background 2")
+        backgroundView.image = #imageLiteral(resourceName: "DeepBackgroundMirrored2")
+        backgroundView.isOpaque = true
         self.view.addSubview(backgroundView)
         
         snapshotView = UIImageView(frame: view.frame)

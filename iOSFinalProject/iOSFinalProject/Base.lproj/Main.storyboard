@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -152,6 +153,7 @@
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
+                        <segue destination="Qrx-RK-jKf" kind="show" identifier="toCharts" id="sI4-og-kAr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -432,6 +434,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v24-mP-TfC" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="751.20000000000005" y="-26.53673163418291"/>
+        </scene>
+        <!--ChartsViewController-->
+        <scene sceneID="Kya-v5-xte">
+            <objects>
+                <viewController title="ChartsViewController" id="Qrx-RK-jKf" customClass="ChartsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Js-Qd-oiw"/>
+                        <viewControllerLayoutGuide type="bottom" id="1iZ-Tw-7RQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1mK-UO-1ud">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="u3e-73-cb1" userLabel="Background Image View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ren-zH-cVP" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="ren-zH-cVP" secondAttribute="bottom" id="6BF-oM-wBs"/>
+                            <constraint firstItem="ren-zH-cVP" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="CTP-RH-to6"/>
+                            <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="u3e-73-cb1" secondAttribute="bottom" id="GDI-mI-D5V"/>
+                            <constraint firstItem="ren-zH-cVP" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="JRG-Wa-Rd3"/>
+                            <constraint firstAttribute="trailing" secondItem="u3e-73-cb1" secondAttribute="trailing" id="Kmf-Se-RVu"/>
+                            <constraint firstItem="u3e-73-cb1" firstAttribute="top" secondItem="1mK-UO-1ud" secondAttribute="topMargin" id="SZr-e2-fiw"/>
+                            <constraint firstItem="u3e-73-cb1" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="n1E-5Y-L8X"/>
+                            <constraint firstAttribute="trailing" secondItem="ren-zH-cVP" secondAttribute="trailing" id="wy4-H4-5p3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="lineChartView" destination="ren-zH-cVP" id="xVl-pu-kid"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="703"/>
         </scene>
     </scenes>
     <resources>

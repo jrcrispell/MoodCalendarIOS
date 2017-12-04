@@ -127,6 +127,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
         
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
+        menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
         self.view.addSubview(menuView)
 
         menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
@@ -186,6 +187,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @objc func handleSettings(_ sender: UIButton){
         closeMenu()
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func handleCharts(_ sender: UIButton){
+        closeMenu()
+        performSegue(withIdentifier: "toCharts", sender: sender)
     }
     
     @objc func handleHome(_ sender: UIButton){

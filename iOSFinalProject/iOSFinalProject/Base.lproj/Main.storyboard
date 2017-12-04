@@ -450,8 +450,64 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="u3e-73-cb1" userLabel="Background Image View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ren-zH-cVP" customClass="LineChartView" customModule="Charts">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ren-zH-cVP" userLabel="Useless View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Ye-19F" userLabel="Tab Bar">
+                                        <rect key="frame" x="0.0" y="567" width="375" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="hgY-g0-rXo"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUY-G7-xWK">
+                                        <rect key="frame" x="16" y="590.5" width="71" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryg-nH-P7M">
+                                        <rect key="frame" x="280.5" y="590.5" width="78.5" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter">
+                                        <rect key="frame" x="125" y="567" width="125" height="80"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="bny-ah-fAw"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ena-bI-Nuq">
+                                        <rect key="frame" x="158" y="591" width="59" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2H2-F7-pi3" secondAttribute="trailing" id="0AL-JK-66o"/>
+                                    <constraint firstItem="P3W-rX-b5Z" firstAttribute="width" secondItem="7re-Ye-19F" secondAttribute="width" multiplier="0.33333" id="3FK-9s-x7w"/>
+                                    <constraint firstItem="bUY-G7-xWK" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="48M-qB-OJM"/>
+                                    <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="5sd-AX-NtN"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ryg-nH-P7M" secondAttribute="trailing" constant="16" id="5wd-7R-i2Q"/>
+                                    <constraint firstItem="P3W-rX-b5Z" firstAttribute="height" secondItem="7re-Ye-19F" secondAttribute="height" id="8HW-C2-o0n"/>
+                                    <constraint firstItem="bUY-G7-xWK" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" constant="16" id="HQh-yw-3BM"/>
+                                    <constraint firstAttribute="bottom" secondItem="7re-Ye-19F" secondAttribute="bottom" id="JF4-ek-vge"/>
+                                    <constraint firstItem="Ena-bI-Nuq" firstAttribute="centerX" secondItem="7re-Ye-19F" secondAttribute="centerX" id="L2c-f9-zwA"/>
+                                    <constraint firstAttribute="trailing" secondItem="7re-Ye-19F" secondAttribute="trailing" id="N2t-pU-P2v"/>
+                                    <constraint firstItem="Ena-bI-Nuq" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="UlG-3J-Wve"/>
+                                    <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerX" secondItem="7re-Ye-19F" secondAttribute="centerX" id="VWH-qc-QHj"/>
+                                    <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="aG6-LJ-aNh"/>
+                                    <constraint firstItem="7re-Ye-19F" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" id="bvq-k8-0nV"/>
+                                    <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="ren-zH-cVP" secondAttribute="top" id="cmH-Qz-jny"/>
+                                    <constraint firstItem="Ryg-nH-P7M" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="dwU-0F-nM1"/>
+                                    <constraint firstItem="7re-Ye-19F" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="rAI-b0-kD1"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -467,12 +523,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="lineChartView" destination="ren-zH-cVP" id="xVl-pu-kid"/>
+                        <outlet property="lineChartView" destination="2H2-F7-pi3" id="fKC-KB-RY6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="751" y="703"/>
+            <point key="canvasLocation" x="749.60000000000002" y="702.99850074962524"/>
         </scene>
     </scenes>
     <resources>

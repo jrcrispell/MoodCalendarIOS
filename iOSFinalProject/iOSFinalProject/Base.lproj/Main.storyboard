@@ -438,7 +438,7 @@
         <!--ChartsViewController-->
         <scene sceneID="Kya-v5-xte">
             <objects>
-                <viewController title="ChartsViewController" id="Qrx-RK-jKf" customClass="ChartsViewController" sceneMemberID="viewController">
+                <viewController title="ChartsViewController" id="Qrx-RK-jKf" customClass="MyChartsViewController" customModule="iOSFinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Js-Qd-oiw"/>
                         <viewControllerLayoutGuide type="bottom" id="1iZ-Tw-7RQ"/>
@@ -479,9 +479,6 @@
                                             <constraint firstAttribute="height" constant="80" id="bny-ah-fAw"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ena-bI-Nuq">
                                         <rect key="frame" x="158" y="591" width="59" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
@@ -490,7 +487,6 @@
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="2H2-F7-pi3" secondAttribute="trailing" id="0AL-JK-66o"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="width" secondItem="7re-Ye-19F" secondAttribute="width" multiplier="0.33333" id="3FK-9s-x7w"/>
                                     <constraint firstItem="bUY-G7-xWK" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="48M-qB-OJM"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="5sd-AX-NtN"/>
@@ -502,28 +498,32 @@
                                     <constraint firstAttribute="trailing" secondItem="7re-Ye-19F" secondAttribute="trailing" id="N2t-pU-P2v"/>
                                     <constraint firstItem="Ena-bI-Nuq" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="UlG-3J-Wve"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerX" secondItem="7re-Ye-19F" secondAttribute="centerX" id="VWH-qc-QHj"/>
-                                    <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="aG6-LJ-aNh"/>
-                                    <constraint firstItem="7re-Ye-19F" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" id="bvq-k8-0nV"/>
-                                    <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="ren-zH-cVP" secondAttribute="top" id="cmH-Qz-jny"/>
                                     <constraint firstItem="Ryg-nH-P7M" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="dwU-0F-nM1"/>
                                     <constraint firstItem="7re-Ye-19F" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="rAI-b0-kD1"/>
                                 </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="36" width="343" height="535"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="ren-zH-cVP" secondAttribute="bottom" id="6BF-oM-wBs"/>
+                            <constraint firstAttribute="trailing" secondItem="2H2-F7-pi3" secondAttribute="trailing" constant="16" id="9Pf-jX-Jdd"/>
                             <constraint firstItem="ren-zH-cVP" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="CTP-RH-to6"/>
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="u3e-73-cb1" secondAttribute="bottom" id="GDI-mI-D5V"/>
                             <constraint firstItem="ren-zH-cVP" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="JRG-Wa-Rd3"/>
                             <constraint firstAttribute="trailing" secondItem="u3e-73-cb1" secondAttribute="trailing" id="Kmf-Se-RVu"/>
+                            <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" constant="16" id="QUV-5Z-oDD"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="top" secondItem="1mK-UO-1ud" secondAttribute="topMargin" id="SZr-e2-fiw"/>
+                            <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" constant="16" id="a3w-yQ-ZGx"/>
+                            <constraint firstItem="P3W-rX-b5Z" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" constant="16" id="isp-Da-9Zg"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="n1E-5Y-L8X"/>
                             <constraint firstAttribute="trailing" secondItem="ren-zH-cVP" secondAttribute="trailing" id="wy4-H4-5p3"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="lineChartView" destination="2H2-F7-pi3" id="fKC-KB-RY6"/>
+                        <outlet property="graphsChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>

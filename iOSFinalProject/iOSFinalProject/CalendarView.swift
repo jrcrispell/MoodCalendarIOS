@@ -13,7 +13,9 @@ import UIKit
 let g_lineStartX: Double = 75
 let g_lineEndX: Double = 600
 let g_firstLineY: Double = 11
-let g_hourVerticalPoints: Double = 48.7
+var g_hourVerticalPoints: Double = 48.7
+//let g_hourVerticalPoints: Double = 80
+
 let g_activityWidth: Double = 400
 let g_moodXPosition:Double = 380
 let g_hourLabelX: Double = 16

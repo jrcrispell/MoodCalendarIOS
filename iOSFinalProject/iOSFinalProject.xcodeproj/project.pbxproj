@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		31C6E7A8E96161CAA0531585 /* Pods_iOSFinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE59F68425EFC11F6099BA0 /* Pods_iOSFinalProject.framework */; };
 		8619C0BD1FBB507600444763 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619C0BC1FBB507600444763 /* Styles.swift */; };
-		8629917B1FD6000500139DBE /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629917A1FD6000500139DBE /* ChartsViewController.swift */; };
+		8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629917A1FD6000500139DBE /* MyChartsViewController.swift */; };
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
@@ -17,6 +17,7 @@
 		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
+		86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
 		86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242081F7C1A5700C1B63C /* CalendarViewController.swift */; };
 		86E2420C1F7C1A5700C1B63C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86E2420A1F7C1A5700C1B63C /* Main.storyboard */; };
@@ -33,7 +34,7 @@
 		350036251DFAE520990B9FC6 /* Pods-iOSFinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalProject/Pods-iOSFinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		47C1A6EB4A75376348F9B7CA /* Pods-iOSFinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalProject/Pods-iOSFinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		8619C0BC1FBB507600444763 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
-		8629917A1FD6000500139DBE /* ChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		8629917A1FD6000500139DBE /* MyChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChartsViewController.swift; sourceTree = "<group>"; };
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -41,6 +42,7 @@
 		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
+		86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartFormatter.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E242061F7C1A5700C1B63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86E242081F7C1A5700C1B63C /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +124,8 @@
 				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
 				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
-				8629917A1FD6000500139DBE /* ChartsViewController.swift */,
+				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
+				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -264,7 +267,8 @@
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,
 				86F83D041FC9F9B200C5B8EF /* MenuView.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
-				8629917B1FD6000500139DBE /* ChartsViewController.swift in Sources */,
+				8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */,
+				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,
 			);

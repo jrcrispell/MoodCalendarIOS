@@ -111,7 +111,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="wir-Hx-80r" secondAttribute="centerY" id="G7e-iS-cot"/>
-                                    <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="16" id="PEY-Vp-gGT"/>
+                                    <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="16" id="s0w-pB-a8e"/>
                                 </constraints>
                             </view>
                         </subviews>

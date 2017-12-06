@@ -17,7 +17,7 @@ var g_hourVerticalPoints: Double = 48.7
 //let g_hourVerticalPoints: Double = 80
 
 let g_activityWidth: Double = 400
-let g_moodXPosition:Double = 380
+let g_moodXPosition:Double = 340
 let g_hourLabelX: Double = 16
 let g_firstTextLabelY: Double = 0
 

@@ -263,8 +263,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
-        
-        print(sender.description)
         closeMenu()
     }
     
@@ -376,10 +374,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             return
         }
         
-        print("Tap")
-        print(sender.description)
         let point = sender.location(in: calendarView)
-        print(point.x.description + " , " + point.y.description)
         if let activity = calendarView.getSelectedActivity(location: point) {
             editingActivity = activity
         }

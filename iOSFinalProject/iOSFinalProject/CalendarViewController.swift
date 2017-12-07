@@ -22,83 +22,43 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     // Date data
     var displayedDate = Date()
     var dateString = ""
+    let calendar = Calendar.current
     
-    // Draggable handles
+    // Draggable handles (for long-click drag resizing)
     var topHandle: UIImageView?
     var botHandle: UIImageView?
     
-    @IBOutlet weak var datePickerHeight: NSLayoutConstraint!
-    var bounds:CGRect!
-    
-    @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
-    var datePickerVisibile = false
-    
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
-    @IBOutlet weak var background: UIImageView!
-    
-    
-    // Header
+    // Outlets
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var calendarView: CalendarView!
     @IBOutlet weak var datePickerTop: NSLayoutConstraint!
-    
     @IBOutlet weak var hamburger: UIButton!
-    
-    let calendar = Calendar.current
-    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var datePickerHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
+    @IBOutlet weak var background: UIImageView!
+
     // Firebase
     let ref = Database.database().reference()
     var displayedDateRef: DatabaseReference!
     var user: User!
     
-    var daysActivities = [CalendarActivity]()
-    var editingActivity: CalendarActivity!
-    var sendStartTime: Double = 0
-    var editMode = false
-    
-    let userDefaults = UserDefaults.standard
-    
+    // Menu
     var menuView: MenuView!
     var menuOutsideButton: UIButton!
     var snapshotView: UIImageView!
     var backgroundView: UIImageView!
-    
     var smallSnapshotWidth: CGFloat!
     var smallSnapshotHeight: CGFloat!
     
-    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
-        displayedDate = sender.date
-        updateDate()
-        loadEvents()
-        
-    }
-    
-    //TODO: - For debug only, make sure to delete button from storyboard too
-    @IBAction func testNotificationTapped(_ sender: Any) {
-        
-        
-        
-//        //Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
-    }
-    
-    @IBAction func hamburgerTapped(_ sender: Any) {
-        if (datePickerVisibile) {
-            datePickerTop.constant = -308
-            scrollViewTopSpace.constant = 150
-            datePickerVisibile = false
-            UIView.animate(withDuration: 0.3, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
-                self.makeMenu()
-            })
-        }
-        else {
-        makeMenu()
-        }
-    }
+    // Misc
+    var daysActivities = [CalendarActivity]()
+    var editingActivity: CalendarActivity!
+    var sendStartTime: Double = 0
+    var editMode = false
+    let userDefaults = UserDefaults.standard
+    var datePickerVisibile = false
+    var bounds:CGRect!
     
     func makeMenu() {
         let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
@@ -320,6 +280,40 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     //MARK: - IBActions
+    
+    @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        displayedDate = sender.date
+        updateDate()
+        loadEvents()
+    }
+    
+    //TODO: - For debug only, make sure to delete button from storyboard too
+    @IBAction func testNotificationTapped(_ sender: Any) {
+        
+        
+        
+        //        //Schedule notification for 5 seconds from now
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
+    }
+    
+    @IBAction func hamburgerTapped(_ sender: Any) {
+        if (datePickerVisibile) {
+            datePickerTop.constant = -308
+            scrollViewTopSpace.constant = 150
+            datePickerVisibile = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.makeMenu()
+            })
+        }
+        else {
+            makeMenu()
+        }
+    }
+    
+    
     @IBAction func arrowButtonTapped(_ sender: UIButton) {
         
         

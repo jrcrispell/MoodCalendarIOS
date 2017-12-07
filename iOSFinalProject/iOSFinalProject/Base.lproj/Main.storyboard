@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sy1-az-Y5j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sy1-az-Y5j">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GeezaPro.ttc">
+            <string>GeezaPro-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Calendar View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -28,36 +33,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="enr-Fw-NDa">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="44" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
-                                <rect key="frame" x="103.5" y="28" width="168.5" height="44"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                <state key="normal" title="Oct 24, 2017">
-                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Za2-CG-bbC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-Fc-6hx" userLabel="BackArrowButton">
-                                <rect key="frame" x="83.5" y="32.5" width="20" height="35"/>
-                                <state key="normal" image="left_arrow">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQm-Ug-fxo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-bE-ODj" userLabel="ForwardArrowButton">
-                                <rect key="frame" x="272" y="32.5" width="20" height="35"/>
-                                <state key="normal" image="right_arrow">
-                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pDF-jt-ayg"/>
-                                </connections>
-                            </button>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVV-E1-lu6">
-                                <rect key="frame" x="0.0" y="-236" width="375" height="167"/>
+                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVV-E1-lu6">
+                                <rect key="frame" x="0.0" y="-236" width="375" height="166.5"/>
                                 <date key="date" timeIntervalSinceReferenceDate="533428018.12384897">
                                     <!--2017-11-26 22:26:58 +0000-->
                                 </date>
@@ -65,10 +42,10 @@
                                     <action selector="datePickerValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="N7q-g7-Yyh"/>
                                 </connections>
                             </datePicker>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
                                 <rect key="frame" x="0.0" y="81" width="375" height="667"/>
                                 <subviews>
-                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
+                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1201"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -86,8 +63,8 @@
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="width" secondItem="ezs-Uc-Js5" secondAttribute="width" id="ncf-Cj-19Q"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
-                                <rect key="frame" x="329" y="35" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
+                                <rect key="frame" x="329" y="35.5" width="30" height="30"/>
                                 <state key="normal" title="Test">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -95,61 +72,94 @@
                                     <action selector="testNotificationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dRV-y6-xNj"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wir-Hx-80r" userLabel="Hamburger Spacer">
-                                <rect key="frame" x="0.0" y="20" width="83.5" height="63.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-hr-I6g" userLabel="NavigationBar">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
-                                        <rect key="frame" x="16" y="17" width="30" height="30"/>
-                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal">
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="44" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
+                                        <rect key="frame" x="112.5" y="10" width="150" height="44"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <state key="normal" title="Oct 24, 2017">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Za2-CG-bbC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-bE-ODj" userLabel="ForwardArrowButton">
+                                        <rect key="frame" x="279" y="14" width="20" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="right_arrow">
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYX-Qs-NIn"/>
+                                            <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pDF-jt-ayg"/>
+                                        </connections>
+                                    </button>
+                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wir-Hx-80r" userLabel="Hamburger Container">
+                                        <rect key="frame" x="-40" y="0.0" width="83.5" height="64"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
+                                                <rect key="frame" x="39" y="17" width="30" height="30"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SYX-Qs-NIn"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="wir-Hx-80r" secondAttribute="centerY" id="1Ux-1k-rwl"/>
+                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="39" id="MIN-MY-kOP"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-Fc-6hx" userLabel="BackArrowButton">
+                                        <rect key="frame" x="74.5" y="0.5" width="30" height="62"/>
+                                        <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="40"/>
+                                        <state key="normal" title="&lt;">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQm-Ug-fxo"/>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.57647058819999997" green="0.65490196079999996" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="wir-Hx-80r" secondAttribute="centerY" id="G7e-iS-cot"/>
-                                    <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="16" id="s0w-pB-a8e"/>
+                                    <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="VgQ-cP-2NN"/>
+                                    <constraint firstItem="6g9-h5-Nna" firstAttribute="centerY" secondItem="ikj-hr-I6g" secondAttribute="centerY" id="X6S-Ea-1ZD"/>
+                                    <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" constant="8" id="ktP-HD-ytz"/>
+                                    <constraint firstAttribute="height" constant="64" id="lvB-SB-IC5"/>
+                                    <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="ikj-hr-I6g" secondAttribute="centerX" id="yHf-m4-jQp"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0cm-5G-VbX"/>
                             <constraint firstAttribute="trailing" secondItem="enr-Fw-NDa" secondAttribute="trailing" id="0g6-Dz-w9I"/>
-                            <constraint firstItem="6g9-h5-Nna" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="2u8-Eo-w3Q"/>
                             <constraint firstAttribute="trailing" secondItem="htd-5Z-dnD" secondAttribute="trailing" constant="16" id="6P2-rh-WMU"/>
                             <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
-                            <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" id="BuW-GZ-9U7"/>
-                            <constraint firstItem="IVV-E1-lu6" firstAttribute="top" secondItem="6g9-h5-Nna" secondAttribute="bottom" constant="-308" id="Ejd-Vf-O78"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="Xcz-R0-hWw" secondAttribute="width" id="ExV-59-Vt9"/>
-                            <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="F4j-AR-38a"/>
-                            <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="enr-Fw-NDa" secondAttribute="centerX" id="K9t-hQ-589"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
-                            <constraint firstItem="eIX-bE-ODj" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="MkJ-kT-KZv"/>
+                            <constraint firstAttribute="trailing" secondItem="ikj-hr-I6g" secondAttribute="trailing" id="Lr6-9W-Sa8"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="OBC-QS-c5G"/>
-                            <constraint firstItem="wir-Hx-80r" firstAttribute="bottom" secondItem="cmW-Fc-6hx" secondAttribute="bottom" constant="16" id="ZL4-4z-eP9"/>
-                            <constraint firstItem="wir-Hx-80r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aCQ-C8-EWB"/>
+                            <constraint firstItem="ikj-hr-I6g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZE6-p2-HwC"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="b4f-0T-Xh0"/>
-                            <constraint firstItem="cmW-Fc-6hx" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="trailing" id="c5x-9N-HYw"/>
-                            <constraint firstItem="htd-5Z-dnD" firstAttribute="centerY" secondItem="eIX-bE-ODj" secondAttribute="centerY" id="f2c-Of-9VZ"/>
+                            <constraint firstItem="ikj-hr-I6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bJF-1M-GTr"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gTx-qu-zhd"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="IVV-E1-lu6" secondAttribute="bottom" constant="150" id="mXK-cP-jf0"/>
-                            <constraint firstItem="wir-Hx-80r" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oqG-VG-hua"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qzv-hs-lzX"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sgU-nA-Z7Z"/>
-                            <constraint firstItem="eIX-bE-ODj" firstAttribute="leading" secondItem="6g9-h5-Nna" secondAttribute="trailing" id="tSv-ce-Rel"/>
-                            <constraint firstItem="6g9-h5-Nna" firstAttribute="width" secondItem="enr-Fw-NDa" secondAttribute="width" multiplier="0.45" id="xeP-Wh-zqQ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backArrowButton" destination="cmW-Fc-6hx" id="u94-RV-V1u"/>
                         <outlet property="background" destination="enr-Fw-NDa" id="lOU-VW-y9q"/>
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
                         <outlet property="datePicker" destination="IVV-E1-lu6" id="tMv-AH-ndK"/>
-                        <outlet property="datePickerTop" destination="Ejd-Vf-O78" id="2w0-91-KX5"/>
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
@@ -157,16 +167,16 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="DRO-8d-KFE">
-                    <connections>
-                        <action selector="calendarViewTapped:" destination="BYZ-38-t0r" id="VLd-Gu-dbT"/>
-                    </connections>
-                </tapGestureRecognizer>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Izm-2B-Cbx">
                     <connections>
                         <action selector="calendarViewLongPress:" destination="BYZ-38-t0r" id="Hgp-EU-2iy"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="DRO-8d-KFE">
+                    <connections>
+                        <action selector="calendarViewTapped:" destination="BYZ-38-t0r" id="VLd-Gu-dbT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1484" y="-24.7376311844078"/>
         </scene>
@@ -530,12 +540,24 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="702.99850074962524"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="mzg-QT-Qvz">
+            <objects>
+                <viewController id="fYK-c0-EnO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="okR-5w-LbE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sr0-vE-4gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="Asset 3" width="58" height="58"/>
         <image name="Asset 4" width="58" height="58"/>
         <image name="background" width="1200" height="1900"/>
-        <image name="left_arrow" width="20" height="35"/>
         <image name="right_arrow" width="20" height="35"/>
     </resources>
 </document>

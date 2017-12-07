@@ -50,6 +50,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var smallSnapshotWidth: CGFloat!
     var smallSnapshotHeight: CGFloat!
     
+    @IBOutlet weak var backArrowButton: UIButton!
+    
+    
     // Misc
     var daysActivities = [CalendarActivity]()
     var editingActivity: CalendarActivity!
@@ -69,6 +72,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             j = j + i*100
             print("Level \(i.description): " + j.description)
         }
+        
+        backArrowButton.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         
         datePicker.date = displayedDate
         

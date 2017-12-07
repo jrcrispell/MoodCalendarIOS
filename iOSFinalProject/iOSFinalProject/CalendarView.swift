@@ -18,7 +18,7 @@ var g_hourVerticalPoints: Double = 48.7
 
 let g_activityWidth: Double = 400
 let g_moodXPosition:Double = 340
-let g_hourLabelX: Double = 16
+let g_hourLabelX: Double = 12
 let g_firstTextLabelY: Double = 0
 
 class CalendarView: UIView {
@@ -80,8 +80,16 @@ class CalendarView: UIView {
             else if index == 12 {
                 hourString = "12:00"
             }
-            else if index < 12 {
+            else if index == 11 || index == 10 {
                 hourString = String(index) + ":00" as NSString
+            }
+                
+                // Adding a space at the beginning so the hours are right-aligned
+            else if index < 10 {
+                hourString = "  " + String(index) + ":00" as NSString
+            }
+            else if index < 22 {
+                hourString = "  " + String(index - 12) + ":00" as NSString
             }
             else {
                 hourString = String(index - 12) + ":00" as NSString

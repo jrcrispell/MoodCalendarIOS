@@ -232,6 +232,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var j = 0
+        
+        for i in 0...20 {
+            j = j + i*100
+            print("Level \(i.description): " + j.description)
+        }
+        
         datePicker.date = displayedDate
         
         datePicker.setValue(UIColor.white, forKey: "textColor")
@@ -628,11 +635,8 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             handleQuickLogResponse(userText: userText, response: response)
             
         case "settingsAction":
-            // If a view has been presented (such as a Logger View), dismiss
-            if let test = self.presentedViewController {
-                test.dismiss(animated: false, completion: nil)
-            }
-            performSegue(withIdentifier: "toSettingsView", sender: self)
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            //performSegue(withIdentifier: "toSettingsView", sender: self)
             
         default:
             //Go to log page with hour filled out

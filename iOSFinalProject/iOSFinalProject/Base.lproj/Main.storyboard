@@ -33,8 +33,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="enr-Fw-NDa">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
-                            <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVV-E1-lu6">
-                                <rect key="frame" x="0.0" y="-236" width="375" height="166.5"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="IVV-E1-lu6">
+                                <rect key="frame" x="0.0" y="-232" width="375" height="167"/>
                                 <date key="date" timeIntervalSinceReferenceDate="533428018.12384897">
                                     <!--2017-11-26 22:26:58 +0000-->
                                 </date>
@@ -42,10 +42,10 @@
                                     <action selector="datePickerValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="N7q-g7-Yyh"/>
                                 </connections>
                             </datePicker>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
-                                <rect key="frame" x="0.0" y="81" width="375" height="667"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
+                                <rect key="frame" x="0.0" y="85" width="375" height="667"/>
                                 <subviews>
-                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1201"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -63,43 +63,43 @@
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="width" secondItem="ezs-Uc-Js5" secondAttribute="width" id="ncf-Cj-19Q"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
-                                <rect key="frame" x="329" y="35.5" width="30" height="30"/>
-                                <state key="normal" title="Test">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="testNotificationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dRV-y6-xNj"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-hr-I6g" userLabel="NavigationBar">
-                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="150" placeholderIntrinsicHeight="44" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
-                                        <rect key="frame" x="112.5" y="10" width="150" height="44"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htd-5Z-dnD">
+                                        <rect key="frame" x="329" y="13" width="30" height="30"/>
+                                        <state key="normal" title="Test">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="testNotificationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dRV-y6-xNj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
+                                        <rect key="frame" x="110" y="6" width="156" height="44"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                         <state key="normal" title="Oct 24, 2017">
-                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Za2-CG-bbC"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-bE-ODj" userLabel="ForwardArrowButton">
-                                        <rect key="frame" x="279" y="14" width="20" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="right_arrow">
-                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-bE-ODj" userLabel="ForwardArrowButton">
+                                        <rect key="frame" x="274" y="-3.5" width="30" height="62"/>
+                                        <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="40"/>
+                                        <state key="normal" title="&gt;">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pDF-jt-ayg"/>
                                         </connections>
                                     </button>
-                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wir-Hx-80r" userLabel="Hamburger Container">
-                                        <rect key="frame" x="-40" y="0.0" width="83.5" height="64"/>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wir-Hx-80r" userLabel="Hamburger Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="56"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
-                                                <rect key="frame" x="39" y="17" width="30" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
+                                                <rect key="frame" x="21" y="13" width="30" height="30"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -111,11 +111,11 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="wir-Hx-80r" secondAttribute="centerY" id="1Ux-1k-rwl"/>
-                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="39" id="MIN-MY-kOP"/>
+                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerX" secondItem="wir-Hx-80r" secondAttribute="centerX" id="it1-n8-gQA"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-Fc-6hx" userLabel="BackArrowButton">
-                                        <rect key="frame" x="74.5" y="0.5" width="30" height="62"/>
+                                        <rect key="frame" x="72" y="-3" width="30" height="62"/>
                                         <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="40"/>
                                         <state key="normal" title="&lt;">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -127,10 +127,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.57647058819999997" green="0.65490196079999996" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="htd-5Z-dnD" firstAttribute="centerY" secondItem="ikj-hr-I6g" secondAttribute="centerY" id="BIB-Pm-V0f"/>
+                                    <constraint firstAttribute="bottom" secondItem="wir-Hx-80r" secondAttribute="bottom" id="Kdi-Fb-nwn"/>
+                                    <constraint firstItem="eIX-bE-ODj" firstAttribute="leading" secondItem="6g9-h5-Nna" secondAttribute="trailing" constant="8" id="SeD-1x-qlf"/>
                                     <constraint firstItem="cmW-Fc-6hx" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="VgQ-cP-2NN"/>
+                                    <constraint firstAttribute="trailing" secondItem="htd-5Z-dnD" secondAttribute="trailing" constant="16" id="WZk-ND-mEl"/>
                                     <constraint firstItem="6g9-h5-Nna" firstAttribute="centerY" secondItem="ikj-hr-I6g" secondAttribute="centerY" id="X6S-Ea-1ZD"/>
+                                    <constraint firstItem="cmW-Fc-6hx" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="trailing" id="cEa-Eh-pe8"/>
+                                    <constraint firstItem="eIX-bE-ODj" firstAttribute="centerY" secondItem="6g9-h5-Nna" secondAttribute="centerY" id="gat-aD-Hee"/>
                                     <constraint firstItem="6g9-h5-Nna" firstAttribute="leading" secondItem="cmW-Fc-6hx" secondAttribute="trailing" constant="8" id="ktP-HD-ytz"/>
-                                    <constraint firstAttribute="height" constant="64" id="lvB-SB-IC5"/>
+                                    <constraint firstAttribute="height" constant="56" id="lvB-SB-IC5"/>
+                                    <constraint firstItem="wir-Hx-80r" firstAttribute="leading" secondItem="ikj-hr-I6g" secondAttribute="leading" id="n71-sN-QkP"/>
+                                    <constraint firstItem="wir-Hx-80r" firstAttribute="top" secondItem="ikj-hr-I6g" secondAttribute="top" id="nfp-qG-rBV"/>
                                     <constraint firstItem="6g9-h5-Nna" firstAttribute="centerX" secondItem="ikj-hr-I6g" secondAttribute="centerX" id="yHf-m4-jQp"/>
                                 </constraints>
                             </view>
@@ -138,7 +146,6 @@
                         <constraints>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0cm-5G-VbX"/>
                             <constraint firstAttribute="trailing" secondItem="enr-Fw-NDa" secondAttribute="trailing" id="0g6-Dz-w9I"/>
-                            <constraint firstAttribute="trailing" secondItem="htd-5Z-dnD" secondAttribute="trailing" constant="16" id="6P2-rh-WMU"/>
                             <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="Xcz-R0-hWw" secondAttribute="width" id="ExV-59-Vt9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
@@ -149,6 +156,7 @@
                             <constraint firstItem="ikj-hr-I6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bJF-1M-GTr"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gTx-qu-zhd"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
+                            <constraint firstItem="IVV-E1-lu6" firstAttribute="top" secondItem="ikj-hr-I6g" secondAttribute="bottom" constant="-308" id="iVq-Ij-JzJ"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="IVV-E1-lu6" secondAttribute="bottom" constant="150" id="mXK-cP-jf0"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qzv-hs-lzX"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sgU-nA-Z7Z"/>
@@ -160,6 +168,7 @@
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>
                         <outlet property="dateButton" destination="6g9-h5-Nna" id="qLh-0p-397"/>
                         <outlet property="datePicker" destination="IVV-E1-lu6" id="tMv-AH-ndK"/>
+                        <outlet property="datePickerTop" destination="iVq-Ij-JzJ" id="pRb-vn-z5A"/>
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
@@ -558,6 +567,5 @@
         <image name="Asset 3" width="58" height="58"/>
         <image name="Asset 4" width="58" height="58"/>
         <image name="background" width="1200" height="1900"/>
-        <image name="right_arrow" width="20" height="35"/>
     </resources>
 </document>

@@ -13,9 +13,8 @@ import FirebaseAuth
 
 let g_dateFormatter = DateFormatter()
 
-
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
- {
+{
     
     //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
     
@@ -37,7 +36,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var datePickerHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
     @IBOutlet weak var background: UIImageView!
-
+    
     // Firebase
     let ref = Database.database().reference()
     var displayedDateRef: DatabaseReference!
@@ -60,140 +59,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var datePickerVisibile = false
     var bounds:CGRect!
     
-    func makeMenu() {
-        let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
-   
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        backgroundView = UIImageView(frame: view.frame)
-        backgroundView.image = #imageLiteral(resourceName: "DeepBackgroundMirrored2")
-        backgroundView.isOpaque = true
-        self.view.addSubview(backgroundView)
-        
-        snapshotView = UIImageView(frame: view.frame)
-        snapshotView.image = image
-        
-        snapshotView.backgroundColor = UIColor.white
-        self.view.addSubview(snapshotView)
-
-        
-        // Make menu
-        menuView = allViewsInXib?.first as! MenuView
-        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
-
-        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
-        
-        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
-        menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
-        self.view.addSubview(menuView)
-
-        menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
-
-        UIView.animate(withDuration: 0.3, animations: {
-            self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
-            self.menuView.frame = CGRect(x: 0, y:  self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
-        })
-
-        // Clickable outside area
-        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
-        menuOutsideButton.backgroundColor = nil
-        self.view.addSubview(menuOutsideButton)
-
-
-
-
-        menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
-        
-    }
-    
-    func animateConstraints() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    func showDatePicker() {
-        datePickerTop.constant = 8
-        scrollViewTopSpace.constant = 8
-        datePickerVisibile = true
-        animateConstraints()
-    }
-    
-    func hideDatePicker() {
-        datePickerTop.constant = -308
-        scrollViewTopSpace.constant = 150
-        datePickerVisibile = false
-        animateConstraints()
-    }
-    
-    @IBAction func dateTapped(_ sender: Any) {
-        
-        if !datePickerVisibile {
-            showDatePicker()
-        }
-        else {
-            hideDatePicker()
-        }
-    }
-    
-    @objc func handleLogOut(_ sender: UIButton){
-        closeMenu()
-        logOutTapped(sender)
-    }
-    
-    @objc func handleSettings(_ sender: UIButton){
-        closeMenu()
-        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
-    }
-    
-    @objc func handleCharts(_ sender: UIButton){
-        closeMenu()
-        performSegue(withIdentifier: "toCharts", sender: sender)
-    }
-    
-    @objc func handleHome(_ sender: UIButton){
-        closeMenu()
-    }
-    
-    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
-        
-        print(sender.description)
-        closeMenu()
-    }
-    
-    func closeMenu() {
-        //TODO add animation
-        
-        
-        //TODO - fix bug
-        UIView.animate(withDuration: 0.3, animations: {
-            self.menuOutsideButton.alpha = 0.1
-            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
-            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 4, height: self.bounds.height)
-            self.snapshotView.frame = self.view.frame
-        }) { (finished) in
-            
-            
-
-                self.snapshotView.removeFromSuperview()
-
-
-            self.backgroundView.removeFromSuperview()
-            
-            self.menuOutsideButton.removeFromSuperview()
-            
-            self.menuView.removeFromSuperview()
-        }
-    }
-    
+    //MARK: - ViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // For debug, calculating level exp requirements
         var j = 0
-        
         for i in 0...20 {
             j = j + i*100
             print("Level \(i.description): " + j.description)
@@ -204,7 +75,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         datePicker.setValue(UIColor.white, forKey: "textColor")
         
         self.view.backgroundColor = UIColor.white
-
+        
         
         smallSnapshotWidth = view.bounds.width * 0.4
         smallSnapshotHeight = view.bounds.height * 0.4
@@ -230,6 +101,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        editingActivity = nil
+        loadEvents()
+        makeNextNotification(incomingDate: Date())
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toLogger" {
             guard let loggerView = segue.destination as? LoggerViewController else {return}
@@ -244,10 +121,86 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        editingActivity = nil
-        loadEvents()
-        makeNextNotification(incomingDate: Date())
+    //MARK: Helper Functions
+    
+    func makeMenu() {
+        let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        backgroundView = UIImageView(frame: view.frame)
+        backgroundView.image = #imageLiteral(resourceName: "DeepBackgroundMirrored2")
+        backgroundView.isOpaque = true
+        self.view.addSubview(backgroundView)
+        
+        snapshotView = UIImageView(frame: view.frame)
+        snapshotView.image = image
+        
+        snapshotView.backgroundColor = UIColor.white
+        self.view.addSubview(snapshotView)
+        
+        
+        // Make menu
+        menuView = allViewsInXib?.first as! MenuView
+        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
+        
+        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        
+        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
+        menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
+        self.view.addSubview(menuView)
+        
+        menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
+            self.menuView.frame = CGRect(x: 0, y:  self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
+        })
+        
+        // Clickable outside area
+        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
+        menuOutsideButton.backgroundColor = nil
+        self.view.addSubview(menuOutsideButton)
+        
+        menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
+    }
+    
+    func closeMenu() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.menuOutsideButton.alpha = 0.1
+            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
+            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 4, height: self.bounds.height)
+            self.snapshotView.frame = self.view.frame
+        }) { (finished) in
+            
+            self.snapshotView.removeFromSuperview()
+            self.backgroundView.removeFromSuperview()
+            self.menuOutsideButton.removeFromSuperview()
+            self.menuView.removeFromSuperview()
+        }
+    }
+    
+    func animateConstraints() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func showDatePicker() {
+        datePickerTop.constant = 8
+        scrollViewTopSpace.constant = 8
+        datePickerVisibile = true
+        animateConstraints()
+    }
+    
+    func hideDatePicker() {
+        datePickerTop.constant = -308
+        scrollViewTopSpace.constant = 150
+        datePickerVisibile = false
+        animateConstraints()
     }
     
     func loadEvents() {
@@ -279,6 +232,82 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         return
     }
     
+    func updateDate() {
+        datePicker.date = displayedDate
+        dateString = g_dateFormatter.string(from: displayedDate)
+        dateButton.setTitle(dateString, for: .normal)
+    }
+    
+    func getDaysActivities() -> [CalendarActivity] {
+        return daysActivities
+    }
+    
+    //MARK: Menu Selectors
+    @objc func handleLogOut(_ sender: UIButton){
+        closeMenu()
+        logOutTapped(sender)
+    }
+    
+    @objc func handleSettings(_ sender: UIButton){
+        closeMenu()
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func handleCharts(_ sender: UIButton){
+        closeMenu()
+        performSegue(withIdentifier: "toCharts", sender: sender)
+    }
+    
+    @objc func handleHome(_ sender: UIButton){
+        closeMenu()
+    }
+    
+    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
+        
+        print(sender.description)
+        closeMenu()
+    }
+    
+    func editActivity(activity: CalendarActivity) {
+        editMode = true
+        
+        
+        topHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
+        botHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
+        
+        
+        // Gesture recognizers
+        let topGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
+        let botGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
+        
+        topHandle!.addGestureRecognizer(topGestureRecognizer)
+        
+        topHandle!.tag = 2
+        let handleHalfWidth = Double(topHandle!.frame.width) / 2
+        let rectangleCenterX = Double(calendarView.center.x) + g_lineStartX/2 - handleHalfWidth
+        topHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime))
+        
+        botHandle!.tag = 3
+        botHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
+        botHandle!.addGestureRecognizer(botGestureRecognizer)
+        
+        topHandle!.isUserInteractionEnabled = true
+        botHandle!.isUserInteractionEnabled = true
+        
+        calendarView.addSubview(topHandle!)
+        calendarView.addSubview(botHandle!)
+    }
+    
+    func endEditMode() {
+        editMode = false
+        // Remove draggable lines
+        for view in calendarView.subviews {
+            if view.tag == 2 || view.tag == 3 {
+                view.removeFromSuperview()
+            }
+        }
+    }
+    
     //MARK: - IBActions
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
@@ -287,14 +316,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         loadEvents()
     }
     
-    //TODO: - For debug only, make sure to delete button from storyboard too
-    @IBAction func testNotificationTapped(_ sender: Any) {
+    @IBAction func dateTapped(_ sender: Any) {
         
-        
-        
-        //        //Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
+        if !datePickerVisibile {
+            showDatePicker()
+        }
+        else {
+            hideDatePicker()
+        }
     }
     
     @IBAction func hamburgerTapped(_ sender: Any) {
@@ -312,7 +341,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             makeMenu()
         }
     }
-    
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {
         
@@ -381,18 +409,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 endEditMode()
             }
         }
-        
-        
     }
     
-    func updateDate() {
-        datePicker.date = displayedDate
-        dateString = g_dateFormatter.string(from: displayedDate)
-        dateButton.setTitle(dateString, for: .normal)
-    }
-    
-    func getDaysActivities() -> [CalendarActivity] {
-        return daysActivities
+    @IBAction func testNotificationTapped(_ sender: Any) {
+        //TODO: - For debug only, make sure to delete button from storyboard too
+        
+        //        //Schedule notification for 5 seconds from now
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
@@ -453,45 +477,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
-    func editActivity(activity: CalendarActivity) {
-        editMode = true
-        
-        
-        topHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
-        botHandle = UIImageView(image: #imageLiteral(resourceName: "whiteHandle2"))
-        
-        
-        // Gesture recognizers
-        let topGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
-        let botGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panDraggableHandle(_:)))
-        
-        topHandle!.addGestureRecognizer(topGestureRecognizer)
-        
-        topHandle!.tag = 2
-        let handleHalfWidth = Double(topHandle!.frame.width) / 2
-        let rectangleCenterX = Double(calendarView.center.x) + g_lineStartX/2 - handleHalfWidth
-        topHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.startTime))
-        
-        botHandle!.tag = 3
-        botHandle!.center = CGPoint(x: rectangleCenterX, y: Utils.converHourToY(time: activity.endTime))
-        botHandle!.addGestureRecognizer(botGestureRecognizer)
-        
-        topHandle!.isUserInteractionEnabled = true
-        botHandle!.isUserInteractionEnabled = true
-        
-        calendarView.addSubview(topHandle!)
-        calendarView.addSubview(botHandle!)
-    }
-    
-    func endEditMode() {
-        editMode = false
-        // Remove draggable lines
-        for view in calendarView.subviews {
-            if view.tag == 2 || view.tag == 3 {
-                view.removeFromSuperview()
-            }
-        }
-    }
+    // MARK: Notifications
     
     func makeNextNotification(incomingDate: Date) {
         
@@ -526,8 +512,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             
             let startTimePreference = self.userDefaults.integer(forKey: "notifications_start")
             let endTimePreference = self.userDefaults.integer(forKey: "notifications_end")
-            
-            
             
             //TODO - protect against overflow in case no notifications should be scheduled, or schedule for the next day somehow
             
@@ -629,7 +613,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             handleQuickLogResponse(userText: userText, response: response)
             
         case "settingsAction":
-        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
             //performSegue(withIdentifier: "toSettingsView", sender: self)
             
         default:

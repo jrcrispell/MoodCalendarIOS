@@ -10,6 +10,7 @@
 		31C6E7A8E96161CAA0531585 /* Pods_iOSFinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EE59F68425EFC11F6099BA0 /* Pods_iOSFinalProject.framework */; };
 		8619C0BD1FBB507600444763 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8619C0BC1FBB507600444763 /* Styles.swift */; };
 		8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629917A1FD6000500139DBE /* MyChartsViewController.swift */; };
+		863415261FD8CA81001F5F42 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863415251FD8CA81001F5F42 /* Credits.swift */; };
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
@@ -35,6 +36,7 @@
 		47C1A6EB4A75376348F9B7CA /* Pods-iOSFinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSFinalProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSFinalProject/Pods-iOSFinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		8619C0BC1FBB507600444763 /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		8629917A1FD6000500139DBE /* MyChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChartsViewController.swift; sourceTree = "<group>"; };
+		863415251FD8CA81001F5F42 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
 				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
+				863415251FD8CA81001F5F42 /* Credits.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */,
 				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
+				863415261FD8CA81001F5F42 /* Credits.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,7 +28,6 @@ class MyChartsViewController: UIViewController {
             
             let point = ChartDataEntry(x: Double(i), y: data[i])
             lineChartEntry.append(point)
-            formatter.stringForValue(Double(i), axis: xAxis)
         }
         xAxis.valueFormatter = formatter
         graphsChartView.xAxis.valueFormatter = xAxis.valueFormatter
@@ -38,7 +37,6 @@ class MyChartsViewController: UIViewController {
         line1.colors = [NSUIColor.white]
         
         let dataSet = LineChartData()
-        let chartData = LineChartData()
         dataSet.addDataSet(line1)
         
         graphsChartView.data = dataSet

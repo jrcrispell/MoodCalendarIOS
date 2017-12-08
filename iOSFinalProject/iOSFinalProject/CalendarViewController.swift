@@ -137,7 +137,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         UIGraphicsEndImageContext()
         
         backgroundView = UIImageView(frame: view.frame)
-        backgroundView.image = #imageLiteral(resourceName: "DeepBackgroundMirrored2")
+        backgroundView.image = #imageLiteral(resourceName: "DeepBackground2")
         backgroundView.isOpaque = true
         self.view.addSubview(backgroundView)
         
@@ -151,11 +151,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         // Make menu
         menuView = allViewsInXib?.first as! MenuView
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
+        menuView.logOutButton.alpha = 0.7
         
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
         
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
+        menuView.settingsButton.alpha = 0.7
+
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
+        menuView.dataVisButton.alpha = 0.7
         self.view.addSubview(menuView)
         
         menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)

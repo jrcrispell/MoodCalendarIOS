@@ -23,6 +23,7 @@ class Styles {
     // Colors
     static let white50Percent = UIColor.white.withAlphaComponent(0.5)
     static let white80Percent = UIColor.white.withAlphaComponent(0.80)
+    static let accentColor = UIColor(red: 0.078431, green: 0.32549, blue: 0.43137, alpha: 1.0)
     
     
     static var textAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): white80Percent, NSAttributedStringKey(rawValue: NSAttributedStringKey.paragraphStyle.rawValue): textStyle, NSAttributedStringKey(rawValue: NSAttributedStringKey.obliqueness.rawValue): 0.1, NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): textFont!]

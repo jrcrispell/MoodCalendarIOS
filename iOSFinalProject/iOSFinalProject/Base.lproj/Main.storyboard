@@ -42,7 +42,7 @@
                                 </connections>
                             </datePicker>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezs-Uc-Js5">
-                                <rect key="frame" x="0.0" y="85" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="75" width="375" height="667"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1201"/>
@@ -154,7 +154,7 @@
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="gTx-qu-zhd"/>
                             <constraint firstItem="enr-Fw-NDa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hYg-Mb-WD2"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="top" secondItem="ikj-hr-I6g" secondAttribute="bottom" constant="-308" id="iVq-Ij-JzJ"/>
-                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="IVV-E1-lu6" secondAttribute="bottom" constant="150" id="mXK-cP-jf0"/>
+                            <constraint firstItem="ezs-Uc-Js5" firstAttribute="top" secondItem="IVV-E1-lu6" secondAttribute="bottom" constant="140" id="mXK-cP-jf0"/>
                             <constraint firstItem="ezs-Uc-Js5" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qzv-hs-lzX"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sgU-nA-Z7Z"/>
                         </constraints>
@@ -167,6 +167,7 @@
                         <outlet property="datePicker" destination="IVV-E1-lu6" id="tMv-AH-ndK"/>
                         <outlet property="datePickerTop" destination="iVq-Ij-JzJ" id="pRb-vn-z5A"/>
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
+                        <outlet property="scrollView" destination="ezs-Uc-Js5" id="uHK-v4-yFI"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
                         <segue destination="Qrx-RK-jKf" kind="show" identifier="toCharts" id="sI4-og-kAr"/>
@@ -397,7 +398,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeA-ch-fFZ" userLabel="Fields View">
                                 <rect key="frame" x="47" y="250" width="281" height="334"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset 4" translatesAutoresizingMaskIntoConstraints="NO" id="qh7-oP-V93" userLabel="PasswordIcon">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PasswordIcon" translatesAutoresizingMaskIntoConstraints="NO" id="qh7-oP-V93" userLabel="PasswordIcon">
                                         <rect key="frame" x="0.0" y="92.5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="hNR-ny-BzJ"/>
@@ -458,7 +459,7 @@
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset 3" translatesAutoresizingMaskIntoConstraints="NO" id="ZJm-TZ-Ub7" userLabel="UsernameIcon">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UsernameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ZJm-TZ-Ub7" userLabel="UsernameIcon">
                                         <rect key="frame" x="0.0" y="18.5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="DRh-Y4-k29"/>
@@ -618,9 +619,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Asset 3" width="58" height="58"/>
-        <image name="Asset 4" width="58" height="58"/>
+        <image name="PasswordIcon" width="58" height="58"/>
         <image name="SaveIcon" width="96" height="96"/>
+        <image name="UsernameIcon" width="58" height="58"/>
         <image name="WhiteTrashIcon" width="84" height="96"/>
         <image name="background" width="1200" height="1900"/>
     </resources>

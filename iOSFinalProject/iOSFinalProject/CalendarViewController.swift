@@ -37,6 +37,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
     @IBOutlet weak var background: UIImageView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
     // Firebase
     let ref = Database.database().reference()
     var displayedDateRef: DatabaseReference!
@@ -131,15 +134,25 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func makeMenu() {
         let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+
         UIGraphicsBeginImageContext(view.frame.size)
+ 
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
+
         backgroundView = UIImageView(frame: view.frame)
-        backgroundView.image = #imageLiteral(resourceName: "DeepBackground2")
+        let statusBarRect = CGRect(x: 0, y: 0, width: view.frame.width, height: statusBarHeight)
+        let statusBarView = UIView(frame: statusBarRect)
+        statusBarView.backgroundColor = UIColor.white
+        statusBarView.isOpaque = true
+
+        backgroundView.image = #imageLiteral(resourceName: "DeepBackground")
         backgroundView.isOpaque = true
         self.view.addSubview(backgroundView)
+        self.view.addSubview(statusBarView)
         
         snapshotView = UIImageView(frame: view.frame)
         snapshotView.image = image
@@ -208,7 +221,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func hideDatePicker() {
         datePickerTop.constant = -308
-        scrollViewTopSpace.constant = 150
+        scrollViewTopSpace.constant = 140
         datePickerVisibile = false
         animateConstraints()
     }

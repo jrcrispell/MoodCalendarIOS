@@ -12,6 +12,8 @@
 		8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8629917A1FD6000500139DBE /* MyChartsViewController.swift */; };
 		863415261FD8CA81001F5F42 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863415251FD8CA81001F5F42 /* Credits.swift */; };
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
+		8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8652F8781FDB088F00442E43 /* ExpCard.xib */; };
+		8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8652F87A1FDB097D00442E43 /* ExpCard.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
 		8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8685FC1B1FBF91FC004B39FB /* Settings.bundle */; };
@@ -38,6 +40,8 @@
 		8629917A1FD6000500139DBE /* MyChartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChartsViewController.swift; sourceTree = "<group>"; };
 		863415251FD8CA81001F5F42 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8652F8781FDB088F00442E43 /* ExpCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpCard.xib; sourceTree = "<group>"; };
+		8652F87A1FDB097D00442E43 /* ExpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCard.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8685FC1B1FBF91FC004B39FB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
+				8652F8781FDB088F00442E43 /* ExpCard.xib */,
 				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
 				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
 				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
@@ -129,6 +134,7 @@
 				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
 				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
 				863415251FD8CA81001F5F42 /* Credits.swift */,
+				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 			files = (
 				867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */,
 				86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */,
+				8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */,
 				8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */,
 				86E242111F7C1A5700C1B63C /* Assets.xcassets in Resources */,
 				86F83D021FC9F7C100C5B8EF /* MenuView.xib in Resources */,
@@ -274,6 +281,7 @@
 				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				863415261FD8CA81001F5F42 /* Credits.swift in Sources */,
+				8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

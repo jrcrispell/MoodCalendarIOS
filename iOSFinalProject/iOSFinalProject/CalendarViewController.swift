@@ -55,6 +55,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @IBOutlet weak var backArrowButton: UIButton!
     
+    // Exp
+    var expCard: ExpCard!
+    
     
     // Misc
     var daysActivities = [CalendarActivity]()
@@ -92,7 +95,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
         
-        bounds = self.view.bounds
+        bounds = view.bounds
         
         
         // Authorized Firebase user
@@ -132,7 +135,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: Helper Functions
     
     func makeMenu() {
-        let allViewsInXib = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
 
@@ -162,7 +165,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         
         // Make menu
-        menuView = allViewsInXib?.first as! MenuView
+        menuView = xibViews?.first as! MenuView
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         menuView.logOutButton.alpha = 0.7
         
@@ -176,11 +179,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.chartsIcon.alpha = 0.7
         self.view.addSubview(menuView)
         
-        menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
+        menuView.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.snapshotView.frame = (CGRect(x: self.view.bounds.width - self.smallSnapshotWidth / 2, y: self.view.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
-            self.menuView.frame = CGRect(x: 0, y:  self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
+            self.snapshotView.frame = (CGRect(x: self.bounds.width - self.smallSnapshotWidth / 2, y: self.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
+            self.menuView.frame = CGRect(x: 0, y:  self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
         })
         
         // Clickable outside area
@@ -194,7 +197,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func closeMenu() {
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.1
-            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.view.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
+            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
             self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 4, height: self.bounds.height)
             self.snapshotView.frame = self.view.frame
         }) { (finished) in
@@ -204,6 +207,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             self.menuOutsideButton.removeFromSuperview()
             self.menuView.removeFromSuperview()
         }
+    }
+    
+    func showExpCard() {
+        let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
+        
+        expCard = xibViews?.first as! ExpCard
+        self.view.addSubview(expCard)
+        expCard.frame = CGRect(x: 0, y: 500, width: view.bounds.width * 0.7, height: view.bounds.height * 0.177)
     }
     
     func animateConstraints() {
@@ -433,8 +444,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         //TODO: - For debug only, make sure to delete button from storyboard too
         
         //        //Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
+//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+//        scheduleNotification(date: fiveSecondsFromNow)
+        
+        showExpCard()
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {

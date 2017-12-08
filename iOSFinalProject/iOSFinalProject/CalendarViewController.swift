@@ -160,6 +160,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
         menuView.dataVisButton.alpha = 0.7
+        menuView.chartsIcon.alpha = 0.7
         self.view.addSubview(menuView)
         
         menuView.frame = CGRect(x: -bounds.width, y: view.bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)

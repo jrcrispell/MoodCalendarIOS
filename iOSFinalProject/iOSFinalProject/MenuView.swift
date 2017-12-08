@@ -9,7 +9,11 @@
 import UIKit
 
 class MenuView: UIView {
-
+    
+    @IBOutlet weak var chartsIcon: UIImageView!
+    
+    @IBOutlet weak var homeIcon: UIImageView!
+    
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var dataVisButton: UIButton!
     

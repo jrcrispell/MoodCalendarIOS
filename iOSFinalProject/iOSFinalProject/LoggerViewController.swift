@@ -14,9 +14,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     @IBOutlet weak var startTimePicker: UIDatePicker!
     @IBOutlet weak var endTimePicker: UIDatePicker!
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var deleteButton: UIBarButtonItem!
-    @IBOutlet weak var dateLabel: UINavigationItem!
+
+    @IBOutlet weak var deleteButton: UIButton!
+
+    @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var moodPicker: UIPickerView!
     
@@ -42,6 +44,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Database references
         user = Auth.auth().currentUser
@@ -72,13 +75,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         moodPicker.setValue(UIColor.white, forKey: "textColor")
 
         // Navigation Bar
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        navigationBar.isTranslucent = true
-        navigationBar.isOpaque = true
-        navigationBar.backgroundColor = UIColor.clear
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        dateLabel.title = g_dateFormatter.string(from: displayedDate)
+        dateLabel.text = g_dateFormatter.string(from: displayedDate)
         
         
     }
@@ -92,11 +89,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: - IBActions
     
-    @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
+    @IBAction func cancelTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveTapped(_ sender:UIBarButtonItem) {
+    @IBAction func saveTapped(_ sender: UIButton) {
         let startDate = startTimePicker.date
         let endDate = endTimePicker.date
         let moodScore = 10 - moodPicker.selectedRow(inComponent: 0)
@@ -114,7 +111,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     }
     
-    @IBAction func deleteTapped(_ sender: UIBarButtonItem) {
+    @IBAction func deleteTapped(_ sender: UIButton) {
         activityRef.removeValue()
         dismiss(animated: true, completion: nil)
     }
@@ -147,7 +144,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let rowData = moodPickerData[row]
-        
         return NSAttributedString(string: rowData, attributes: Styles.moodPickerAttributes)
     }
 

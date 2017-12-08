@@ -30,4 +30,5 @@ class Styles {
     
     static var moodPickerAttributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): white80Percent, NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): textFont!]
     
+    
 }

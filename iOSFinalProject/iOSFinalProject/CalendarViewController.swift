@@ -290,6 +290,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @objc func handleCharts(_ sender: UIButton){
         closeMenu()
         performSegue(withIdentifier: "toCharts", sender: sender)
+        
+        //present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
     }
     
     @objc func handleHome(_ sender: UIButton){
@@ -442,10 +444,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
-        
-        //        //Schedule notification for 5 seconds from now
-//        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-//        scheduleNotification(date: fiveSecondsFromNow)
         
         showExpCard()
     }

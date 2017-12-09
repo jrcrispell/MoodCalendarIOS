@@ -30,9 +30,34 @@ class MenuView: UIView {
         super.init(coder: aDecoder)
     }
     
-    func setInitialPosition(bounds: CGRect) {
+    func setInitialPosition(superViewBounds bounds: CGRect) {
 
         self.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - bounds.height * 0.4 / 2, width: bounds.width * 0.6, height: bounds.height)
+    }
+    
+    func makeViews(superView: UIView) -> (UIImageView, UIView, UIImageView) {
+        
+        // Make Deep Background
+        let backgroundView = UIImageView(frame: superView.frame)
+        backgroundView.image = #imageLiteral(resourceName: "DeepBackground")
+        backgroundView.isOpaque = true
+        
+        // Make Status bar
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let statusBarRect = CGRect(x: 0, y: 0, width: superView.frame.width, height: statusBarHeight)
+        let statusBarView = UIView(frame: statusBarRect)
+        statusBarView.backgroundColor = UIColor.white
+        statusBarView.isOpaque = true
+        
+        // Make Snapshot
+        UIGraphicsBeginImageContext(superView.frame.size)
+        superView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let snapshotView = UIImageView(frame: superView.frame)
+        snapshotView.image = image
+
+        return (backgroundView, statusBarView, snapshotView)
     }
 
     func animateIn(snapshotView: UIImageView, bounds: CGRect) {

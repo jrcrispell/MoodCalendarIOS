@@ -134,62 +134,35 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func makeMenu() {
         
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        
+        menuView = xibViews?.first as! MenuView
+        
+        let backgroundViews = menuView.makeViews(superView: view)
+        backgroundView = backgroundViews.0
+        snapshotView = backgroundViews.2
 
+        self.view.addSubview(backgroundViews.0)
+        self.view.addSubview(backgroundViews.1)
+        self.view.addSubview(backgroundViews.2)
         
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        
-        UIGraphicsBeginImageContext(view.frame.size)
-        
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        
-        backgroundView = UIImageView(frame: view.frame)
-        let statusBarRect = CGRect(x: 0, y: 0, width: view.frame.width, height: statusBarHeight)
-        let statusBarView = UIView(frame: statusBarRect)
-        statusBarView.backgroundColor = UIColor.white
-        statusBarView.isOpaque = true
-        
-        backgroundView.image = #imageLiteral(resourceName: "DeepBackground")
-        backgroundView.isOpaque = true
-        self.view.addSubview(backgroundView)
-        self.view.addSubview(statusBarView)
-        
-        snapshotView = UIImageView(frame: view.frame)
-        snapshotView.image = image
-        
-        snapshotView.backgroundColor = UIColor.white
-        self.view.addSubview(snapshotView)
-        
+        //TODO: - Delete this shit
         bounds = view.bounds
-        
         smallSnapshotWidth = bounds.width * 0.4
         smallSnapshotHeight = bounds.height * 0.4
         
-        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
-        
-        // Make menu
-        menuView = xibViews?.first as! MenuView
-        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
-        
+        // Set up buttons
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
-        menuView.logOutButton.alpha = 1.0
-
-        
-        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
-        
+        menuView.homeButton.alpha = 1.0
+        menuView.homeIcon.alpha = 1.0
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
-        
+        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
+        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
         
-       print( menuView.frame.width.description + " : " + menuView.frame.height.description)
-        
-            menuView.setInitialPosition(bounds: bounds)
+        menuView.setInitialPosition(superViewBounds: bounds)
         self.view.addSubview(menuView)
-
         menuView.animateIn(snapshotView: snapshotView, bounds: bounds)
-        
         
         // Clickable outside area
         menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
@@ -207,6 +180,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             self.snapshotView.frame = self.view.frame
         }) { (finished) in
             
+            //TODO: - remove statusBarView
             self.snapshotView.removeFromSuperview()
             self.backgroundView.removeFromSuperview()
             self.menuOutsideButton.removeFromSuperview()

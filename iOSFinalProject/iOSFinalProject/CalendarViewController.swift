@@ -133,6 +133,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: Helper Functions
     
     func makeMenu() {
+        
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
@@ -181,10 +182,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
         menuView.dataVisButton.alpha = 0.7
         menuView.chartsIcon.alpha = 0.7
-        self.view.addSubview(menuView)
         
         menuView.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
         
+        self.view.addSubview(menuView)
+
         menuView.animateIn(snapshotView: snapshotView, bounds: bounds)
         
         

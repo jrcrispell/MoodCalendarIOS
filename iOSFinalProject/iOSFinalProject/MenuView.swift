@@ -23,15 +23,6 @@ class MenuView: UIView {
     
     @IBOutlet weak var notifyButton: UIButton!
     
-    
-//    override init(frame: CGRect, snapshotView: UIImageView, bounds: CGRect) {
-//        super.init(frame: frame)
-//        commonInit(snapshotView: UIImageView, bounds: CGRect)
-//    }
-//    required init?(coder aDecoder: NSCoder, snapshotView: UIImageView, bounds: CGRect) {
-//        super.init(coder: aDecoder)
-//        commonInit(snapshotView: UIImageView, bounds: CGRect)
-//    }
 
     func animateIn(snapshotView: UIImageView, bounds: CGRect) {
         

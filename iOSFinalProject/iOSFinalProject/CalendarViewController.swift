@@ -88,14 +88,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         self.view.backgroundColor = UIColor.white
         
         
-        smallSnapshotWidth = view.bounds.width * 0.4
-        smallSnapshotHeight = view.bounds.height * 0.4
+        
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
         
-        bounds = view.bounds
         
         
         // Authorized Firebase user
@@ -138,20 +136,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
-
+        
         UIGraphicsBeginImageContext(view.frame.size)
- 
+        
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-
+        
         backgroundView = UIImageView(frame: view.frame)
         let statusBarRect = CGRect(x: 0, y: 0, width: view.frame.width, height: statusBarHeight)
         let statusBarView = UIView(frame: statusBarRect)
         statusBarView.backgroundColor = UIColor.white
         statusBarView.isOpaque = true
-
+        
         backgroundView.image = #imageLiteral(resourceName: "DeepBackground")
         backgroundView.isOpaque = true
         self.view.addSubview(backgroundView)
@@ -163,6 +161,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         snapshotView.backgroundColor = UIColor.white
         self.view.addSubview(snapshotView)
         
+        bounds = view.bounds
+        
+        smallSnapshotWidth = bounds.width * 0.4
+        smallSnapshotHeight = bounds.height * 0.4
         
         // Make menu
         menuView = xibViews?.first as! MenuView
@@ -173,18 +175,23 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
         menuView.settingsButton.alpha = 0.7
-
+        
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
+        
+        menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
         menuView.dataVisButton.alpha = 0.7
         menuView.chartsIcon.alpha = 0.7
         self.view.addSubview(menuView)
         
         menuView.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
         
-        UIView.animate(withDuration: 0.3, animations: {
-            self.snapshotView.frame = (CGRect(x: self.bounds.width - self.smallSnapshotWidth / 2, y: self.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
-            self.menuView.frame = CGRect(x: 0, y:  self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
-        })
+        menuView.animateIn(snapshotView: snapshotView, bounds: bounds)
+        
+        
+        //        UIView.animate(withDuration: 0.3, animations: {
+        //            self.snapshotView.frame = (CGRect(x: self.bounds.width - self.smallSnapshotWidth / 2, y: self.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
+        //            self.menuView.frame = CGRect(x: 0, y:  self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
+        //        })
         
         // Clickable outside area
         menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
@@ -297,6 +304,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @objc func handleHome(_ sender: UIButton){
         closeMenu()
     }
+    
+    @objc func handleNotify(_ sender: UIButton){
+        closeMenu()
+        
+        //Schedule notification for 5 seconds from now
+        let fiveSecondsFromNow = Date().addingTimeInterval(5)
+        scheduleNotification(date: fiveSecondsFromNow)
+        
+    }
+    
+    
     
     @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
         closeMenu()

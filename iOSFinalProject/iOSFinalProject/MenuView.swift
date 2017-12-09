@@ -21,18 +21,28 @@ class MenuView: UIView {
     
     @IBOutlet weak var logOutButton: UIButton!
     
-//    override init(frame: CGRect) {
+    @IBOutlet weak var notifyButton: UIButton!
+    
+    
+//    override init(frame: CGRect, snapshotView: UIImageView, bounds: CGRect) {
 //        super.init(frame: frame)
-//        commonInit()
+//        commonInit(snapshotView: UIImageView, bounds: CGRect)
 //    }
-//    required init?(coder aDecoder: NSCoder) {
+//    required init?(coder aDecoder: NSCoder, snapshotView: UIImageView, bounds: CGRect) {
 //        super.init(coder: aDecoder)
-//        commonInit()
+//        commonInit(snapshotView: UIImageView, bounds: CGRect)
 //    }
-//
-//    private func commonInit() {
-//
-//    }
+
+    func animateIn(snapshotView: UIImageView, bounds: CGRect) {
+        
+        let smallSnapshotWidth = bounds.width * 0.4
+        let smallSnapshotHeight = bounds.height * 0.4
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            snapshotView.frame = (CGRect(x: bounds.width - smallSnapshotWidth / 2, y: bounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight))
+            self.frame = CGRect(x: 0, y:  bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
+        })
+    }
     
     override func layoutSubviews() {
 //        homeButton.layer.borderColor = UIColor.black.cgColor

@@ -134,7 +134,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func makeMenu() {
         
-        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+
         
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         
@@ -167,33 +167,29 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         smallSnapshotWidth = bounds.width * 0.4
         smallSnapshotHeight = bounds.height * 0.4
         
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        
         // Make menu
         menuView = xibViews?.first as! MenuView
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
-        menuView.logOutButton.alpha = 0.7
         
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        menuView.logOutButton.alpha = 1.0
+
         
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
-        menuView.settingsButton.alpha = 0.7
         
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
         
         menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
-        menuView.dataVisButton.alpha = 0.7
-        menuView.chartsIcon.alpha = 0.7
         
-        menuView.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - smallSnapshotHeight/2, width: bounds.width * 0.6, height: bounds.height)
+       print( menuView.frame.width.description + " : " + menuView.frame.height.description)
         
+            menuView.setInitialPosition(bounds: bounds)
         self.view.addSubview(menuView)
 
         menuView.animateIn(snapshotView: snapshotView, bounds: bounds)
         
-        
-        //        UIView.animate(withDuration: 0.3, animations: {
-        //            self.snapshotView.frame = (CGRect(x: self.bounds.width - self.smallSnapshotWidth / 2, y: self.bounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
-        //            self.menuView.frame = CGRect(x: 0, y:  self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 0.6, height: self.bounds.height)
-        //        })
         
         // Clickable outside area
         menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))

@@ -66,8 +66,8 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6g9-h5-Nna" userLabel="DateButton">
-                                        <rect key="frame" x="110" y="6" width="156" height="44"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <rect key="frame" x="115" y="6" width="146" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <state key="normal" title="Oct 24, 2017">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -76,7 +76,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-bE-ODj" userLabel="ForwardArrowButton">
-                                        <rect key="frame" x="282" y="0.0" width="30" height="55"/>
+                                        <rect key="frame" x="277" y="0.0" width="30" height="55"/>
                                         <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="35"/>
                                         <state key="normal" title="&gt;">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,10 +86,10 @@
                                         </connections>
                                     </button>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wir-Hx-80r" userLabel="Hamburger Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="56"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQI-xJ-AG4" userLabel="Hamburger">
-                                                <rect key="frame" x="16.666666666666668" y="13" width="30.000000000000004" height="30"/>
+                                                <rect key="frame" x="18" y="13" width="30" height="30"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal">
                                                     <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -101,11 +101,11 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerY" secondItem="wir-Hx-80r" secondAttribute="centerY" id="1Ux-1k-rwl"/>
-                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="centerX" secondItem="wir-Hx-80r" secondAttribute="centerX" id="it1-n8-gQA"/>
+                                            <constraint firstItem="xQI-xJ-AG4" firstAttribute="leading" secondItem="wir-Hx-80r" secondAttribute="leading" constant="18" id="3yW-Zl-MhB"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmW-Fc-6hx" userLabel="BackArrowButton">
-                                        <rect key="frame" x="64" y="0.6666666666666643" width="30" height="55"/>
+                                        <rect key="frame" x="69" y="0.6666666666666643" width="30" height="55"/>
                                         <fontDescription key="fontDescription" name="GeezaPro-Bold" family="Geeza Pro" pointSize="35"/>
                                         <state key="normal" title="&lt;">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -115,7 +115,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-dU-jeo">
-                                        <rect key="frame" x="312" y="13" width="63" height="30"/>
+                                        <rect key="frame" x="307" y="13" width="68" height="30"/>
                                         <state key="normal" title="Test">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -240,9 +240,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 24, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqb-U1-Q9b">
-                                        <rect key="frame" x="109" y="12" width="156" height="32"/>
+                                        <rect key="frame" x="114" y="12" width="146" height="32"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -592,8 +592,47 @@
                                     <constraint firstItem="7re-Ye-19F" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="rAI-b0-kD1"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90h-aS-1d6" userLabel="NavigationBar">
+                                <rect key="frame" x="0.0" y="44" width="375" height="56"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lg3-0D-7i2" userLabel="Hamburger">
+                                        <rect key="frame" x="18" y="13" width="30" height="30"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQB-g8-dTw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjr-o2-Es0" userLabel="DateButton">
+                                        <rect key="frame" x="150.66666666666666" y="6" width="75" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="Charts">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOW-NU-syg"/>
+                                        </connections>
+                                    </button>
+                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3X6-o4-RBt" userLabel="Hamburger Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="56"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.078431372550000003" green="0.32549019610000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Lg3-0D-7i2" firstAttribute="leading" secondItem="90h-aS-1d6" secondAttribute="leading" constant="18" id="9CW-wP-pts"/>
+                                    <constraint firstItem="Wjr-o2-Es0" firstAttribute="centerX" secondItem="90h-aS-1d6" secondAttribute="centerX" id="D9b-WM-ajn"/>
+                                    <constraint firstAttribute="bottom" secondItem="3X6-o4-RBt" secondAttribute="bottom" id="Fli-6U-GmH"/>
+                                    <constraint firstItem="Wjr-o2-Es0" firstAttribute="centerY" secondItem="90h-aS-1d6" secondAttribute="centerY" id="GRN-49-u8C"/>
+                                    <constraint firstAttribute="height" constant="56" id="ZhS-0J-WRt"/>
+                                    <constraint firstItem="3X6-o4-RBt" firstAttribute="leading" secondItem="90h-aS-1d6" secondAttribute="leading" id="dpR-DH-Wwr"/>
+                                    <constraint firstItem="3X6-o4-RBt" firstAttribute="top" secondItem="90h-aS-1d6" secondAttribute="top" id="k48-bk-gwe"/>
+                                    <constraint firstItem="Lg3-0D-7i2" firstAttribute="centerY" secondItem="90h-aS-1d6" secondAttribute="centerY" id="zef-yg-jSU"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="60" width="343" height="622"/>
+                                <rect key="frame" x="16" y="116" width="343" height="566"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -604,9 +643,12 @@
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="u3e-73-cb1" secondAttribute="bottom" id="GDI-mI-D5V"/>
                             <constraint firstItem="ren-zH-cVP" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="JRG-Wa-Rd3"/>
                             <constraint firstAttribute="trailing" secondItem="u3e-73-cb1" secondAttribute="trailing" id="Kmf-Se-RVu"/>
-                            <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" constant="16" id="QUV-5Z-oDD"/>
+                            <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" constant="72" id="QUV-5Z-oDD"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="top" secondItem="1mK-UO-1ud" secondAttribute="topMargin" id="SZr-e2-fiw"/>
+                            <constraint firstItem="90h-aS-1d6" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="Wkm-K9-h0H"/>
                             <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" constant="16" id="a3w-yQ-ZGx"/>
+                            <constraint firstItem="90h-aS-1d6" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="f6I-JC-kp6"/>
+                            <constraint firstAttribute="trailing" secondItem="90h-aS-1d6" secondAttribute="trailing" id="hBQ-u3-EiI"/>
                             <constraint firstItem="P3W-rX-b5Z" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" constant="16" id="isp-Da-9Zg"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="n1E-5Y-L8X"/>
                             <constraint firstAttribute="trailing" secondItem="ren-zH-cVP" secondAttribute="trailing" id="wy4-H4-5p3"/>
@@ -614,11 +656,12 @@
                     </view>
                     <connections>
                         <outlet property="graphsChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
+                        <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="702.99850074962524"/>
+            <point key="canvasLocation" x="749.60000000000002" y="702.70935960591135"/>
         </scene>
     </scenes>
     <resources>

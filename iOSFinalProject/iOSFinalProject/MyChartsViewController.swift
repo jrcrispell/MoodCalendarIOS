@@ -13,11 +13,15 @@ class MyChartsViewController: UIViewController {
     
     @IBOutlet weak var graphsChartView: LineChartView!
     
+    @IBOutlet weak var hamburger: UIButton!
     
     let data: [Double] = [5, 3, 7, 9, 8, 5, 10]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
+
 
         let formatter = LineChartFormatter()
         let xAxis = XAxis()

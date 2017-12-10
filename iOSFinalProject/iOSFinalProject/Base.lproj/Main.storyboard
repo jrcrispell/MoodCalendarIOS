@@ -544,33 +544,35 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Ye-19F" userLabel="Tab Bar">
-                                        <rect key="frame" x="0.0" y="654" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="678" width="375" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="hgY-g0-rXo"/>
-                                        </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUY-G7-xWK">
-                                        <rect key="frame" x="16" y="677.66666666666663" width="71" height="33"/>
+                                        <rect key="frame" x="16" y="689.66666666666663" width="71" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryg-nH-P7M">
-                                        <rect key="frame" x="280.66666666666669" y="677.66666666666663" width="78.333333333333314" height="33"/>
+                                        <rect key="frame" x="280.66666666666669" y="689.66666666666663" width="78.333333333333314" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter">
-                                        <rect key="frame" x="125" y="654" width="125.33333333333331" height="80"/>
+                                        <rect key="frame" x="125" y="678" width="125.33333333333331" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="bny-ah-fAw"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="bny-ah-fAw"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ena-bI-Nuq">
-                                        <rect key="frame" x="158" y="678" width="59" height="33"/>
+                                        <rect key="frame" x="158" y="690" width="59" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -615,24 +617,18 @@
                                             <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOW-NU-syg"/>
                                         </connections>
                                     </button>
-                                    <view opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3X6-o4-RBt" userLabel="Hamburger Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="56"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.32549019610000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Lg3-0D-7i2" firstAttribute="leading" secondItem="90h-aS-1d6" secondAttribute="leading" constant="18" id="9CW-wP-pts"/>
                                     <constraint firstItem="Wjr-o2-Es0" firstAttribute="centerX" secondItem="90h-aS-1d6" secondAttribute="centerX" id="D9b-WM-ajn"/>
-                                    <constraint firstAttribute="bottom" secondItem="3X6-o4-RBt" secondAttribute="bottom" id="Fli-6U-GmH"/>
                                     <constraint firstItem="Wjr-o2-Es0" firstAttribute="centerY" secondItem="90h-aS-1d6" secondAttribute="centerY" id="GRN-49-u8C"/>
                                     <constraint firstAttribute="height" constant="56" id="ZhS-0J-WRt"/>
-                                    <constraint firstItem="3X6-o4-RBt" firstAttribute="leading" secondItem="90h-aS-1d6" secondAttribute="leading" id="dpR-DH-Wwr"/>
-                                    <constraint firstItem="3X6-o4-RBt" firstAttribute="top" secondItem="90h-aS-1d6" secondAttribute="top" id="k48-bk-gwe"/>
                                     <constraint firstItem="Lg3-0D-7i2" firstAttribute="centerY" secondItem="90h-aS-1d6" secondAttribute="centerY" id="zef-yg-jSU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="116" width="343" height="566"/>
+                                <rect key="frame" x="16" y="116" width="343" height="590"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -652,6 +648,7 @@
                             <constraint firstItem="P3W-rX-b5Z" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" constant="16" id="isp-Da-9Zg"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="n1E-5Y-L8X"/>
                             <constraint firstAttribute="trailing" secondItem="ren-zH-cVP" secondAttribute="trailing" id="wy4-H4-5p3"/>
+                            <constraint firstItem="7re-Ye-19F" firstAttribute="height" secondItem="90h-aS-1d6" secondAttribute="height" id="z5P-8k-Ta8"/>
                         </constraints>
                     </view>
                     <connections>

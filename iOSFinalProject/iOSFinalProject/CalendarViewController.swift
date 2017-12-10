@@ -281,8 +281,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         closeMenu()
         
         //Schedule notification for 5 seconds from now
-        let fiveSecondsFromNow = Date().addingTimeInterval(5)
-        scheduleNotification(date: fiveSecondsFromNow)
+        let oneSecondFromNow = Date().addingTimeInterval(1)
+        scheduleNotification(date: oneSecondFromNow)
         
     }
     

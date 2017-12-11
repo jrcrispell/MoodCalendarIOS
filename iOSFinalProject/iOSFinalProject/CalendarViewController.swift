@@ -218,6 +218,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func loadEvents() {
         
+        
+        
         displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
             self.daysActivities = []
@@ -253,43 +255,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func getDaysActivities() -> [CalendarActivity] {
         return daysActivities
-    }
-    
-    //MARK: Menu Selectors
-    @objc func handleLogOut(_ sender: UIButton){
-        closeMenu()
-        logOutTapped(sender)
-    }
-    
-    @objc func handleSettings(_ sender: UIButton){
-        closeMenu()
-        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
-    }
-    
-    @objc func handleCharts(_ sender: UIButton){
-        closeMenu()
-        performSegue(withIdentifier: "toCharts", sender: sender)
-        
-        //present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
-    }
-    
-    @objc func handleHome(_ sender: UIButton){
-        closeMenu()
-    }
-    
-    @objc func handleNotify(_ sender: UIButton){
-        closeMenu()
-        
-        //Schedule notification for 5 seconds from now
-        let oneSecondFromNow = Date().addingTimeInterval(1)
-        scheduleNotification(date: oneSecondFromNow)
-        
-    }
-    
-    
-    
-    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
-        closeMenu()
     }
     
     func editActivity(activity: CalendarActivity) {
@@ -330,6 +295,41 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 view.removeFromSuperview()
             }
         }
+    }
+    
+    //MARK: Menu Selectors
+    @objc func handleLogOut(_ sender: UIButton){
+        closeMenu()
+        logOutTapped(sender)
+    }
+    
+    @objc func handleSettings(_ sender: UIButton){
+        closeMenu()
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
+    @objc func handleCharts(_ sender: UIButton){
+        //closeMenu()
+        //performSegue(withIdentifier: "toCharts", sender: sender)
+        
+        present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
+    }
+    
+    @objc func handleHome(_ sender: UIButton){
+        closeMenu()
+    }
+    
+    @objc func handleNotify(_ sender: UIButton){
+        closeMenu()
+        
+        //Schedule notification for 5 seconds from now
+        let oneSecondFromNow = Date().addingTimeInterval(1)
+        scheduleNotification(date: oneSecondFromNow)
+        
+    }
+    
+    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
+        closeMenu()
     }
     
     //MARK: - IBActions

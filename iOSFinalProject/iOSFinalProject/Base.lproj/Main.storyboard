@@ -46,7 +46,16 @@
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1462.3333333333333"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-7F-VZz">
+                                                <rect key="frame" x="169" y="8" width="37" height="37"/>
+                                            </activityIndicatorView>
+                                        </subviews>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="w8e-7F-VZz" firstAttribute="centerX" secondItem="Xcz-R0-hWw" secondAttribute="centerX" id="5Zr-ny-qi1"/>
+                                            <constraint firstItem="w8e-7F-VZz" firstAttribute="top" secondItem="Xcz-R0-hWw" secondAttribute="top" constant="8" id="ZND-tb-PIw"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="DRO-8d-KFE" appends="YES" id="HYY-TN-CQg"/>
                                             <outletCollection property="gestureRecognizers" destination="Izm-2B-Cbx" appends="YES" id="WQY-fm-SP2"/>
@@ -114,7 +123,7 @@
                                             <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQm-Ug-fxo"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-dU-jeo">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-dU-jeo">
                                         <rect key="frame" x="307" y="13" width="68" height="30"/>
                                         <state key="normal" title="Test">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -412,13 +421,13 @@
                                         <rect key="frame" x="33" y="15.999999999999986" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-ul-lt7">
                                         <rect key="frame" x="33" y="89.999999999999986" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsS-Dd-Odg">
                                         <rect key="frame" x="151" y="120" width="130" height="32"/>
@@ -469,6 +478,12 @@
                                             <constraint firstAttribute="width" secondItem="ZJm-TZ-Ub7" secondAttribute="height" multiplier="1:1" id="vs4-6p-bZP"/>
                                         </constraints>
                                     </imageView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invalid Email" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKw-un-raf">
+                                        <rect key="frame" x="194.66666666666666" y="-7" width="86.333333333333343" height="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="qh7-oP-V93" firstAttribute="centerY" secondItem="bYZ-ul-lt7" secondAttribute="centerY" id="1TV-M0-Pdb"/>
@@ -490,8 +505,10 @@
                                     <constraint firstItem="Aum-mJ-U4Y" firstAttribute="top" secondItem="sdk-0r-WfB" secondAttribute="bottom" constant="32" id="ga1-gb-Fgs"/>
                                     <constraint firstItem="sdk-0r-WfB" firstAttribute="centerX" secondItem="ZeA-ch-fFZ" secondAttribute="centerX" id="h1r-c3-waz"/>
                                     <constraint firstItem="Cie-s7-Qie" firstAttribute="top" secondItem="ZeA-ch-fFZ" secondAttribute="top" constant="16" id="j2e-95-bFX"/>
+                                    <constraint firstItem="UKw-un-raf" firstAttribute="trailing" secondItem="Cie-s7-Qie" secondAttribute="trailing" id="oqW-aJ-pfC"/>
                                     <constraint firstItem="ZJm-TZ-Ub7" firstAttribute="leading" secondItem="ZeA-ch-fFZ" secondAttribute="leading" id="sx4-BD-6BL"/>
                                     <constraint firstItem="Cie-s7-Qie" firstAttribute="leading" secondItem="ZJm-TZ-Ub7" secondAttribute="trailing" constant="8" id="xeq-oW-dCS"/>
+                                    <constraint firstItem="UKw-un-raf" firstAttribute="bottom" secondItem="tXa-Fz-CD8" secondAttribute="bottom" id="yHY-S7-oaV"/>
                                     <constraint firstItem="bYZ-ul-lt7" firstAttribute="top" secondItem="ja3-Jb-Dq8" secondAttribute="bottom" constant="6" id="yz5-bK-HkS"/>
                                     <constraint firstItem="GsS-Dd-Odg" firstAttribute="top" secondItem="bYZ-ul-lt7" secondAttribute="bottom" id="zIz-Ez-aWB"/>
                                 </constraints>
@@ -517,13 +534,14 @@
                     <navigationItem key="navigationItem" id="Txr-hI-IPZ"/>
                     <connections>
                         <outlet property="emailField" destination="Cie-s7-Qie" id="zXv-CC-JAy"/>
+                        <outlet property="invalidEmail" destination="UKw-un-raf" id="fNY-tN-zZo"/>
                         <outlet property="passwordField" destination="bYZ-ul-lt7" id="S4A-G0-fwq"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="toCalendarView" id="SyZ-mF-gYR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v24-mP-TfC" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="751.20000000000005" y="-26.53673163418291"/>
+            <point key="canvasLocation" x="751.20000000000005" y="-26.600985221674879"/>
         </scene>
         <!--ChartsViewController-->
         <scene sceneID="Kya-v5-xte">

@@ -13,14 +13,7 @@ import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
-    //TODO: - Email validation in line
-    // credit https://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
-//    func isValidEmail(testStr:String) -> Bool {
-//        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-//
-//        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-//        return emailTest.evaluate(with: testStr)
-//    }
+    @IBOutlet weak var invalidEmail: UILabel!
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -30,6 +23,8 @@ class LoginViewController: UIViewController {
     var password = ""
     
     override func viewDidLoad() {
+        
+        emailField.addTarget(self, action: #selector(validateEmail(_:)), for: .editingChanged)
         
         user = Auth.auth().currentUser
         
@@ -79,14 +74,12 @@ class LoginViewController: UIViewController {
         alert.addAction(cancelButton)
         alert.addAction(confirmButton)
         present(alert, animated: true, completion: nil)
-        
     }
     
     @IBAction func loginTapped(_ sender: Any) {
         
         email = emailField.text!
         password = passwordField.text!
-        
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             if error != nil {
@@ -116,17 +109,17 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //MARK: Helper Methods
-    
+    @objc func validateEmail(_ sender: UITextField) {
+        
+        // credit https://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
 
-
-    
-     //MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//         let calendarViewController = segue.destination as! CalendarViewController
-//        calendarViewController.user = self.user
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+            
+            let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        if emailTest.evaluate(with: sender.text) {
+            invalidEmail.isHidden = true
+        } else {
+            invalidEmail.isHidden = false
+        }
     }
- 
-
 }

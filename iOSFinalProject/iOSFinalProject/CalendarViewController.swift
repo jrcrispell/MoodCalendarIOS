@@ -15,6 +15,7 @@ let g_dateFormatter = DateFormatter()
 
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
 {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
     
@@ -111,6 +112,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        activityIndicator.startAnimating()
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
@@ -218,7 +220,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func loadEvents() {
         
-        
+        self.activityIndicator.startAnimating()
         
         displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
@@ -228,6 +230,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 print("No existing activities")
                 self.calendarView.makeActivityDrawables()
                 self.calendarView.setNeedsDisplay()
+                self.activityIndicator.stopAnimating()
                 return
             }
             let activityIds = Array(activityDictionary.keys)
@@ -242,6 +245,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             }
             self.calendarView.makeActivityDrawables()
             self.calendarView.setNeedsDisplay()
+            self.activityIndicator.stopAnimating()
             
         })
         return

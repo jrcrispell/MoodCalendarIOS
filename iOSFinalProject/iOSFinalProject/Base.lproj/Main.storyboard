@@ -47,7 +47,7 @@
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1462.3333333333333"/>
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-7F-VZz">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-7F-VZz">
                                                 <rect key="frame" x="169" y="8" width="37" height="37"/>
                                             </activityIndicatorView>
                                         </subviews>
@@ -172,6 +172,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="w8e-7F-VZz" id="IuF-AX-enj"/>
                         <outlet property="backArrowButton" destination="cmW-Fc-6hx" id="u94-RV-V1u"/>
                         <outlet property="background" destination="enr-Fw-NDa" id="lOU-VW-y9q"/>
                         <outlet property="calendarView" destination="Xcz-R0-hWw" id="Ol5-7q-6di"/>

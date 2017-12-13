@@ -17,6 +17,9 @@ class MyChartsViewController: UIViewController {
     
     @IBOutlet weak var hamburger: UIButton!
     
+    var oldSnapshotView: UIImageView!
+    var snapshotView: UIImageView!
+    
     let data: [Double] = [5, 3, 7, 9, 8, 5, 10]
     
     override func viewDidLoad() {
@@ -66,15 +69,50 @@ class MyChartsViewController: UIViewController {
         view.addSubview(views.3)
         view.addSubview(menuView)
         
-        let oldSnapshotView = UIImageView(image: oldSnapshot)
+        snapshotView = views.2
+        
+        oldSnapshotView = UIImageView(image: oldSnapshot)
+        
+        menuView.shrinkSnapshot(snapshotView: snapshotView, superViewBounds: view.bounds)
+        
+        //view.addSubview(snapshotView)
+
         
         menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
-        view.addSubview(oldSnapshotView)
+        //view.addSubview(oldSnapshotView)
+        //menuView.animateFromViewController()
         
-        menuView.animateIn()
-       // menuView.animateFromViewController()
+        let containerView = UIView(frame: view.frame)
+        containerView.addSubview(snapshotView)
+        containerView.addSubview(oldSnapshotView)
+        //view.addSubview(containerView)
+
+        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        
+        print("new" + snapshotView.frame.debugDescription)
+        print("newImage" + snapshotView.image.debugDescription)
+        let image = snapshotView.image
+        print("old" + oldSnapshotView.frame.debugDescription)
+        
+        //menuView.animateIn()
 
     }
+    
+    @objc func handleHome(_ sender: UIButton){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+//                UIView.transition(from: oldSnapshotView, to: snapshotView, duration: 2, options: .transitionFlipFromLeft) { (finished) in
+//                    //nada
+//                }
+        
+//        UIView.animate(withDuration: 1) {
+//            self.oldSnapshotView.removeFromSuperview()
+//        }
+    }
+    
 
 
 }

@@ -94,6 +94,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func saveTapped(_ sender: UIButton) {
+        
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not save activity"), animated: true, completion: nil)
+            return
+        }
+        
         let startDate = startTimePicker.date
         let endDate = endTimePicker.date
         let moodScore = 10 - moodPicker.selectedRow(inComponent: 0)
@@ -112,6 +118,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     @IBAction func deleteTapped(_ sender: UIButton) {
+        
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not delete activity"), animated: true, completion: nil)
+            return
+        }
+        
         activityRef.removeValue()
         dismiss(animated: true, completion: nil)
     }

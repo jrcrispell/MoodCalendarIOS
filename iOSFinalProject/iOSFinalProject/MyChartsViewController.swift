@@ -20,6 +20,11 @@ class MyChartsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could load charts data."), animated: true, completion: nil)
+            return
+        }
+        
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
 
 

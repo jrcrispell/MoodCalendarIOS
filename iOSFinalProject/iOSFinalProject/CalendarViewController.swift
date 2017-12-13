@@ -340,6 +340,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: - IBActions
     
     @IBAction func datePickerValueChanged(_ sender: UIDatePicker) {
+        
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not change days."), animated: true, completion: nil)
+            return
+        }
+        
         displayedDate = sender.date
         updateDate()
         loadEvents()
@@ -375,6 +381,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         if (!Reachability.isConnectedToNetwork()) {
             present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not change days."), animated: true, completion: nil)
+            return
         }
         
         let calendar = Calendar.current
@@ -408,6 +415,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             return
         }
         
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not complete request."), animated: true, completion: nil)
+            return
+        }
+        
         let point = sender.location(in: calendarView)
         if let activity = calendarView.getSelectedActivity(location: point) {
             editingActivity = activity
@@ -423,6 +435,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         // Only act on the "release" touch
         if sender.state.rawValue != 3 {return}
+        
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, can not edit activities"), animated: true, completion: nil)
+            return
+        }
+        
         
         let timeTapped = Utils.convertYToHour(sender.location(in: calendarView).y)
         

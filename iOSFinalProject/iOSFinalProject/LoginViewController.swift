@@ -70,6 +70,7 @@ class LoginViewController: UIViewController {
         }
         alert.addTextField { (textField) in
             textField.placeholder = "Password"
+            textField.isSecureTextEntry = true  
         }
         alert.addAction(cancelButton)
         alert.addAction(confirmButton)

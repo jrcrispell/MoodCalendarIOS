@@ -12,6 +12,7 @@ import SystemConfiguration
 
 // Code credit: http://www.brianjcoleman.com/tutorial-check-for-internet-connection-in-swift/
 // Extra help: https://stackoverflow.com/questions/39046377/swift-3-unsafepointer0-no-longer-compile-in-xcode-8-beta-6
+
 public class Reachability {
     
     class func isConnectedToNetwork() -> Bool {

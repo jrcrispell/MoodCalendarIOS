@@ -373,6 +373,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @IBAction func arrowButtonTapped(_ sender: UIButton) {
         
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not change days."), animated: true, completion: nil)
+        }
         
         let calendar = Calendar.current
         // Back arrow

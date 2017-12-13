@@ -10,6 +10,7 @@ import Firebase
 import FirebaseDatabase
 import UserNotifications
 import FirebaseAuth
+import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
 
@@ -72,7 +73,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: - ViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         // For debug, calculating level exp requirements
         var j = 0
         for i in 0...20 {
@@ -112,7 +113,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        activityIndicator.startAnimating()
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
@@ -148,11 +148,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         self.view.addSubview(backgroundViews.1)
         self.view.addSubview(backgroundViews.2)
         
-        //TODO: - Delete this shit
-        bounds = view.bounds
-        smallSnapshotWidth = bounds.width * 0.4
-        smallSnapshotHeight = bounds.height * 0.4
-        
         // Set up buttons
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
         menuView.homeButton.alpha = 1.0
@@ -162,12 +157,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
         
-        menuView.setInitialPosition(superViewBounds: bounds)
+        menuView.setInitialPosition(superViewBounds: view.bounds)
         self.view.addSubview(menuView)
-        menuView.animateIn(snapshotView: snapshotView, bounds: bounds)
+        menuView.animateIn(snapshotView: snapshotView, bounds: view.bounds)
         
         // Clickable outside area
-        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: bounds.width, height: bounds.height))
+        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: view.bounds.width, height: view.bounds.height))
         menuOutsideButton.backgroundColor = nil
         self.view.addSubview(menuOutsideButton)
         
@@ -175,6 +170,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     func closeMenu() {
+        
+        bounds = view.bounds
+
+        smallSnapshotWidth = bounds.width * 0.4
+        smallSnapshotHeight = bounds.height * 0.4
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.menuOutsideButton.alpha = 0.1
             self.menuView.frame = CGRect(x: -self.bounds.width, y: self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
@@ -439,7 +440,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
         
-        showExpCard()
+        //showExpCard()
+        var alert: UIAlertController
+        if (Reachability.isConnectedToNetwork()) {
+            
+        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
+        }
+        else {
+            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
+        }
+        
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {

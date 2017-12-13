@@ -52,7 +52,18 @@ class MyChartsViewController: UIViewController {
         
         graphsChartView.chartDescription?.text = "Chart description"
         
-        
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        let menuView = xibViews?.first as! MenuView
+        menuView.setInitialPosition(superViewBounds: view.bounds)
+        let views = menuView.makeViews(superView: view)
+        view.addSubview(views.0)
+        view.addSubview(views.1)
+        view.addSubview(views.2)
+        view.addSubview(views.3)
+        view.addSubview(menuView)
+        menuView.animateIn()
+       // menuView.animateFromViewController()
+
     }
 
 

@@ -183,7 +183,7 @@
                         <outlet property="scrollView" destination="ezs-Uc-Js5" id="uHK-v4-yFI"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <segue destination="vKY-3Z-Ll0" kind="show" identifier="toLogger" id="RoR-qb-FHD"/>
-                        <segue destination="Qrx-RK-jKf" kind="show" identifier="toCharts" id="sI4-og-kAr"/>
+                        <segue destination="Qrx-RK-jKf" kind="show" identifier="toCharts" animates="NO" id="sI4-og-kAr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

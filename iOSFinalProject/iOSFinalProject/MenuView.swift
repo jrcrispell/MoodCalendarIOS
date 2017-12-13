@@ -104,7 +104,10 @@ class MenuView: UIView {
         }
     }
     
-    func presentNewViewController() {
-        
+    func animateFromViewController() {
+        self.menuOutsideButton.alpha = 0.1
+        self.frame = CGRect(x: -self.superViewBounds.width, y: self.superViewBounds.height / 2 - self.smallSnapshotHeight/2, width: self.superViewBounds.width * 100, height: self.superViewBounds.height)
+        self.backgroundView.frame = CGRect(x: -self.superViewBounds.width, y: 0, width: self.superViewBounds.width * 4, height: self.superViewBounds.height)
+        self.snapshotView.frame = self.superViewBounds
     }
 }

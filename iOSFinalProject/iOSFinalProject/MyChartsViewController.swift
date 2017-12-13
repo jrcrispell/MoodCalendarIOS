@@ -11,6 +11,8 @@ import Charts
 
 class MyChartsViewController: UIViewController {
     
+    var oldSnapshot: UIImage!
+    
     @IBOutlet weak var graphsChartView: LineChartView!
     
     @IBOutlet weak var hamburger: UIButton!
@@ -56,11 +58,19 @@ class MyChartsViewController: UIViewController {
         let menuView = xibViews?.first as! MenuView
         menuView.setInitialPosition(superViewBounds: view.bounds)
         let views = menuView.makeViews(superView: view)
+        menuView.homeIcon.alpha = 1.0
+        menuView.homeButton.alpha = 1.0
         view.addSubview(views.0)
         view.addSubview(views.1)
-        view.addSubview(views.2)
+        //view.addSubview(views.2)
         view.addSubview(views.3)
         view.addSubview(menuView)
+        
+        let oldSnapshotView = UIImageView(image: oldSnapshot)
+        
+        menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
+        view.addSubview(oldSnapshotView)
+        
         menuView.animateIn()
        // menuView.animateFromViewController()
 

@@ -131,7 +131,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             
         }
         else if segue.identifier == "toCharts" {
-            // Nothing
+            guard let chartsView = segue.destination as? MyChartsViewController else {return}
+            chartsView.oldSnapshot = menuView.snapshotView.image
+        
         }
     }
     

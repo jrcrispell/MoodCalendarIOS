@@ -82,9 +82,14 @@ class MenuView: UIView {
     func animateIn() {
         
         UIView.animate(withDuration: 0.3, animations: {
-            self.snapshotView.frame = (CGRect(x: self.superViewBounds.width - self.smallSnapshotWidth / 2, y: self.superViewBounds.height / 2 - self.smallSnapshotHeight / 2, width: self.smallSnapshotWidth, height: self.smallSnapshotHeight))
+            self.shrinkSnapshot(snapshotView: self.snapshotView, superViewBounds: self.superViewBounds)
+
             self.frame = CGRect(x: 0, y:  self.superViewBounds.height / 2 - self.smallSnapshotHeight/2, width: self.superViewBounds.width * 0.6, height: self.superViewBounds.height)
         })
+    }
+    
+    func shrinkSnapshot(snapshotView: UIImageView, superViewBounds: CGRect) {
+        snapshotView.frame = CGRect(x: superViewBounds.width - smallSnapshotWidth / 2, y: superViewBounds.height / 2 - smallSnapshotHeight / 2, width: smallSnapshotWidth, height: smallSnapshotHeight)
     }
     
     func closeMenu() {

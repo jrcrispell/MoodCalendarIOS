@@ -104,9 +104,7 @@ class MenuView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-//        homeButton.layer.borderColor = UIColor.black.cgColor
-//        homeButton.layer.borderWidth = 1.0
+    func presentNewViewController() {
+        
     }
-    
 }

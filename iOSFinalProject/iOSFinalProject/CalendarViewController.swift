@@ -140,13 +140,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         menuView = xibViews?.first as! MenuView
         
+        menuView.setInitialPosition(superViewBounds: view.bounds)
+        
         let backgroundViews = menuView.makeViews(superView: view)
-        backgroundView = backgroundViews.0
         snapshotView = backgroundViews.2
-
+        
         self.view.addSubview(backgroundViews.0)
         self.view.addSubview(backgroundViews.1)
         self.view.addSubview(backgroundViews.2)
+        self.view.addSubview(backgroundViews.3)
+        self.view.addSubview(menuView)
         
         // Set up buttons
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
@@ -156,39 +159,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
         menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
+        menuView.menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
         
-        menuView.setInitialPosition(superViewBounds: view.bounds)
-        self.view.addSubview(menuView)
-        menuView.animateIn(snapshotView: snapshotView, bounds: view.bounds)
-        
-        // Clickable outside area
-        menuOutsideButton = UIButton(frame: CGRect(x:  self.menuView.frame.width, y: 0, width: view.bounds.width, height: view.bounds.height))
-        menuOutsideButton.backgroundColor = nil
-        self.view.addSubview(menuOutsideButton)
-        
-        menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
+        menuView.animateIn()
     }
     
     func closeMenu() {
-        
-        bounds = view.bounds
-
-        smallSnapshotWidth = bounds.width * 0.4
-        smallSnapshotHeight = bounds.height * 0.4
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.menuOutsideButton.alpha = 0.1
-            self.menuView.frame = CGRect(x: -self.bounds.width, y: self.bounds.height / 2 - self.smallSnapshotHeight/2, width: self.bounds.width * 100, height: self.bounds.height)
-            self.backgroundView.frame = CGRect(x: -self.bounds.width, y: 0, width: self.bounds.width * 4, height: self.bounds.height)
-            self.snapshotView.frame = self.view.frame
-        }) { (finished) in
-            
-            //TODO: - remove statusBarView
-            self.snapshotView.removeFromSuperview()
-            self.backgroundView.removeFromSuperview()
-            self.menuOutsideButton.removeFromSuperview()
-            self.menuView.removeFromSuperview()
-        }
+        menuView.closeMenu()
     }
     
     func showExpCard() {

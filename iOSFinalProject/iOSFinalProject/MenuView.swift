@@ -51,6 +51,11 @@ class MenuView: UIView {
     
     func makeViews(superView: UIView) -> (UIImageView, UIView, UIImageView, UIButton) {
         
+        superViewBounds = superView.bounds
+        
+        smallSnapshotWidth = bounds.width * 0.4
+        smallSnapshotHeight = bounds.height * 0.4
+        
         // Make Deep Background
         backgroundView = UIImageView(frame: superView.frame)
         backgroundView.image = #imageLiteral(resourceName: "DeepBackground")

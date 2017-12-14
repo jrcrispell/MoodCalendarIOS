@@ -59,10 +59,13 @@ class MyChartsViewController: UIViewController {
         
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         let menuView = xibViews?.first as! MenuView
-        menuView.setInitialPosition(superViewBounds: view.bounds)
+
         let views = menuView.makeViews(superView: view)
         menuView.homeIcon.alpha = 1.0
         menuView.homeButton.alpha = 1.0
+        
+        menuView.frame = CGRect(x: 0, y: view.bounds.height / 2 - menuView.smallSnapshotHeight / 2, width: view.bounds.width * 0.6, height: view.bounds.height)
+        
         view.addSubview(views.0)
         view.addSubview(views.1)
         //view.addSubview(views.2)
@@ -79,20 +82,24 @@ class MyChartsViewController: UIViewController {
 
         
         menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
+        
         //view.addSubview(oldSnapshotView)
         //menuView.animateFromViewController()
         
-        let containerView = UIView(frame: view.frame)
+        let containerView = UIView(frame: snapshotView.frame)
+        snapshotView.frame = CGRect(x: 0, y: 0, width: snapshotView.frame.width, height: snapshotView.frame.height)
+        oldSnapshotView.frame = snapshotView.frame
         containerView.addSubview(snapshotView)
         containerView.addSubview(oldSnapshotView)
-        //view.addSubview(containerView)
+//        containerView.backgroundColor = nil
+        view.addSubview(containerView)
 
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
         
-        print("new" + snapshotView.frame.debugDescription)
-        print("newImage" + snapshotView.image.debugDescription)
-        let image = snapshotView.image
-        print("old" + oldSnapshotView.frame.debugDescription)
+//        print("new" + snapshotView.frame.debugDescription)
+//        print("newImage" + snapshotView.image.debugDescription)
+//        let image = snapshotView.image
+//        print("old" + oldSnapshotView.frame.debugDescription)
         
         //menuView.animateIn()
 
@@ -104,9 +111,9 @@ class MyChartsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-//                UIView.transition(from: oldSnapshotView, to: snapshotView, duration: 2, options: .transitionFlipFromLeft) { (finished) in
-//                    //nada
-//                }
+                UIView.transition(from: oldSnapshotView, to: snapshotView, duration: 2, options: .transitionFlipFromLeft) { (finished) in
+                    //nada
+                }
         
 //        UIView.animate(withDuration: 1) {
 //            self.oldSnapshotView.removeFromSuperview()

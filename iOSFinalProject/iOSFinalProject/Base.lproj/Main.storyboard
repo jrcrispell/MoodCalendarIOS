@@ -626,7 +626,7 @@
                                             <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQB-g8-dTw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjr-o2-Es0" userLabel="DateButton">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjr-o2-Es0" userLabel="Title">
                                         <rect key="frame" x="150.66666666666666" y="6" width="75" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <state key="normal" title="Charts">
@@ -671,6 +671,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chartsButton" destination="Wjr-o2-Es0" id="VfY-n3-3wB"/>
                         <outlet property="graphsChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
                         <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
                     </connections>

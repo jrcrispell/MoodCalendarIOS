@@ -18,10 +18,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXA-bF-PrH" userLabel="ContainerCard">
-                    <rect key="frame" x="0.0" y="20" width="375" height="128"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="500"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkE-IN-BZZ" userLabel="ShadowView">
-                            <rect key="frame" x="19" y="-20" width="337.5" height="89.5"/>
+                            <rect key="frame" x="19" y="-20" width="337.5" height="350"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -31,34 +31,55 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrr-RG-s2a" userLabel="ExpCardView">
-                            <rect key="frame" x="24" y="-20" width="327.5" height="87"/>
+                            <rect key="frame" x="24" y="-20" width="327.5" height="339.5"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EXPStar" translatesAutoresizingMaskIntoConstraints="NO" id="Up4-h8-Lvx" userLabel="ExpStar">
-                                    <rect key="frame" x="8" y="46" width="30" height="30"/>
+                                    <rect key="frame" x="8" y="52" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="IeP-PC-N0q"/>
                                         <constraint firstAttribute="width" constant="30" id="qql-QG-KPu"/>
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geP-7D-y6I" userLabel="EmptyExpBar">
-                                    <rect key="frame" x="46" y="50" width="265.5" height="22.5"/>
+                                    <rect key="frame" x="46" y="56" width="265.5" height="22.5"/>
                                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="16"/>
+                                            <integer key="value" value="4"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myt-D5-Qjf" userLabel="EarnedExpBar">
+                                    <rect key="frame" x="46" y="56" width="159.5" height="22.5"/>
+                                    <color key="backgroundColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 exp points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwJ-Ff-Skv">
+                                    <rect key="frame" x="46" y="28" width="126" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="textColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="Up4-h8-Lvx" firstAttribute="centerY" secondItem="lrr-RG-s2a" secondAttribute="centerY" multiplier="1.4" id="FuS-WQ-VEN"/>
                                 <constraint firstItem="Up4-h8-Lvx" firstAttribute="leading" secondItem="lrr-RG-s2a" secondAttribute="leading" constant="8" id="JEl-0r-jpJ"/>
+                                <constraint firstItem="myt-D5-Qjf" firstAttribute="leading" secondItem="geP-7D-y6I" secondAttribute="leading" id="Mqy-0w-K6K"/>
+                                <constraint firstItem="myt-D5-Qjf" firstAttribute="height" secondItem="geP-7D-y6I" secondAttribute="height" id="NUt-gE-vSc"/>
                                 <constraint firstItem="geP-7D-y6I" firstAttribute="height" secondItem="Up4-h8-Lvx" secondAttribute="height" multiplier="0.75" id="NiD-hq-9KS"/>
                                 <constraint firstAttribute="trailing" secondItem="geP-7D-y6I" secondAttribute="trailing" constant="16" id="OmO-Be-a34"/>
+                                <constraint firstItem="myt-D5-Qjf" firstAttribute="centerY" secondItem="geP-7D-y6I" secondAttribute="centerY" id="Wuw-zj-vLJ"/>
+                                <constraint firstItem="Up4-h8-Lvx" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="bottom" id="XWW-qI-Tmb"/>
                                 <constraint firstItem="geP-7D-y6I" firstAttribute="centerY" secondItem="Up4-h8-Lvx" secondAttribute="centerY" id="bHd-Bi-x3f"/>
                                 <constraint firstItem="geP-7D-y6I" firstAttribute="leading" secondItem="Up4-h8-Lvx" secondAttribute="trailing" constant="8" id="cHH-94-TqW"/>
+                                <constraint firstItem="myt-D5-Qjf" firstAttribute="width" secondItem="geP-7D-y6I" secondAttribute="width" multiplier="0.6" id="doE-Eu-7bq"/>
+                                <constraint firstItem="PwJ-Ff-Skv" firstAttribute="leading" secondItem="myt-D5-Qjf" secondAttribute="leading" id="pJq-Jg-kNt"/>
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -70,7 +91,7 @@
                     </subviews>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="128" id="1Ks-9e-lMB"/>
+                        <constraint firstAttribute="height" constant="500" id="1Ks-9e-lMB"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="width" secondItem="nkE-IN-BZZ" secondAttribute="width" multiplier="0.97" id="4od-0D-61S"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="height" secondItem="kXA-bF-PrH" secondAttribute="height" multiplier="0.7" id="70x-So-5zl"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="top" secondItem="nkE-IN-BZZ" secondAttribute="top" id="9Od-OO-rGV"/>
@@ -87,20 +108,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="60 exp points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwJ-Ff-Skv">
-                    <rect key="frame" x="70" y="21.5" width="126" height="24"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                    <color key="textColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="PwJ-Ff-Skv" firstAttribute="leading" secondItem="geP-7D-y6I" secondAttribute="leading" id="Cem-Gg-p9T"/>
                 <constraint firstItem="kXA-bF-PrH" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="GeQ-LV-42N"/>
                 <constraint firstItem="kXA-bF-PrH" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Gpj-oG-GqY"/>
-                <constraint firstItem="PwJ-Ff-Skv" firstAttribute="bottom" secondItem="Up4-h8-Lvx" secondAttribute="top" id="lCX-wZ-oz8"/>
                 <constraint firstItem="kXA-bF-PrH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="lkC-mT-rLf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="top" constant="-8" id="uLp-OA-Cba"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="54.5"/>

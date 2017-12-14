@@ -69,7 +69,7 @@ class MenuView: UIView {
         statusBarView = UIView(frame: statusBarRect)
         statusBarView.backgroundColor = UIColor.white
         statusBarView.isOpaque = true
-        superView.addSubview(statusBarView)
+        //superView.addSubview(statusBarView)
         
         // Make Snapshot
         UIGraphicsBeginImageContext(superView.frame.size)

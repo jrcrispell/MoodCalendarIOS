@@ -26,10 +26,7 @@ class MyChartsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        hamburger.isHidden = true
-        chartsButton.isHidden = true
-        
+    
         if (!Reachability.isConnectedToNetwork()) {
             present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could load charts data."), animated: true, completion: nil)
             return
@@ -105,8 +102,6 @@ class MyChartsViewController: UIViewController {
         
         UIView.transition(from: oldSnapshotView, to: snapshotView, duration: 0.3, options: .transitionFlipFromLeft) { (finished) in
             self.menuView.closeAfterFlip()
-            self.chartsButton.isHidden = false
-            self.hamburger.isHidden = false
         }
         
         

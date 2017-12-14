@@ -30,6 +30,7 @@ class MenuView: UIView {
     var smallSnapshotWidth: CGFloat!
     var smallSnapshotHeight: CGFloat!
     var menuOutsideButton: UIButton!
+    var containerView: UIView!
     
     
     
@@ -45,7 +46,7 @@ class MenuView: UIView {
         
         smallSnapshotWidth = bounds.width * 0.4
         smallSnapshotHeight = bounds.height * 0.4
-
+        
         self.frame = CGRect(x: -bounds.width, y: bounds.height / 2 - bounds.height * 0.4 / 2, width: bounds.width * 0.6, height: bounds.height)
     }
     
@@ -64,10 +65,12 @@ class MenuView: UIView {
         // Make Status bar
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let statusBarRect = CGRect(x: 0, y: 0, width: superView.frame.width, height: statusBarHeight)
-
+        
         statusBarView = UIView(frame: statusBarRect)
         statusBarView.backgroundColor = UIColor.white
         statusBarView.isOpaque = true
+        
+        superView.addSubview(statusBarView)
         
         // Make Snapshot
         UIGraphicsBeginImageContext(superView.frame.size)
@@ -76,19 +79,19 @@ class MenuView: UIView {
         UIGraphicsEndImageContext()
         snapshotView = UIImageView(frame: superView.frame)
         snapshotView.image = image
-
+        
         // Clickable outside area
         menuOutsideButton = UIButton(frame: CGRect(x: self.frame.width, y: 0, width: superViewBounds.width, height: superViewBounds.height))
         menuOutsideButton.backgroundColor = nil
         
         return (backgroundView, statusBarView, snapshotView, menuOutsideButton)
     }
-
+    
     func animateIn() {
         
         UIView.animate(withDuration: 0.3, animations: {
             self.shrinkSnapshot(snapshotView: self.snapshotView, superViewBounds: self.superViewBounds)
-
+            
             self.frame = CGRect(x: 0, y:  self.superViewBounds.height / 2 - self.smallSnapshotHeight/2, width: self.superViewBounds.width * 0.6, height: self.superViewBounds.height)
         })
     }
@@ -110,6 +113,25 @@ class MenuView: UIView {
             self.snapshotView.removeFromSuperview()
             self.backgroundView.removeFromSuperview()
             self.menuOutsideButton.removeFromSuperview()
+            self.removeFromSuperview()
+        }
+    }
+    
+    func closeAfterFlip() {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.menuOutsideButton.alpha = 0.1
+            self.frame = CGRect(x: -self.superViewBounds.width, y: self.superViewBounds.height / 2 - self.smallSnapshotHeight/2, width: self.superViewBounds.width * 100, height: self.superViewBounds.height)
+            self.backgroundView.frame = CGRect(x: -self.superViewBounds.width, y: 0, width: self.superViewBounds.width * 4, height: self.superViewBounds.height)
+            self.containerView.frame = self.superViewBounds
+            self.snapshotView.frame = self.superViewBounds
+        }) { (finished) in
+            
+            //TODO: - remove statusBarView
+            self.snapshotView.removeFromSuperview()
+            self.backgroundView.removeFromSuperview()
+            self.menuOutsideButton.removeFromSuperview()
+            self.containerView.removeFromSuperview()
             self.removeFromSuperview()
         }
     }

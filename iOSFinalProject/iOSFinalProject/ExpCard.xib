@@ -18,11 +18,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXA-bF-PrH" userLabel="ContainerCard">
-                    <rect key="frame" x="0.0" y="20" width="375" height="500"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="140"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkE-IN-BZZ" userLabel="ShadowView">
-                            <rect key="frame" x="19.5" y="-20" width="337.5" height="110"/>
+                            <rect key="frame" x="19.5" y="-20" width="337.5" height="106"/>
                             <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="106" id="Mfg-af-85N"/>
+                            </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -31,7 +34,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrr-RG-s2a" userLabel="ExpCardView">
-                            <rect key="frame" x="24" y="-20" width="327.5" height="107.5"/>
+                            <rect key="frame" x="24" y="-20" width="327.5" height="102"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EXPStar" translatesAutoresizingMaskIntoConstraints="NO" id="Up4-h8-Lvx" userLabel="ExpStar">
                                     <rect key="frame" x="8" y="45" width="25" height="25"/>
@@ -125,10 +128,10 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xB9-dl-b2b" userLabel="ExplanationView">
-                            <rect key="frame" x="56.5" y="103.5" width="262.5" height="37.5"/>
+                            <rect key="frame" x="56.5" y="98" width="262.5" height="36"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EXPStar" translatesAutoresizingMaskIntoConstraints="NO" id="uxP-u5-ZQz" userLabel="ExpStar">
-                                    <rect key="frame" x="8" y="6.5" width="25" height="25"/>
+                                    <rect key="frame" x="8" y="5.5" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="a2D-lX-a3M"/>
                                         <constraint firstAttribute="height" constant="25" id="gOp-Cs-JJ0"/>
@@ -141,7 +144,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged first activity!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgn-4g-qZE" userLabel="ExplanationAchievement">
-                                    <rect key="frame" x="37" y="21.5" width="225.5" height="12"/>
+                                    <rect key="frame" x="37" y="20" width="225.5" height="12"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
@@ -168,9 +171,8 @@
                     </subviews>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="500" id="1Ks-9e-lMB"/>
+                        <constraint firstAttribute="height" constant="140" id="1Ks-9e-lMB"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="width" secondItem="nkE-IN-BZZ" secondAttribute="width" multiplier="0.97" id="4od-0D-61S"/>
-                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="height" secondItem="kXA-bF-PrH" secondAttribute="height" multiplier="0.22" id="70x-So-5zl"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="top" secondItem="nkE-IN-BZZ" secondAttribute="top" id="9Od-OO-rGV"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="centerX" secondItem="lrr-RG-s2a" secondAttribute="centerX" id="A4E-qr-nNB"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="top" secondItem="lrr-RG-s2a" secondAttribute="bottom" constant="16" id="LX4-a7-A4H"/>
@@ -178,6 +180,7 @@
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="width" secondItem="kXA-bF-PrH" secondAttribute="width" multiplier="0.9" id="Oxa-0O-4xC"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="width" secondItem="lrr-RG-s2a" secondAttribute="width" multiplier="0.8" id="Pen-SL-XJZ"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="height" secondItem="lrr-RG-s2a" secondAttribute="height" multiplier="0.35" id="XFR-uc-yeg"/>
+                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="top" secondItem="kXA-bF-PrH" secondAttribute="top" constant="150" id="ozN-3u-GPW"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="height" secondItem="nkE-IN-BZZ" secondAttribute="height" multiplier="0.97" id="xrR-Rv-UOe"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="centerX" secondItem="kXA-bF-PrH" secondAttribute="centerX" id="yCo-CR-icH"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="top" secondItem="kXA-bF-PrH" secondAttribute="top" constant="-20" id="zPb-T5-4ik"/>
@@ -185,9 +188,14 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="16"/>
+                            <integer key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ozN-3u-GPW"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <constraints>

@@ -178,7 +178,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         expCard = xibViews?.first as! ExpCard
         self.view.addSubview(expCard)
-        expCard.frame = CGRect(x: 0, y: 500, width: view.bounds.width * 0.7, height: view.bounds.height * 0.177)
+        expCard.frame = CGRect(x: view.bounds.width * 0.15, y: 500, width: view.bounds.width * 0.7, height: 375)
     }
     
     func animateConstraints() {
@@ -443,17 +443,21 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
         
-        //showExpCard()
-        var alert: UIAlertController
-        if (Reachability.isConnectedToNetwork()) {
-            
-        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
-        }
-        else {
-            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
-        }
+        showExpCard()
         
-        present(alert, animated: true, completion: nil)
+        
+        
+        // Test connection
+//        var alert: UIAlertController
+//        if (Reachability.isConnectedToNetwork()) {
+//
+//        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
+//        }
+//        else {
+//            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
+//        }
+//
+//        present(alert, animated: true, completion: nil)
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {

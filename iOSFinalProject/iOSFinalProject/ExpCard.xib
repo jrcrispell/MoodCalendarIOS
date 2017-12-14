@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,20 +17,51 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXA-bF-PrH">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXA-bF-PrH" userLabel="ContainerCard">
                     <rect key="frame" x="0.0" y="20" width="375" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nkE-IN-BZZ" userLabel="ShadowView">
+                            <rect key="frame" x="19" y="-20" width="337.5" height="89.5"/>
+                            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="16"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lrr-RG-s2a" userLabel="ExpCardView">
+                            <rect key="frame" x="24" y="-20" width="327.5" height="87"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="16"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="128" id="1Ks-9e-lMB"/>
+                        <constraint firstItem="lrr-RG-s2a" firstAttribute="width" secondItem="nkE-IN-BZZ" secondAttribute="width" multiplier="0.97" id="4od-0D-61S"/>
+                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="height" secondItem="kXA-bF-PrH" secondAttribute="height" multiplier="0.7" id="70x-So-5zl"/>
+                        <constraint firstItem="lrr-RG-s2a" firstAttribute="top" secondItem="nkE-IN-BZZ" secondAttribute="top" id="9Od-OO-rGV"/>
+                        <constraint firstItem="lrr-RG-s2a" firstAttribute="centerX" secondItem="nkE-IN-BZZ" secondAttribute="centerX" id="O6v-Mg-voT"/>
+                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="width" secondItem="kXA-bF-PrH" secondAttribute="width" multiplier="0.9" id="Oxa-0O-4xC"/>
+                        <constraint firstItem="lrr-RG-s2a" firstAttribute="height" secondItem="nkE-IN-BZZ" secondAttribute="height" multiplier="0.97" id="xrR-Rv-UOe"/>
+                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="centerX" secondItem="kXA-bF-PrH" secondAttribute="centerX" id="yCo-CR-icH"/>
+                        <constraint firstItem="nkE-IN-BZZ" firstAttribute="top" secondItem="kXA-bF-PrH" secondAttribute="top" constant="-20" id="zPb-T5-4ik"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="32"/>
+                            <integer key="value" value="16"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="kXA-bF-PrH" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="GeQ-LV-42N"/>
                 <constraint firstItem="kXA-bF-PrH" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="Gpj-oG-GqY"/>

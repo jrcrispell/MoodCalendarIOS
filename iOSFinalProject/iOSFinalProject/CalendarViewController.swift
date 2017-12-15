@@ -179,6 +179,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         expCard = xibViews?.first as! ExpCard
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
+        self.view.layoutIfNeeded()
+        expCard.changeExpWidth(percent: 0.9)
+        animateConstraints()
 
     }
     

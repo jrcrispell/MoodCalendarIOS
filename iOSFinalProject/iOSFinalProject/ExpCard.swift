@@ -11,13 +11,16 @@ import UIKit
 
 class ExpCard: UIView {
     
+    @IBOutlet weak var emptyExpBar: UIView!
     
     @IBOutlet weak var arrowView: UIView!
     
-    override func layoutSubviews() {
-        
-        
-    }
+    @IBOutlet weak var earnedExpWidth: NSLayoutConstraint!
     
 
+    public func changeExpWidth(percent: CGFloat) {
+        
+        earnedExpWidth.constant = -(percent * emptyExpBar.frame.width)
+        
+    }
 }

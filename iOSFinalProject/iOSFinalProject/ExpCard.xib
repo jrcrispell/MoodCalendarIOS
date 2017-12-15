@@ -54,7 +54,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myt-D5-Qjf" userLabel="EarnedExpBar">
-                                    <rect key="frame" x="41" y="48" width="162.5" height="19"/>
+                                    <rect key="frame" x="41" y="48" width="270.5" height="19"/>
                                     <color key="backgroundColor" red="0.094117647060000004" green="0.50196078430000002" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="tintColor" red="0.14117647059999999" green="0.57647058819999997" blue="0.80392156859999997" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <userDefinedRuntimeAttributes>
@@ -71,7 +71,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Level 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVv-pE-gC0" userLabel="Current Level">
-                                    <rect key="frame" x="41" y="75" width="162.5" height="21.5"/>
+                                    <rect key="frame" x="41" y="75" width="270.5" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                     <color key="textColor" red="0.094117647060000004" green="0.50196078430000002" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -112,9 +112,9 @@
                                 <constraint firstItem="Up4-h8-Lvx" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="bottom" id="XWW-qI-Tmb"/>
                                 <constraint firstItem="geP-7D-y6I" firstAttribute="centerY" secondItem="Up4-h8-Lvx" secondAttribute="centerY" id="bHd-Bi-x3f"/>
                                 <constraint firstItem="geP-7D-y6I" firstAttribute="leading" secondItem="Up4-h8-Lvx" secondAttribute="trailing" constant="8" id="cHH-94-TqW"/>
-                                <constraint firstItem="myt-D5-Qjf" firstAttribute="width" secondItem="geP-7D-y6I" secondAttribute="width" multiplier="0.6" id="doE-Eu-7bq"/>
+                                <constraint firstItem="myt-D5-Qjf" firstAttribute="width" secondItem="geP-7D-y6I" secondAttribute="width" id="doE-Eu-7bq"/>
                                 <constraint firstItem="QVv-pE-gC0" firstAttribute="top" secondItem="myt-D5-Qjf" secondAttribute="bottom" constant="8" id="gw6-6Z-aLi"/>
-                                <constraint firstItem="QVv-pE-gC0" firstAttribute="width" secondItem="myt-D5-Qjf" secondAttribute="width" id="h7L-5x-M6a"/>
+                                <constraint firstItem="QVv-pE-gC0" firstAttribute="width" secondItem="geP-7D-y6I" secondAttribute="width" id="h7L-5x-M6a"/>
                                 <constraint firstAttribute="trailing" secondItem="JE4-ej-udA" secondAttribute="trailing" id="iE8-Z4-MT0"/>
                                 <constraint firstItem="RNp-bF-d9e" firstAttribute="leading" secondItem="aJg-1f-72j" secondAttribute="trailing" constant="4" id="jci-Ly-ZXm"/>
                                 <constraint firstItem="PwJ-Ff-Skv" firstAttribute="leading" secondItem="myt-D5-Qjf" secondAttribute="leading" id="pJq-Jg-kNt"/>
@@ -222,6 +222,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="arrowView" destination="Lag-YA-jco" id="uSc-bt-4c1"/>
+                <outlet property="earnedExpWidth" destination="doE-Eu-7bq" id="uD0-O7-R5y"/>
+                <outlet property="emptyExpBar" destination="geP-7D-y6I" id="DXp-zU-ofN"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

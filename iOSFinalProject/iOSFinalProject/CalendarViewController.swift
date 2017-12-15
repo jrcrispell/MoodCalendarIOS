@@ -205,6 +205,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func loadEvents() {
         
         self.activityIndicator.startAnimating()
+
+        
+        if (!Reachability.isConnectedToNetwork()) {
+            present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not load events."), animated: true, completion: nil)
+            self.activityIndicator.stopAnimating()
+            return
+        }
+        
         
         displayedDateRef = ref.child(user.uid).child(dateString)
         displayedDateRef.observeSingleEvent(of: .value, with:{ (snapshot) in
@@ -297,10 +305,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     @objc func handleCharts(_ sender: UIButton){
-        closeMenu()
-        performSegue(withIdentifier: "toCharts", sender: sender)
+        //closeMenu()
+        //performSegue(withIdentifier: "toCharts", sender: sender)
         
-        //present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
+        present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
     }
     
     @objc func handleHome(_ sender: UIButton){

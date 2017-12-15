@@ -13,6 +13,7 @@
 		863415261FD8CA81001F5F42 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863415251FD8CA81001F5F42 /* Credits.swift */; };
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		863B4CEB1FE19519006D25DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CEA1FE19519006D25DE /* Reachability.swift */; };
+		863B4CEF1FE351FF006D25DE /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CEE1FE351FF006D25DE /* Arrow.swift */; };
 		8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8652F8781FDB088F00442E43 /* ExpCard.xib */; };
 		8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8652F87A1FDB097D00442E43 /* ExpCard.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
@@ -42,6 +43,7 @@
 		863415251FD8CA81001F5F42 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		863B4CEA1FE19519006D25DE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		863B4CEE1FE351FF006D25DE /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		8652F8781FDB088F00442E43 /* ExpCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpCard.xib; sourceTree = "<group>"; };
 		8652F87A1FDB097D00442E43 /* ExpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCard.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
+				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
 				863B4CEA1FE19519006D25DE /* Reachability.swift */,
 				8652F8781FDB088F00442E43 /* ExpCard.xib */,
 				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
@@ -284,6 +287,7 @@
 				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				863415261FD8CA81001F5F42 /* Credits.swift in Sources */,
+				863B4CEF1FE351FF006D25DE /* Arrow.swift in Sources */,
 				8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */,
 				863B4CEB1FE19519006D25DE /* Reachability.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,

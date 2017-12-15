@@ -150,7 +150,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="uxP-u5-ZQz" firstAttribute="leading" secondItem="xB9-dl-b2b" secondAttribute="leading" constant="8" id="AiP-yc-tQX"/>
                                 <constraint firstAttribute="bottom" secondItem="Wgn-4g-qZE" secondAttribute="bottom" constant="4" id="J4e-eZ-7Ac"/>
@@ -168,6 +168,14 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lag-YA-jco" userLabel="Arrow">
+                            <rect key="frame" x="178" y="88" width="20" height="20"/>
+                            <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="Vk0-bD-x0f"/>
+                                <constraint firstAttribute="height" constant="20" id="u5b-Em-egl"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -180,7 +188,9 @@
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="width" secondItem="kXA-bF-PrH" secondAttribute="width" multiplier="0.9" id="Oxa-0O-4xC"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="width" secondItem="lrr-RG-s2a" secondAttribute="width" multiplier="0.8" id="Pen-SL-XJZ"/>
                         <constraint firstItem="xB9-dl-b2b" firstAttribute="height" secondItem="lrr-RG-s2a" secondAttribute="height" multiplier="0.35" id="XFR-uc-yeg"/>
+                        <constraint firstItem="Lag-YA-jco" firstAttribute="bottom" secondItem="xB9-dl-b2b" secondAttribute="top" constant="10" id="feB-rl-Tm7"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="top" secondItem="kXA-bF-PrH" secondAttribute="top" constant="150" id="ozN-3u-GPW"/>
+                        <constraint firstItem="Lag-YA-jco" firstAttribute="centerX" secondItem="xB9-dl-b2b" secondAttribute="centerX" id="qeE-YT-bIi"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="height" secondItem="nkE-IN-BZZ" secondAttribute="height" multiplier="0.97" id="xrR-Rv-UOe"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="centerX" secondItem="kXA-bF-PrH" secondAttribute="centerX" id="yCo-CR-icH"/>
                         <constraint firstItem="nkE-IN-BZZ" firstAttribute="top" secondItem="kXA-bF-PrH" secondAttribute="top" constant="-20" id="zPb-T5-4ik"/>
@@ -205,6 +215,9 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="top" constant="-8" id="uLp-OA-Cba"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="arrowView" destination="Lag-YA-jco" id="uSc-bt-4c1"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>

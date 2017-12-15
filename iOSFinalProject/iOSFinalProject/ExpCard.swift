@@ -12,13 +12,12 @@ import UIKit
 class ExpCard: UIView {
     
     
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    @IBOutlet weak var arrowView: UIView!
+    
+    override func layoutSubviews() {
+        
+        
     }
-    */
+    
 
 }

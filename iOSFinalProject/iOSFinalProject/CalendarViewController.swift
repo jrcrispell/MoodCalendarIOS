@@ -305,10 +305,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     @objc func handleCharts(_ sender: UIButton){
-        //closeMenu()
-        //performSegue(withIdentifier: "toCharts", sender: sender)
+        closeMenu()
+        performSegue(withIdentifier: "toCharts", sender: sender)
         
-        present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
+        //present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
+        
+        
     }
     
     @objc func handleHome(_ sender: UIButton){

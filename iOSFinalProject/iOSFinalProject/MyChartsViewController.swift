@@ -24,6 +24,9 @@ class MyChartsViewController: UIViewController {
     
     let data: [Double] = [5, 3, 7, 9, 8, 5, 10]
     
+    @IBAction func hamburgerTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     

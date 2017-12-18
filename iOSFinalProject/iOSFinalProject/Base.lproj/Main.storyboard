@@ -623,6 +623,7 @@
                                             <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="hamburgerTapped:" destination="Qrx-RK-jKf" eventType="touchUpInside" id="4ox-OS-DvB"/>
                                             <action selector="hamburgerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQB-g8-dTw"/>
                                         </connections>
                                     </button>

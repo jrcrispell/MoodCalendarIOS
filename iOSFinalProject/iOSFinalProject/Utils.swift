@@ -31,7 +31,9 @@ class Utils {
         activityRef.child("startTime").setValue(startTime)
         activityRef.child("endTime").setValue(startTime + 1)
         activityRef.child("activityDescription").setValue(eventDescription)
-        activityRef.child("moodScore").setValue(Double(moodScore))    }
+        activityRef.child("moodScore").setValue(Double(moodScore))
+        Achievements.check()
+    }
     
     static func saveToRef(calendar: Calendar, activityRef: DatabaseReference, startTime: Double, endTime: Double, eventDescription: String, moodScore: Int) {
         
@@ -39,8 +41,9 @@ class Utils {
         activityRef.child("endTime").setValue(endTime)
         activityRef.child("activityDescription").setValue(eventDescription)
         activityRef.child("moodScore").setValue(Double(moodScore))
-        
+        Achievements.check()
     }
+    
     
     static func dateToTime(calendar: Calendar, date: Date) -> Double {
         

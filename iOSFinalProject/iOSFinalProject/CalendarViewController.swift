@@ -8,8 +8,9 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-import UserNotifications
 import FirebaseAuth
+import UserNotifications
+
 import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
@@ -89,9 +90,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         self.view.backgroundColor = UIColor.white
         
-        
-        
-        
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
         updateDate()
@@ -116,6 +114,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
+        Achievements.check()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

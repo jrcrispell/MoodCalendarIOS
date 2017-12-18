@@ -13,9 +13,15 @@ import FirebaseAuth
 
 class Achievements {
     
-    let ref = Database.database().reference()
 
+    
     static func check() {
+        
+        let ref = Database.database().reference()
+        let user = Auth.auth().currentUser
+        
+        let todaysDate = Date()
+        let todaysDateRef = ref.child(user!.uid).child(g_dateFormatter.string(from: todaysDate))
 
     }
 }

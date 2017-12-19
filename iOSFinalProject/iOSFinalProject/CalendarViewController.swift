@@ -176,10 +176,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
         
         expCard = xibViews?.first as! ExpCard
+        expCard.earnedExpWidth.constant = 0
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-        expCard.changeExpWidth(percent: 0.9)
+        expCard.changeExpWidth(percent: 0.6)
         animateConstraints()
 
     }

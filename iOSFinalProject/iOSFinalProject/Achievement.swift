@@ -15,7 +15,7 @@ class Achievements {
     
 
     
-    static func check() {
+        static func check() {
         
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser

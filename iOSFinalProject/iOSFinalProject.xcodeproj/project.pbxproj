@@ -123,6 +123,7 @@
 				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
 				863B4CEA1FE19519006D25DE /* Reachability.swift */,
 				8652F8781FDB088F00442E43 /* ExpCard.xib */,
+				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
 				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
 				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
 				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
@@ -143,7 +144,6 @@
 				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
 				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
 				863415251FD8CA81001F5F42 /* Credits.swift */,
-				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";

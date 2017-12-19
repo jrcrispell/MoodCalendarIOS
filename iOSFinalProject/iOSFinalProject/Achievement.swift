@@ -10,10 +10,27 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import UIKit
 
-class Achievements {
+protocol EXPShowing {
+    func showExpCard(expCard: ExpCard)
+    func getView() -> UIView
+}
+
+class Achievements: NSObject {
     
-    static func check() {
+    var expShower: EXPShowing!
+    
+    init(viewController: UIViewController) {
+        
+        if viewController is EXPShowing {
+            self.expShower = viewController as! EXPShowing
+        }
+        super.init()
+
+    }
+    
+    func check() {
         
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
@@ -26,32 +43,32 @@ class Achievements {
             guard let achievementsDict = snapshot.value as? [String:Bool] else {
                 return
             }
-
-            var achievementsEarned: [String:Int] = [:]
             
             for achievement in achievementsDict {
                 if achievement.key == "firstActivity" && achievement.value == false {
-                    let result = checkFirstActivity()
-                    if (result > 0) {
-                        achievementsEarned[achievement.key] = 60
-                    }
+                    self.checkFirstActivity()
                 }
                 print(achievement.key + " - " + achievement.value.description)
             }
-            
-            if achievementsEarned.count > 0 {
-                animateExp(achievementsEarned: achievementsEarned)
-            }
+
         }
     }
     
-    static func animateExp(achievementsEarned: [String:Int]) {
+    func animateExp(achievementsEarned: [String:Int]) {
         print(achievementsEarned.debugDescription)
+        
+        let view = expShower.getView()
+        
+        let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
+
+        let expCard = xibViews?.first as! ExpCard
+        expCard.earnedExpWidth.constant = 0
+        expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
+
     }
     
-    static func checkFirstActivity() -> Int {
+    func checkFirstActivity() {
         
-        var expEarned = 0
         
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
@@ -62,7 +79,7 @@ class Achievements {
             
             var shouldBreak = false
             
-            //TODO: this doesn't return correctly to previous method since it's asynchronous, i think i need to resolve the animateExp here
+            //TODO: low pri = optimize (don't check every day regardless of outcome)
             for day in daysArray {
                 if day.key == "Achievements" || day.key == "Experience" {continue}
                 else {
@@ -71,18 +88,18 @@ class Achievements {
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
                         if activityArray.count > 0 {
                             print("WE HAVE AN ACTIVITY WAHOOOOOOO")
-                            expEarned = 60
                             userRef.child("Achievements").child("firstActivity").setValue(true)
+                            self.animateExp(achievementsEarned: ["firstActivity":60])
                             shouldBreak = true
                             return
                         }
                     })
                 }
                 if (shouldBreak) {
+                    print("Oops, I bwoke it")
                     break
                 }
             }
         }
-        return expEarned
     }
 }

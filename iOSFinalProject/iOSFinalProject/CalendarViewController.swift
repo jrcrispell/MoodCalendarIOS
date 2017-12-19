@@ -15,8 +15,21 @@ import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
 
-class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
+class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
+
 {
+
+    func showExpCard(expCard: ExpCard) {
+        self.view.addSubview(expCard)
+        self.view.layoutIfNeeded()
+        expCard.changeExpWidth(percent: 0.6)
+        animateConstraints()
+    }
+    
+    func getView() -> UIView {
+        return self.view
+    }
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
@@ -71,9 +84,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var datePickerVisibile = false
     var bounds:CGRect!
     
+    var achievements: Achievements!
+
+    
     //MARK: - ViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        achievements = Achievements(viewController: self)
+
                 
         // For debug, calculating level exp requirements
         var j = 0
@@ -114,7 +133,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
-        Achievements.check()
+        achievements.check()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -526,7 +545,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         // Save when the gesture is complete
         if sender.state.rawValue == 3 {
             let activityRef = displayedDateRef.child(editingActivity.databaseID)
-            Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore)
+            Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore, viewController: self)
         }
     }
     
@@ -719,7 +738,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             
             let dateKey = g_dateFormatter.string(from: Date())
             
-            Utils.saveNewActivity(startTime: startTime, endTime: startTime + 1, eventDescription: eventDescription, moodScore: moodScore, dateKey: dateKey)
+            Utils.saveNewActivity(startTime: startTime, endTime: startTime + 1, eventDescription: eventDescription, moodScore: moodScore, dateKey: dateKey, viewController: self)
             
             loadEvents()
         }

@@ -18,7 +18,9 @@ class Utils {
         errorAlert.addAction(okButton)
         return errorAlert
     }
-    static func saveNewActivity(startTime: Double, endTime: Double, eventDescription: String, moodScore: Int, dateKey: String) {
+    static func saveNewActivity(startTime: Double, endTime: Double, eventDescription: String, moodScore: Int, dateKey: String, viewController: UIViewController) {
+        
+        let achievements = Achievements(viewController: viewController)
         
         let ref = Database.database().reference()
 
@@ -32,16 +34,17 @@ class Utils {
         activityRef.child("endTime").setValue(startTime + 1)
         activityRef.child("activityDescription").setValue(eventDescription)
         activityRef.child("moodScore").setValue(Double(moodScore))
-        Achievements.check()
+        achievements.check()
     }
     
-    static func saveToRef(calendar: Calendar, activityRef: DatabaseReference, startTime: Double, endTime: Double, eventDescription: String, moodScore: Int) {
+    static func saveToRef(calendar: Calendar, activityRef: DatabaseReference, startTime: Double, endTime: Double, eventDescription: String, moodScore: Int, viewController: UIViewController) {
         
+        let achievements = Achievements(viewController: viewController)
         activityRef.child("startTime").setValue(startTime)
         activityRef.child("endTime").setValue(endTime)
         activityRef.child("activityDescription").setValue(eventDescription)
         activityRef.child("moodScore").setValue(Double(moodScore))
-        Achievements.check()
+        achievements.check()
     }
     
     

@@ -111,7 +111,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
         // Save values to database
-        Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.dateToTime(calendar: calendar, date: startDate), endTime: Utils.dateToTime(calendar: calendar, date: endDate), eventDescription: descriptionField.text!, moodScore: moodScore)
+        Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.dateToTime(calendar: calendar, date: startDate), endTime: Utils.dateToTime(calendar: calendar, date: endDate), eventDescription: descriptionField.text!, moodScore: moodScore, viewController: self)
         
         self.dismiss(animated: true, completion: nil)
 

@@ -64,7 +64,7 @@ class Achievements: NSObject {
         let expCard = xibViews?.first as! ExpCard
         expCard.earnedExpWidth.constant = 0
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
-
+        expShower.showExpCard(expCard: expCard)
     }
     
     func checkFirstActivity() {

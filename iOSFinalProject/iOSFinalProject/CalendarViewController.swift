@@ -19,12 +19,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
 {
 
-    func showExpCard(expCard: ExpCard) {
-        self.view.addSubview(expCard)
-        self.view.layoutIfNeeded()
-        expCard.changeExpWidth(percent: 0.6)
-        animateConstraints()
-    }
+
     
     func getView() -> UIView {
         return self.view
@@ -191,17 +186,40 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.closeMenu()
     }
     
+    //MARK: WORKING HERE
+    
+    func animateExp(withDuration: TimeInterval) {
+        
+        UIView.animate(withDuration: withDuration, animations: {
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func showExpCard(expCard: ExpCard) {
+        self.expCard = expCard
+        //expCard.changeExpWidth(percent: 0)
+        self.view.addSubview(expCard)
+        self.view.layoutIfNeeded()
+        expCard.changeExpWidth(percent: 2.0)
+        animateExp(withDuration: 1.5)
+    }
+    
     func showExpCard() {
+        
+        if expCard != nil {
+            expCard.removeFromSuperview()
+
+        }
+        
         let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
         
         expCard = xibViews?.first as! ExpCard
-        expCard.earnedExpWidth.constant = 0
+        //expCard.changeExpWidth(percent: 0.0)
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
         expCard.changeExpWidth(percent: 0.6)
-        animateConstraints()
-
+        animateExp(withDuration: 1)
     }
     
     func animateConstraints() {
@@ -209,6 +227,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             self.view.layoutIfNeeded()
         })
     }
+    
+
     
     func showDatePicker() {
         datePickerTop.constant = 8

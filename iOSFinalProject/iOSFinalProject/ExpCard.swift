@@ -22,6 +22,7 @@ class ExpCard: UIView {
     
     @IBOutlet weak var earnedExpWidth: NSLayoutConstraint!
     
+    
     override func layoutSubviews() {
         
         let selfBounds = self.layer.bounds
@@ -49,6 +50,7 @@ class ExpCard: UIView {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         shadowView.addSubview(blurEffectView)
         
+        
 
 //        
 //        expCardView.layer.shouldRasterize = true
@@ -62,7 +64,7 @@ class ExpCard: UIView {
 
     public func changeExpWidth(percent: CGFloat) {
         
-        earnedExpWidth.constant = -(percent * emptyExpBar.frame.width)
+        earnedExpWidth.constant = (percent * emptyExpBar.frame.width)
         
     }
 }

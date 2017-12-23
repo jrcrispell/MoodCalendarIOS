@@ -64,6 +64,7 @@ class ExpCard: UIView {
 
     public func changeExpWidth(percent: CGFloat) {
         
+        
         earnedExpWidth.constant = (percent * emptyExpBar.frame.width)
         
     }

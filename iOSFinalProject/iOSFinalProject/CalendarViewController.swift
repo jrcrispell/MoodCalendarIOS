@@ -218,11 +218,84 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-        expCard.changeExpWidth(percent: 0.6)
-        animateExp(withDuration: 1)
+//        expCard.changeExpWidth(percent: 1.0)
+//        animateExp(withDuration: 1)
+//        expCard.changeExpWidth(percent: 0.0)
+//        self.view.layoutIfNeeded()
+//        expCard.changeExpWidth(percent: 1.0)
+//        animateExp(withDuration: 1)
+        
+        animateExpGain(percent: 3.6, expCard: expCard)
+    }
+    
+    func animateExpGain(percent: CGFloat, expCard: ExpCard) {
+        
+        expCard.earnedExpWidth.constant = 0
+        self.view.layoutIfNeeded()
+
+        
+        
+        var duration = TimeInterval(percent / 1)
+        if duration < 0.5 {
+            duration = 0.5
+        }
+        if duration > 1 {
+            duration = 1
+        }
+        
+        
+        if percent <= 1 {
+            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        else {
+            expCard.earnedExpWidth.constant = expCard.emptyExpBar.frame.width
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.animateExpGain(percent: percent-1, expCard: expCard)
+            })
+        }
+
+//
+//        let percentLoop = Int(percent)
+//        let fractional = Double(percent) - Double(percentLoop)
+//
+//        if percent <= 1 {
+//            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
+//            UIView.animate(withDuration: 1.0, animations: {
+//                self.view.layoutIfNeeded()
+//            })
+//        }
+        
+//        for index in 1...percentLoop
+//        {
+//            let duration = TimeInterval(index/percentLoop)
+//            if (index < percentLoop) {
+//                expCard.earnedExpWidth.constant = 0
+//                self.view.layoutIfNeeded()
+//                expCard.earnedExpWidth.constant = 100
+//            UIView.animate(withDuration: duration, animations: {
+//            self.view.layoutIfNeeded()
+//        })
+//            }
+//            else {
+//                expCard.earnedExpWidth.constant = (CGFloat(fractional) * expCard.emptyExpBar.frame.width)
+//                UIView.animate(withDuration: duration, animations: {
+//                    self.view.layoutIfNeeded()
+//                })
+//            }
+//        }
+        
+        
+        
+        
     }
     
     func animateConstraints() {
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })

@@ -18,6 +18,10 @@ let g_dateFormatter = DateFormatter()
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
 
 {
+    func showExpCard(expCard: ExpCard) {
+        // do nothing
+    }
+    
 
 
     
@@ -195,37 +199,33 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         })
     }
     
-    func showExpCard(expCard: ExpCard) {
+    func showExpCard(expCard: ExpCard, percent: CGFloat) {
         self.expCard = expCard
         //expCard.changeExpWidth(percent: 0)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-        expCard.changeExpWidth(percent: 2.0)
-        animateExp(withDuration: 1.5)
+//        expCard.changeExpWidth(percent: 2.0)
+//        animateExp(withDuration: 1.5)
+        
+        animateExpGain(percent: percent, expCard: expCard)
+
     }
     
-    func showExpCard() {
+    func showExpCard(animatePercent: CGFloat) {
         
         if expCard != nil {
             expCard.removeFromSuperview()
-
         }
         
         let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
         
         expCard = xibViews?.first as! ExpCard
-        //expCard.changeExpWidth(percent: 0.0)
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-//        expCard.changeExpWidth(percent: 1.0)
-//        animateExp(withDuration: 1)
-//        expCard.changeExpWidth(percent: 0.0)
-//        self.view.layoutIfNeeded()
-//        expCard.changeExpWidth(percent: 1.0)
-//        animateExp(withDuration: 1)
+
         
-        animateExpGain(percent: 3.6, expCard: expCard)
+        animateExpGain(percent: animatePercent, expCard: expCard)
     }
     
     func animateExpGain(percent: CGFloat, expCard: ExpCard) {
@@ -567,7 +567,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
         
-        showExpCard()
+        showExpCard(animatePercent: 2.3)
         
         
         

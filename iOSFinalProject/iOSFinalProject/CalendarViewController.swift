@@ -84,6 +84,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var bounds:CGRect!
     
     var achievements: Achievements!
+    
+    var animatingExp: Bool = false
 
     
     //MARK: - ViewController Overrides
@@ -192,13 +194,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     //MARK: WORKING HERE
     
-    func animateExp(withDuration: TimeInterval) {
-        
-        UIView.animate(withDuration: withDuration, animations: {
-            self.view.layoutIfNeeded()
-        })
-    }
-    
     func showExpCard(expCard: ExpCard, percent: CGFloat) {
         self.expCard = expCard
         //expCard.changeExpWidth(percent: 0)
@@ -228,12 +223,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         animateExpGain(percent: animatePercent, expCard: expCard)
     }
     
+    
+    
+    
     func animateExpGain(percent: CGFloat, expCard: ExpCard) {
+        
+        self.animatingExp = true
         
         expCard.earnedExpWidth.constant = 0
         self.view.layoutIfNeeded()
-
-        
         
         var duration = TimeInterval(percent / 1)
         if duration < 0.5 {
@@ -248,6 +246,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
             UIView.animate(withDuration: duration, animations: {
                 self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.animatingExp = false
             })
         }
         else {

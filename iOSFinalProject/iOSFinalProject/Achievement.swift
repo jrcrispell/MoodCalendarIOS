@@ -13,6 +13,7 @@ import FirebaseAuth
 import UIKit
 
 protocol EXPShowing {
+    var animatingExp: Bool { get }
     func showExpCard(expCard: ExpCard, percent: CGFloat)
     func getView() -> UIView
     func animateExpGain(percent: CGFloat, expCard: ExpCard)
@@ -20,7 +21,18 @@ protocol EXPShowing {
 
 class Achievements: NSObject {
     
+    let ref = Database.database().reference()
+    let user = Auth.auth().currentUser
+    
     var expShower: EXPShowing!
+    
+    var achievementsEarned: [String:Int] = [:] {
+        didSet {
+            print("bingo")
+            animateExp(achievementsEarned: achievementsEarned)
+        }
+    }
+
     
     init(viewController: UIViewController) {
         
@@ -49,6 +61,9 @@ class Achievements: NSObject {
                 if achievement.key == "firstActivity" && achievement.value == false {
                     self.checkFirstActivity()
                 }
+                else if achievement.key == "usedDatePicker" && achievement.value == false {
+                    self.checkDatePicker()
+                }
                 print(achievement.key + " - " + achievement.value.description)
             }
 
@@ -76,9 +91,6 @@ class Achievements: NSObject {
     func checkFirstActivity() {
         
         
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-        
         let userRef = ref.child(user!.uid)
         userRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let daysArray = snapshot.value as? [String:Any] else {return}
@@ -92,10 +104,11 @@ class Achievements: NSObject {
                     let dayRef = userRef.child(day.key)
                     dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
-                        if activityArray.count > 0 {
+                        if activityArray.count > 0 && !shouldBreak {
                             print("WE HAVE AN ACTIVITY WAHOOOOOOO")
                             userRef.child("Achievements").child("firstActivity").setValue(true)
-                            self.animateExp(achievementsEarned: ["firstActivity":60])
+                            self.achievementsEarned["firstActivity"] = 60
+                            //self.animateExp(achievementsEarned: achievementsEarned)
                             shouldBreak = true
                             return
                         }
@@ -107,5 +120,10 @@ class Achievements: NSObject {
                 }
             }
         }
+    }
+    
+    func checkDatePicker() {
+        self.achievementsEarned["usedDatePicker"] = 50
+        
     }
 }

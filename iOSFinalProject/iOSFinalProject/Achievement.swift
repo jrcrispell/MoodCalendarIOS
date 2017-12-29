@@ -30,7 +30,7 @@ class Achievements: NSObject {
     
     var achievementsEarned: [String:Int] = [:] {
         didSet {
-            print("bingo")
+            print("didSetTriggered")
             animateExp(achievementsEarned: achievementsEarned)
         }
     }
@@ -108,8 +108,7 @@ class Achievements: NSObject {
             guard let daysArray = snapshot.value as? [String:Any] else {return}
             
             var shouldBreak = false
-            
-            //TODO: low pri = optimize (don't check every day regardless of outcome)
+
             for day in daysArray {
                 if day.key == "Achievements" || day.key == "Experience" {continue}
                 else {
@@ -120,7 +119,6 @@ class Achievements: NSObject {
                             print("WE HAVE AN ACTIVITY WAHOOOOOOO")
                             userRef.child("Achievements").child("firstActivity").setValue(true)
                             self.achievementsEarned["firstActivity"] = 60
-                            //self.animateExp(achievementsEarned: achievementsEarned)
                             shouldBreak = true
                             return
                         }

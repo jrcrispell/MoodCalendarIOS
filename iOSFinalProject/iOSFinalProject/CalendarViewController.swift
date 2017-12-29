@@ -196,11 +196,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func showExpCard(expCard: ExpCard, percent: CGFloat) {
         self.expCard = expCard
-        //expCard.changeExpWidth(percent: 0)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-//        expCard.changeExpWidth(percent: 2.0)
-//        animateExp(withDuration: 1.5)
+
         
         animateExpGain(percent: percent, expCard: expCard)
 
@@ -229,9 +227,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func animateExpGain(percent: CGFloat, expCard: ExpCard) {
         
         self.animatingExp = true
-        
-        print(achievements.earnedExperience.description)
-        
+                
         let earnedExperience = achievements.earnedExperience
         let currentLevel = achievements.levelFor(exp: earnedExperience)
         let expLeft = achievements.expRequiredFor(level: currentLevel + 1) - earnedExperience

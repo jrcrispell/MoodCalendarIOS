@@ -230,6 +230,19 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         self.animatingExp = true
         
+        print(achievements.earnedExperience.description)
+        
+        let earnedExperience = achievements.earnedExperience
+        let currentLevel = achievements.levelFor(exp: earnedExperience)
+        let expLeft = achievements.expRequiredFor(level: currentLevel + 1) - earnedExperience
+        
+        
+        expCard.earnedExpPoints.text = earnedExperience.description + " exp points"
+        expCard.currentLevel.text = "Level " + currentLevel.description
+        expCard.nextLevel.text = "Level " + (currentLevel + 1).description
+        expCard.expLeft.text = expLeft.description + " exp to"
+        
+        
         expCard.earnedExpWidth.constant = 0
         self.view.layoutIfNeeded()
         

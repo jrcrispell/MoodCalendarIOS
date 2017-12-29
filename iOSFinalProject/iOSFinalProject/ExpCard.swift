@@ -14,7 +14,13 @@ class ExpCard: UIView {
     @IBOutlet weak var expCardView: UIView!
     @IBOutlet weak var explanationView: UIView!
     
+    @IBOutlet weak var earnedExpPoints: UILabel!
+    @IBOutlet weak var currentLevel: UILabel!
     
+    @IBOutlet weak var explanationEarnedAchievement: UILabel!
+    @IBOutlet weak var explanationEarnedExp: UILabel!
+    @IBOutlet weak var nextLevel: UILabel!
+    @IBOutlet weak var expLeft: UILabel!
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var emptyExpBar: UIView!
     

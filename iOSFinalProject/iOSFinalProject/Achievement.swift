@@ -26,13 +26,15 @@ class Achievements: NSObject {
     
     var expShower: EXPShowing!
     
+    var earnedExperience = 0
+    
     var achievementsEarned: [String:Int] = [:] {
         didSet {
             print("bingo")
             animateExp(achievementsEarned: achievementsEarned)
         }
     }
-
+    
     
     init(viewController: UIViewController) {
         
@@ -40,7 +42,7 @@ class Achievements: NSObject {
             self.expShower = viewController as! EXPShowing
         }
         super.init()
-
+        
     }
     
     func check() {
@@ -57,15 +59,26 @@ class Achievements: NSObject {
                 return
             }
             
+            var checkFirst = false
+            var checkDate = false
+            
             for achievement in achievementsDict {
                 if achievement.key == "firstActivity" && (achievement.value as! Bool) == false {
-                    self.checkFirstActivity()
+                    checkFirst = true
                 }
                 else if achievement.key == "usedDatePicker" && (achievement.value as! Bool) == false {
-                    self.checkDatePicker()
+                    checkDate = true
+                }
+                else if achievement.key == "earnedExperience" {
+                    self.earnedExperience = achievement.value as! Int
                 }
             }
-
+            if checkFirst {
+                self.checkFirstActivity()
+            }
+            if checkDate {
+                self.checkDatePicker()
+            }
         }
     }
     
@@ -76,7 +89,7 @@ class Achievements: NSObject {
         let view = expShower.getView()
         
         let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
-
+        
         let expCard = xibViews?.first as! ExpCard
         expCard.earnedExpWidth.constant = 0
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
@@ -84,7 +97,7 @@ class Achievements: NSObject {
         
         //TODO: - Convert from 60 exp to .6 percent
         
-        expShower.showExpCard(expCard: expCard, percent: 0.6)
+        expShower.showExpCard(expCard: expCard, percent: 1.5)
     }
     
     func checkFirstActivity() {
@@ -123,6 +136,26 @@ class Achievements: NSObject {
     
     func checkDatePicker() {
         self.achievementsEarned["usedDatePicker"] = 50
-        
     }
+    
+    func expRequiredFor(level: Int) -> Int {
+        var j = 0
+        for i in 0..<level {
+            j = j + i*100
+        }
+        return j
+    }
+    
+    func levelFor(exp: Int) -> Int {
+        var j = 0
+        for i in 0...20 {
+            j = j + i*100
+            if j > exp {
+                return i
+            }
+        }
+        return 20
+    }
+    
+    
 }

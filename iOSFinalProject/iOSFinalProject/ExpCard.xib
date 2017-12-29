@@ -222,10 +222,16 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="arrowView" destination="Lag-YA-jco" id="uSc-bt-4c1"/>
+                <outlet property="currentLevel" destination="QVv-pE-gC0" id="XSj-K2-Uv6"/>
+                <outlet property="earnedExpPoints" destination="PwJ-Ff-Skv" id="plI-mi-UlF"/>
                 <outlet property="earnedExpWidth" destination="doE-Eu-7bq" id="uD0-O7-R5y"/>
                 <outlet property="emptyExpBar" destination="geP-7D-y6I" id="DXp-zU-ofN"/>
                 <outlet property="expCardView" destination="lrr-RG-s2a" id="K9m-vd-fiN"/>
+                <outlet property="expLeft" destination="aJg-1f-72j" id="JTh-fN-6J8"/>
+                <outlet property="explanationEarnedAchievement" destination="Wgn-4g-qZE" id="fiH-RH-f0M"/>
+                <outlet property="explanationEarnedExp" destination="hJD-9E-GMx" id="vhA-f8-cPB"/>
                 <outlet property="explanationView" destination="xB9-dl-b2b" id="ivB-Bp-kXX"/>
+                <outlet property="nextLevel" destination="RNp-bF-d9e" id="iGm-7q-bGN"/>
                 <outlet property="shadowView" destination="nkE-IN-BZZ" id="olZ-jv-6q0"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="54.5"/>

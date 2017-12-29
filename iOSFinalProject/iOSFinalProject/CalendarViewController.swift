@@ -228,31 +228,49 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
         
-        
-        self.animatingExp = true
-        
-        let earnedExperience = achievements.earnedExperience
-        let currentLevel = achievements.levelFor(exp: earnedExperience)
-        let expLeft = achievements.expRequiredFor(level: currentLevel + 1) - earnedExperience
+        var earnedExperience = achievements.earnedExperience
+        var currentLevel = achievements.levelFor(exp: earnedExperience)
+        let nextLevel = achievements.expRequiredFor(level: currentLevel + 1)
+
+        var expLeft = nextLevel - earnedExperience
         
         expCard.earnedExpPoints.text = earnedExperience.description + " exp points"
         expCard.currentLevel.text = "Level " + currentLevel.description
         expCard.nextLevel.text = "Level " + (currentLevel + 1).description
         expCard.expLeft.text = expLeft.description + " exp to"
         expCard.earnedExpWidth.constant = 0
+        view.layoutIfNeeded()
         
-        let expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
-        let progressToLevel = expBetweenLevels - expLeft
-        let expPercentage = Double(progressToLevel)/Double(expBetweenLevels)
-        self.view.layoutIfNeeded()
+        var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
+        var progressToLevel = expBetweenLevels - expLeft
+        var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
         
-        let key = Array(achievements.newAchievements.keys)[0]
-        let achievementExp = achievements.newAchievements[key]!
-        print("test")
+        let keys = Array(achievements.newAchievements.keys)
+        for key in keys {
+            let achievementExp = achievements.newAchievements[key]!
+            
+            if achievementExp > expLeft {
+                // Loop
+            }
+            else {
+                
+                let newEarnedExperience = earnedExperience + achievementExp
+                
+                let newExpLeft = nextLevel - newEarnedExperience
+                let newProgressToLevel = expBetweenLevels - newExpLeft
+                let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
+                //MARK: - WORKING HERE
+                let animation = ExpCardAnimation(earnedExp: earnedExperience, expLeft: expLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: nextLevel, explanationExp: achievementExp, explanationAchievement: key)
+                
+                earnedExperience += achievementExp
+            }
+            
+            
+            
+            
+            
+        }
         
-
-        
-
 
 //
 //        let percentLoop = Int(percent)

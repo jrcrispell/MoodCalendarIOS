@@ -24,6 +24,8 @@ class Achievements: NSObject {
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
     
+    var expCardAnimations: [ExpCardAnimation] = []
+    
     var expShower: EXPShowing!
     
     var earnedExperience = 0

@@ -53,18 +53,17 @@ class Achievements: NSObject {
         
         let achievementsRef = ref.child(user!.uid).child("Achievements")
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
-            guard let achievementsDict = snapshot.value as? [String:Bool] else {
+            guard let achievementsDict = snapshot.value as? [String:Any] else {
                 return
             }
             
             for achievement in achievementsDict {
-                if achievement.key == "firstActivity" && achievement.value == false {
+                if achievement.key == "firstActivity" && (achievement.value as! Bool) == false {
                     self.checkFirstActivity()
                 }
-                else if achievement.key == "usedDatePicker" && achievement.value == false {
+                else if achievement.key == "usedDatePicker" && (achievement.value as! Bool) == false {
                     self.checkDatePicker()
                 }
-                print(achievement.key + " - " + achievement.value.description)
             }
 
         }

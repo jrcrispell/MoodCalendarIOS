@@ -226,47 +226,33 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func animateExpGain(percent: CGFloat, expCard: ExpCard) {
         
+        //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
+        
+        
         self.animatingExp = true
-                
+        
         let earnedExperience = achievements.earnedExperience
         let currentLevel = achievements.levelFor(exp: earnedExperience)
         let expLeft = achievements.expRequiredFor(level: currentLevel + 1) - earnedExperience
-        
         
         expCard.earnedExpPoints.text = earnedExperience.description + " exp points"
         expCard.currentLevel.text = "Level " + currentLevel.description
         expCard.nextLevel.text = "Level " + (currentLevel + 1).description
         expCard.expLeft.text = expLeft.description + " exp to"
-        
-        
         expCard.earnedExpWidth.constant = 0
+        
+        let expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
+        let progressToLevel = expBetweenLevels - expLeft
+        let expPercentage = Double(progressToLevel)/Double(expBetweenLevels)
         self.view.layoutIfNeeded()
         
-        var duration = TimeInterval(percent / 1)
-        if duration < 0.5 {
-            duration = 0.5
-        }
-        if duration > 1 {
-            duration = 1
-        }
+        let key = Array(achievements.newAchievements.keys)[0]
+        let achievementExp = achievements.newAchievements[key]!
+        print("test")
         
+
         
-        if percent <= 1 {
-            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
-            UIView.animate(withDuration: duration, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
-                self.animatingExp = false
-            })
-        }
-        else {
-            expCard.earnedExpWidth.constant = expCard.emptyExpBar.frame.width
-            UIView.animate(withDuration: duration, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
-                self.animateExpGain(percent: percent-1, expCard: expCard)
-            })
-        }
+
 
 //
 //        let percentLoop = Int(percent)
@@ -297,10 +283,37 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 //                })
 //            }
 //        }
+    }
+    
+    func resolveAnimations(expCard: ExpCard) {
+        
+        let percent: CGFloat = 1
+        
+        var duration = TimeInterval(percent / 1)
+        if duration < 0.5 {
+            duration = 0.5
+        }
+        if duration > 1 {
+            duration = 1
+        }
         
         
-        
-        
+        if percent <= 1 {
+            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.animatingExp = false
+            })
+        }
+        else {
+            expCard.earnedExpWidth.constant = expCard.emptyExpBar.frame.width
+            UIView.animate(withDuration: duration, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                self.animateExpGain(percent: percent-1, expCard: expCard)
+            })
+        }
     }
     
     func animateConstraints() {

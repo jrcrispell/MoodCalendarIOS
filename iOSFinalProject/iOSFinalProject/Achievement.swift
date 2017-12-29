@@ -28,10 +28,10 @@ class Achievements: NSObject {
     
     var earnedExperience = 0
     
-    var achievementsEarned: [String:Int] = [:] {
+    var newAchievements: [String:Int] = [:] {
         didSet {
             print("didSetTriggered")
-            animateExp(achievementsEarned: achievementsEarned)
+            animateExp(achievementsEarned: newAchievements)
         }
     }
     
@@ -118,7 +118,7 @@ class Achievements: NSObject {
                         if activityArray.count > 0 && !shouldBreak {
                             print("WE HAVE AN ACTIVITY WAHOOOOOOO")
                             userRef.child("Achievements").child("firstActivity").setValue(true)
-                            self.achievementsEarned["firstActivity"] = 60
+                            self.newAchievements["firstActivity"] = 60
                             shouldBreak = true
                             return
                         }
@@ -133,7 +133,7 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.achievementsEarned["usedDatePicker"] = 50
+        self.newAchievements["usedDatePicker"] = 50
     }
     
     func expRequiredFor(level: Int) -> Int {

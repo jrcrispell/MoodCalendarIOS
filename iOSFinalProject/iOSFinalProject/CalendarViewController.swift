@@ -16,14 +16,14 @@ import SystemConfiguration
 let g_dateFormatter = DateFormatter()
 
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
-
+    
 {
     func showExpCard(expCard: ExpCard) {
         // do nothing
     }
     
-
-
+    
+    
     
     func getView() -> UIView {
         return self.view
@@ -86,15 +86,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var achievements: Achievements!
     
     var animatingExp: Bool = false
-
+    
     
     //MARK: - ViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
         achievements = Achievements(viewController: self)
-
-                
+        
+        
         // For debug, calculating level exp requirements
         var j = 0
         for i in 0...20 {
@@ -152,7 +152,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         else if segue.identifier == "toCharts" {
             guard let chartsView = segue.destination as? MyChartsViewController else {return}
             chartsView.oldSnapshot = menuView.snapshotView.image
-        
+            
         }
     }
     
@@ -198,10 +198,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         self.expCard = expCard
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-
+        
         
         animateExpGain(percent: percent, expCard: expCard)
-
+        
     }
     
     func showExpCard(animatePercent: CGFloat) {
@@ -216,7 +216,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
-
+        
         
         animateExpGain(percent: animatePercent, expCard: expCard)
     }
@@ -231,15 +231,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         var earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
         let nextLevel = achievements.expRequiredFor(level: currentLevel + 1)
-
-        var expLeft = nextLevel - earnedExperience
         
-        expCard.earnedExpPoints.text = earnedExperience.description + " exp points"
-        expCard.currentLevel.text = "Level " + currentLevel.description
-        expCard.nextLevel.text = "Level " + (currentLevel + 1).description
-        expCard.expLeft.text = expLeft.description + " exp to"
-        expCard.earnedExpWidth.constant = 0
-        view.layoutIfNeeded()
+        var expLeft = nextLevel - earnedExperience
         
         var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
         var progressToLevel = expBetweenLevels - expLeft
@@ -260,79 +253,68 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newProgressToLevel = expBetweenLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 //MARK: - WORKING HERE
-                let animation = ExpCardAnimation(earnedExp: earnedExperience, expLeft: expLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: nextLevel, explanationExp: achievementExp, explanationAchievement: key)
+                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: earnedExperience, expLeft: expLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: nextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
                 earnedExperience += achievementExp
             }
-            
-            
-            
-            
-            
         }
         
-
-//
-//        let percentLoop = Int(percent)
-//        let fractional = Double(percent) - Double(percentLoop)
-//
-//        if percent <= 1 {
-//            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
-//            UIView.animate(withDuration: 1.0, animations: {
-//                self.view.layoutIfNeeded()
-//            })
-//        }
+        resolveAnimations(expCard: expCard)
         
-//        for index in 1...percentLoop
-//        {
-//            let duration = TimeInterval(index/percentLoop)
-//            if (index < percentLoop) {
-//                expCard.earnedExpWidth.constant = 0
-//                self.view.layoutIfNeeded()
-//                expCard.earnedExpWidth.constant = 100
-//            UIView.animate(withDuration: duration, animations: {
-//            self.view.layoutIfNeeded()
-//        })
-//            }
-//            else {
-//                expCard.earnedExpWidth.constant = (CGFloat(fractional) * expCard.emptyExpBar.frame.width)
-//                UIView.animate(withDuration: duration, animations: {
-//                    self.view.layoutIfNeeded()
-//                })
-//            }
-//        }
+        
+        //
+        //        let percentLoop = Int(percent)
+        //        let fractional = Double(percent) - Double(percentLoop)
+        //
+        //        if percent <= 1 {
+        //            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
+        //            UIView.animate(withDuration: 1.0, animations: {
+        //                self.view.layoutIfNeeded()
+        //            })
+        //        }
+        
+        //        for index in 1...percentLoop
+        //        {
+        //            let duration = TimeInterval(index/percentLoop)
+        //            if (index < percentLoop) {
+        //                expCard.earnedExpWidth.constant = 0
+        //                self.view.layoutIfNeeded()
+        //                expCard.earnedExpWidth.constant = 100
+        //            UIView.animate(withDuration: duration, animations: {
+        //            self.view.layoutIfNeeded()
+        //        })
+        //            }
+        //            else {
+        //                expCard.earnedExpWidth.constant = (CGFloat(fractional) * expCard.emptyExpBar.frame.width)
+        //                UIView.animate(withDuration: duration, animations: {
+        //                    self.view.layoutIfNeeded()
+        //                })
+        //            }
+        //        }
     }
     
     func resolveAnimations(expCard: ExpCard) {
         
-        let percent: CGFloat = 1
-        
-        var duration = TimeInterval(percent / 1)
-        if duration < 0.5 {
-            duration = 0.5
+        if achievements.expCardAnimations.count > 0 {
+            let nextAnimation = achievements.expCardAnimations[0]
+            
+            expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
+            expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
+            expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
+            expCard.expLeft.text = nextAnimation.expLeft.description + " exp to"
+            expCard.earnedExpWidth.constant = nextAnimation.gaugeStartPercent * expCard.emptyExpBar.frame.width
+            
+            view.layoutIfNeeded()
+            expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width
+            
+
+                UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { (finished) in
+                    // Nothing yet
+                })
+            }
         }
-        if duration > 1 {
-            duration = 1
-        }
-        
-        
-        if percent <= 1 {
-            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
-            UIView.animate(withDuration: duration, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
-                self.animatingExp = false
-            })
-        }
-        else {
-            expCard.earnedExpWidth.constant = expCard.emptyExpBar.frame.width
-            UIView.animate(withDuration: duration, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (finished) in
-                self.animateExpGain(percent: percent-1, expCard: expCard)
-            })
-        }
-    }
     
     func animateConstraints() {
         
@@ -341,7 +323,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         })
     }
     
-
+    
     
     func showDatePicker() {
         datePickerTop.constant = 8
@@ -360,7 +342,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func loadEvents() {
         
         self.activityIndicator.startAnimating()
-
+        
         
         if (!Reachability.isConnectedToNetwork()) {
             present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not load events."), animated: true, completion: nil)
@@ -612,16 +594,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         
         // Test connection
-//        var alert: UIAlertController
-//        if (Reachability.isConnectedToNetwork()) {
-//
-//        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
-//        }
-//        else {
-//            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
-//        }
-//
-//        present(alert, animated: true, completion: nil)
+        //        var alert: UIAlertController
+        //        if (Reachability.isConnectedToNetwork()) {
+        //
+        //        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
+        //        }
+        //        else {
+        //            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
+        //        }
+        //
+        //        present(alert, animated: true, completion: nil)
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {

@@ -76,7 +76,7 @@ class Achievements: NSObject {
                 }
             }
             if checkFirst {
-                //self.checkFirstActivity()
+                self.checkFirstActivity()
             }
             if checkDate {
                 self.checkDatePicker()
@@ -135,7 +135,7 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.newAchievements["Used date picker"] = 400
+        self.newAchievements["Used date picker"] = 50
     }
     
     func expRequiredFor(level: Int) -> Int {

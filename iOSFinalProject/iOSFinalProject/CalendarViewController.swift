@@ -22,9 +22,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         // do nothing
     }
     
-    
-    
-    
     func getView() -> UIView {
         return self.view
     }
@@ -72,6 +69,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     // Exp
     var expCard: ExpCard!
+    var displayLevelUp = false
     
     
     // Misc
@@ -204,23 +202,24 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
     }
     
-    func showExpCard(animatePercent: CGFloat) {
+    func levelUp() {
         
-        if expCard != nil {
-            expCard.removeFromSuperview()
+        displayLevelUp = false
+        
+        let xibViews = Bundle.main.loadNibNamed("LevelUp", owner: self, options: nil)
+        
+        let levelUp = xibViews?.first as! UIView
+        
+        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/2, width: view.bounds.width * 0.9, height: 170)
+        levelUp.alpha = 0
+        view.addSubview(levelUp)
+        
+        UIView.animate(withDuration: 1, animations: {
+            levelUp.alpha = 2
+        }) { (finished) in
+            levelUp.removeFromSuperview()
         }
-        
-        let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
-        
-        expCard = xibViews?.first as! ExpCard
-        expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
-        self.view.addSubview(expCard)
-        self.view.layoutIfNeeded()
-        
-        
-        animateExpGain(percent: animatePercent, expCard: expCard)
     }
-    
     
     
     
@@ -242,8 +241,33 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         for key in keys {
             let achievementExp = achievements.newAchievements[key]!
             
-            if achievementExp > expLeft {
-                // Loop
+            if achievementExp >= expLeft {
+                displayLevelUp = true
+                let destinationLevel = achievements.levelFor(exp: earnedExperience + achievementExp)
+                let levelsGained = destinationLevel - currentLevel
+                
+                let newEarnedExperience = earnedExperience + achievementExp
+                let newExpLeft = achievements.expRequiredFor(level: destinationLevel + 1) - newEarnedExperience
+                let expBetweenFinalLevels = achievements.expRequiredFor(level: destinationLevel) - achievements.expRequiredFor(level: destinationLevel - 1)
+                let newProgressToLevel = expBetweenFinalLevels - newExpLeft
+                let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenFinalLevels)
+                
+                for index in 0...levelsGained {
+
+
+                   
+                    if index < levelsGained {
+                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                        currentLevel += 1
+                        expPercentage = 0
+                    }
+                    else {
+                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                    }
+                    
+                    //earnedExperience += achievementExp
+                }
+                
             }
             else {
                 
@@ -253,44 +277,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newProgressToLevel = expBetweenLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 //MARK: - WORKING HERE
-                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: earnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
                 earnedExperience += achievementExp
             }
         }
         
         resolveAnimations(expCard: expCard)
-        
-        
-        //
-        //        let percentLoop = Int(percent)
-        //        let fractional = Double(percent) - Double(percentLoop)
-        //
-        //        if percent <= 1 {
-        //            expCard.earnedExpWidth.constant = (percent * expCard.emptyExpBar.frame.width)
-        //            UIView.animate(withDuration: 1.0, animations: {
-        //                self.view.layoutIfNeeded()
-        //            })
-        //        }
-        
-        //        for index in 1...percentLoop
-        //        {
-        //            let duration = TimeInterval(index/percentLoop)
-        //            if (index < percentLoop) {
-        //                expCard.earnedExpWidth.constant = 0
-        //                self.view.layoutIfNeeded()
-        //                expCard.earnedExpWidth.constant = 100
-        //            UIView.animate(withDuration: duration, animations: {
-        //            self.view.layoutIfNeeded()
-        //        })
-        //            }
-        //            else {
-        //                expCard.earnedExpWidth.constant = (CGFloat(fractional) * expCard.emptyExpBar.frame.width)
-        //                UIView.animate(withDuration: duration, animations: {
-        //                    self.view.layoutIfNeeded()
-        //                })
-        //            }
-        //        }
     }
     
     func resolveAnimations(expCard: ExpCard) {
@@ -298,7 +291,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         if achievements.expCardAnimations.count > 0 {
             let nextAnimation = achievements.expCardAnimations[0]
             
-            expCard.earnedExpPoints.text = (nextAnimation.earnedExp + nextAnimation.explanationExp).description + " exp points"
+            expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
             expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
             expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
             expCard.expLeft.text = nextAnimation.expLeft.description + " exp to"
@@ -307,14 +300,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             expCard.explanationEarnedExp.text = "You earned " + nextAnimation.explanationExp.description + " exp for:"
             expCard.explanationEarnedAchievement.text = nextAnimation.explanationAchievement
             
+            
             view.layoutIfNeeded()
             expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width
             
+            achievements.expCardAnimations.remove(at: 0)
 
                 UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
                     self.view.layoutIfNeeded()
                 }, completion: { (finished) in
-                    // Nothing yet
+                    if (self.displayLevelUp) {
+                        self.levelUp()
+                    }
+                    self.resolveAnimations(expCard: expCard)
+                    
                 })
             }
         }
@@ -591,9 +590,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
-        
-        showExpCard(animatePercent: 2.3)
-        
         
         
         // Test connection

@@ -135,7 +135,7 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.newAchievements["Used date picker"] = 50
+        self.newAchievements["Used date picker"] = 400
     }
     
     func expRequiredFor(level: Int) -> Int {

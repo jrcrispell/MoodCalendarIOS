@@ -17,6 +17,7 @@
 		863B4CF11FE73CFC006D25DE /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CF01FE73CFC006D25DE /* Achievement.swift */; };
 		8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8652F8781FDB088F00442E43 /* ExpCard.xib */; };
 		8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8652F87A1FDB097D00442E43 /* ExpCard.swift */; };
+		8662A17E1FFD5C830018FCE8 /* LevelUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8662A17D1FFD5C830018FCE8 /* LevelUp.xib */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
 		8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8685FC1B1FBF91FC004B39FB /* Settings.bundle */; };
@@ -49,6 +50,7 @@
 		863B4CF01FE73CFC006D25DE /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		8652F8781FDB088F00442E43 /* ExpCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpCard.xib; sourceTree = "<group>"; };
 		8652F87A1FDB097D00442E43 /* ExpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCard.swift; sourceTree = "<group>"; };
+		8662A17D1FFD5C830018FCE8 /* LevelUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelUp.xib; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8685FC1B1FBF91FC004B39FB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		86E242051F7C1A5700C1B63C /* iOSFinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				8662A17D1FFD5C830018FCE8 /* LevelUp.xib */,
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
 				86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */,
 				863B4CF01FE73CFC006D25DE /* Achievement.swift */,
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */,
+				8662A17E1FFD5C830018FCE8 /* LevelUp.xib in Resources */,
 				86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */,
 				8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */,
 				8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */,

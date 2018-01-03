@@ -13,13 +13,15 @@ import FirebaseAuth
 import UIKit
 
 protocol EXPShowing {
-    var animatingExp: Bool { get }
-    func showExpCard(expCard: ExpCard, percent: CGFloat)
+    var currentlyAnimating: Bool { get }
+    func showExpCard(expCard: ExpCard)
     func getView() -> UIView
-    func animateExpGain(percent: CGFloat, expCard: ExpCard)
+    func animateExpGain(expCard: ExpCard)
 }
 
 class Achievements: NSObject {
+    
+    var xibViews: [Any]? = nil
     
     let ref = Database.database().reference()
     let user = Auth.auth().currentUser
@@ -85,21 +87,18 @@ class Achievements: NSObject {
     }
     
     func animateExp(achievementsEarned: [String:Int]) {
-        print(achievementsEarned.debugDescription)
+
         let keys = Array(achievementsEarned.keys)
-        
         let view = expShower.getView()
         
-        let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
-        
+        if xibViews == nil {
+        xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
+        }
         let expCard = xibViews?.first as! ExpCard
         expCard.earnedExpWidth.constant = 0
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         
-        
-        //TODO: - Convert from 60 exp to .6 percent
-        
-        expShower.showExpCard(expCard: expCard, percent: 0.6)
+        expShower.showExpCard(expCard: expCard)
     }
     
     func checkFirstActivity() {

@@ -18,9 +18,6 @@ let g_dateFormatter = DateFormatter()
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
     
 {
-    func showExpCard(expCard: ExpCard) {
-        // do nothing
-    }
     
     func getView() -> UIView {
         return self.view
@@ -83,7 +80,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     var achievements: Achievements!
     
-    var animatingExp: Bool = false
+    var currentlyAnimating: Bool = false
     
     
     //MARK: - ViewController Overrides
@@ -192,13 +189,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     //MARK: WORKING HERE
     
-    func showExpCard(expCard: ExpCard, percent: CGFloat) {
+    func showExpCard(expCard: ExpCard) {
         self.expCard = expCard
         self.view.addSubview(expCard)
         self.view.layoutIfNeeded()
         
         
-        animateExpGain(percent: percent, expCard: expCard)
+        animateExpGain(expCard: expCard)
         
     }
     
@@ -223,7 +220,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     
     
-    func animateExpGain(percent: CGFloat, expCard: ExpCard) {
+    func animateExpGain(expCard: ExpCard) {
         
         //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
         
@@ -287,6 +284,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     func resolveAnimations(expCard: ExpCard) {
+        if (currentlyAnimating) {
+            return
+        }
+        currentlyAnimating = true
         
         if achievements.expCardAnimations.count > 0 {
             let nextAnimation = achievements.expCardAnimations[0]
@@ -312,6 +313,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                     if (self.displayLevelUp) {
                         self.levelUp()
                     }
+                    self.currentlyAnimating = false
                     self.resolveAnimations(expCard: expCard)
                     
                 })

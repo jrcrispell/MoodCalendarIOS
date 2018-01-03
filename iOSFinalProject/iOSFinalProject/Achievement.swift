@@ -76,7 +76,7 @@ class Achievements: NSObject {
                 }
             }
             if checkFirst {
-                self.checkFirstActivity()
+                //self.checkFirstActivity()
             }
             if checkDate {
                 self.checkDatePicker()
@@ -99,7 +99,7 @@ class Achievements: NSObject {
         
         //TODO: - Convert from 60 exp to .6 percent
         
-        expShower.showExpCard(expCard: expCard, percent: 1.5)
+        expShower.showExpCard(expCard: expCard, percent: 0.6)
     }
     
     func checkFirstActivity() {
@@ -135,7 +135,7 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.newAchievements["usedDatePicker"] = 50
+        self.newAchievements["Used date picker"] = 50
     }
     
     func expRequiredFor(level: Int) -> Int {

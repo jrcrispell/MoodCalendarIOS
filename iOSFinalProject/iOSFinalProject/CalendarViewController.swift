@@ -230,9 +230,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         var earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
-        let nextLevel = achievements.expRequiredFor(level: currentLevel + 1)
+        let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
         
-        var expLeft = nextLevel - earnedExperience
+        var expLeft = expForNextLevel - earnedExperience
         
         var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
         var progressToLevel = expBetweenLevels - expLeft
@@ -249,11 +249,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 
                 let newEarnedExperience = earnedExperience + achievementExp
                 
-                let newExpLeft = nextLevel - newEarnedExperience
+                let newExpLeft = expForNextLevel - newEarnedExperience
                 let newProgressToLevel = expBetweenLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 //MARK: - WORKING HERE
-                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: earnedExperience, expLeft: expLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: nextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: earnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
                 earnedExperience += achievementExp
             }
@@ -298,11 +298,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         if achievements.expCardAnimations.count > 0 {
             let nextAnimation = achievements.expCardAnimations[0]
             
-            expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
+            expCard.earnedExpPoints.text = (nextAnimation.earnedExp + nextAnimation.explanationExp).description + " exp points"
             expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
             expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
             expCard.expLeft.text = nextAnimation.expLeft.description + " exp to"
             expCard.earnedExpWidth.constant = nextAnimation.gaugeStartPercent * expCard.emptyExpBar.frame.width
+            
+            expCard.explanationEarnedExp.text = "You earned " + nextAnimation.explanationExp.description + " exp for:"
+            expCard.explanationEarnedAchievement.text = nextAnimation.explanationAchievement
             
             view.layoutIfNeeded()
             expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width

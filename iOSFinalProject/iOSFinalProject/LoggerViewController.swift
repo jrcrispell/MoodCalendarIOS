@@ -63,8 +63,13 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             if incomingExactStartTime - precedingEndTime < 0.60 {
                 incomingStartTime = precedingEndTime
             }
-        }
             
+            // Judge if end-time should be whatever the current time is
+            let now = dateToDouble(date: Date())
+            if abs(now - incomingEndTime) < 0.95 {
+                incomingEndTime = now
+            }
+        }
             
         else {
             // Editing existing Activity
@@ -73,7 +78,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             descriptionField.text = editingActivity.activityDescription
             moodPicker.selectRow(10 - editingActivity.moodScore, inComponent: 0, animated: true)
             activityRef = displayedDateRef.child(editingActivity.databaseID)
-
         }
         
         startTimePicker.setDate(doubleToDate(time: incomingStartTime), animated: true)
@@ -92,7 +96,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let hourFractional = time - Double(Int(time))
         let dateComponents = DateComponents(calendar: calendar, hour: Int(time), minute: Int(60*hourFractional))
         return calendar.date(from: dateComponents)!
-
+    }
+    
+    func dateToDouble(date: Date) -> Double{
+        let hour = Double(calendar.component(.hour, from: date))
+        let hourFractional = Double(calendar.component(.minute, from: date)) / 60
+        return hour + hourFractional
     }
     
     // MARK: - IBActions

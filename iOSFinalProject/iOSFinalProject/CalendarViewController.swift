@@ -145,6 +145,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             loggerView.incomingStartTime = sendStartTime
             loggerView.incomingEndTime = sendStartTime + 1
             loggerView.incomingExactStartTime = self.sendExactStartTime
+            if self.precedingActivity != nil {
+            loggerView.precedingEndTime = self.precedingActivity!.endTime
+            }
             
         }
         else if segue.identifier == "toCharts" {

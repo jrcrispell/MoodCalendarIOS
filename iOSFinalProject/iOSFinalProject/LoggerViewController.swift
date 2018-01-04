@@ -28,6 +28,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var incomingStartTime: Double = 8
     var incomingEndTime: Double = 9
     var incomingExactStartTime: Double = 8
+    var precedingEndTime: Double = 0
     
     // Database
     var ref: DatabaseReference!
@@ -57,7 +58,11 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             deleteButton.isEnabled = false
             moodPicker.selectRow(5, inComponent: 0, animated: true)
             activityRef = displayedDateRef.childByAutoId()
-
+            
+            // Judge if this activity should by default start at the end of the previous activity
+            if incomingExactStartTime - precedingEndTime < 0.60 {
+                incomingStartTime = precedingEndTime
+            }
         }
             
             

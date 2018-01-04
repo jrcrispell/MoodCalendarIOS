@@ -88,6 +88,9 @@
                                     <state key="normal" title="X">
                                         <color key="titleColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="closeButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="euB-yr-SKS"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40 exp to" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-1f-72j" userLabel="Exp Left">
                                     <rect key="frame" x="206.5" y="80" width="55" height="14.5"/>

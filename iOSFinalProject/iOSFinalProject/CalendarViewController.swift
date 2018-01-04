@@ -324,6 +324,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                     
                 })
             }
+        else {
+            let test = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+                if self.expCard != nil {
+                    //TODO: Animate out
+                    expCard.removeFromSuperview()
+                }
+            })
+
+            
+        }
         }
     
     func animateConstraints() {
@@ -681,6 +691,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         if sender.state.rawValue == 3 {
             let activityRef = displayedDateRef.child(editingActivity.databaseID)
             Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore, viewController: self)
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        if expCard != nil {
+            expCard.removeFromSuperview()
         }
     }
     

@@ -88,6 +88,10 @@ class Achievements: NSObject {
     
     func animateExp(achievementsEarned: [String:Int]) {
 
+        if expShower == nil {
+            return
+        }
+        
         let keys = Array(achievementsEarned.keys)
         let view = expShower.getView()
         

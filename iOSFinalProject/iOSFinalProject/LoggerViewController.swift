@@ -27,6 +27,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var displayedDate = Date()
     var incomingStartTime: Double = 8
     var incomingEndTime: Double = 9
+    var incomingExactStartTime: Double = 8
     
     // Database
     var ref: DatabaseReference!
@@ -40,7 +41,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var user: User!
     let white80Percent = UIColor.white.withAlphaComponent(0.80)
     
-    
+    //TODO: use preceding activity to improve date picker logic
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             activityRef = displayedDateRef.childByAutoId()
 
         }
+            
+            
         else {
             // Editing existing Activity
             incomingStartTime = editingActivity.startTime

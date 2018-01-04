@@ -72,7 +72,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     // Misc
     var daysActivities = [CalendarActivity]()
     var editingActivity: CalendarActivity!
+    var precedingActivity: CalendarActivity?
     var sendStartTime: Double = 0
+    var sendExactStartTime: Double = 0
     var editMode = false
     let userDefaults = UserDefaults.standard
     var datePickerVisibile = false
@@ -142,6 +144,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             loggerView.displayedDate = displayedDate
             loggerView.incomingStartTime = sendStartTime
             loggerView.incomingEndTime = sendStartTime + 1
+            loggerView.incomingExactStartTime = self.sendExactStartTime
             
         }
         else if segue.identifier == "toCharts" {
@@ -556,10 +559,24 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             editingActivity = activity
         }
         
+            // Get preceding activity for loggerview time picker logic
+            sendExactStartTime = Utils.convertYToHour(point.y)
+        if (editingActivity == nil) {
+            
+            var precedingEndTime = 0.0
+            
+            for activity in self.daysActivities {
+                if activity.endTime < self.sendExactStartTime && activity.endTime > precedingEndTime {
+                    self.precedingActivity = activity
+                    precedingEndTime = activity.endTime
+                }
+            }
+        }
+        
         // Calculate start hour where user clicked, will be sent in prepare function
         sendStartTime = Double(Int(Utils.convertYToHour(point.y)))
-        performSegue(withIdentifier: "toLogger", sender: sender)
         
+        performSegue(withIdentifier: "toLogger", sender: sender)
     }
     
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {

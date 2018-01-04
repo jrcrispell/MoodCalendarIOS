@@ -65,7 +65,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var backArrowButton: UIButton!
     
     // Exp
-    var expCard: ExpCard!
     var displayLevelUp = false
     
     
@@ -195,13 +194,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     //MARK: WORKING HERE
     
-    func showExpCard(expCard: ExpCard) {
-        self.expCard = expCard
-        self.view.addSubview(expCard)
+    func showExpCard() {
+        self.view.addSubview(achievements.expCard)
         self.view.layoutIfNeeded()
         
         
-        animateExpGain(expCard: expCard)
+        animateExpGain()
         
     }
     
@@ -226,7 +224,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     
     
-    func animateExpGain(expCard: ExpCard) {
+    func animateExpGain() {
         
         //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
         
@@ -268,7 +266,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                         achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                     }
                     
-                    //earnedExperience += achievementExp
                 }
                 
             }
@@ -279,25 +276,26 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newExpLeft = expForNextLevel - newEarnedExperience
                 let newProgressToLevel = expBetweenLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
-                //MARK: - WORKING HERE
                 achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
                 earnedExperience += achievementExp
             }
         }
         
-        resolveAnimations(expCard: expCard)
+        resolveAnimations()
     }
     
-    func resolveAnimations(expCard: ExpCard) {
+    func resolveAnimations() {
         if (currentlyAnimating) {
             return
         }
         currentlyAnimating = true
         
+        let expCard = achievements.expCard!
+        
         if achievements.expCardAnimations.count > 0 {
+
             let nextAnimation = achievements.expCardAnimations[0]
-            
             expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
             expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
             expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
@@ -320,13 +318,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                         self.levelUp()
                     }
                     self.currentlyAnimating = false
-                    self.resolveAnimations(expCard: expCard)
+                    self.resolveAnimations()
                     
                 })
             }
         else {
             let test = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
-                if self.expCard != nil {
+                if expCard != nil {
                     //TODO: Animate out
                     expCard.removeFromSuperview()
                 }
@@ -694,8 +692,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
-        if expCard != nil {
-            expCard.removeFromSuperview()
+        if achievements.expCard != nil {
+            achievements.expCard.removeFromSuperview()
         }
     }
     

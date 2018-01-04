@@ -14,9 +14,10 @@ import UIKit
 
 protocol EXPShowing {
     var currentlyAnimating: Bool { get }
-    func showExpCard(expCard: ExpCard)
+    func showExpCard()
     func getView() -> UIView
-    func animateExpGain(expCard: ExpCard)
+    func animateExpGain()
+    func resolveAnimations()
 }
 
 class Achievements: NSObject {
@@ -31,6 +32,8 @@ class Achievements: NSObject {
     var expShower: EXPShowing!
     
     var earnedExperience = 0
+    
+    var expCard: ExpCard!
     
     var newAchievements: [String:Int] = [:] {
         didSet {
@@ -98,11 +101,13 @@ class Achievements: NSObject {
         if xibViews == nil {
         xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
         }
-        let expCard = xibViews?.first as! ExpCard
+        if expCard == nil {
+        expCard = xibViews?.first as! ExpCard
         expCard.earnedExpWidth.constant = 0
+        }
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
         
-        expShower.showExpCard(expCard: expCard)
+        expShower.showExpCard()
     }
     
     func checkFirstActivity() {

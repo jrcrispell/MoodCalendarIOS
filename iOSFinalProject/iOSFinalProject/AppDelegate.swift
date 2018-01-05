@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Custom button actions
         let snoozeAction = UNNotificationAction(identifier: "snoozeAction", title: "Snooze 15 minutes", options: [])
         let settingsAction = UNNotificationAction(identifier: "settingsAction", title: "Change notification settings", options: [.foreground])
-        let quicklogAction = UNTextInputNotificationAction(identifier: "quickLogAction", title: "Quick Log", options: [], textInputButtonTitle: "Save", textInputPlaceholder: "Activity + Mood Score - Example: 'Schoolwork 6'")
+        let quicklogAction = UNTextInputNotificationAction(identifier: "quickLogAction", title: "Quick Log", options: [], textInputButtonTitle: "Save", textInputPlaceholder: "Walked the dog 8")
         
         // Set custom notification category
         let category = UNNotificationCategory(identifier: "moodCalendarNotification", actions: [settingsAction, quicklogAction, snoozeAction], intentIdentifiers: [], options: [])

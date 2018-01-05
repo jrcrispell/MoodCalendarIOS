@@ -18,7 +18,6 @@ let g_dateFormatter = DateFormatter()
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
     
 {
-    
     func getView() -> UIView {
         return self.view
     }
@@ -769,7 +768,6 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         
         // Making notification content
         let content = UNMutableNotificationContent()
-        content.title = "Mood Calendar Reminder"
         
         let hour = simpleComponents.hour!
         
@@ -779,22 +777,26 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         // Hour refers to the hour when the notification is schedule. The activity to be logged will be for the previous hour
         switch hour {
         case 0:
-            content.body = "Log activity for 11:00PM - 12:00AM"
+            content.title = "Log activity for 11:00PM - 12:00AM"
             // This prevents -1 from being saved as the hour
             content.userInfo = ["hour":Double(23)]
         case 1:
-            content.body = "Log activity for 12:00AM - 1:00AM"
+            content.title = "Log activity for 12:00AM - 1:00AM"
             break
         case let x where x < 12:
-            content.body = "Log activity for \(hour - 1):00AM - \(hour):00AM"
+            content.title = "Log activity for \(hour - 1):00AM - \(hour):00AM"
             break
         case 12:
-            content.body = "Log activity for 11:00AM - 12:00PM"
+            content.title = "Log activity for 11:00AM - 12:00PM"
         case 13:
-            content.body = "Log activity for 12:00PM - 1:00PM"
+            content.title = "Log activity for 12:00PM - 1:00PM"
         default:
-            content.body = "Log activity for \(hour-13):00PM - \(hour - 12):00 PM"
+            content.title = "Log activity for \(hour-13):00PM - \(hour - 12):00 PM"
         }
+        
+        // Add random motivational quote to body
+        let rand = Int(arc4random_uniform(UInt32(Quotes.all.count)))
+        content.body = Quotes.all[rand]
         
         content.sound = UNNotificationSound.default()
         

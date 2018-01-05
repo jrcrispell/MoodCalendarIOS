@@ -14,14 +14,18 @@
 		8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8634F2CA1FB37250000DBACB /* LoginViewController.swift */; };
 		863B4CEB1FE19519006D25DE /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CEA1FE19519006D25DE /* Reachability.swift */; };
 		863B4CEF1FE351FF006D25DE /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CEE1FE351FF006D25DE /* Arrow.swift */; };
+		863B4CF11FE73CFC006D25DE /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863B4CF01FE73CFC006D25DE /* Achievement.swift */; };
 		8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8652F8781FDB088F00442E43 /* ExpCard.xib */; };
 		8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8652F87A1FDB097D00442E43 /* ExpCard.swift */; };
+		8662A17E1FFD5C830018FCE8 /* LevelUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8662A17D1FFD5C830018FCE8 /* LevelUp.xib */; };
+		8662A1801FFEFF940018FCE8 /* Quotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8662A17F1FFEFF940018FCE8 /* Quotes.swift */; };
 		867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */; };
 		867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */; };
 		8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8685FC1B1FBF91FC004B39FB /* Settings.bundle */; };
 		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
+		86BAC69E1FF6810100E7A80F /* ExpCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */; };
 		86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
 		86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242081F7C1A5700C1B63C /* CalendarViewController.swift */; };
@@ -44,14 +48,18 @@
 		8634F2CA1FB37250000DBACB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		863B4CEA1FE19519006D25DE /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		863B4CEE1FE351FF006D25DE /* Arrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
+		863B4CF01FE73CFC006D25DE /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		8652F8781FDB088F00442E43 /* ExpCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpCard.xib; sourceTree = "<group>"; };
 		8652F87A1FDB097D00442E43 /* ExpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCard.swift; sourceTree = "<group>"; };
+		8662A17D1FFD5C830018FCE8 /* LevelUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LevelUp.xib; sourceTree = "<group>"; };
+		8662A17F1FFEFF940018FCE8 /* Quotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes.swift; sourceTree = "<group>"; };
 		867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerViewController.swift; sourceTree = "<group>"; };
 		867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8685FC1B1FBF91FC004B39FB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
+		86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCardAnimation.swift; sourceTree = "<group>"; };
 		86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartFormatter.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86E242061F7C1A5700C1B63C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,13 +124,19 @@
 		86E242051F7C1A5700C1B63C /* iOSFinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
-				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
-				863B4CEA1FE19519006D25DE /* Reachability.swift */,
-				8652F8781FDB088F00442E43 /* ExpCard.xib */,
 				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
 				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
 				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
+				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
+				8662A17D1FFD5C830018FCE8 /* LevelUp.xib */,
+				8662A17F1FFEFF940018FCE8 /* Quotes.swift */,
+				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
+				86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */,
+				863B4CF01FE73CFC006D25DE /* Achievement.swift */,
+				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
+				863B4CEA1FE19519006D25DE /* Reachability.swift */,
+				8652F8781FDB088F00442E43 /* ExpCard.xib */,
+				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
 				868F699F1FA10B9A0060016F /* CalendarView.swift */,
 				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
 				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
@@ -137,10 +151,8 @@
 				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
 				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
 				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
-				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
 				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
 				863415251FD8CA81001F5F42 /* Credits.swift */,
-				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -210,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				867809DF1FB2818B00B5E12F /* GoogleService-Info.plist in Resources */,
+				8662A17E1FFD5C830018FCE8 /* LevelUp.xib in Resources */,
 				86E242141F7C1A5700C1B63C /* LaunchScreen.storyboard in Resources */,
 				8652F8791FDB088F00442E43 /* ExpCard.xib in Resources */,
 				8685FC1C1FBF91FC004B39FB /* Settings.bundle in Resources */,
@@ -281,16 +294,19 @@
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,
+				86BAC69E1FF6810100E7A80F /* ExpCardAnimation.swift in Sources */,
 				86F83D041FC9F9B200C5B8EF /* MenuView.swift in Sources */,
 				868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */,
 				8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */,
 				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
+				8662A1801FFEFF940018FCE8 /* Quotes.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				863415261FD8CA81001F5F42 /* Credits.swift in Sources */,
 				863B4CEF1FE351FF006D25DE /* Arrow.swift in Sources */,
 				8652F87B1FDB097D00442E43 /* ExpCard.swift in Sources */,
 				863B4CEB1FE19519006D25DE /* Reachability.swift in Sources */,
 				86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */,
+				863B4CF11FE73CFC006D25DE /* Achievement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

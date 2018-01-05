@@ -8,14 +8,20 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-import UserNotifications
 import FirebaseAuth
+import UserNotifications
+
 import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
 
-class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate
+class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
+    
 {
+    func getView() -> UIView {
+        return self.view
+    }
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
@@ -58,22 +64,32 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var backArrowButton: UIButton!
     
     // Exp
-    var expCard: ExpCard!
+    var displayLevelUp = false
     
     
     // Misc
     var daysActivities = [CalendarActivity]()
     var editingActivity: CalendarActivity!
+    var precedingActivity: CalendarActivity?
     var sendStartTime: Double = 0
+    var sendExactStartTime: Double = 0
     var editMode = false
     let userDefaults = UserDefaults.standard
     var datePickerVisibile = false
     var bounds:CGRect!
     
+    var achievements: Achievements!
+    
+    var currentlyAnimating: Bool = false
+    
+    
     //MARK: - ViewController Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        achievements = Achievements(viewController: self)
+        
+        
         // For debug, calculating level exp requirements
         var j = 0
         for i in 0...20 {
@@ -88,9 +104,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         datePicker.setValue(UIColor.white, forKey: "textColor")
         
         self.view.backgroundColor = UIColor.white
-        
-        
-        
         
         // Set date
         g_dateFormatter.dateFormat = "MMM d, yyyy"
@@ -116,6 +129,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
+        achievements.check()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -128,12 +142,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             loggerView.displayedDate = displayedDate
             loggerView.incomingStartTime = sendStartTime
             loggerView.incomingEndTime = sendStartTime + 1
+            loggerView.incomingExactStartTime = self.sendExactStartTime
+            if self.precedingActivity != nil {
+            loggerView.precedingEndTime = self.precedingActivity!.endTime
+            }
             
         }
         else if segue.identifier == "toCharts" {
             guard let chartsView = segue.destination as? MyChartsViewController else {return}
             chartsView.oldSnapshot = menuView.snapshotView.image
-        
+            
         }
     }
     
@@ -173,20 +191,156 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.closeMenu()
     }
     
+    //MARK: WORKING HERE
+    
     func showExpCard() {
-        let xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
+        self.view.addSubview(achievements.expCard)
+        self.view.layoutIfNeeded()
         
-        expCard = xibViews?.first as! ExpCard
-        expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
-        self.view.addSubview(expCard)
-
+        
+        animateExpGain()
+        
     }
     
+    func levelUp() {
+        
+        displayLevelUp = false
+        
+        let xibViews = Bundle.main.loadNibNamed("LevelUp", owner: self, options: nil)
+        
+        let levelUp = xibViews?.first as! UIView
+        
+        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/2, width: view.bounds.width * 0.9, height: 170)
+        levelUp.alpha = 0
+        view.addSubview(levelUp)
+        
+        UIView.animate(withDuration: 1, animations: {
+            levelUp.alpha = 2
+        }) { (finished) in
+            levelUp.removeFromSuperview()
+        }
+    }
+    
+    
+    
+    func animateExpGain() {
+        
+        //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
+        
+        var earnedExperience = achievements.earnedExperience
+        var currentLevel = achievements.levelFor(exp: earnedExperience)
+        let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
+        
+        var expLeft = expForNextLevel - earnedExperience
+        
+        var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
+        var progressToLevel = expBetweenLevels - expLeft
+        var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
+        
+        let keys = Array(achievements.newAchievements.keys)
+        for key in keys {
+            let achievementExp = achievements.newAchievements[key]!
+            
+            if achievementExp >= expLeft {
+                displayLevelUp = true
+                let destinationLevel = achievements.levelFor(exp: earnedExperience + achievementExp)
+                let levelsGained = destinationLevel - currentLevel
+                
+                let newEarnedExperience = earnedExperience + achievementExp
+                let newExpLeft = achievements.expRequiredFor(level: destinationLevel + 1) - newEarnedExperience
+                let expBetweenFinalLevels = achievements.expRequiredFor(level: destinationLevel) - achievements.expRequiredFor(level: destinationLevel - 1)
+                let newProgressToLevel = expBetweenFinalLevels - newExpLeft
+                let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenFinalLevels)
+                
+                for index in 0...levelsGained {
+
+
+                   
+                    if index < levelsGained {
+                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                        currentLevel += 1
+                        expPercentage = 0
+                    }
+                    else {
+                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                    }
+                    
+                }
+                
+            }
+            else {
+                
+                let newEarnedExperience = earnedExperience + achievementExp
+                
+                let newExpLeft = expForNextLevel - newEarnedExperience
+                let newProgressToLevel = expBetweenLevels - newExpLeft
+                let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
+                achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                
+                earnedExperience += achievementExp
+            }
+        }
+        
+        resolveAnimations()
+    }
+    
+    func resolveAnimations() {
+        if (currentlyAnimating) {
+            return
+        }
+        currentlyAnimating = true
+        
+        let expCard = achievements.expCard!
+        
+        if achievements.expCardAnimations.count > 0 {
+
+            let nextAnimation = achievements.expCardAnimations[0]
+            expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
+            expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
+            expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
+            expCard.expLeft.text = nextAnimation.expLeft.description + " exp to"
+            expCard.earnedExpWidth.constant = nextAnimation.gaugeStartPercent * expCard.emptyExpBar.frame.width
+            
+            expCard.explanationEarnedExp.text = "You earned " + nextAnimation.explanationExp.description + " exp for:"
+            expCard.explanationEarnedAchievement.text = nextAnimation.explanationAchievement
+            
+            
+            view.layoutIfNeeded()
+            expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width
+            
+            achievements.expCardAnimations.remove(at: 0)
+
+                UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { (finished) in
+                    if (self.displayLevelUp) {
+                        self.levelUp()
+                    }
+                    self.currentlyAnimating = false
+                    self.resolveAnimations()
+                    
+                })
+            }
+        else {
+            let test = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+                if expCard != nil {
+                    //TODO: Animate out
+                    expCard.removeFromSuperview()
+                }
+            })
+
+            
+        }
+        }
+    
     func animateConstraints() {
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.view.layoutIfNeeded()
         })
     }
+    
+    
     
     func showDatePicker() {
         datePickerTop.constant = 8
@@ -205,7 +359,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func loadEvents() {
         
         self.activityIndicator.startAnimating()
-
+        
         
         if (!Reachability.isConnectedToNetwork()) {
             present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could not load events."), animated: true, completion: nil)
@@ -300,15 +454,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     @objc func handleSettings(_ sender: UIButton){
-        closeMenu()
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+        closeMenu()
+
     }
     
     @objc func handleCharts(_ sender: UIButton){
-        //closeMenu()
-        //performSegue(withIdentifier: "toCharts", sender: sender)
-        
-        present(Utils.makeSimpleAlert(title: "Charts unavailable", message: "Charts page will not be available until beta."), animated: true, completion: nil)
+        closeMenu()
+        performSegue(withIdentifier: "toCharts", sender: sender)
     }
     
     @objc func handleHome(_ sender: UIButton){
@@ -416,10 +569,24 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             editingActivity = activity
         }
         
+            // Get preceding activity for loggerview time picker logic
+            sendExactStartTime = Utils.convertYToHour(point.y)
+        if (editingActivity == nil) {
+            
+            var precedingEndTime = 0.0
+            
+            for activity in self.daysActivities {
+                if activity.endTime < self.sendExactStartTime && activity.endTime > precedingEndTime {
+                    self.precedingActivity = activity
+                    precedingEndTime = activity.endTime
+                }
+            }
+        }
+        
         // Calculate start hour where user clicked, will be sent in prepare function
         sendStartTime = Double(Int(Utils.convertYToHour(point.y)))
-        performSegue(withIdentifier: "toLogger", sender: sender)
         
+        performSegue(withIdentifier: "toLogger", sender: sender)
     }
     
     @IBAction func calendarViewLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -452,21 +619,18 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBAction func testNotificationTapped(_ sender: Any) {
         //TODO: - For debug only, make sure to delete button from storyboard too
         
-        showExpCard()
-        
-        
         
         // Test connection
-//        var alert: UIAlertController
-//        if (Reachability.isConnectedToNetwork()) {
-//
-//        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
-//        }
-//        else {
-//            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
-//        }
-//
-//        present(alert, animated: true, completion: nil)
+        //        var alert: UIAlertController
+        //        if (Reachability.isConnectedToNetwork()) {
+        //
+        //        alert = Utils.makeSimpleAlert(title: "Connected", message: "Yippie!")
+        //        }
+        //        else {
+        //            alert = Utils.makeSimpleAlert(title: "Not Connected", message: "Rats!")
+        //        }
+        //
+        //        present(alert, animated: true, completion: nil)
     }
     
     @objc func panDraggableHandle(_ sender: UIPanGestureRecognizer) {
@@ -523,7 +687,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         // Save when the gesture is complete
         if sender.state.rawValue == 3 {
             let activityRef = displayedDateRef.child(editingActivity.databaseID)
-            Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore)
+            Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.convertYToHour(topHandle.center.y) , endTime: Utils.convertYToHour(botHandle.center.y), eventDescription: editingActivity.activityDescription, moodScore: editingActivity.moodScore, viewController: self)
+        }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        if achievements.expCard != nil {
+            achievements.expCard.removeFromSuperview()
         }
     }
     
@@ -599,7 +768,6 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         
         // Making notification content
         let content = UNMutableNotificationContent()
-        content.title = "Mood Calendar Reminder"
         
         let hour = simpleComponents.hour!
         
@@ -609,22 +777,26 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
         // Hour refers to the hour when the notification is schedule. The activity to be logged will be for the previous hour
         switch hour {
         case 0:
-            content.body = "Log activity for 11:00PM - 12:00AM"
+            content.title = "Log activity for 11:00PM - 12:00AM"
             // This prevents -1 from being saved as the hour
             content.userInfo = ["hour":Double(23)]
         case 1:
-            content.body = "Log activity for 12:00AM - 1:00AM"
+            content.title = "Log activity for 12:00AM - 1:00AM"
             break
         case let x where x < 12:
-            content.body = "Log activity for \(hour - 1):00AM - \(hour):00AM"
+            content.title = "Log activity for \(hour - 1):00AM - \(hour):00AM"
             break
         case 12:
-            content.body = "Log activity for 11:00AM - 12:00PM"
+            content.title = "Log activity for 11:00AM - 12:00PM"
         case 13:
-            content.body = "Log activity for 12:00PM - 1:00PM"
+            content.title = "Log activity for 12:00PM - 1:00PM"
         default:
-            content.body = "Log activity for \(hour-13):00PM - \(hour - 12):00 PM"
+            content.title = "Log activity for \(hour-13):00PM - \(hour - 12):00 PM"
         }
+        
+        // Add random motivational quote to body
+        let rand = Int(arc4random_uniform(UInt32(Quotes.all.count)))
+        content.body = Quotes.all[rand]
         
         content.sound = UNNotificationSound.default()
         
@@ -716,7 +888,7 @@ extension CalendarViewController: UNUserNotificationCenterDelegate {
             
             let dateKey = g_dateFormatter.string(from: Date())
             
-            Utils.saveNewActivity(startTime: startTime, endTime: startTime + 1, eventDescription: eventDescription, moodScore: moodScore, dateKey: dateKey)
+            Utils.saveNewActivity(startTime: startTime, endTime: startTime + 1, eventDescription: eventDescription, moodScore: moodScore, dateKey: dateKey, viewController: self)
             
             loadEvents()
         }

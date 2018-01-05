@@ -27,6 +27,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var displayedDate = Date()
     var incomingStartTime: Double = 8
     var incomingEndTime: Double = 9
+    var incomingExactStartTime: Double = 8
+    var precedingEndTime: Double = 0
     
     // Database
     var ref: DatabaseReference!
@@ -40,7 +42,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var user: User!
     let white80Percent = UIColor.white.withAlphaComponent(0.80)
     
-    
+    //TODO: use preceding activity to improve date picker logic
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +58,19 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             deleteButton.isEnabled = false
             moodPicker.selectRow(5, inComponent: 0, animated: true)
             activityRef = displayedDateRef.childByAutoId()
-
+            
+            // Judge if this activity should by default start at the end of the previous activity
+            if incomingExactStartTime - precedingEndTime < 0.60 {
+                incomingStartTime = precedingEndTime
+            }
+            
+            // Judge if end-time should be whatever the current time is
+            let now = dateToDouble(date: Date())
+            if abs(now - incomingEndTime) < 0.95 {
+                incomingEndTime = now
+            }
         }
+            
         else {
             // Editing existing Activity
             incomingStartTime = editingActivity.startTime
@@ -65,7 +78,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             descriptionField.text = editingActivity.activityDescription
             moodPicker.selectRow(10 - editingActivity.moodScore, inComponent: 0, animated: true)
             activityRef = displayedDateRef.child(editingActivity.databaseID)
-
         }
         
         startTimePicker.setDate(doubleToDate(time: incomingStartTime), animated: true)
@@ -84,7 +96,12 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let hourFractional = time - Double(Int(time))
         let dateComponents = DateComponents(calendar: calendar, hour: Int(time), minute: Int(60*hourFractional))
         return calendar.date(from: dateComponents)!
-
+    }
+    
+    func dateToDouble(date: Date) -> Double{
+        let hour = Double(calendar.component(.hour, from: date))
+        let hourFractional = Double(calendar.component(.minute, from: date)) / 60
+        return hour + hourFractional
     }
     
     // MARK: - IBActions
@@ -111,7 +128,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         }
         
         // Save values to database
-        Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.dateToTime(calendar: calendar, date: startDate), endTime: Utils.dateToTime(calendar: calendar, date: endDate), eventDescription: descriptionField.text!, moodScore: moodScore)
+        Utils.saveToRef(calendar: calendar, activityRef: activityRef, startTime: Utils.dateToTime(calendar: calendar, date: startDate), endTime: Utils.dateToTime(calendar: calendar, date: endDate), eventDescription: descriptionField.text!, moodScore: moodScore, viewController: self)
         
         self.dismiss(animated: true, completion: nil)
 

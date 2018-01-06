@@ -37,8 +37,15 @@ class Achievements: NSObject {
     
     var newAchievements: [String:Int] = [:]
     
+    let userRef: DatabaseReference!
+    let achievementsRef: DatabaseReference!
+
+    
     
     init(viewController: UIViewController) {
+        
+        userRef = ref.child(user!.uid)
+        achievementsRef = userRef.child("Achievements")
         
         if viewController is EXPShowing {
             self.expShower = viewController as! EXPShowing
@@ -49,10 +56,6 @@ class Achievements: NSObject {
     
     func check() {
         
-        let ref = Database.database().reference()
-        let user = Auth.auth().currentUser
-            
-        let achievementsRef = ref.child(user!.uid).child("Achievements")
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let achievementsDict = snapshot.value as? [String:Any] else {
                 return
@@ -107,7 +110,6 @@ class Achievements: NSObject {
     func checkFirstActivity() {
         
         
-        let userRef = ref.child(user!.uid)
         userRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let daysArray = snapshot.value as? [String:Any] else {return}
             
@@ -116,13 +118,12 @@ class Achievements: NSObject {
             for day in daysArray {
                 if day.key == "Achievements" || day.key == "Experience" {continue}
                 else {
-                    let dayRef = userRef.child(day.key)
+                    let dayRef = self.userRef.child(day.key)
                     dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
                         if activityArray.count > 0 && !shouldBreak {
-                            //TODO: Uncomment next line to save to db
-                            //userRef.child("Achievements").child("firstActivity").setValue(true)
-                            self.newAchievements["firstActivity"] = 250
+                            self.achievementsRef.child("firstActivity").setValue(true)
+                            self.newAchievements["firstActivity"] = 50
                             self.animateExp()
                             shouldBreak = true
                             return
@@ -138,7 +139,8 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.newAchievements["Used date picker"] = 500
+        self.newAchievements["Used date picker"] = 60
+        achievementsRef.child("usedDatePicker").setValue(true)
         self.animateExp()
     }
     

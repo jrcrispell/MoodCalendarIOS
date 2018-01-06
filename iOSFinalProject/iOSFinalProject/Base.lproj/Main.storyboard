@@ -307,7 +307,7 @@
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What did you do?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Mh-FD-Jev">
-                                <rect key="frame" x="47.333333333333343" y="116.00000000000001" width="166" height="26.666666666666671"/>
+                                <rect key="frame" x="47.333333333333343" y="116.00000000000001" width="296.33333333333326" height="26.666666666666671"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -337,6 +337,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Mh-FD-Jev" firstAttribute="trailing" secondItem="ie5-Jp-XQw" secondAttribute="trailing" id="2Ky-OP-FNM"/>
                             <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="LSQ-rQ-joE" secondAttribute="bottom" id="6Xq-C9-Zv8"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="width" secondItem="fJg-Qi-gAR" secondAttribute="width" id="9TP-6Q-sEa"/>
                             <constraint firstItem="bhb-re-UU0" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="C92-8l-XDa"/>
@@ -682,7 +683,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="702.70935960591135"/>
+            <point key="canvasLocation" x="751" y="963"/>
         </scene>
         <!--ChartsViewController-->
         <scene sceneID="yC2-kU-Pni">
@@ -836,7 +837,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XgL-Gr-Ogm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1696.8" y="714.53201970443354"/>
+            <point key="canvasLocation" x="1467" y="963"/>
         </scene>
     </scenes>
     <resources>

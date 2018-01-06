@@ -252,6 +252,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             achievements.newAchievements[key] = nil
             let achievementExp = newAchievementsCopy[key]!
             achievements.earnedExperience += achievementExp
+            achievements.achievementsRef.child("earnedExperience").setValue(achievements.earnedExperience)
 
             // This is run if you're going to be gaining a level
             if achievementExp >= expLeft {

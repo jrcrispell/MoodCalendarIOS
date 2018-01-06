@@ -656,7 +656,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Top handle
                 
                 // Don't get too close to bottom line
-                if Double(newY) > (Double(botHandle.center.y) - 0.15 * g_hourVerticalPoints) {
+                if Double(newY) > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) {
                     shouldDrag = false
                 }
                 else {
@@ -670,7 +670,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Bot handle
                 
                 // Don't get too close to top line
-                if Double(newY) < (Double(topHandle.center.y) + 0.15 * g_hourVerticalPoints) {
+                if Double(newY) < (Double(topHandle.center.y) + 0.25 * g_hourVerticalPoints) {
                     shouldDrag = false
                 }
                 else {

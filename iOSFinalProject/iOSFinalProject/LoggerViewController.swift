@@ -65,7 +65,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             }
             
             // Judge if end-time should be whatever the current time is
-            let now = dateToDouble(date: Date())
+            let now = Utils.dateToTime(calendar: calendar, date: Date())
             if abs(now - incomingEndTime) < 0.95 {
                 incomingEndTime = now
             }
@@ -98,11 +98,6 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return calendar.date(from: dateComponents)!
     }
     
-    func dateToDouble(date: Date) -> Double{
-        let hour = Double(calendar.component(.hour, from: date))
-        let hourFractional = Double(calendar.component(.minute, from: date)) / 60
-        return hour + hourFractional
-    }
     
     // MARK: - IBActions
     
@@ -124,6 +119,10 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         // Make sure start time is before end time.
         if startDate > endDate{
             self.present(Utils.makeSimpleAlert(title: "Alert", message: "Start date can not be after end date"), animated: true, completion: nil)
+            return
+        }
+        else if Utils.dateToTime(calendar: calendar, date: endDate) - Utils.dateToTime(calendar: calendar, date: startDate) < 0.25 {
+            self.present(Utils.makeSimpleAlert(title: "Alert", message: "Activities must be at least 15 minutes long"), animated: true, completion: nil)
             return
         }
         

@@ -14,7 +14,7 @@ import UIKit
 
 protocol EXPShowing {
     var currentlyAnimating: Bool { get }
-    func showExpCard()
+    func showExpCard(alreadyVisible: Bool)
     func getView() -> UIView
     func animateExpGain()
     func resolveAnimations()
@@ -38,7 +38,7 @@ class Achievements: NSObject {
     var newAchievements: [String:Int] = [:] {
         didSet {
             print("didSetTriggered")
-            animateExp(achievementsEarned: newAchievements)
+            animateExp()
         }
     }
     
@@ -89,13 +89,12 @@ class Achievements: NSObject {
         }
     }
     
-    func animateExp(achievementsEarned: [String:Int]) {
+    func animateExp() {
 
         if expShower == nil {
             return
         }
         
-        let keys = Array(achievementsEarned.keys)
         let view = expShower.getView()
         
         if xibViews == nil {
@@ -104,10 +103,13 @@ class Achievements: NSObject {
         if expCard == nil {
         expCard = xibViews?.first as! ExpCard
         expCard.earnedExpWidth.constant = 0
-        }
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
+            expShower.showExpCard(alreadyVisible: false)
+        }
+        expShower.showExpCard(alreadyVisible: true)
+
+
         
-        expShower.showExpCard()
     }
     
     func checkFirstActivity() {
@@ -126,7 +128,6 @@ class Achievements: NSObject {
                     dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
                         if activityArray.count > 0 && !shouldBreak {
-                            print("WE HAVE AN ACTIVITY WAHOOOOOOO")
                             userRef.child("Achievements").child("firstActivity").setValue(true)
                             self.newAchievements["firstActivity"] = 60
                             shouldBreak = true

@@ -158,7 +158,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
-    //MARK: Helper Functions
+    //MARK: Menu
     
     func makeMenu() {
         
@@ -196,10 +196,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     //MARK: WORKING HERE
     
-    func showExpCard() {
+    func showExpCard(alreadyVisible: Bool) {
+        
+        if !alreadyVisible {
         self.view.addSubview(achievements.expCard)
         self.view.layoutIfNeeded()
-        
+        }
         
         animateExpGain()
         
@@ -230,6 +232,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
         
+        
         var earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
         let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
@@ -239,11 +242,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
         var progressToLevel = expBetweenLevels - expLeft
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
-        
+    
         let keys = Array(achievements.newAchievements.keys)
         for key in keys {
             let achievementExp = achievements.newAchievements[key]!
-            
+            achievements.earnedExperience += achievementExp
+
+            // This is run if you're going to be gaining a level
             if achievementExp >= expLeft {
                 displayLevelUp = true
                 let destinationLevel = achievements.levelFor(exp: earnedExperience + achievementExp)
@@ -257,8 +262,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 
                 for index in 0...levelsGained {
 
-
-                   
                     if index < levelsGained {
                         achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                         currentLevel += 1
@@ -271,6 +274,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 }
                 
             }
+                
+                // Gaining exp without gaining a level
             else {
                 
                 let newEarnedExperience = earnedExperience + achievementExp
@@ -280,7 +285,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
-                earnedExperience += achievementExp
+                achievements.earnedExperience += achievementExp
             }
         }
         
@@ -325,7 +330,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 })
             }
         else {
-            let test = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+            let test = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
                 if expCard != nil {
                     //TODO: Animate out
                     expCard.removeFromSuperview()

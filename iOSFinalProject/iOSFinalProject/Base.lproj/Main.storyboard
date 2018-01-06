@@ -328,7 +328,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How do you feel?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Iy-1Y-pUn">
-                                <rect key="frame" x="47.333333333333329" y="426.33333333333331" width="163.66666666666669" height="27"/>
+                                <rect key="frame" x="47.333333333333343" y="426.33333333333331" width="295.66666666666663" height="27"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -347,6 +347,7 @@
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="leading" secondItem="6Iy-1Y-pUn" secondAttribute="leading" id="G2g-u6-bYB"/>
                             <constraint firstItem="6Iy-1Y-pUn" firstAttribute="top" secondItem="fJg-Qi-gAR" secondAttribute="bottom" constant="42" id="H7k-vs-AED"/>
                             <constraint firstItem="cvE-mJ-4ZQ" firstAttribute="centerY" secondItem="czK-nS-pMk" secondAttribute="centerY" id="I23-X5-Lvb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6Iy-1Y-pUn" secondAttribute="trailing" constant="16" id="LhN-sY-yzM"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="N1U-mi-vG6"/>
                             <constraint firstItem="csf-M8-TTa" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="NSR-pi-0td"/>
                             <constraint firstItem="fJg-Qi-gAR" firstAttribute="height" secondItem="LSQ-rQ-joE" secondAttribute="height" multiplier="0.2" id="Oti-3M-etr"/>
@@ -431,8 +432,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsS-Dd-Odg">
-                                        <rect key="frame" x="151" y="120" width="130" height="32"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsS-Dd-Odg">
+                                        <rect key="frame" x="33" y="120" width="248" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Forgot password?">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -489,6 +490,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="qh7-oP-V93" firstAttribute="centerY" secondItem="bYZ-ul-lt7" secondAttribute="centerY" id="1TV-M0-Pdb"/>
+                                    <constraint firstItem="GsS-Dd-Odg" firstAttribute="leading" secondItem="bYZ-ul-lt7" secondAttribute="leading" id="4jL-zI-S1K"/>
                                     <constraint firstItem="Cie-s7-Qie" firstAttribute="top" secondItem="tXa-Fz-CD8" secondAttribute="bottom" constant="6" id="62L-ec-NwI"/>
                                     <constraint firstItem="qh7-oP-V93" firstAttribute="centerX" secondItem="ZJm-TZ-Ub7" secondAttribute="centerX" id="CNo-hh-2PC"/>
                                     <constraint firstItem="Aum-mJ-U4Y" firstAttribute="centerX" secondItem="sdk-0r-WfB" secondAttribute="centerX" id="Cus-JV-jTV"/>

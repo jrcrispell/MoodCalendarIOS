@@ -51,10 +51,7 @@ class Achievements: NSObject {
         
         let ref = Database.database().reference()
         let user = Auth.auth().currentUser
-        
-        let todaysDate = Date()
-        let todaysDateRef = ref.child(user!.uid).child(g_dateFormatter.string(from: todaysDate))
-        
+            
         let achievementsRef = ref.child(user!.uid).child("Achievements")
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let achievementsDict = snapshot.value as? [String:Any] else {

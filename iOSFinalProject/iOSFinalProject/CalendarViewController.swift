@@ -233,14 +233,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
         
         
-        var earnedExperience = achievements.earnedExperience
+        let earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
         let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
         
-        var expLeft = expForNextLevel - earnedExperience
+        let expLeft = expForNextLevel - earnedExperience
         
-        var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
-        var progressToLevel = expBetweenLevels - expLeft
+        let expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
+        let progressToLevel = expBetweenLevels - expLeft
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
         
         var newAchievementsCopy = achievements.newAchievements
@@ -305,7 +305,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
         currentlyAnimating = true
         
-        let expCard = achievements.expCard!
+        guard let expCard = achievements.expCard else {return}
         
         if achievements.expCardAnimations.count > 0 {
 
@@ -337,11 +337,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 })
             }
         else {
-            let test = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-                if expCard != nil {
+            let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
                     //TODO: Animate out
                     expCard.removeFromSuperview()
-                }
             })
 
             

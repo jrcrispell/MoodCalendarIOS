@@ -242,10 +242,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         var expBetweenLevels = achievements.expRequiredFor(level: currentLevel + 1) - achievements.expRequiredFor(level: currentLevel)
         var progressToLevel = expBetweenLevels - expLeft
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
+        
+        var newAchievementsCopy = achievements.newAchievements
     
-        let keys = Array(achievements.newAchievements.keys)
+        let keys = Array(newAchievementsCopy.keys)
         for key in keys {
-            let achievementExp = achievements.newAchievements[key]!
+            
+            // Remove from original array
+            achievements.newAchievements[key] = nil
+            let achievementExp = newAchievementsCopy[key]!
             achievements.earnedExperience += achievementExp
 
             // This is run if you're going to be gaining a level

@@ -35,12 +35,7 @@ class Achievements: NSObject {
     
     var expCard: ExpCard!
     
-    var newAchievements: [String:Int] = [:] {
-        didSet {
-            print("didSetTriggered")
-            animateExp()
-        }
-    }
+    var newAchievements: [String:Int] = [:]
     
     
     init(viewController: UIViewController) {
@@ -130,6 +125,7 @@ class Achievements: NSObject {
                         if activityArray.count > 0 && !shouldBreak {
                             userRef.child("Achievements").child("firstActivity").setValue(true)
                             self.newAchievements["firstActivity"] = 60
+                            self.animateExp()
                             shouldBreak = true
                             return
                         }
@@ -145,6 +141,7 @@ class Achievements: NSObject {
     
     func checkDatePicker() {
         self.newAchievements["Used date picker"] = 50
+        self.animateExp()
     }
     
     func expRequiredFor(level: Int) -> Int {

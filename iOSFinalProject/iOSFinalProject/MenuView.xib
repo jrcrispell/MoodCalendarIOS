@@ -38,7 +38,7 @@
                 <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtc-zs-dKj">
                     <rect key="frame" x="80" y="78" width="200" height="50"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <state key="normal" title="Charts">
+                    <state key="normal" title="Stats">
                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
@@ -76,6 +76,7 @@
                     </state>
                 </button>
             </subviews>
+            <color key="backgroundColor" red="0.3625217013888889" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="1u5-tv-6L2" firstAttribute="width" secondItem="go6-ez-ZXQ" secondAttribute="width" id="0J4-FX-oHr"/>
                 <constraint firstItem="beS-9h-2MW" firstAttribute="top" secondItem="Jtc-zs-dKj" secondAttribute="bottom" constant="8" id="0Kj-Ms-VTZ"/>

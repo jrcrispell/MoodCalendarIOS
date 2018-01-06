@@ -25,6 +25,7 @@
 		8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */; };
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
+		86AA5DA1200051F1000CDCB0 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */; };
 		86BAC69E1FF6810100E7A80F /* ExpCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */; };
 		86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDrawables.swift; sourceTree = "<group>"; };
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
+		86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCardAnimation.swift; sourceTree = "<group>"; };
 		86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartFormatter.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,7 @@
 				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
 				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
 				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
+				86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */,
 				8662A17D1FFD5C830018FCE8 /* LevelUp.xib */,
 				8662A17F1FFEFF940018FCE8 /* Quotes.swift */,
 				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
@@ -149,10 +152,10 @@
 				86FB52B11FB518E300C612B7 /* Utils.swift */,
 				8619C0BC1FBB507600444763 /* Styles.swift */,
 				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
-				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
-				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
 				863415251FD8CA81001F5F42 /* Credits.swift */,
+				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
+				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				8619C0BD1FBB507600444763 /* Styles.swift in Sources */,
 				86E242091F7C1A5700C1B63C /* CalendarViewController.swift in Sources */,
 				868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */,
+				86AA5DA1200051F1000CDCB0 /* StatsViewController.swift in Sources */,
 				867809DD1FB0E92E00B5E12F /* LoggerViewController.swift in Sources */,
 				8634F2CB1FB37250000DBACB /* LoginViewController.swift in Sources */,
 				86FB52B21FB518E300C612B7 /* Utils.swift in Sources */,

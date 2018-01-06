@@ -151,7 +151,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         else if segue.identifier == "toCharts" {
             guard let chartsView = segue.destination as? MyChartsViewController else {return}
             chartsView.oldSnapshot = menuView.snapshotView.image
-            
+        }
+        else if segue.identifier == "toStats" {
+            guard let statsView = segue.destination as? StatsViewController else {return}
+            statsView.oldSnapshot = menuView.snapshotView.image
         }
     }
     
@@ -461,7 +464,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @objc func handleCharts(_ sender: UIButton){
         closeMenu()
-        performSegue(withIdentifier: "toCharts", sender: sender)
+        //performSegue(withIdentifier: "toCharts", sender: sender)
+        performSegue(withIdentifier: "toStats", sender: sender)
     }
     
     @objc func handleHome(_ sender: UIButton){

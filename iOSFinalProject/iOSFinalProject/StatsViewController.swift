@@ -14,6 +14,8 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var activitiesCount: UILabel!
     @IBOutlet weak var hoursCount: UILabel!
     @IBOutlet weak var moodAverage: UILabel!
+    var oldSnapshot: UIImage!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +23,8 @@ class StatsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
 

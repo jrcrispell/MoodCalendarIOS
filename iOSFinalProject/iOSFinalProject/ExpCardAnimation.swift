@@ -17,9 +17,9 @@ class ExpCardAnimation {
     var duration: CGFloat {
         get{
             if gaugeEndPercent - gaugeStartPercent < 0.5 {
-                return 0.5
+                return 1
             }
-            return gaugeEndPercent - gaugeStartPercent
+            return (gaugeEndPercent - gaugeStartPercent) * 2
         }
     }
     let currentLevel: Int

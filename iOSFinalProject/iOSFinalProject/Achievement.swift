@@ -123,8 +123,9 @@ class Achievements: NSObject {
                     dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
                         if activityArray.count > 0 && !shouldBreak {
-                            userRef.child("Achievements").child("firstActivity").setValue(true)
-                            self.newAchievements["firstActivity"] = 60
+                            //TODO: Uncomment next line to save to db
+                            //userRef.child("Achievements").child("firstActivity").setValue(true)
+                            self.newAchievements["firstActivity"] = 250
                             self.animateExp()
                             shouldBreak = true
                             return
@@ -140,7 +141,7 @@ class Achievements: NSObject {
     }
     
     func checkDatePicker() {
-        self.newAchievements["Used date picker"] = 50
+        self.newAchievements["Used date picker"] = 500
         self.animateExp()
     }
     

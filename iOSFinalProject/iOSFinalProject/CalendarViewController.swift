@@ -215,12 +215,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         let levelUp = xibViews?.first as! UIView
         
-        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/2, width: view.bounds.width * 0.9, height: 170)
+        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/1.7, width: view.bounds.width * 0.9, height: 170)
         levelUp.alpha = 0
         view.addSubview(levelUp)
         
-        UIView.animate(withDuration: 1, animations: {
-            levelUp.alpha = 2
+        UIView.animate(withDuration: 3, animations: {
+            levelUp.alpha = 3
         }) { (finished) in
             levelUp.removeFromSuperview()
         }
@@ -261,17 +261,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 
                 let newEarnedExperience = earnedExperience + achievementExp
                 let newExpLeft = achievements.expRequiredFor(level: destinationLevel + 1) - newEarnedExperience
-                let expBetweenFinalLevels = achievements.expRequiredFor(level: destinationLevel) - achievements.expRequiredFor(level: destinationLevel - 1)
+                let expBetweenFinalLevels = achievements.expRequiredFor(level: destinationLevel + 1) - achievements.expRequiredFor(level: destinationLevel)
                 let newProgressToLevel = expBetweenFinalLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenFinalLevels)
                 
                 for index in 0...levelsGained {
 
+                    // Gaining level animation
                     if index < levelsGained {
-                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                        achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: 0, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                         currentLevel += 1
                         expPercentage = 0
                     }
+                        
+                        // final, non level gaining animation
                     else {
                         achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                     }
@@ -290,7 +293,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
                 
-                achievements.earnedExperience += achievementExp
             }
         }
         

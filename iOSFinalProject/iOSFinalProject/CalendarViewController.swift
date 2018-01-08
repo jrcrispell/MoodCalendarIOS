@@ -128,7 +128,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
         
-        showTip(number: 2)
+        //showTip(number: 2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -379,6 +379,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
                 //TODO: Animate out
                 expCard.removeFromSuperview()
+                self.achievements.expCardVisible = false
             })
             
             

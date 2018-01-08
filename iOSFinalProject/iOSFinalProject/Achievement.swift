@@ -37,8 +37,12 @@ class Achievements: NSObject {
     
     var newAchievements: [String:Int] = [:]
     
+    var expCardVisible = false
+    
     let userRef: DatabaseReference!
     let achievementsRef: DatabaseReference!
+    
+    var preventOverflow = false
 
     
     
@@ -54,10 +58,26 @@ class Achievements: NSObject {
         
     }
     
+    func createAchievementsDict() {
+        self.achievementsRef.child("Logged First Activity").setValue(false)
+        self.achievementsRef.child("Used Drag Resize").setValue(false)
+        self.achievementsRef.child("earnedExperience").setValue(0)
+        self.achievementsRef.child("Used Quick Log").setValue(false)
+        self.achievementsRef.child("Rated Application").setValue(false)
+        self.achievementsRef.child("Viewed Charts").setValue(false)
+        self.achievementsRef.child("Used Date Picker").setValue(false)
+
+    }
+    
     func check() {
         
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let achievementsDict = snapshot.value as? [String:Any] else {
+                if !self.preventOverflow {
+                self.createAchievementsDict()
+                self.check()
+                self.preventOverflow = true
+                }
                 return
             }
             
@@ -65,10 +85,10 @@ class Achievements: NSObject {
             var checkDate = false
             
             for achievement in achievementsDict {
-                if achievement.key == "firstActivity" && (achievement.value as! Bool) == false {
+                if achievement.key == "Logged First Activity" && (achievement.value as! Bool) == false {
                     checkFirst = true
                 }
-                else if achievement.key == "usedDatePicker" && (achievement.value as! Bool) == false {
+                else if achievement.key == "Used Date Picker" && (achievement.value as! Bool) == false {
                     checkDate = true
                 }
                 else if achievement.key == "earnedExperience" {
@@ -100,8 +120,9 @@ class Achievements: NSObject {
         expCard.earnedExpWidth.constant = 0
         expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
             expShower.showExpCard(alreadyVisible: false)
+            expCardVisible = true
         }
-        expShower.showExpCard(alreadyVisible: true)
+        expShower.showExpCard(alreadyVisible: expCardVisible)
 
 
         
@@ -122,8 +143,8 @@ class Achievements: NSObject {
                     dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
                         guard let activityArray = snapshot.value as? [String:Any] else {return}
                         if activityArray.count > 0 && !shouldBreak {
-                            self.achievementsRef.child("firstActivity").setValue(true)
-                            self.newAchievements["firstActivity"] = 50
+                            self.achievementsRef.child("Logged First Activity").setValue(true)
+                            self.newAchievements["Logged First Activity"] = 50
                             self.animateExp()
                             shouldBreak = true
                             return
@@ -140,7 +161,7 @@ class Achievements: NSObject {
     
     func checkDatePicker() {
         self.newAchievements["Used date picker"] = 60
-        achievementsRef.child("usedDatePicker").setValue(true)
+        achievementsRef.child("Used date picker").setValue(true)
         self.animateExp()
     }
     

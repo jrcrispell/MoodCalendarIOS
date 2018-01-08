@@ -505,13 +505,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func endEditMode() {
         editMode = false
-        // Remove draggable lines
-//        for view in calendarView.subviews {
-//            if view.tag == 2 || view.tag == 3 {
-//                view.removeFromSuperview()
-//            }
-//        }
+         //Remove draggable lines
+        for view in calendarView.subviews {
+            if view.tag == 2 || view.tag == 3 {
+                view.removeFromSuperview()
+            }
+        }
         achievements.check()
+        achievements.usedClickDragResize()
     }
     
     //MARK: Menu Selectors

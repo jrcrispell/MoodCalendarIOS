@@ -68,7 +68,7 @@ class ExpCard: UIView {
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-        self.removeFromSuperview()
+        self.isHidden = true
     }
     
     public func changeExpWidth(percent: CGFloat) {

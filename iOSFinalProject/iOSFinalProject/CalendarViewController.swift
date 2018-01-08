@@ -69,6 +69,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     // Exp
     var displayLevelUp = false
+    var expCardTimer: Timer? = nil
     
     
     // Misc
@@ -208,6 +209,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             self.view.addSubview(achievements.expCard)
             self.view.layoutIfNeeded()
         }
+        achievements.expCard.isHidden = false
+        achievements.expCardVisible = true
         
         animateExpGain()
         
@@ -226,9 +229,13 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         view.addSubview(levelUp)
         
         UIView.animate(withDuration: 3, animations: {
-            levelUp.alpha = 3
+            levelUp.alpha = 1
         }) { (finished) in
-            levelUp.removeFromSuperview()
+            
+            let _ = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { (timer) in
+                levelUp.removeFromSuperview()
+
+            })
         }
     }
     
@@ -255,11 +262,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             tipView.tipLine2.text = "on notifications to use QuickLog"
         }
         view.addSubview(tipView)
-        
-//        let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-//            //TODO: Animate out
-//            tipView.removeFromSuperview()
-//        })
+
     }
     
     
@@ -342,11 +345,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         if (currentlyAnimating) {
             return
         }
-        currentlyAnimating = true
         
         guard let expCard = achievements.expCard else {return}
         
         if achievements.expCardAnimations.count > 0 {
+            currentlyAnimating = true
             
             let nextAnimation = achievements.expCardAnimations[0]
             expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
@@ -376,10 +379,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             })
         }
         else {
-            let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
+            
+            if expCardTimer != nil {
+                expCardTimer?.invalidate()
+                expCardTimer = nil
+            }
+            
+            expCardTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
                 //TODO: Animate out
-                expCard.removeFromSuperview()
+                expCard.isHidden = true
                 self.achievements.expCardVisible = false
+                self.currentlyAnimating = false
             })
             
             
@@ -746,7 +756,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     override func viewWillDisappear(_ animated: Bool) {
         if achievements.expCard != nil {
-            achievements.expCard.removeFromSuperview()
+            achievements.expCard.isHidden = true
         }
     }
     

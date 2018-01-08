@@ -96,14 +96,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         achievements = Achievements(viewController: self)
         
-        
-        // For debug, calculating level exp requirements
-        var j = 0
-        for i in 0...20 {
-            j = j + i*100
-            print("Level \(i.description): " + j.description)
-        }
-        
         backArrowButton.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         
         datePicker.date = displayedDate
@@ -736,19 +728,40 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         let translation = sender.translation(in: self.view)
         
-        
         if let senderView = sender.view {
             var shouldDrag = true
             
+            
+            // Prevent overlap with other activities
+            var precedingEndTime = 0.0
+            var followingStartTime = 24.0
+            var precedingActivity: CalendarActivity? = nil
+            var followingActivity: CalendarActivity? = nil
+
+            for activity in self.daysActivities {
+                if activity.endTime < editingActivity.startTime && activity.endTime > precedingEndTime {
+                    precedingActivity = activity
+                    precedingEndTime = activity.endTime
+                    print("activity checker: endTime = \(activity.endTime)")
+                }
+                if activity.startTime > editingActivity.endTime && activity.startTime < followingStartTime {
+                    followingActivity = activity
+                    followingStartTime = activity.startTime
+                    print("activity checker: startTime = \(activity.startTime)")
+                }
+            }
+            
+            
             // Move handle
             let newY = senderView.center.y + translation.y
-            
-            
+            let doubleY = Double(newY)
             if senderView.tag == 2 {
-                // Top handle
                 
-                // Don't get too close to bottom line
-                if Double(newY) > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) {
+                // Top handle
+                // Don't get too close to bottom line or next activity
+                print("handle checker: precedEndY = \(Utils.converHourToY(time: precedingEndTime).description)")
+                print("handle checker: doubleY = \(doubleY)")
+                if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < precedingEndTime * g_hourVerticalPoints {
                     shouldDrag = false
                 }
                 else {

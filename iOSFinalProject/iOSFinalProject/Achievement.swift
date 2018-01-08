@@ -203,10 +203,22 @@ class Achievements: NSObject {
         
     }
     
+    // If first time using date picker give achievement
+    func usedDatePicker() {
+        achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
+            guard let achievementsDict = snapshot.value as? [String:Any] else {return}
+            for achievement in achievementsDict {
+                if achievement.key == "Used Date Picker" && (achievement.value as! Bool) == false {
+                    self.newAchievements["Used Date picker"] = 60
+                    self.achievementsRef.child("Used Date picker").setValue(true)
+                    self.animateExp()
+                }
+            }
+        }
+    }
+    
     func checkDatePicker() {
-        self.newAchievements["Used Date picker"] = 60
-        achievementsRef.child("Used Date picker").setValue(true)
-        self.animateExp()
+
     }
     
     func expRequiredFor(level: Int) -> Int {

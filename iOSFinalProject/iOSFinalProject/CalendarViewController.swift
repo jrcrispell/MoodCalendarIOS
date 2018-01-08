@@ -411,6 +411,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         scrollViewTopSpace.constant = 8
         datePickerVisibile = true
         animateConstraints()
+        achievements.usedDatePicker()
     }
     
     func hideDatePicker() {

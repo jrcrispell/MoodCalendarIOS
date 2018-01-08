@@ -127,6 +127,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         UserDefaults.standard.register(defaults: defaults)
         
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
+        
+        showTip(number: 2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +150,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             loggerView.incomingEndTime = sendStartTime + 1
             loggerView.incomingExactStartTime = self.sendExactStartTime
             if self.precedingActivity != nil {
-            loggerView.precedingEndTime = self.precedingActivity!.endTime
+                loggerView.precedingEndTime = self.precedingActivity!.endTime
             }
             
         }
@@ -203,8 +205,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func showExpCard(alreadyVisible: Bool) {
         
         if !alreadyVisible {
-        self.view.addSubview(achievements.expCard)
-        self.view.layoutIfNeeded()
+            self.view.addSubview(achievements.expCard)
+            self.view.layoutIfNeeded()
         }
         
         animateExpGain()
@@ -241,6 +243,27 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         downTapArrow.isHidden = false
     }
     
+    func showTip(number: Int) {
+        
+        let xibViews = Bundle.main.loadNibNamed("Tip", owner: self, options: nil)
+        
+        let tipView = xibViews?.first as! TipView
+        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 110, width: view.bounds.width * 0.7, height: 170)
+        
+        if number == 2 {
+            tipView.tipLine1.text = "Try pressing forcefully"
+            tipView.tipLine2.text = "on notifications to use QuickLog"
+        }
+        view.addSubview(tipView)
+        
+//        let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
+//            //TODO: Animate out
+//            tipView.removeFromSuperview()
+//        })
+    }
+    
+    
+    
     
     
     func animateExpGain() {
@@ -259,7 +282,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
         
         var newAchievementsCopy = achievements.newAchievements
-    
+        
         let keys = Array(newAchievementsCopy.keys)
         for key in keys {
             
@@ -268,7 +291,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             let achievementExp = newAchievementsCopy[key]!
             achievements.earnedExperience += achievementExp
             achievements.achievementsRef.child("earnedExperience").setValue(achievements.earnedExperience)
-
+            
             // This is run if you're going to be gaining a level
             if achievementExp >= expLeft {
                 displayLevelUp = true
@@ -282,7 +305,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenFinalLevels)
                 
                 for index in 0...levelsGained {
-
+                    
                     // Gaining level animation
                     if index < levelsGained {
                         achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: 0, gaugeStartPercent: expPercentage, gaugeEndPercent: 1.0, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
@@ -324,7 +347,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         guard let expCard = achievements.expCard else {return}
         
         if achievements.expCardAnimations.count > 0 {
-
+            
             let nextAnimation = achievements.expCardAnimations[0]
             expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
             expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
@@ -340,27 +363,27 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width
             
             achievements.expCardAnimations.remove(at: 0)
-
-                UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: { (finished) in
-                    if (self.displayLevelUp) {
-                        self.levelUp()
-                    }
-                    self.currentlyAnimating = false
-                    self.resolveAnimations()
-                    
-                })
-            }
+            
+            UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (finished) in
+                if (self.displayLevelUp) {
+                    self.levelUp()
+                }
+                self.currentlyAnimating = false
+                self.resolveAnimations()
+                
+            })
+        }
         else {
             let _ = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) in
-                    //TODO: Animate out
-                    expCard.removeFromSuperview()
+                //TODO: Animate out
+                expCard.removeFromSuperview()
             })
-
+            
             
         }
-        }
+    }
     
     func animateConstraints() {
         
@@ -485,7 +508,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @objc func handleSettings(_ sender: UIButton){
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
         closeMenu()
-
+        
     }
     
     @objc func handleCharts(_ sender: UIButton){
@@ -599,8 +622,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             editingActivity = activity
         }
         
-            // Get preceding activity for loggerview time picker logic
-            sendExactStartTime = Utils.convertYToHour(point.y)
+        // Get preceding activity for loggerview time picker logic
+        sendExactStartTime = Utils.convertYToHour(point.y)
         if (editingActivity == nil) {
             
             var precedingEndTime = 0.0

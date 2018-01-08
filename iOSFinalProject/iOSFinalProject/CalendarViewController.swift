@@ -35,6 +35,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     // Draggable handles (for long-click drag resizing)
     var topHandle: UIImageView?
     var botHandle: UIImageView?
+    // Prevent overlap with other activities
+    var precedingEndTime = 0.0
+    var followingStartTime = 24.0
     
     // Outlets
     @IBOutlet weak var dateButton: UIButton!
@@ -702,6 +705,20 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 endEditMode()
             }
         
+        precedingEndTime = 0.0
+        followingStartTime = 24.0
+        
+        for activity in self.daysActivities {
+            if activity.endTime < editingActivity.startTime && activity.endTime > precedingEndTime {
+                precedingEndTime = activity.endTime
+                print("activity checker: endTime = \(activity.endTime)")
+            }
+            if activity.startTime > editingActivity.endTime && activity.startTime < followingStartTime {
+                followingStartTime = activity.startTime
+                print("activity checker: startTime = \(activity.startTime)")
+            }
+        }
+        
     }
     
     @IBAction func testNotificationTapped(_ sender: Any) {
@@ -730,26 +747,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         if let senderView = sender.view {
             var shouldDrag = true
-            
-            
-            // Prevent overlap with other activities
-            var precedingEndTime = 0.0
-            var followingStartTime = 24.0
-            var precedingActivity: CalendarActivity? = nil
-            var followingActivity: CalendarActivity? = nil
-
-            for activity in self.daysActivities {
-                if activity.endTime < editingActivity.startTime && activity.endTime > precedingEndTime {
-                    precedingActivity = activity
-                    precedingEndTime = activity.endTime
-                    print("activity checker: endTime = \(activity.endTime)")
-                }
-                if activity.startTime > editingActivity.endTime && activity.startTime < followingStartTime {
-                    followingActivity = activity
-                    followingStartTime = activity.startTime
-                    print("activity checker: startTime = \(activity.startTime)")
-                }
-            }
             
             
             // Move handle

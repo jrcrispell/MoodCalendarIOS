@@ -18,6 +18,8 @@ protocol EXPShowing {
     func getView() -> UIView
     func animateExpGain()
     func resolveAnimations()
+    func showOnboarding()
+    func showTip(number: Int)
 }
 
 class Achievements: NSObject {
@@ -83,7 +85,6 @@ class Achievements: NSObject {
         self.achievementsRef.child("Used Date Picker").setValue(false)
         self.achievementsRef.child("Activity Count").setValue(0)
         self.achievementsRef.child("Hour Count").setValue(0.0)
-
     }
     
     func check() {
@@ -135,6 +136,10 @@ class Achievements: NSObject {
     
     func checkActivities(checkFirst: Bool, oldActivityCount: Int, oldHourCount: Double) {
         
+        if expShower == nil {
+            return
+        }
+        
         
         userRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let daysArray = snapshot.value as? [String:Any] else {return}
@@ -163,6 +168,16 @@ class Achievements: NSObject {
 
                     }
                 }
+            
+            if self.moodScores.count == 0 {
+                self.expShower.showOnboarding()
+            }
+            else if self.moodScores.count < 3 {
+                self.expShower.showTip(number: 1)
+            }
+            else if self.moodScores.count < 5 {
+               self.expShower.showTip(number: 2)
+            }
             
             // Check for Logged First Activity achievement
             if self.moodScores.count > 0 && checkFirst {

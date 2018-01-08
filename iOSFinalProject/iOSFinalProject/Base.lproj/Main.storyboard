@@ -51,12 +51,12 @@
                                                 <rect key="frame" x="169" y="8" width="37" height="37"/>
                                             </activityIndicatorView>
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43z-pz-jSz" userLabel="Tap Anywhere">
-                                                <rect key="frame" x="86" y="285" width="204" height="100"/>
+                                                <rect key="frame" x="86" y="285" width="204" height="110"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                                 </accessibility>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="PDx-i1-XD1"/>
+                                                    <constraint firstAttribute="height" constant="110" id="PDx-i1-XD1"/>
                                                 </constraints>
                                                 <string key="text">Tap anywhere to  
 add an activity</string>
@@ -65,7 +65,7 @@ add an activity</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Middle Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kTu-Er-jmu" userLabel="Down Tap Arrow">
-                                                <rect key="frame" x="177.5" y="393" width="20" height="100"/>
+                                                <rect key="frame" x="177.5" y="403" width="20" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="ynM-30-uSm"/>
                                                 </constraints>
@@ -157,7 +157,7 @@ add an activity</string>
                                             <action selector="arrowButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQm-Ug-fxo"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-dU-jeo">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ug3-dU-jeo">
                                         <rect key="frame" x="307" y="13" width="68" height="30"/>
                                         <state key="normal" title="Test">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -238,6 +238,7 @@ add an activity</string>
                         <outlet property="datePickerTop" destination="iVq-Ij-JzJ" id="pRb-vn-z5A"/>
                         <outlet property="downTapArrow" destination="kTu-Er-jmu" id="wJ1-ta-IMW"/>
                         <outlet property="hamburger" destination="xQI-xJ-AG4" id="5b5-Ik-R7H"/>
+                        <outlet property="navigationBar" destination="ikj-hr-I6g" id="qLK-0A-iSy"/>
                         <outlet property="scrollView" destination="ezs-Uc-Js5" id="uHK-v4-yFI"/>
                         <outlet property="scrollViewTopSpace" destination="mXK-cP-jf0" id="j1q-fa-T5G"/>
                         <outlet property="tapOnboardingText" destination="43z-pz-jSz" id="WQR-pK-C18"/>

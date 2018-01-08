@@ -44,7 +44,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pro Tip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwJ-Ff-Skv" userLabel="Pro Tip Header">
-                                    <rect key="frame" x="41" y="28" width="51.5" height="17"/>
+                                    <rect key="frame" x="38" y="28" width="51.5" height="17"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="textColor" red="0.094117647060000004" green="0.50196078430000002" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -59,14 +59,14 @@
                                         <action selector="closeTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="0VL-qG-OFE"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to edit its size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heg-bk-y6w" userLabel="Tip Line 2">
-                                    <rect key="frame" x="41" y="67" width="81" height="15"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="activity rectangle to edit its size" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heg-bk-y6w" userLabel="Tip Line 2">
+                                    <rect key="frame" x="42" y="67" width="185" height="15"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try doing a long press on an activity rectangle" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-1f-72j" userLabel="Tip Line 1">
-                                    <rect key="frame" x="41" y="48" width="267" height="15"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try doing a long press on an " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJg-1f-72j" userLabel="Tip Line 1">
+                                    <rect key="frame" x="38" y="48" width="167" height="15"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -77,11 +77,11 @@
                                 <constraint firstItem="aJg-1f-72j" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="bottom" constant="3" id="2eX-g2-iGi"/>
                                 <constraint firstItem="JE4-ej-udA" firstAttribute="top" secondItem="lrr-RG-s2a" secondAttribute="top" constant="16" id="9nS-6B-vR3"/>
                                 <constraint firstItem="Up4-h8-Lvx" firstAttribute="leading" secondItem="lrr-RG-s2a" secondAttribute="leading" constant="8" id="JEl-0r-jpJ"/>
-                                <constraint firstItem="PwJ-Ff-Skv" firstAttribute="leading" secondItem="lrr-RG-s2a" secondAttribute="leading" constant="41" id="QWC-WZ-hc5"/>
+                                <constraint firstItem="PwJ-Ff-Skv" firstAttribute="leading" secondItem="lrr-RG-s2a" secondAttribute="leading" constant="38" id="QWC-WZ-hc5"/>
                                 <constraint firstItem="PwJ-Ff-Skv" firstAttribute="top" secondItem="lrr-RG-s2a" secondAttribute="top" constant="28" id="TYl-DF-N5J"/>
                                 <constraint firstItem="Up4-h8-Lvx" firstAttribute="top" secondItem="PwJ-Ff-Skv" secondAttribute="bottom" id="XWW-qI-Tmb"/>
                                 <constraint firstAttribute="trailing" secondItem="JE4-ej-udA" secondAttribute="trailing" id="iE8-Z4-MT0"/>
-                                <constraint firstItem="heg-bk-y6w" firstAttribute="leading" secondItem="aJg-1f-72j" secondAttribute="leading" id="lc9-MQ-7cn"/>
+                                <constraint firstItem="heg-bk-y6w" firstAttribute="leading" secondItem="aJg-1f-72j" secondAttribute="leading" constant="4" id="lc9-MQ-7cn"/>
                                 <constraint firstItem="aJg-1f-72j" firstAttribute="leading" secondItem="PwJ-Ff-Skv" secondAttribute="leading" id="nCk-dY-XhP"/>
                                 <constraint firstItem="heg-bk-y6w" firstAttribute="top" secondItem="aJg-1f-72j" secondAttribute="bottom" constant="4" id="nrY-eI-zM7"/>
                             </constraints>
@@ -93,7 +93,6 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="140" id="1Ks-9e-lMB"/>
                         <constraint firstItem="lrr-RG-s2a" firstAttribute="width" secondItem="nkE-IN-BZZ" secondAttribute="width" multiplier="0.99" id="4od-0D-61S"/>

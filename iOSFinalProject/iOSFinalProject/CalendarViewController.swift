@@ -24,7 +24,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
+    //TODO: - known bugs: switching between activities in editing mode, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
     //TODO: - known bug: click-drag resizing doesn't give exp
     
     // Date data
@@ -52,6 +52,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var downTapArrow: UIImageView!
     @IBOutlet weak var tapOnboardingText: UITextView!
     
+    @IBOutlet weak var navigationBar: UIView!
     
     // Firebase
     let ref = Database.database().reference()
@@ -241,23 +242,37 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
-    func showDateOnboarding() {
+    func showOnboarding() {
+        // Date onboarding
         dateArrows.isHidden = false
-        dateOnboardingText.isHighlighted = false
-    }
-    
-    func showTapOnboarding() {
+        dateOnboardingText.isHidden = false
+        
+        // Tap onboarding
         tapOnboardingText.isHidden = false
         upTapArrow.isHidden = false
         downTapArrow.isHidden = false
     }
     
+    func hideOnboarding() {
+        // Date onboarding
+        dateArrows.isHidden = true
+        dateOnboardingText.isHidden = true
+        
+        // Tap onboarding
+        tapOnboardingText.isHidden = true
+        upTapArrow.isHidden = true
+        downTapArrow.isHidden = true
+    }
+    
+
     func showTip(number: Int) {
         
         let xibViews = Bundle.main.loadNibNamed("Tip", owner: self, options: nil)
         
+        
+        
         let tipView = xibViews?.first as! TipView
-        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 110, width: view.bounds.width * 0.7, height: 170)
+        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 170)
         
         if number == 2 {
             tipView.tipLine1.text = "Try pressing forcefully"
@@ -408,6 +423,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     
     func showDatePicker() {
+        // Hide date onboarding
+        dateArrows.isHidden = true
+        dateOnboardingText.isHidden = true
+        
         datePickerTop.constant = 8
         scrollViewTopSpace.constant = 8
         datePickerVisibile = true
@@ -505,6 +524,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func endEditMode() {
         editMode = false
+        editingActivity = nil
          //Remove draggable lines
         for view in calendarView.subviews {
             if view.tag == 2 || view.tag == 3 {
@@ -673,16 +693,23 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         var activityTouched = false
         
+        
+        if editingActivity != nil {
+            editingActivity = nil
+            endEditMode()
+        }
+        
         for activity in daysActivities {
             if timeTapped >= activity.startTime && timeTapped <= activity.endTime {
                 editActivity(activity: activity)
                 activityTouched = true
                 editingActivity = activity
             }
+        }
             if (!activityTouched) {
                 endEditMode()
             }
-        }
+        
     }
     
     @IBAction func testNotificationTapped(_ sender: Any) {

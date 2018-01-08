@@ -25,6 +25,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //TODO: - known bugs: switching between activities in editing mode, going from editing mode to selecting an empty activity pre-loads the wrong activity, don't allow dragging past the end of the calendar (above 12 AM will go to 11 PM)
+    //TODO: - known bug: click-drag resizing doesn't give exp
     
     // Date data
     var displayedDate = Date()
@@ -505,11 +506,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func endEditMode() {
         editMode = false
         // Remove draggable lines
-        for view in calendarView.subviews {
-            if view.tag == 2 || view.tag == 3 {
-                view.removeFromSuperview()
-            }
-        }
+//        for view in calendarView.subviews {
+//            if view.tag == 2 || view.tag == 3 {
+//                view.removeFromSuperview()
+//            }
+//        }
+        achievements.check()
     }
     
     //MARK: Menu Selectors

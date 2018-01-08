@@ -55,11 +55,21 @@ class Achievements: NSObject {
         
         userRef = ref.child(user!.uid)
         achievementsRef = userRef.child("Achievements")
-        
+        super.init()
+
         if viewController is EXPShowing {
             self.expShower = viewController as! EXPShowing
+            let view = expShower.getView()
+            
+            if xibViews == nil {
+                xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
+            }
+            if expCard == nil {
+                expCard = xibViews?.first as! ExpCard
+                expCard.earnedExpWidth.constant = 0
+                expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
+            }
         }
-        super.init()
         
     }
     
@@ -97,9 +107,6 @@ class Achievements: NSObject {
                 if achievement.key == "Logged First Activity" && (achievement.value as! Bool) == false {
                     checkFirst = true
                 }
-                else if achievement.key == "Used Date Picker" && (achievement.value as! Bool) == false {
-                    checkDate = true
-                }
                 else if achievement.key == "Earned Experience" {
                     self.earnedExperience = achievement.value as! Int
                 }
@@ -112,32 +119,18 @@ class Achievements: NSObject {
             }
 
                 self.checkActivities(checkFirst: checkFirst, oldActivityCount: activityCount, oldHourCount: hourCount)
-            
-            if checkDate {
-                self.checkDatePicker()
-            }
         }
     }
     
     func animateExp() {
-
-        if expShower == nil {
-            return
-        }
         
-        let view = expShower.getView()
+        if expShower != nil {
+            
         
-        if xibViews == nil {
-        xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
-        }
-        if expCard == nil {
-        expCard = xibViews?.first as! ExpCard
-        expCard.earnedExpWidth.constant = 0
-        expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
-            expShower.showExpCard(alreadyVisible: false)
-            expCardVisible = true
-        }
+        
         expShower.showExpCard(alreadyVisible: expCardVisible)
+        expCardVisible = true
+        }
     }
     
     func checkActivities(checkFirst: Bool, oldActivityCount: Int, oldHourCount: Double) {
@@ -176,7 +169,8 @@ class Achievements: NSObject {
                 self.achievementsRef.child("Logged First Activity").setValue(true)
                 self.newAchievements["Logged First Activity"] = 50
                 self.animateExp()
-                
+            }
+            
                 // Check for new activities
                 if self.moodScores.count > oldActivityCount {
                     let newActivities = self.moodScores.count - oldActivityCount
@@ -191,14 +185,14 @@ class Achievements: NSObject {
                     }
                     self.animateExp()
                 }
-                
+            
                 if self.hoursLogged > oldHourCount {
                     let newHours = self.hoursLogged - oldHourCount
                     self.newAchievements["Logged \(newHours.description) Hours"] = Int(newHours * 5)
                     self.achievementsRef.child("Hour Count").setValue(self.hoursLogged)
                     self.animateExp()
                 }
-            }
+            
             }
         
     }
@@ -209,17 +203,14 @@ class Achievements: NSObject {
             guard let achievementsDict = snapshot.value as? [String:Any] else {return}
             for achievement in achievementsDict {
                 if achievement.key == "Used Date Picker" && (achievement.value as! Bool) == false {
-                    self.newAchievements["Used Date picker"] = 60
-                    self.achievementsRef.child("Used Date picker").setValue(true)
+                    self.newAchievements["Used Date Picker"] = 60
+                    self.achievementsRef.child("Used Date Picker").setValue(true)
                     self.animateExp()
                 }
             }
         }
     }
     
-    func checkDatePicker() {
-
-    }
     
     func expRequiredFor(level: Int) -> Int {
         var j = 0

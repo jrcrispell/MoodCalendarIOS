@@ -162,6 +162,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         else if segue.identifier == "toStats" {
             guard let statsView = segue.destination as? StatsViewController else {return}
             statsView.oldSnapshot = menuView.snapshotView.image
+            statsView.achievements = achievements
         }
     }
     
@@ -293,7 +294,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             achievements.newAchievements[key] = nil
             let achievementExp = newAchievementsCopy[key]!
             achievements.earnedExperience += achievementExp
-            achievements.achievementsRef.child("earnedExperience").setValue(achievements.earnedExperience)
+            achievements.achievementsRef.child("Earned Experience").setValue(achievements.earnedExperience)
             
             // This is run if you're going to be gaining a level
             if achievementExp >= expLeft {

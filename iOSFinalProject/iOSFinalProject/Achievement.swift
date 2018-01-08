@@ -43,6 +43,11 @@ class Achievements: NSObject {
     let achievementsRef: DatabaseReference!
     
     var preventOverflow = false
+    
+    var daysLogged = 0
+    var moodScores: [Int] = []
+    var moodScoreSum = 0
+    var hoursLogged = 0.0
 
     
     
@@ -61,11 +66,13 @@ class Achievements: NSObject {
     func createAchievementsDict() {
         self.achievementsRef.child("Logged First Activity").setValue(false)
         self.achievementsRef.child("Used Drag Resize").setValue(false)
-        self.achievementsRef.child("earnedExperience").setValue(0)
+        self.achievementsRef.child("Earned Experience").setValue(0)
         self.achievementsRef.child("Used Quick Log").setValue(false)
         self.achievementsRef.child("Rated Application").setValue(false)
         self.achievementsRef.child("Viewed Charts").setValue(false)
         self.achievementsRef.child("Used Date Picker").setValue(false)
+        self.achievementsRef.child("Activity Count").setValue(0)
+        self.achievementsRef.child("Hour Count").setValue(0.0)
 
     }
     
@@ -83,6 +90,8 @@ class Achievements: NSObject {
             
             var checkFirst = false
             var checkDate = false
+            var activityCount = 0
+            var hourCount = 0.0
             
             for achievement in achievementsDict {
                 if achievement.key == "Logged First Activity" && (achievement.value as! Bool) == false {
@@ -91,13 +100,19 @@ class Achievements: NSObject {
                 else if achievement.key == "Used Date Picker" && (achievement.value as! Bool) == false {
                     checkDate = true
                 }
-                else if achievement.key == "earnedExperience" {
+                else if achievement.key == "Earned Experience" {
                     self.earnedExperience = achievement.value as! Int
                 }
+                else if achievement.key == "Activity Count" {
+                    activityCount = achievement.value as! Int
+                }
+                else if achievement.key == "Hour Count" {
+                    hourCount = achievement.value as! Double
+                }
             }
-            if checkFirst {
-                self.checkFirstActivity()
-            }
+
+                self.checkActivities(checkFirst: checkFirst, oldActivityCount: activityCount, oldHourCount: hourCount)
+            
             if checkDate {
                 self.checkDatePicker()
             }
@@ -123,45 +138,74 @@ class Achievements: NSObject {
             expCardVisible = true
         }
         expShower.showExpCard(alreadyVisible: expCardVisible)
-
-
-        
     }
     
-    func checkFirstActivity() {
+    func checkActivities(checkFirst: Bool, oldActivityCount: Int, oldHourCount: Double) {
         
         
         userRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let daysArray = snapshot.value as? [String:Any] else {return}
             
-            var shouldBreak = false
-
+            self.daysLogged = 0
+            self.moodScores = []
+            self.moodScoreSum = 0
+            self.hoursLogged = 0.0
+            
             for day in daysArray {
-                if day.key == "Achievements" || day.key == "Experience" {continue}
+                if day.key == "Achievements" {continue}
                 else {
-                    let dayRef = self.userRef.child(day.key)
-                    dayRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                        guard let activityArray = snapshot.value as? [String:Any] else {return}
-                        if activityArray.count > 0 && !shouldBreak {
-                            self.achievementsRef.child("Logged First Activity").setValue(true)
-                            self.newAchievements["Logged First Activity"] = 50
-                            self.animateExp()
-                            shouldBreak = true
-                            return
-                        }
-                    })
+                    self.daysLogged += 1
+                    
+                    guard let activitiesArray = daysArray[day.key] as? [String:Any] else {return}
+                    for activity in activitiesArray {
+                        guard let valuesArray = activitiesArray[activity.key] as? [String:Any],
+                            let moodScore = valuesArray["moodScore"] as? Int,
+                            let startTime = valuesArray["startTime"] as? Double,
+                            let endTime = valuesArray["endTime"] as? Double else {return}
+                        self.hoursLogged += endTime - startTime
+                        self.moodScores.append(moodScore)
+                        self.moodScoreSum += moodScore
+                    }
+                    
+
+                    }
                 }
-                if (shouldBreak) {
-                    print("Oops, I bwoke it")
-                    break
+            
+            // Check for Logged First Activity achievement
+            if self.moodScores.count > 0 && checkFirst {
+                self.achievementsRef.child("Logged First Activity").setValue(true)
+                self.newAchievements["Logged First Activity"] = 50
+                self.animateExp()
+                
+                // Check for new activities
+                if self.moodScores.count > oldActivityCount {
+                    let newActivities = self.moodScores.count - oldActivityCount
+                    if newActivities == 1 {
+                        self.newAchievements["Logged Activity"] = 5
+                        self.achievementsRef.child("Activity Count").setValue(self.moodScores.count)
+                    }
+                    else {
+                        self.newAchievements["Logged Activities"] = 5 * newActivities
+                        self.achievementsRef.child("Activity Count").setValue(self.moodScores.count)
+                        
+                    }
+                    self.animateExp()
+                }
+                
+                if self.hoursLogged > oldHourCount {
+                    let newHours = self.hoursLogged - oldHourCount
+                    self.newAchievements["Logged \(newHours.description) Hours"] = Int(newHours * 5)
+                    self.achievementsRef.child("Hour Count").setValue(self.hoursLogged)
+                    self.animateExp()
                 }
             }
-        }
+            }
+        
     }
     
     func checkDatePicker() {
-        self.newAchievements["Used date picker"] = 60
-        achievementsRef.child("Used date picker").setValue(true)
+        self.newAchievements["Used Date picker"] = 60
+        achievementsRef.child("Used Date picker").setValue(true)
         self.animateExp()
     }
     

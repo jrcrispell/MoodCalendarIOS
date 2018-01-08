@@ -264,7 +264,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         
         let tipView = xibViews?.first as! TipView
-        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 170)
+        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 86)
         
         if number == 2 {
             tipView.tipLine1.text = "Try pressing forcefully"
@@ -761,7 +761,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Don't get too close to bottom line or next activity
                 print("handle checker: precedEndY = \(Utils.converHourToY(time: precedingEndTime).description)")
                 print("handle checker: doubleY = \(doubleY)")
-                if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < precedingEndTime * g_hourVerticalPoints {
+                if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < precedingEndTime * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
                     shouldDrag = false
                 }
                 else {

@@ -41,11 +41,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     @IBOutlet weak var datePickerTop: NSLayoutConstraint!
     @IBOutlet weak var hamburger: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var datePickerHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewTopSpace: NSLayoutConstraint!
     @IBOutlet weak var background: UIImageView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
+    // Onboarding
+    @IBOutlet weak var dateArrows: UIImageView!
+    @IBOutlet weak var dateOnboardingText: UILabel!
+    @IBOutlet weak var upTapArrow: UIImageView!
+    @IBOutlet weak var downTapArrow: UIImageView!
+    @IBOutlet weak var tapOnboardingText: UITextView!
     
     
     // Firebase
@@ -224,6 +228,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }) { (finished) in
             levelUp.removeFromSuperview()
         }
+    }
+    
+    func showDateOnboarding() {
+        dateArrows.isHidden = false
+        dateOnboardingText.isHighlighted = false
+    }
+    
+    func showTapOnboarding() {
+        tapOnboardingText.isHidden = false
+        upTapArrow.isHidden = false
+        downTapArrow.isHidden = false
     }
     
     

@@ -35,7 +35,9 @@ class Achievements: NSObject {
     
     var earnedExperience = 0
     
-    var expCard: ExpCard!
+    var expCard: ExpCard?
+    
+    var expCardAdded = false
     
     var newAchievements: [String:Int] = [:]
     
@@ -67,9 +69,9 @@ class Achievements: NSObject {
                 xibViews = Bundle.main.loadNibNamed("ExpCard", owner: self, options: nil)
             }
             if expCard == nil {
-                expCard = xibViews?.first as! ExpCard
-                expCard.earnedExpWidth.constant = 0
-                expCard.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
+                expCard = xibViews?.first as? ExpCard
+                expCard!.earnedExpWidth.constant = 0
+                expCard!.frame = CGRect(x: view.bounds.width * 0.15, y: view.bounds.height - 140, width: view.bounds.width * 0.7, height: 170)
             }
         }
         
@@ -125,10 +127,11 @@ class Achievements: NSObject {
     
     func animateExp() {
         
+        if newAchievements.count == 0 {
+            return
+        }
+        
         if expShower != nil {
-            
-        
-        
         expShower.showExpCard(alreadyVisible: expCardVisible)
         expCardVisible = true
         }
@@ -202,8 +205,8 @@ class Achievements: NSObject {
                 }
             
                 if self.hoursLogged > oldHourCount {
-                    let newHours = self.hoursLogged - oldHourCount
-                    self.newAchievements["Logged \(newHours.description) Hours"] = Int(newHours * 5)
+                    let newHours = Int(self.hoursLogged - oldHourCount)
+                    self.newAchievements["Logged \(newHours.description) Hours"] = newHours * 5
                     self.achievementsRef.child("Hour Count").setValue(self.hoursLogged)
                     self.animateExp()
                 }

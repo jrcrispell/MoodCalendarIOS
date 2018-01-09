@@ -216,11 +216,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func showExpCard(alreadyVisible: Bool) {
         
-        if !alreadyVisible {
-            self.view.addSubview(achievements.expCard)
+        //hideOnboarding()
+        
+        if !achievements.expCardAdded {
+            self.view.addSubview(achievements.expCard!)
             self.view.layoutIfNeeded()
+            achievements.expCardAdded = true
         }
-        achievements.expCard.isHidden = false
+        achievements.expCard?.isHidden = false
         achievements.expCardVisible = true
         
         animateExpGain()
@@ -312,10 +315,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func animateExpGain() {
         
-        //TODO: Create an array of animation objects - if one achievement gains 3 levels then it'll be in there 3 times as 1 percent each, then recursion should work (remove the animation before the recursion call
+        if achievements.newAchievements.count == 0 {
+            return
+        }
         
-        
-        let earnedExperience = achievements.earnedExperience
+            let earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
         let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
         
@@ -832,7 +836,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     override func viewWillDisappear(_ animated: Bool) {
         if achievements.expCard != nil {
-            achievements.expCard.isHidden = true
+            achievements.expCard?.isHidden = true
         }
     }
     

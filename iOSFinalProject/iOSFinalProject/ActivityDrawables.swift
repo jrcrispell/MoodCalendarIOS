@@ -48,6 +48,16 @@ public class ActivityDrawables: NSObject {
     }
     
     func draw() {
+        let moodValue: Int32 = self.mood.intValue
+        if moodValue >= 5 {
+            let alpha = CGFloat(0.02 * Double(moodValue))
+            UIColor.yellow.withAlphaComponent(alpha).set()
+        }
+        else {
+            let alpha: CGFloat = CGFloat(0.02 * Double(10 - moodValue))
+            UIColor.blue.withAlphaComponent(alpha).set()
+        }
+        rectanglePath.fill()
         
         UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 0.2).set()
         

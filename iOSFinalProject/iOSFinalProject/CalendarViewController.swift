@@ -15,9 +15,13 @@ import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
 
-class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing
+class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing, TipViewShowing
     
 {
+    func removeTipView() {
+        closedTipView = true
+    }
+    
     func getView() -> UIView {
         return self.view
     }
@@ -76,6 +80,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var displayLevelUp = false
     var expCardTimer: Timer? = nil
     
+    var tipView: TipView?
+    var closedTipView = false
     
     // Misc
     var daysActivities = [CalendarActivity]()
@@ -126,17 +132,21 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
         
-        //showTip(number: 2)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        tipView = nil
         editingActivity = nil
         loadEvents()
         makeNextNotification(incomingDate: Date())
         achievements.check()
+        precedingEndTime = 0.0
+        followingStartTime = 24.0
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
         if segue.identifier == "toLogger" {
             guard let loggerView = segue.destination as? LoggerViewController else {return}
             if editingActivity != nil {
@@ -262,18 +272,22 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
     func showTip(number: Int) {
         
+        // Don't show if the user has already closed the tip view
+        if closedTipView {
+            return
+        }
+        
         let xibViews = Bundle.main.loadNibNamed("Tip", owner: self, options: nil)
         
-        
-        
-        let tipView = xibViews?.first as! TipView
-        tipView.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 86)
-        
+        tipView = xibViews?.first as? TipView
+        tipView!.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 86)
+        tipView!.tipShower = self
+        closedTipView =  false
         if number == 2 {
-            tipView.tipLine1.text = "Try pressing forcefully"
-            tipView.tipLine2.text = "on notifications to use QuickLog"
+            tipView!.tipLine1.text = "Try pressing forcefully"
+            tipView!.tipLine2.text = "on notifications to use QuickLog"
         }
-        view.addSubview(tipView)
+        view.addSubview(tipView!)
 
     }
     
@@ -701,7 +715,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 editingActivity = activity
             }
         }
-            if (!activityTouched) {
+            if (!activityTouched) || editingActivity == nil {
                 endEditMode()
             }
         
@@ -772,7 +786,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Bot handle
                 
                 // Don't get too close to top line
-                if Double(newY) < (Double(topHandle.center.y) + 0.25 * g_hourVerticalPoints) {
+                if doubleY < (Double(topHandle.center.y) + 0.25 * g_hourVerticalPoints) || doubleY > followingStartTime * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
                     shouldDrag = false
                 }
                 else {

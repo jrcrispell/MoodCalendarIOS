@@ -82,6 +82,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     var tipView: TipView?
     var closedTipView = false
+    var tipShown = false
+    var quicklogTipShown = false
+    var defaultTipShown = false
     
     // Misc
     var daysActivities = [CalendarActivity]()
@@ -272,9 +275,21 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
     func showTip(number: Int) {
         
-        // Don't show if the user has already closed the tip view
-        if closedTipView {
+        // Prevent the same tip from showing over and over
+        if closedTipView  || tipShown{
             return
+        }
+        if number != 2 {
+            if (defaultTipShown) {
+                return
+            }
+        defaultTipShown = true
+        }
+        else {
+            if (quicklogTipShown) {
+                return
+            }
+            quicklogTipShown = true
         }
         
         let xibViews = Bundle.main.loadNibNamed("Tip", owner: self, options: nil)
@@ -717,6 +732,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
             if (!activityTouched) || editingActivity == nil {
                 endEditMode()
+                return
             }
         
         precedingEndTime = 0.0
@@ -725,11 +741,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         for activity in self.daysActivities {
             if activity.endTime < editingActivity.startTime && activity.endTime > precedingEndTime {
                 precedingEndTime = activity.endTime
-                print("activity checker: endTime = \(activity.endTime)")
+                //print("activity checker: endTime = \(activity.endTime)")
             }
             if activity.startTime > editingActivity.endTime && activity.startTime < followingStartTime {
                 followingStartTime = activity.startTime
-                print("activity checker: startTime = \(activity.startTime)")
+                //print("activity checker: startTime = \(activity.startTime)")
             }
         }
         
@@ -768,14 +784,17 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             let doubleY = Double(newY)
             if senderView.tag == 2 {
                 
+                
+                
                 // Top handle
                 // Don't get too close to bottom line or next activity
-                print("handle checker: precedEndY = \(Utils.converHourToY(time: precedingEndTime).description)")
-                print("handle checker: doubleY = \(doubleY)")
+
                 if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < precedingEndTime * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
                     shouldDrag = false
                 }
                 else {
+                    //TODO - couldnt get the snapping to work
+                    //newYRounded = (Double(newY) / g_hourVerticalPoints * 30).rounded(.toNearestOrAwayFromZero) * g_hourVerticalPoints / 30
                     editingActivity.startTime = Utils.convertYToHour(newY)
                     calendarView.makeActivityDrawables()
                     calendarView.setNeedsDisplay()
@@ -797,7 +816,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             }
             
             if (shouldDrag) {
-                senderView.center = CGPoint(x: senderView.center.x, y: newY)
+                
+                senderView.center = CGPoint(x: senderView.center.x, y: CGFloat(newY))
             }
         }
         

@@ -48,6 +48,8 @@ public class ActivityDrawables: NSObject {
     }
     
     func draw() {
+        
+        // Add color according to mood score
         let moodValue: Int32 = self.mood.intValue
         if moodValue >= 5 {
             let alpha = CGFloat(0.02 * Double(moodValue))

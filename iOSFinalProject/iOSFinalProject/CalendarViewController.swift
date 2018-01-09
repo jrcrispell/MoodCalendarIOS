@@ -216,7 +216,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func showExpCard(alreadyVisible: Bool) {
         
-        //hideOnboarding()
+        hideOnboarding()
         
         if !achievements.expCardAdded {
             self.view.addSubview(achievements.expCard!)
@@ -278,7 +278,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
 
     func showTip(number: Int) {
         
-        // Prevent the same tip from showing over and over
+         //Prevent the same tip from showing over and over
         if closedTipView  || tipShown{
             return
         }
@@ -294,9 +294,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             }
             quicklogTipShown = true
         }
-        
+
         let xibViews = Bundle.main.loadNibNamed("Tip", owner: self, options: nil)
-        
+
         tipView = xibViews?.first as? TipView
         tipView!.frame = CGRect(x: view.bounds.width * 0.15, y: navigationBar.frame.maxY, width: view.bounds.width * 0.7, height: 86)
         tipView!.tipShower = self
@@ -787,8 +787,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             let newY = senderView.center.y + translation.y
             let doubleY = Double(newY)
             if senderView.tag == 2 {
-                
-                
                 
                 // Top handle
                 // Don't get too close to bottom line or next activity

@@ -14,9 +14,9 @@ import UIKit
 
 protocol EXPShowing {
     var currentlyAnimating: Bool { get }
-    func showExpCard(alreadyVisible: Bool)
+    func showExpCard(alreadyVisible: Bool, newAchievements: [String:Int])
     func getView() -> UIView
-    func animateExpGain()
+    func animateExpGain(newAchievements: [String:Int])
     func resolveAnimations()
     func showOnboarding()
     func showTip(number: Int)
@@ -134,7 +134,7 @@ class Achievements: NSObject {
         
         if expShower != nil {
             print("Achievements.shower not nil, calling shower")
-        expShower.showExpCard(alreadyVisible: expCardVisible)
+            expShower.showExpCard(alreadyVisible: expCardVisible, newAchievements: newAchievements)
         expCardVisible = true
         }
     }

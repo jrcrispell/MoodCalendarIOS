@@ -214,7 +214,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     //MARK: WORKING HERE
     
-    func showExpCard(alreadyVisible: Bool) {
+    func showExpCard(alreadyVisible: Bool, newAchievements: [String:Int]) {
                 
         if !achievements.expCardAdded {
             self.view.addSubview(achievements.expCard!)
@@ -226,7 +226,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         achievements.expCard?.isHidden = false
         achievements.expCardVisible = true
         
-        animateExpGain()
+        animateExpGain(newAchievements: newAchievements)
         
     }
     
@@ -313,14 +313,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     
     
-    func animateExpGain() {
+    func animateExpGain(newAchievements: [String:Int]) {
         
-        if achievements.newAchievements.count == 0 {
+        if newAchievements.count == 0 {
             return
         }
         print("Creating animations")
         
-            let earnedExperience = achievements.earnedExperience
+        let earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
         let expForNextLevel = achievements.expRequiredFor(level: currentLevel + 1)
         
@@ -330,7 +330,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         let progressToLevel = expBetweenLevels - expLeft
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
         
-        let newAchievementsCopy = achievements.newAchievements
+        let newAchievementsCopy = newAchievements
         
         let keys = Array(newAchievementsCopy.keys)
         for key in keys {
@@ -695,6 +695,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             editingActivity = activity
         }
         
+        self.precedingActivity = nil
         // Get preceding activity for loggerview time picker logic
         sendExactStartTime = Utils.convertYToHour(point.y)
         if (editingActivity == nil) {

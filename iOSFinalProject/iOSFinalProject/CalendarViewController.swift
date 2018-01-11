@@ -215,14 +215,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: WORKING HERE
     
     func showExpCard(alreadyVisible: Bool) {
-        
-        hideOnboarding()
-        
+                
         if !achievements.expCardAdded {
             self.view.addSubview(achievements.expCard!)
             self.view.layoutIfNeeded()
             achievements.expCardAdded = true
         }
+        
+        print("Unhiding expcard")
         achievements.expCard?.isHidden = false
         achievements.expCardVisible = true
         
@@ -318,6 +318,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         if achievements.newAchievements.count == 0 {
             return
         }
+        print("Creating animations")
         
             let earnedExperience = achievements.earnedExperience
         var currentLevel = achievements.levelFor(exp: earnedExperience)
@@ -329,13 +330,12 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         let progressToLevel = expBetweenLevels - expLeft
         var expPercentage = CGFloat(progressToLevel)/CGFloat(expBetweenLevels)
         
-        var newAchievementsCopy = achievements.newAchievements
+        let newAchievementsCopy = achievements.newAchievements
         
         let keys = Array(newAchievementsCopy.keys)
         for key in keys {
             
-            // Remove from original array
-            achievements.newAchievements[key] = nil
+
             let achievementExp = newAchievementsCopy[key]!
             achievements.earnedExperience += achievementExp
             achievements.achievementsRef.child("Earned Experience").setValue(achievements.earnedExperience)
@@ -379,24 +379,31 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 let newProgressToLevel = expBetweenLevels - newExpLeft
                 let newExpPercentage = CGFloat(newProgressToLevel)/CGFloat(expBetweenLevels)
                 achievements.expCardAnimations.append(ExpCardAnimation(earnedExp: newEarnedExperience, expLeft: newExpLeft, gaugeStartPercent: expPercentage, gaugeEndPercent: newExpPercentage, currentLevel: currentLevel, nextLevel: expForNextLevel, explanationExp: achievementExp, explanationAchievement: key))
+                print("added non level gaining animation")
                 
             }
+            // Remove from original array
+            achievements.newAchievements[key] = nil
         }
-        
+        print("about to call resolve")
         resolveAnimations()
     }
     
     func resolveAnimations() {
         if (currentlyAnimating) {
+            print("Resolve was animating, returning")
             return
         }
         
+        print("Resolve was not animating")
         guard let expCard = achievements.expCard else {return}
         
         if achievements.expCardAnimations.count > 0 {
             currentlyAnimating = true
             
             let nextAnimation = achievements.expCardAnimations[0]
+            
+            print("Preparing next animation: \(nextAnimation.explanationAchievement)")
             expCard.earnedExpPoints.text = nextAnimation.earnedExp.description + " exp points"
             expCard.currentLevel.text = "Level " + nextAnimation.currentLevel.description
             expCard.nextLevel.text = "Level " + (nextAnimation.currentLevel + 1).description
@@ -411,20 +418,22 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
             expCard.earnedExpWidth.constant = nextAnimation.gaugeEndPercent * expCard.emptyExpBar.frame.width
             
             achievements.expCardAnimations.remove(at: 0)
-            
+            print("About to animate")
             UIView.animate(withDuration: TimeInterval(nextAnimation.duration), animations: {
                 self.view.layoutIfNeeded()
             }, completion: { (finished) in
+                print("animation done")
                 if (self.displayLevelUp) {
                     self.levelUp()
                 }
                 self.currentlyAnimating = false
+                print("About to recurse resolve")
                 self.resolveAnimations()
                 
             })
         }
         else {
-            
+            print("no animations left")
             if expCardTimer != nil {
                 expCardTimer?.invalidate()
                 expCardTimer = nil

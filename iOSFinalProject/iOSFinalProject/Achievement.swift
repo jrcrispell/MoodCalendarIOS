@@ -20,6 +20,7 @@ protocol EXPShowing {
     func resolveAnimations()
     func showOnboarding()
     func showTip(number: Int)
+    func hideOnboarding()
 }
 
 class Achievements: NSObject {
@@ -132,6 +133,7 @@ class Achievements: NSObject {
         }
         
         if expShower != nil {
+            print("Achievements.shower not nil, calling shower")
         expShower.showExpCard(alreadyVisible: expCardVisible)
         expCardVisible = true
         }
@@ -175,10 +177,13 @@ class Achievements: NSObject {
             if self.moodScores.count == 0 {
                 self.expShower.showOnboarding()
             }
-            else if self.moodScores.count < 3 {
+            else {
+                self.expShower.hideOnboarding()
+            }
+            if self.moodScores.count >= 2 && self.moodScores.count <= 3  {
                 self.expShower.showTip(number: 1)
             }
-            else if self.moodScores.count < 5 {
+            else if self.moodScores.count >= 5 && self.moodScores.count <= 6{
                self.expShower.showTip(number: 2)
             }
             
@@ -204,16 +209,19 @@ class Achievements: NSObject {
                     self.animateExp()
                 }
             
+            // Handle exp gain by hours logged
                 if self.hoursLogged > oldHourCount {
                     
-                    var roundedHours = (self.hoursLogged * 10).rounded(.toNearestOrAwayFromZero) / 10
                     
                     
+                    let roundedHours = (self.hoursLogged * 10).rounded(.toNearestOrAwayFromZero) / 10
                     
-                    let newHours = Int(self.hoursLogged - oldHourCount)
-                    if newHours == 0 {return}
-                    self.newAchievements["Total logged hours: (\(roundedHours)"] = newHours * 5
+                    let newHours = self.hoursLogged - oldHourCount
                     self.achievementsRef.child("Hour Count").setValue(self.hoursLogged)
+                    
+                    self.newAchievements["Total logged hours: (\(roundedHours))"] = Int(newHours * 5)
+                    print("Added hours, calling animate")
+                    
                     self.animateExp()
                 }
             
@@ -235,7 +243,7 @@ class Achievements: NSObject {
         }
     }
     
-    // If first time using date picker give achievement
+    // If first time using drag resize give achievement
     func usedClickDragResize() {
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in
             guard let achievementsDict = snapshot.value as? [String:Any] else {return}

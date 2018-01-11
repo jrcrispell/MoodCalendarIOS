@@ -753,11 +753,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         followingStartTime = 24.0
         
         for activity in self.daysActivities {
-            if activity.endTime < editingActivity.startTime && activity.endTime > precedingEndTime {
+            if activity.endTime <= editingActivity.startTime && activity.endTime >= precedingEndTime {
                 precedingEndTime = activity.endTime
                 //print("activity checker: endTime = \(activity.endTime)")
             }
-            if activity.startTime > editingActivity.endTime && activity.startTime < followingStartTime {
+            if activity.startTime >= editingActivity.endTime && activity.startTime <= followingStartTime {
                 followingStartTime = activity.startTime
                 //print("activity checker: startTime = \(activity.startTime)")
             }
@@ -801,7 +801,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Top handle
                 // Don't get too close to bottom line or next activity
 
-                if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < precedingEndTime * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
+                if doubleY > (Double(botHandle.center.y) - 0.25 * g_hourVerticalPoints) || doubleY < (precedingEndTime + 0.03) * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
                     shouldDrag = false
                 }
                 else {
@@ -817,7 +817,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                 // Bot handle
                 
                 // Don't get too close to top line
-                if doubleY < (Double(topHandle.center.y) + 0.25 * g_hourVerticalPoints) || doubleY > followingStartTime * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
+                if doubleY < (Double(topHandle.center.y) + 0.25 * g_hourVerticalPoints) || doubleY > (followingStartTime - 0.03) * g_hourVerticalPoints + Double(navigationBar.frame.minY) {
                     shouldDrag = false
                 }
                 else {
@@ -825,6 +825,8 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
                     calendarView.makeActivityDrawables()
                     calendarView.setNeedsDisplay()
                 }
+                
+                //TODO: - check to see if we're within a 2 minutes of an activity, then snap to flush to it
             }
             
             if (shouldDrag) {

@@ -279,11 +279,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func showTip(number: Int) {
         
          //Prevent the same tip from showing over and over
-        if closedTipView  || tipShown{
+        if tipShown{
             return
         }
         if number != 2 {
-            if (defaultTipShown) {
+            if defaultTipShown || closedTipView {
                 return
             }
         defaultTipShown = true

@@ -205,8 +205,14 @@ class Achievements: NSObject {
                 }
             
                 if self.hoursLogged > oldHourCount {
+                    
+                    var roundedHours = (self.hoursLogged * 10).rounded(.toNearestOrAwayFromZero) / 10
+                    
+                    
+                    
                     let newHours = Int(self.hoursLogged - oldHourCount)
-                    self.newAchievements["Logged \(newHours.description) Hours"] = newHours * 5
+                    if newHours == 0 {return}
+                    self.newAchievements["Total logged hours: (\(roundedHours)"] = newHours * 5
                     self.achievementsRef.child("Hour Count").setValue(self.hoursLogged)
                     self.animateExp()
                 }

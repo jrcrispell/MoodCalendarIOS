@@ -23,6 +23,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var moodPicker: UIPickerView!
     
+    @IBOutlet weak var emojiPicker: UIPickerView!
+    
     // Incoming data
     var editingActivity: CalendarActivity!
     var displayedDate = Date()
@@ -40,6 +42,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     // Misc
     let calendar = Calendar.current
     let moodPickerData = ["10", "9", "8", "7", "6", "5", "4", "3", "2", "1"]
+    let emojiPickerData = [#imageLiteral(resourceName: "HappyFace"), #imageLiteral(resourceName: "MiddleFace"), #imageLiteral(resourceName: "SangryFace")]
     var user: User!
     let white80Percent = UIColor.white.withAlphaComponent(0.80)
     
@@ -165,12 +168,40 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        // Emoji
+        if pickerView.tag == 1 {
+            return 3
+        }
+            // Mood score
+        else if pickerView.tag == 2 {
         return 10
+        }
+        return 0
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 2 {
         return moodPickerData[row]
+        }
+        else {return ""}
     }
+    
+//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+//        if pickerView.tag == 1 {
+//
+//        }
+//        return nil
+//    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        if pickerView.tag == 1 {
+            return 60
+        }
+        else {return 30}
+    }
+    
+    //TODO: left off here
     
     // Keyboard dismissals
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

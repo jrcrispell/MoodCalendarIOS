@@ -41,7 +41,13 @@ public class ActivityDrawables: NSObject {
         rectanglePath = UIBezierPath(roundedRect: rectangle, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
         rectanglePath.close()
         
-        activityDescription = "  " + activity.activityDescription as NSString
+        let description = activity.activityDescription
+        if description.count < 24 {
+        activityDescription = "  " + description as NSString
+        }
+        else {
+            activityDescription = "  " + description.prefix(23) + "..." as NSString
+        }
 
         super.init()
         

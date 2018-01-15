@@ -28,6 +28,7 @@
 		868F69A01FA10B9A0060016F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F699F1FA10B9A0060016F /* CalendarView.swift */; };
 		868F69A21FA10C4A0060016F /* CalendarActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868F69A11FA10C4A0060016F /* CalendarActivity.swift */; };
 		86AA5DA1200051F1000CDCB0 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */; };
+		86B3DF5A200D146B00BFBAC6 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3DF59200D146A00BFBAC6 /* CreateAccountViewController.swift */; };
 		86BAC69E1FF6810100E7A80F /* ExpCardAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */; };
 		86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */; };
 		86E242071F7C1A5700C1B63C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E242061F7C1A5700C1B63C /* AppDelegate.swift */; };
@@ -65,6 +66,7 @@
 		868F699F1FA10B9A0060016F /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		868F69A11FA10C4A0060016F /* CalendarActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarActivity.swift; sourceTree = "<group>"; };
 		86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		86B3DF59200D146A00BFBAC6 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpCardAnimation.swift; sourceTree = "<group>"; };
 		86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartFormatter.swift; sourceTree = "<group>"; };
 		86E242031F7C1A5700C1B63C /* iOSFinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSFinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,11 +114,12 @@
 		86B3DF56200D12D200BFBAC6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
-				86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */,
 				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
+				86B3DF59200D146A00BFBAC6 /* CreateAccountViewController.swift */,
 				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
 				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
+				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
+				86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -176,10 +179,10 @@
 		86E242051F7C1A5700C1B63C /* iOSFinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				86B3DF56200D12D200BFBAC6 /* View Controllers */,
 				86B3DF57200D12F600BFBAC6 /* Xibs */,
 				86B3DF58200D133F00BFBAC6 /* Classes */,
-				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				8685FC1B1FBF91FC004B39FB /* Settings.bundle */,
 				86E242101F7C1A5700C1B63C /* Assets.xcassets */,
 				86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */,
@@ -335,6 +338,7 @@
 				8629917B1FD6000500139DBE /* MyChartsViewController.swift in Sources */,
 				86DD10B31FD64E2300E40849 /* LineChartFormatter.swift in Sources */,
 				8662A1801FFEFF940018FCE8 /* Quotes.swift in Sources */,
+				86B3DF5A200D146B00BFBAC6 /* CreateAccountViewController.swift in Sources */,
 				864CC57420030B1500083CFA /* TipView.swift in Sources */,
 				8686D9D51FAA75AD00BE164D /* ActivityDrawables.swift in Sources */,
 				863415261FD8CA81001F5F42 /* Credits.swift in Sources */,

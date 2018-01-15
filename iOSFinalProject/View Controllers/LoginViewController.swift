@@ -11,7 +11,7 @@ import FirebaseAuth
 
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var invalidEmail: UILabel!
 
@@ -22,6 +22,16 @@ class LoginViewController: UIViewController {
     var email = ""
     var password = ""
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == 1 {
+            passwordField.becomeFirstResponder()
+        }
+        if textField.tag == 2 {
+        loginTapped(textField)
+        }
+        return true
+    }
+        
     override func viewDidLoad() {
         
         emailField.addTarget(self, action: #selector(validateEmail(_:)), for: .editingChanged)

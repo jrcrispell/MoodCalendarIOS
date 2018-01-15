@@ -239,7 +239,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         let levelUp = xibViews?.first as! UIView
         
-        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/1.7, width: view.bounds.width * 0.9, height: 170)
+        levelUp.frame = CGRect(x: view.bounds.width * 0.1, y: view.bounds.height/1.7, width: view.bounds.width * 0.9, height: 80)
         levelUp.alpha = 0
         view.addSubview(levelUp)
         

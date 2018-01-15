@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // Global Location values
-let g_lineStartX: Double = 75
+let g_lineStartX: Double = 90
 let g_lineEndX: Double = 600
 let g_firstLineY: Double = 21
 var g_hourVerticalPoints: Double = 80
@@ -18,7 +18,7 @@ var g_hourVerticalPoints: Double = 80
 
 let g_activityWidth: Double = 400
 let g_moodXPosition:Double = 340
-let g_hourLabelX: Double = 12
+let g_hourLabelX: Double = 8
 let g_firstTextLabelY: Double = 10
 
 class CalendarView: UIView {
@@ -26,18 +26,12 @@ class CalendarView: UIView {
     var viewControllerDelegate: ViewControllerDelegate?
     
     // Instantiating drawable objects here so it's not done in draw()
-    //var hourBezier = UIBezierPath()
     var halfHourBezier = UIBezierPath()
     var activityDrawables: [ActivityDrawables] = []
     var hourLabels: [NSString] = []
     
     var daysActivities: [CalendarActivity]?
 
-    // Old globals
-//    var g_moodRectangleXPosition = 315
-//    var g_moodValueIndentation = 17
-//    var g_moodRectangleWidth = 120
-//    var g_draggableLineHeight: Double = 10
     
     
     override init(frame: CGRect) {
@@ -75,24 +69,24 @@ class CalendarView: UIView {
             // Draw label
             var hourString = NSString()
             if index == 0 {
-                hourString = "12:00"
+                hourString = "12:00 am"
             }
             else if index == 12 {
-                hourString = "12:00"
+                hourString = "12:00 pm"
             }
             else if index == 11 || index == 10 {
-                hourString = String(index) + ":00" as NSString
+                hourString = String(index) + ":00 am" as NSString
             }
                 
                 // Adding a space at the beginning so the hours are right-aligned
             else if index < 10 {
-                hourString = "  " + String(index) + ":00" as NSString
+                hourString = "  " + String(index) + ":00 am" as NSString
             }
             else if index < 22 {
-                hourString = "  " + String(index - 12) + ":00" as NSString
+                hourString = "  " + String(index - 12) + ":00 pm" as NSString
             }
             else {
-                hourString = String(index - 12) + ":00" as NSString
+                hourString = String(index - 12) + ":00 pm" as NSString
             }
             hourString.draw(at: CGPoint(x: g_hourLabelX, y: g_firstTextLabelY + Double(index) * g_hourVerticalPoints), withAttributes: Styles.textAttributes)
         }

@@ -45,7 +45,7 @@
                                 <rect key="frame" x="0.0" y="75" width="375" height="667"/>
                                 <subviews>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcz-R0-hWw" customClass="CalendarView" customModule="iOSFinalProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1201"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2001"/>
                                         <subviews>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-7F-VZz">
                                                 <rect key="frame" x="169" y="8" width="37" height="37"/>
@@ -98,7 +98,7 @@ add an activity</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Xcz-R0-hWw" secondAttribute="bottom" id="0bP-4E-nfP"/>
-                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="height" secondItem="ezs-Uc-Js5" secondAttribute="height" multiplier="1.8" id="8DA-uE-QrZ"/>
+                                    <constraint firstItem="Xcz-R0-hWw" firstAttribute="height" secondItem="ezs-Uc-Js5" secondAttribute="height" multiplier="3" id="8DA-uE-QrZ"/>
                                     <constraint firstAttribute="trailing" secondItem="Xcz-R0-hWw" secondAttribute="trailing" id="RAk-hR-o94"/>
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="top" secondItem="ezs-Uc-Js5" secondAttribute="top" id="VXw-CR-IAy"/>
                                     <constraint firstItem="Xcz-R0-hWw" firstAttribute="leading" secondItem="ezs-Uc-Js5" secondAttribute="leading" id="lB8-GS-tx5"/>
@@ -482,17 +482,23 @@ add an activity</string>
                                             <constraint firstAttribute="width" secondItem="qh7-oP-V93" secondAttribute="height" multiplier="1:1" id="luv-eO-VnW"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cie-s7-Qie" userLabel="Email Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cie-s7-Qie" userLabel="Email Field">
                                         <rect key="frame" x="33" y="16" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sy1-az-Y5j" id="UHu-fl-2gR"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-ul-lt7">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bYZ-ul-lt7">
                                         <rect key="frame" x="33" y="90" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sy1-az-Y5j" id="L4S-o8-51G"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsS-Dd-Odg">
                                         <rect key="frame" x="33" y="120" width="248" height="32"/>
@@ -925,17 +931,23 @@ add an activity</string>
                                             <constraint firstAttribute="width" constant="25" id="xqX-NU-RL3"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPy-mf-3Sa" userLabel="Email Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPy-mf-3Sa" userLabel="Email Field">
                                         <rect key="frame" x="33" y="16" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EEH-da-wDw" id="9nd-FT-1zR"/>
+                                        </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNI-67-uWo">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNI-67-uWo">
                                         <rect key="frame" x="33" y="90" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EEH-da-wDw" id="QrU-k2-sP3"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0B-pQ-jYQ">
                                         <rect key="frame" x="107" y="238" width="100" height="54"/>
@@ -982,11 +994,14 @@ add an activity</string>
                                         <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jET-AZ-Mxh" userLabel="Confirm Password Field">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jET-AZ-Mxh" userLabel="Confirm Password Field">
                                         <rect key="frame" x="33" y="164" width="248" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="EEH-da-wDw" id="EP3-9i-Sq9"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eeu-S7-REy">
                                         <rect key="frame" x="33" y="136" width="148" height="22"/>

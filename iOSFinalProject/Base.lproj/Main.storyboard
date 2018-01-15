@@ -281,34 +281,13 @@ add an activity</string>
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWf-2S-lYU" userLabel="CancelButton">
-                                        <rect key="frame" x="16" y="8.5" width="30" height="39"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <state key="normal" title="X">
+                                        <rect key="frame" x="16" y="11" width="56" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Cancel">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="cancelTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="rng-dT-trh"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKg-Ix-fB2" userLabel="SaveButton">
-                                        <rect key="frame" x="335" y="12" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="Jl7-tI-BK7"/>
-                                            <constraint firstAttribute="height" constant="32" id="Unn-N6-Pcz"/>
-                                        </constraints>
-                                        <state key="normal" image="CheckMark"/>
-                                        <connections>
-                                            <action selector="saveTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="Lf8-7O-Wmt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mR-Hh-bfJ" userLabel="TrashButton">
-                                        <rect key="frame" x="293" y="12" width="22" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="5mR-Hh-bfJ" secondAttribute="height" multiplier="1:1.452" id="ITy-0p-SVy"/>
-                                        </constraints>
-                                        <state key="normal" image="SkinnyWhiteTrashIcon"/>
-                                        <connections>
-                                            <action selector="deleteTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="Mkw-Bv-b28"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oct 24, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqb-U1-Q9b">
@@ -318,19 +297,27 @@ add an activity</string>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKg-Ix-fB2" userLabel="SaveButton">
+                                        <rect key="frame" x="319" y="12" width="40" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Jl7-tI-BK7"/>
+                                            <constraint firstAttribute="height" constant="32" id="Unn-N6-Pcz"/>
+                                        </constraints>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="Lf8-7O-Wmt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.32549019610000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="5mR-Hh-bfJ" firstAttribute="height" secondItem="LKg-Ix-fB2" secondAttribute="height" id="9MG-zo-mjp"/>
                                     <constraint firstItem="EWf-2S-lYU" firstAttribute="centerY" secondItem="bhb-re-UU0" secondAttribute="centerY" id="A6Q-KV-r4a"/>
                                     <constraint firstItem="oqb-U1-Q9b" firstAttribute="centerX" secondItem="bhb-re-UU0" secondAttribute="centerX" id="BRj-ve-U3v"/>
                                     <constraint firstItem="oqb-U1-Q9b" firstAttribute="centerY" secondItem="bhb-re-UU0" secondAttribute="centerY" id="IHa-Jm-2WF"/>
-                                    <constraint firstItem="5mR-Hh-bfJ" firstAttribute="bottom" secondItem="LKg-Ix-fB2" secondAttribute="bottom" id="LtZ-Wh-pkk"/>
+                                    <constraint firstAttribute="trailing" secondItem="LKg-Ix-fB2" secondAttribute="trailing" constant="16" id="JEz-RA-Tw2"/>
                                     <constraint firstAttribute="height" constant="56" id="MX2-Io-XbP"/>
-                                    <constraint firstAttribute="trailing" secondItem="LKg-Ix-fB2" secondAttribute="trailing" constant="8" id="gzz-6s-hsU"/>
                                     <constraint firstItem="LKg-Ix-fB2" firstAttribute="centerY" secondItem="bhb-re-UU0" secondAttribute="centerY" id="sCR-8c-GM7"/>
                                     <constraint firstItem="EWf-2S-lYU" firstAttribute="leading" secondItem="bhb-re-UU0" secondAttribute="leading" constant="16" id="u8s-Db-efm"/>
-                                    <constraint firstItem="LKg-Ix-fB2" firstAttribute="leading" secondItem="5mR-Hh-bfJ" secondAttribute="trailing" constant="20" id="z03-K5-Ndf"/>
                                 </constraints>
                             </view>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fJg-Qi-gAR" userLabel="Start Date Picker">
@@ -395,18 +382,45 @@ add an activity</string>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EZW-Ix-PFs" userLabel="DeleteHighlighter">
+                                <rect key="frame" x="125" y="611" width="125.5" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="4mh-nf-W8r"/>
+                                    <constraint firstAttribute="height" constant="56" id="CEq-No-SQF"/>
+                                    <constraint firstAttribute="width" constant="125.5" id="awI-xx-Ygj"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4mh-nf-W8r"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqN-4O-YzF">
+                                <rect key="frame" x="156" y="619" width="62" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="amR-BB-MC4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="trailing" secondItem="ie5-Jp-XQw" secondAttribute="trailing" id="2Ky-OP-FNM"/>
                             <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="LSQ-rQ-joE" secondAttribute="bottom" id="6Xq-C9-Zv8"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="width" secondItem="fJg-Qi-gAR" secondAttribute="width" id="9TP-6Q-sEa"/>
+                            <constraint firstItem="SqN-4O-YzF" firstAttribute="centerX" secondItem="EZW-Ix-PFs" secondAttribute="centerX" id="Bsr-Gv-xuN"/>
                             <constraint firstItem="bhb-re-UU0" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="C92-8l-XDa"/>
+                            <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="EZW-Ix-PFs" secondAttribute="bottom" id="Cph-20-Odf"/>
                             <constraint firstItem="ie5-Jp-XQw" firstAttribute="leading" secondItem="6Mh-FD-Jev" secondAttribute="leading" id="E4D-8i-WFu"/>
                             <constraint firstItem="ie5-Jp-XQw" firstAttribute="top" secondItem="6Mh-FD-Jev" secondAttribute="bottom" constant="8" id="FKN-Db-Pg3"/>
                             <constraint firstItem="6Iy-1Y-pUn" firstAttribute="leading" secondItem="J6z-Nl-gGb" secondAttribute="leading" id="FUw-hu-lk7"/>
                             <constraint firstItem="LSQ-rQ-joE" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" id="Fq5-bN-ORU"/>
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="leading" secondItem="6Iy-1Y-pUn" secondAttribute="leading" id="G2g-u6-bYB"/>
+                            <constraint firstItem="SqN-4O-YzF" firstAttribute="centerY" secondItem="EZW-Ix-PFs" secondAttribute="centerY" id="GSc-cr-IHz"/>
                             <constraint firstItem="6Iy-1Y-pUn" firstAttribute="top" secondItem="fJg-Qi-gAR" secondAttribute="bottom" constant="42" id="H7k-vs-AED"/>
                             <constraint firstItem="cvE-mJ-4ZQ" firstAttribute="centerY" secondItem="czK-nS-pMk" secondAttribute="centerY" id="I23-X5-Lvb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Iy-1Y-pUn" secondAttribute="trailing" constant="16" id="LhN-sY-yzM"/>
@@ -420,6 +434,7 @@ add an activity</string>
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="top" secondItem="bhb-re-UU0" secondAttribute="bottom" constant="16" id="a5e-ce-LeV"/>
                             <constraint firstAttribute="trailing" secondItem="HoO-HJ-Zd3" secondAttribute="trailing" constant="8" id="aaB-wl-f6b"/>
                             <constraint firstAttribute="trailing" secondItem="LSQ-rQ-joE" secondAttribute="trailing" id="dVU-BH-70B"/>
+                            <constraint firstItem="EZW-Ix-PFs" firstAttribute="centerX" secondItem="R3P-AX-ygC" secondAttribute="centerX" id="jU8-EL-BXo"/>
                             <constraint firstAttribute="trailing" secondItem="ie5-Jp-XQw" secondAttribute="trailing" constant="31.329999999999998" id="jhm-3v-sUJ"/>
                             <constraint firstItem="fJg-Qi-gAR" firstAttribute="width" secondItem="LSQ-rQ-joE" secondAttribute="width" multiplier="0.4" id="kdK-rz-qdQ"/>
                             <constraint firstItem="czK-nS-pMk" firstAttribute="top" secondItem="ie5-Jp-XQw" secondAttribute="bottom" constant="42" id="qFy-yG-d74"/>
@@ -436,7 +451,8 @@ add an activity</string>
                     <navigationItem key="navigationItem" id="QDv-yn-tPf"/>
                     <connections>
                         <outlet property="dateLabel" destination="oqb-U1-Q9b" id="Uj6-vZ-VcP"/>
-                        <outlet property="deleteButton" destination="5mR-Hh-bfJ" id="a4G-sq-tyX"/>
+                        <outlet property="deleteButton" destination="SqN-4O-YzF" id="hUA-Bf-5Hd"/>
+                        <outlet property="deleteHighlighter" destination="EZW-Ix-PFs" id="TSM-a5-EZj"/>
                         <outlet property="descriptionField" destination="ie5-Jp-XQw" id="kQO-1s-4un"/>
                         <outlet property="endTimePicker" destination="HoO-HJ-Zd3" id="LbO-KU-Ips"/>
                         <outlet property="moodPicker" destination="J6z-Nl-gGb" id="ham-hC-reZ"/>
@@ -1089,11 +1105,9 @@ add an activity</string>
         </scene>
     </scenes>
     <resources>
-        <image name="CheckMark" width="96" height="90"/>
         <image name="Date Arrows" width="1019" height="500"/>
         <image name="Middle Arrow" width="99" height="500"/>
         <image name="PasswordIcon" width="58" height="58"/>
-        <image name="SkinnyWhiteTrashIcon" width="84" height="122"/>
         <image name="UsernameIcon" width="58" height="58"/>
         <image name="background" width="1200" height="1900"/>
     </resources>

@@ -17,6 +17,7 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     @IBOutlet weak var deleteButton: UIButton!
 
+    @IBOutlet weak var deleteHighlighter: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var descriptionField: UITextField!
@@ -56,6 +57,8 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         // Making new Activity
         if editingActivity == nil {
             deleteButton.isEnabled = false
+            deleteButton.isHidden = true
+            deleteHighlighter.isHidden = true
             moodPicker.selectRow(5, inComponent: 0, animated: true)
             activityRef = displayedDateRef.childByAutoId()
             
@@ -140,8 +143,19 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
-        activityRef.removeValue()
-        dismiss(animated: true, completion: nil)
+        let confirmAlert = UIAlertController(title: "Confirm deletion", message: "Are you sure you want to delete this activity?", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive) { (delete) in
+            self.activityRef.removeValue()
+            self.dismiss(animated: true, completion: nil)
+        }
+        confirmAlert.addAction(cancelButton)
+        confirmAlert.addAction(deleteButton)
+        present(confirmAlert, animated: true, completion: nil)
+        
+        
+        
+
     }
     
     //MARK: - Slider setup

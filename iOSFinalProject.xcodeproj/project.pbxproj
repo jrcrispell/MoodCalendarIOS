@@ -109,6 +109,52 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		86B3DF56200D12D200BFBAC6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
+				86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */,
+				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
+				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
+				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		86B3DF57200D12F600BFBAC6 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				8662A17D1FFD5C830018FCE8 /* LevelUp.xib */,
+				864CC571200308CE00083CFA /* Tip.xib */,
+				864CC56F2003088400083CFA /* ExpCard.xib */,
+				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		86B3DF58200D133F00BFBAC6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				86FB52B11FB518E300C612B7 /* Utils.swift */,
+				8619C0BC1FBB507600444763 /* Styles.swift */,
+				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
+				863415251FD8CA81001F5F42 /* Credits.swift */,
+				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
+				864CC57320030B1500083CFA /* TipView.swift */,
+				8662A17F1FFEFF940018FCE8 /* Quotes.swift */,
+				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
+				86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */,
+				863B4CF01FE73CFC006D25DE /* Achievement.swift */,
+				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
+				863B4CEA1FE19519006D25DE /* Reachability.swift */,
+				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
+				868F699F1FA10B9A0060016F /* CalendarView.swift */,
+				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
+				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		86E241FA1F7C1A5700C1B63C = {
 			isa = PBXGroup;
 			children = (
@@ -130,38 +176,16 @@
 		86E242051F7C1A5700C1B63C /* iOSFinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				8634F2CA1FB37250000DBACB /* LoginViewController.swift */,
-				86E242081F7C1A5700C1B63C /* CalendarViewController.swift */,
-				867809DC1FB0E92E00B5E12F /* LoggerViewController.swift */,
-				8629917A1FD6000500139DBE /* MyChartsViewController.swift */,
-				86AA5DA0200051F1000CDCB0 /* StatsViewController.swift */,
-				8662A17D1FFD5C830018FCE8 /* LevelUp.xib */,
-				8662A17F1FFEFF940018FCE8 /* Quotes.swift */,
-				86E242061F7C1A5700C1B63C /* AppDelegate.swift */,
-				86BAC69D1FF6810100E7A80F /* ExpCardAnimation.swift */,
-				863B4CF01FE73CFC006D25DE /* Achievement.swift */,
-				863B4CEE1FE351FF006D25DE /* Arrow.swift */,
-				864CC571200308CE00083CFA /* Tip.xib */,
-				863B4CEA1FE19519006D25DE /* Reachability.swift */,
-				8652F87A1FDB097D00442E43 /* ExpCard.swift */,
-				864CC56F2003088400083CFA /* ExpCard.xib */,
-				868F699F1FA10B9A0060016F /* CalendarView.swift */,
-				8686D9D41FAA75AD00BE164D /* ActivityDrawables.swift */,
-				868F69A11FA10C4A0060016F /* CalendarActivity.swift */,
+				86B3DF56200D12D200BFBAC6 /* View Controllers */,
+				86B3DF57200D12F600BFBAC6 /* Xibs */,
+				86B3DF58200D133F00BFBAC6 /* Classes */,
+				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
 				8685FC1B1FBF91FC004B39FB /* Settings.bundle */,
 				86E242101F7C1A5700C1B63C /* Assets.xcassets */,
 				86E2420D1F7C1A5700C1B63C /* iOSFinalProject.xcdatamodeld */,
 				86E242151F7C1A5700C1B63C /* Info.plist */,
 				867809DE1FB2818B00B5E12F /* GoogleService-Info.plist */,
 				86E242121F7C1A5700C1B63C /* LaunchScreen.storyboard */,
-				86FB52B11FB518E300C612B7 /* Utils.swift */,
-				8619C0BC1FBB507600444763 /* Styles.swift */,
-				86F83D011FC9F7C100C5B8EF /* MenuView.xib */,
-				86DD10B21FD64E2300E40849 /* LineChartFormatter.swift */,
-				863415251FD8CA81001F5F42 /* Credits.swift */,
-				86F83D031FC9F9B200C5B8EF /* MenuView.swift */,
-				86E2420A1F7C1A5700C1B63C /* Main.storyboard */,
-				864CC57320030B1500083CFA /* TipView.swift */,
 			);
 			path = iOSFinalProject;
 			sourceTree = "<group>";

@@ -22,7 +22,7 @@ class MyChartsViewController: UIViewController {
     var snapshotView: UIImageView!
     var menuView: MenuView!
     
-    let data: [Double] = [5, 3, 7, 9, 8, 5, 10]
+    let data: [Double] = [5, 3, 7, 9, 1, 5, 10]
     
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -72,10 +72,15 @@ class MyChartsViewController: UIViewController {
         menuView.containerView = containerView
         view.addSubview(containerView)
         
+        
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
     }
     
     func setupLineChart() {
+        
+        chartsButton.setTitle("Poop", for: .normal
+        )
+        
         let formatter = LineChartFormatter()
         
         let xAxis = XAxis()
@@ -100,16 +105,30 @@ class MyChartsViewController: UIViewController {
         let dataSet = LineChartData()
         dataSet.addDataSet(line1)
         
+        
+        
         lineChartView.data = dataSet
-        //lineChartView.xAxis.gridColor = UIColor.red
-        //lineChartView.yAxis.gridColor = UIColor.white.withAlphaComponent(0.5)
-        //lineChartView.rightAxis.labelTextColor = UIColor.red
-        //lineChartView.rightAxis.gridColor = UIColor.red
-        //lineChartView.leftAxis.gridColor = UIColor.red
-        //lineChartView.borderColor = UIColor.red
-        lineChartView.gridBackgroundColor = UIColor.red
+        lineChartView.xAxis.gridColor = Styles.white80Percent
+        lineChartView.xAxis.labelPosition = .bottom
+        //lineChartView.xAxis.axisMinimum = 0
+        //lineChartView.xAxis.axisMaximum = 10
+        lineChartView.legend.textColor = UIColor.white
+        lineChartView.legend.enabled = false
+        lineChartView.xAxis.labelTextColor = UIColor.white
+        lineChartView.rightAxis.labelTextColor = UIColor.white
+        lineChartView.rightAxis.axisMaximum = 10
+        lineChartView.rightAxis.gridColor = Styles.white80Percent
+        lineChartView.leftAxis.gridColor = Styles.white80Percent
+        lineChartView.leftAxis.labelTextColor = UIColor.white
+        lineChartView.leftAxis.axisMaximum = 10
+        lineChartView.xAxis.axisLineColor = Styles.white80Percent
+        lineChartView.xAxis.labelTextColor = UIColor.white
+        lineChartView.borderColor = Styles.white80Percent
+        lineChartView.gridBackgroundColor = UIColor.clear
         
         lineChartView.chartDescription?.text = ""
+        lineChartView.noDataText = "No data available"
+        //lineChartView.drawBordersEnabled = false
     }
     
     @objc func handleHome(_ sender: UIButton){

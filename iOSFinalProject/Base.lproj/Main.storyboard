@@ -729,9 +729,6 @@ add an activity</string>
                                         <state key="normal" title="Charts">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="dateTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XOW-NU-syg"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.078431372550000003" green="0.32549019610000002" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>

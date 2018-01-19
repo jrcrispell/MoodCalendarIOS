@@ -16,7 +16,10 @@ public class LineChartFormatter: NSObject, IAxisValueFormatter {
     var days = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"]
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        if value < 7 {
         return days[Int(value)]
+        }
+        else {return ""}
     }
 }
 

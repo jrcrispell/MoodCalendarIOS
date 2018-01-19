@@ -21,6 +21,7 @@ protocol EXPShowing {
     func showOnboarding()
     func showTip(number: Int)
     func hideOnboarding()
+    func takeDepressionScreen()
 }
 
 class Achievements: NSObject {
@@ -88,6 +89,7 @@ class Achievements: NSObject {
         self.achievementsRef.child("Used Date Picker").setValue(false)
         self.achievementsRef.child("Activity Count").setValue(0)
         self.achievementsRef.child("Hour Count").setValue(0.0)
+        self.achievementsRef.child("Last Depression Screen").setValue("None")
     }
     
     func check() {
@@ -120,10 +122,26 @@ class Achievements: NSObject {
                 else if achievement.key == "Hour Count" {
                     hourCount = achievement.value as! Double
                 }
+                else if achievement.key == "Last Depression Screen" {
+                    //TODO: - check against 30 days
+                    if achievement.value as! String == "None" {
+                        self.expShower.takeDepressionScreen()
+                    }
+                }
             }
 
                 self.checkActivities(checkFirst: checkFirst, oldActivityCount: activityCount, oldHourCount: hourCount)
         }
+    }
+    
+    func recordDepressionScore(depressionScore: Int) {
+        
+        let dateKey = g_dateFormatter.string(from: Date())
+
+        
+        achievementsRef.child("Last Depression Screen").setValue(dateKey)
+        achievementsRef.child("Depression Scores").child(dateKey).setValue(depressionScore)
+
     }
     
     func animateExp() {

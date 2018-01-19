@@ -16,9 +16,47 @@ import SystemConfiguration
 
 let g_dateFormatter = DateFormatter()
 
+let DEPRESSION_SCREEN_URL = "https://psychcentral.com/quizzes/depquiz.htm";
+
+
 class CalendarViewController: UIViewController, ViewControllerDelegate, UIPickerViewDelegate, EXPShowing, TipViewShowing
     
 {
+    func takeDepressionScreen() {
+        
+        guard let screenURL = URL(string: DEPRESSION_SCREEN_URL) else {return}
+        
+        // Take screen alert
+        let screenAlert = UIAlertController(title: "Depression Screen", message: "It's time to take a depression screen! Woo-hoo!", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default) { (alert) in
+            UIApplication.shared.open(screenURL, options: [:], completionHandler: { (finished) in
+                self.handleScreenResult()
+            })
+        }
+        screenAlert.addAction(okButton)
+        present(screenAlert, animated: true) {
+            
+        }
+    }
+    func handleScreenResult() {
+        let resultAlert = UIAlertController(title: "Enter result", message: "Please enter the score you received", preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let okButton = UIAlertAction(title: "OK", style: .default) { (alert) in
+            //Do nothing
+            let textField = resultAlert.textFields![0] as UITextField
+            guard let depressionScore =  Int(textField.text!) else {return}
+            self.achievements.recordDepressionScore(depressionScore: depressionScore)
+
+        }
+        resultAlert.addTextField { (textField) in
+            textField.placeholder = "Enter score here"
+            textField.keyboardType = .numberPad
+        }
+        resultAlert.addAction(cancelButton)
+        resultAlert.addAction(okButton)
+        present(resultAlert, animated: true, completion: nil)
+    }
+    
     func removeTipView() {
         closedTipView = true
     }

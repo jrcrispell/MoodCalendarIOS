@@ -38,7 +38,7 @@
                 <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jtc-zs-dKj">
                     <rect key="frame" x="80" y="78" width="200" height="50"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <state key="normal" title="Stats">
+                    <state key="normal" title="Charts">
                         <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
@@ -68,13 +68,6 @@
                         <constraint firstAttribute="width" secondItem="JcD-Z5-SWs" secondAttribute="height" multiplier="1:1" id="efg-DP-ZCv"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6e-nW-dbZ" userLabel="Notification Button">
-                    <rect key="frame" x="80" y="252" width="68" height="44"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                    <state key="normal" title="Notify">
-                        <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="1u5-tv-6L2" firstAttribute="width" secondItem="go6-ez-ZXQ" secondAttribute="width" id="0J4-FX-oHr"/>
@@ -88,9 +81,7 @@
                 <constraint firstItem="c71-uq-eK7" firstAttribute="width" secondItem="Jtc-zs-dKj" secondAttribute="width" id="Bjc-ky-50e"/>
                 <constraint firstItem="JcD-Z5-SWs" firstAttribute="centerY" secondItem="IJr-ji-gy9" secondAttribute="centerY" id="DY1-Z2-v0o"/>
                 <constraint firstItem="1u5-tv-6L2" firstAttribute="trailing" secondItem="go6-ez-ZXQ" secondAttribute="trailing" id="KfH-Vt-tHf"/>
-                <constraint firstItem="h6e-nW-dbZ" firstAttribute="leading" secondItem="c71-uq-eK7" secondAttribute="leading" id="LOj-YC-uut"/>
                 <constraint firstItem="Jtc-zs-dKj" firstAttribute="leading" secondItem="IJr-ji-gy9" secondAttribute="leading" id="Ldm-7v-cA6"/>
-                <constraint firstItem="h6e-nW-dbZ" firstAttribute="top" secondItem="c71-uq-eK7" secondAttribute="bottom" constant="8" id="PJ0-iT-RQx"/>
                 <constraint firstItem="IJr-ji-gy9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="80" id="VU6-4q-HQS"/>
                 <constraint firstItem="Jtc-zs-dKj" firstAttribute="top" secondItem="IJr-ji-gy9" secondAttribute="bottom" constant="8" id="Wjt-qp-lg8"/>
                 <constraint firstItem="gea-jR-lg6" firstAttribute="centerY" secondItem="c71-uq-eK7" secondAttribute="centerY" constant="4" id="Yue-1F-2WL"/>
@@ -115,7 +106,6 @@
                 <outlet property="homeButton" destination="IJr-ji-gy9" id="DEi-zW-Imm"/>
                 <outlet property="homeIcon" destination="JcD-Z5-SWs" id="lbb-xx-pib"/>
                 <outlet property="logOutButton" destination="c71-uq-eK7" id="app-gO-ugU"/>
-                <outlet property="notifyButton" destination="h6e-nW-dbZ" id="Zlo-Qh-m7x"/>
                 <outlet property="settingsButton" destination="beS-9h-2MW" id="EPz-9C-8qO"/>
             </connections>
             <point key="canvasLocation" x="-59.5" y="78"/>

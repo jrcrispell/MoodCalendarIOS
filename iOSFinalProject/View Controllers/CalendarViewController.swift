@@ -184,6 +184,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         achievements.check()
         precedingEndTime = 0.0
         followingStartTime = 24.0
+        hamburger.isHidden = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -219,6 +220,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func makeMenu() {
         
+        
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
         menuView = xibViews?.first as! MenuView
@@ -241,14 +243,16 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
         menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
         menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
-        menuView.notifyButton.addTarget(self, action: #selector(handleNotify(_:)), for: .touchUpInside)
         menuView.menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
         
+        hamburger.isHidden = true
+
         menuView.animateIn()
     }
     
     func closeMenu() {
         menuView.closeMenu()
+        hamburger.isHidden = false
     }
     
     //MARK: WORKING HERE
@@ -625,22 +629,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     @objc func handleCharts(_ sender: UIButton){
         closeMenu()
-        //performSegue(withIdentifier: "toCharts", sender: sender)
-        performSegue(withIdentifier: "toStats", sender: sender)
+        performSegue(withIdentifier: "toCharts", sender: sender)
+        //performSegue(withIdentifier: "toStats", sender: sender)
     }
     
     @objc func handleHome(_ sender: UIButton){
         closeMenu()
     }
-    
-    @objc func handleNotify(_ sender: UIButton){
-        closeMenu()
-        
-        //Schedule notification for 5 seconds from now
-        let oneSecondFromNow = Date().addingTimeInterval(1)
-        scheduleNotification(date: oneSecondFromNow)
-        
-    }
+
     
     @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
         closeMenu()

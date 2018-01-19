@@ -51,7 +51,7 @@
                                                 <rect key="frame" x="169" y="8" width="37" height="37"/>
                                             </activityIndicatorView>
                                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43z-pz-jSz" userLabel="Tap Anywhere">
-                                                <rect key="frame" x="86" y="285" width="204" height="110"/>
+                                                <rect key="frame" x="86" y="310" width="204" height="110"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                                 </accessibility>
@@ -65,7 +65,7 @@ add an activity</string>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Middle Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="kTu-Er-jmu" userLabel="Down Tap Arrow">
-                                                <rect key="frame" x="177.5" y="403" width="20" height="100"/>
+                                                <rect key="frame" x="177.5" y="428" width="20" height="150"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="ynM-30-uSm"/>
                                                 </constraints>
@@ -76,7 +76,7 @@ add an activity</string>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Middle Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="wij-Z9-0o5" userLabel="Up Tap Arrow">
-                                                <rect key="frame" x="177.5" y="191" width="20" height="100"/>
+                                                <rect key="frame" x="177.5" y="166" width="20" height="150"/>
                                             </imageView>
                                         </subviews>
                                         <gestureRecognizers/>
@@ -185,14 +185,14 @@ add an activity</string>
                                 </constraints>
                             </view>
                             <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Date Arrows" translatesAutoresizingMaskIntoConstraints="NO" id="ucr-C0-h48">
-                                <rect key="frame" x="82.5" y="84" width="210" height="100"/>
+                                <rect key="frame" x="82.5" y="84" width="210" height="75"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="9kc-ID-6fA"/>
+                                    <constraint firstAttribute="height" constant="75" id="9kc-ID-6fA"/>
                                     <constraint firstAttribute="width" constant="210" id="hJW-tX-e1y"/>
                                 </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to change day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMz-HC-8WT">
-                                <rect key="frame" x="85.5" y="192" width="204" height="32"/>
+                                <rect key="frame" x="85.5" y="167" width="204" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -204,7 +204,7 @@ add an activity</string>
                             <constraint firstItem="43z-pz-jSz" firstAttribute="width" secondItem="RMz-HC-8WT" secondAttribute="width" id="2K8-Km-bOP"/>
                             <constraint firstAttribute="trailing" secondItem="ezs-Uc-Js5" secondAttribute="trailing" id="7OT-K9-t9O"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="width" secondItem="Xcz-R0-hWw" secondAttribute="width" id="ExV-59-Vt9"/>
-                            <constraint firstItem="kTu-Er-jmu" firstAttribute="height" secondItem="ucr-C0-h48" secondAttribute="height" id="J9x-3c-CH2"/>
+                            <constraint firstItem="kTu-Er-jmu" firstAttribute="height" secondItem="ucr-C0-h48" secondAttribute="height" multiplier="2" id="J9x-3c-CH2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="enr-Fw-NDa" secondAttribute="bottom" id="KKN-vU-0Md"/>
                             <constraint firstItem="RMz-HC-8WT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LpC-pL-vG6"/>
                             <constraint firstAttribute="trailing" secondItem="ikj-hr-I6g" secondAttribute="trailing" id="Lr6-9W-Sa8"/>
@@ -213,7 +213,7 @@ add an activity</string>
                             <constraint firstItem="RMz-HC-8WT" firstAttribute="top" secondItem="ucr-C0-h48" secondAttribute="bottom" constant="8" id="TG6-v1-Htb"/>
                             <constraint firstItem="ucr-C0-h48" firstAttribute="top" secondItem="ikj-hr-I6g" secondAttribute="bottom" constant="8" id="Y4L-C2-YBw"/>
                             <constraint firstItem="ikj-hr-I6g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZE6-p2-HwC"/>
-                            <constraint firstItem="43z-pz-jSz" firstAttribute="top" secondItem="RMz-HC-8WT" secondAttribute="bottom" constant="136" id="ZRn-p6-0vX"/>
+                            <constraint firstItem="43z-pz-jSz" firstAttribute="top" secondItem="RMz-HC-8WT" secondAttribute="bottom" constant="186" id="ZRn-p6-0vX"/>
                             <constraint firstItem="ucr-C0-h48" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aXd-hp-ubl"/>
                             <constraint firstItem="IVV-E1-lu6" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.25" id="b4f-0T-Xh0"/>
                             <constraint firstItem="ikj-hr-I6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bJF-1M-GTr"/>
@@ -769,8 +769,8 @@ add an activity</string>
                     </view>
                     <connections>
                         <outlet property="chartsButton" destination="Wjr-o2-Es0" id="VfY-n3-3wB"/>
-                        <outlet property="graphsChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
                         <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
+                        <outlet property="lineChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>

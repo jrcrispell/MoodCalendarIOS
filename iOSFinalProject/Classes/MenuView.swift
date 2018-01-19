@@ -21,7 +21,6 @@ class MenuView: UIView {
     
     @IBOutlet weak var logOutButton: UIButton!
     
-    @IBOutlet weak var notifyButton: UIButton!
     
     var superViewBounds: CGRect!
     var backgroundView: UIImageView!

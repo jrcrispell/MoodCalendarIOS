@@ -137,7 +137,6 @@ class Achievements: NSObject {
     func recordDepressionScore(depressionScore: Int) {
         
         let dateKey = g_dateFormatter.string(from: Date())
-
         
         achievementsRef.child("Last Depression Screen").setValue(dateKey)
         achievementsRef.child("Depression Scores").child(dateKey).setValue(depressionScore)

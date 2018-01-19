@@ -13,7 +13,7 @@ class MyChartsViewController: UIViewController {
     
     var oldSnapshot: UIImage!
     
-    @IBOutlet weak var graphsChartView: LineChartView!
+    @IBOutlet weak var lineChartView: LineChartView!
     
     @IBOutlet weak var hamburger: UIButton!
     @IBOutlet weak var chartsButton: UIButton!
@@ -38,29 +38,7 @@ class MyChartsViewController: UIViewController {
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
         
         
-        let formatter = LineChartFormatter()
-        let xAxis = XAxis()
-        
-        var lineChartEntry  = [ChartDataEntry]()
-        
-        for i in 0..<data.count {
-            
-            let point = ChartDataEntry(x: Double(i), y: data[i])
-            lineChartEntry.append(point)
-        }
-        xAxis.valueFormatter = formatter
-        graphsChartView.xAxis.valueFormatter = xAxis.valueFormatter
-        
-        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
-        
-        line1.colors = [NSUIColor.white]
-        
-        let dataSet = LineChartData()
-        dataSet.addDataSet(line1)
-        
-        graphsChartView.data = dataSet
-        
-        graphsChartView.chartDescription?.text = "Chart description"
+        setupLineChart()
         
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         menuView = xibViews?.first as! MenuView
@@ -95,6 +73,43 @@ class MyChartsViewController: UIViewController {
         view.addSubview(containerView)
         
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+    }
+    
+    func setupLineChart() {
+        let formatter = LineChartFormatter()
+        
+        let xAxis = XAxis()
+        
+        var lineChartEntry  = [ChartDataEntry]()
+        
+        for i in 0..<data.count {
+            let point = ChartDataEntry(x: Double(i), y: data[i])
+            lineChartEntry.append(point)
+        }
+        xAxis.valueFormatter = formatter
+        lineChartView.xAxis.valueFormatter = xAxis.valueFormatter
+        
+        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
+        
+        line1.colors = [NSUIColor.white]
+        line1.valueTextColor = UIColor.clear
+        
+
+        
+        
+        let dataSet = LineChartData()
+        dataSet.addDataSet(line1)
+        
+        lineChartView.data = dataSet
+        //lineChartView.xAxis.gridColor = UIColor.red
+        //lineChartView.yAxis.gridColor = UIColor.white.withAlphaComponent(0.5)
+        //lineChartView.rightAxis.labelTextColor = UIColor.red
+        //lineChartView.rightAxis.gridColor = UIColor.red
+        //lineChartView.leftAxis.gridColor = UIColor.red
+        //lineChartView.borderColor = UIColor.red
+        lineChartView.gridBackgroundColor = UIColor.red
+        
+        lineChartView.chartDescription?.text = ""
     }
     
     @objc func handleHome(_ sender: UIButton){

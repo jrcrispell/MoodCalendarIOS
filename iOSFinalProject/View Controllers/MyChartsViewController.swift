@@ -30,8 +30,9 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var daysHighlighter: UIView!
     @IBOutlet weak var screensHighlighter: UIView!
     @IBOutlet weak var hoursHighlighter: UIView!
-    
-    
+    @IBOutlet weak var weekFilterHighlighter: UIView!
+    @IBOutlet weak var monthFilterHighlighter: UIView!
+    @IBOutlet weak var allFilterHighlighter: UIView!
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -84,6 +85,34 @@ class MyChartsViewController: UIViewController {
         
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
     }
+    
+    @IBAction func filterTabTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            print("Week")
+            weekFilterHighlighter.isHidden = false
+            monthFilterHighlighter.isHidden = true
+            allFilterHighlighter
+                .isHidden = true
+            break;
+        case 1:
+            print("Month")
+            weekFilterHighlighter.isHidden = true
+            monthFilterHighlighter.isHidden = false
+            allFilterHighlighter.isHidden = true
+            break;
+        case 2:
+            print("All")
+            weekFilterHighlighter.isHidden = true
+            monthFilterHighlighter.isHidden = true
+            allFilterHighlighter.isHidden = false
+            break;
+        default:
+            print("Invalid filter button tab tapped")
+            break;
+        }
+    }
+    
     
     
     @IBAction func bottomTabTapped(_ sender: UIButton) {

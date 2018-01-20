@@ -708,21 +708,82 @@ add an activity</string>
                                         <rect key="frame" x="249.5" y="591" width="125.5" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FlD-VA-jnP">
+                                        <rect key="frame" x="80.5" y="60.5" width="39" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Week">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterTabTapped:" destination="Qrx-RK-jKf" eventType="touchUpInside" id="xh8-hp-7bS"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTb-0v-jty" userLabel="Month">
+                                        <rect key="frame" x="165" y="60.5" width="44" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Month">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterTabTapped:" destination="Qrx-RK-jKf" eventType="touchUpInside" id="aiI-hM-mB8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ia7-zO-RiD" userLabel="All">
+                                        <rect key="frame" x="260" y="60.5" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="All">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="filterTabTapped:" destination="Qrx-RK-jKf" eventType="touchUpInside" id="oqN-Vj-hu8"/>
+                                        </connections>
+                                    </button>
+                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6L4-bp-weO" userLabel="WeekHighlighter">
+                                        <rect key="frame" x="56" y="56" width="87.5" height="39"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gV0-jh-pcJ" userLabel="MonthHighlighter">
+                                        <rect key="frame" x="143" y="56" width="87.5" height="39"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Gp-oj-Uf1" userLabel="AllHighlighter">
+                                        <rect key="frame" x="231" y="56" width="87.5" height="39"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <view userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pf7-ne-Lfy" userLabel="FilterView">
+                                        <rect key="frame" x="56" y="56" width="262.5" height="39"/>
+                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="gV0-jh-pcJ" firstAttribute="centerX" secondItem="pf7-ne-Lfy" secondAttribute="centerX" id="1Eq-f5-H9q"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="width" secondItem="7re-Ye-19F" secondAttribute="width" multiplier="0.33333" id="3FK-9s-x7w"/>
+                                    <constraint firstItem="6L4-bp-weO" firstAttribute="centerY" secondItem="pf7-ne-Lfy" secondAttribute="centerY" id="4yV-pM-glr"/>
+                                    <constraint firstItem="6L4-bp-weO" firstAttribute="width" secondItem="pf7-ne-Lfy" secondAttribute="width" multiplier="0.333333" id="5Il-1s-S4q"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerY" secondItem="7re-Ye-19F" secondAttribute="centerY" id="5sd-AX-NtN"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="height" secondItem="7re-Ye-19F" secondAttribute="height" id="8HW-C2-o0n"/>
+                                    <constraint firstItem="gV0-jh-pcJ" firstAttribute="centerY" secondItem="6L4-bp-weO" secondAttribute="centerY" id="Ch5-au-Fgw"/>
                                     <constraint firstItem="rMZ-8L-Teh" firstAttribute="top" secondItem="7re-Ye-19F" secondAttribute="top" id="Fha-Dm-DCq"/>
+                                    <constraint firstItem="5Gp-oj-Uf1" firstAttribute="height" secondItem="gV0-jh-pcJ" secondAttribute="height" id="G9V-Rl-3oz"/>
                                     <constraint firstAttribute="bottom" secondItem="7re-Ye-19F" secondAttribute="bottom" id="JF4-ek-vge"/>
+                                    <constraint firstItem="5Gp-oj-Uf1" firstAttribute="width" secondItem="gV0-jh-pcJ" secondAttribute="width" id="MTg-Oh-ivS"/>
+                                    <constraint firstItem="5Gp-oj-Uf1" firstAttribute="trailing" secondItem="pf7-ne-Lfy" secondAttribute="trailing" id="Mcj-M1-r9o"/>
                                     <constraint firstAttribute="trailing" secondItem="7re-Ye-19F" secondAttribute="trailing" id="N2t-pU-P2v"/>
+                                    <constraint firstItem="6L4-bp-weO" firstAttribute="leading" secondItem="pf7-ne-Lfy" secondAttribute="leading" id="QEh-qO-6li"/>
+                                    <constraint firstItem="5Gp-oj-Uf1" firstAttribute="centerY" secondItem="gV0-jh-pcJ" secondAttribute="centerY" id="Qbh-El-zSa"/>
+                                    <constraint firstItem="pf7-ne-Lfy" firstAttribute="centerX" secondItem="7re-Ye-19F" secondAttribute="centerX" id="RpM-ad-z1o"/>
                                     <constraint firstItem="P3W-rX-b5Z" firstAttribute="centerX" secondItem="7re-Ye-19F" secondAttribute="centerX" id="VWH-qc-QHj"/>
+                                    <constraint firstItem="gV0-jh-pcJ" firstAttribute="width" secondItem="6L4-bp-weO" secondAttribute="width" id="Z8h-UF-5yF"/>
                                     <constraint firstItem="rMZ-8L-Teh" firstAttribute="width" secondItem="P3W-rX-b5Z" secondAttribute="width" id="ZGi-bs-OZz"/>
                                     <constraint firstItem="Qrx-QM-Zgz" firstAttribute="centerX" secondItem="rMZ-8L-Teh" secondAttribute="centerX" id="dzT-Pz-bMo"/>
                                     <constraint firstItem="Qrx-QM-Zgz" firstAttribute="centerY" secondItem="rMZ-8L-Teh" secondAttribute="centerY" id="ggu-MS-vCb"/>
+                                    <constraint firstItem="pf7-ne-Lfy" firstAttribute="width" secondItem="7re-Ye-19F" secondAttribute="width" multiplier="0.7" id="hO7-8v-wam"/>
+                                    <constraint firstItem="gV0-jh-pcJ" firstAttribute="height" secondItem="6L4-bp-weO" secondAttribute="height" id="nkB-lF-Fd7"/>
                                     <constraint firstItem="rMZ-8L-Teh" firstAttribute="height" secondItem="P3W-rX-b5Z" secondAttribute="height" id="pXb-yw-LR1"/>
+                                    <constraint firstItem="pf7-ne-Lfy" firstAttribute="height" secondItem="7re-Ye-19F" secondAttribute="height" multiplier="0.7" id="qBD-7u-LUy"/>
                                     <constraint firstItem="7re-Ye-19F" firstAttribute="leading" secondItem="ren-zH-cVP" secondAttribute="leading" id="rAI-b0-kD1"/>
                                     <constraint firstItem="biU-DI-kCe" firstAttribute="centerY" secondItem="P3W-rX-b5Z" secondAttribute="centerY" id="t4i-Uq-4Z7"/>
+                                    <constraint firstItem="6L4-bp-weO" firstAttribute="height" secondItem="pf7-ne-Lfy" secondAttribute="height" id="uou-wX-5Iw"/>
                                     <constraint firstItem="biU-DI-kCe" firstAttribute="centerX" secondItem="P3W-rX-b5Z" secondAttribute="centerX" id="xYU-c8-T3O"/>
                                     <constraint firstItem="rMZ-8L-Teh" firstAttribute="trailing" secondItem="7re-Ye-19F" secondAttribute="trailing" id="zlo-uj-PsO"/>
                                 </constraints>
@@ -759,7 +820,7 @@ add an activity</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="92" width="343" height="503"/>
+                                <rect key="frame" x="16" y="115" width="343" height="480"/>
                             </view>
                             <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K07-0u-rHm" userLabel="HoursHighlighter" customClass="UIButton">
                                 <rect key="frame" x="0.0" y="611" width="125.5" height="56"/>
@@ -783,9 +844,9 @@ add an activity</string>
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="u3e-73-cb1" secondAttribute="bottom" id="GDI-mI-D5V"/>
                             <constraint firstItem="XtK-rJ-5aZ" firstAttribute="centerY" secondItem="K07-0u-rHm" secondAttribute="centerY" id="HG8-XB-vGH"/>
                             <constraint firstItem="K07-0u-rHm" firstAttribute="top" secondItem="7re-Ye-19F" secondAttribute="top" id="HNQ-iO-6IU"/>
+                            <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="pf7-ne-Lfy" secondAttribute="bottom" id="JO7-Nh-Uvt"/>
                             <constraint firstItem="ren-zH-cVP" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="JRG-Wa-Rd3"/>
                             <constraint firstAttribute="trailing" secondItem="u3e-73-cb1" secondAttribute="trailing" id="Kmf-Se-RVu"/>
-                            <constraint firstItem="2H2-F7-pi3" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" constant="72" id="QUV-5Z-oDD"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="top" secondItem="1mK-UO-1ud" secondAttribute="topMargin" id="SZr-e2-fiw"/>
                             <constraint firstItem="90h-aS-1d6" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="Wkm-K9-h0H"/>
                             <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" constant="16" id="a3w-yQ-ZGx"/>
@@ -796,17 +857,21 @@ add an activity</string>
                             <constraint firstItem="K07-0u-rHm" firstAttribute="width" secondItem="P3W-rX-b5Z" secondAttribute="width" id="kxZ-Bz-Eu0"/>
                             <constraint firstItem="K07-0u-rHm" firstAttribute="height" secondItem="P3W-rX-b5Z" secondAttribute="height" id="mHC-Gk-xE8"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="n1E-5Y-L8X"/>
+                            <constraint firstItem="pf7-ne-Lfy" firstAttribute="top" secondItem="90h-aS-1d6" secondAttribute="bottom" id="q4P-74-fWh"/>
                             <constraint firstAttribute="trailing" secondItem="ren-zH-cVP" secondAttribute="trailing" id="wy4-H4-5p3"/>
                             <constraint firstItem="7re-Ye-19F" firstAttribute="height" secondItem="90h-aS-1d6" secondAttribute="height" id="z5P-8k-Ta8"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allFilterHighlighter" destination="5Gp-oj-Uf1" id="whl-D7-zAR"/>
                         <outlet property="chartsButton" destination="Wjr-o2-Es0" id="VfY-n3-3wB"/>
                         <outlet property="daysHighlighter" destination="P3W-rX-b5Z" id="ZIg-bM-cYz"/>
                         <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
                         <outlet property="hoursHighlighter" destination="K07-0u-rHm" id="Aoh-LQ-SFh"/>
                         <outlet property="lineChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
+                        <outlet property="monthFilterHighlighter" destination="gV0-jh-pcJ" id="hSW-0i-QNs"/>
                         <outlet property="screensHighlighter" destination="rMZ-8L-Teh" id="wQN-g2-05I"/>
+                        <outlet property="weekFilterHighlighter" destination="6L4-bp-weO" id="xb9-VP-7Ut"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UUU-0u-0Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>

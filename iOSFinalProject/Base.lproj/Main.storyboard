@@ -820,7 +820,7 @@ add an activity</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="115" width="343" height="480"/>
+                                <rect key="frame" x="0.0" y="115" width="375" height="480"/>
                             </view>
                             <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K07-0u-rHm" userLabel="HoursHighlighter" customClass="UIButton">
                                 <rect key="frame" x="0.0" y="611" width="125.5" height="56"/>
@@ -838,7 +838,7 @@ add an activity</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="ren-zH-cVP" secondAttribute="bottom" id="6BF-oM-wBs"/>
-                            <constraint firstAttribute="trailing" secondItem="2H2-F7-pi3" secondAttribute="trailing" constant="16" id="9Pf-jX-Jdd"/>
+                            <constraint firstAttribute="trailing" secondItem="2H2-F7-pi3" secondAttribute="trailing" id="9Pf-jX-Jdd"/>
                             <constraint firstItem="ren-zH-cVP" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="CTP-RH-to6"/>
                             <constraint firstItem="K07-0u-rHm" firstAttribute="leading" secondItem="7re-Ye-19F" secondAttribute="leading" id="EFc-cB-v4S"/>
                             <constraint firstItem="1iZ-Tw-7RQ" firstAttribute="top" secondItem="u3e-73-cb1" secondAttribute="bottom" id="GDI-mI-D5V"/>
@@ -849,7 +849,7 @@ add an activity</string>
                             <constraint firstAttribute="trailing" secondItem="u3e-73-cb1" secondAttribute="trailing" id="Kmf-Se-RVu"/>
                             <constraint firstItem="u3e-73-cb1" firstAttribute="top" secondItem="1mK-UO-1ud" secondAttribute="topMargin" id="SZr-e2-fiw"/>
                             <constraint firstItem="90h-aS-1d6" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="Wkm-K9-h0H"/>
-                            <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" constant="16" id="a3w-yQ-ZGx"/>
+                            <constraint firstItem="2H2-F7-pi3" firstAttribute="leading" secondItem="1mK-UO-1ud" secondAttribute="leading" id="a3w-yQ-ZGx"/>
                             <constraint firstItem="90h-aS-1d6" firstAttribute="top" secondItem="7Js-Qd-oiw" secondAttribute="bottom" id="f6I-JC-kp6"/>
                             <constraint firstAttribute="trailing" secondItem="90h-aS-1d6" secondAttribute="trailing" id="hBQ-u3-EiI"/>
                             <constraint firstItem="P3W-rX-b5Z" firstAttribute="top" secondItem="2H2-F7-pi3" secondAttribute="bottom" constant="16" id="isp-Da-9Zg"/>

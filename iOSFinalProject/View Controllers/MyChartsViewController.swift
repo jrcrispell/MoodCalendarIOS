@@ -30,6 +30,9 @@ class MyChartsViewController: UIViewController {
     
     var achievements: Achievements!
     
+    let chartDateFormatter = DateFormatter()
+    
+    
     @IBOutlet weak var daysHighlighter: UIView!
     @IBOutlet weak var screensHighlighter: UIView!
     @IBOutlet weak var hoursHighlighter: UIView!
@@ -50,6 +53,8 @@ class MyChartsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        chartDateFormatter.dateFormat = "M/d"
     
         if (!Reachability.isConnectedToNetwork()) {
             present(Utils.makeSimpleAlert(title: "Not connected", message: "No internet connection, could load charts data."), animated: true, completion: nil)
@@ -132,6 +137,7 @@ class MyChartsViewController: UIViewController {
     
     
     @IBAction func bottomTabTapped(_ sender: UIButton) {
+        selectedDataType = sender.tag
         switch sender.tag {
         case 0:
             print("Hours")
@@ -166,22 +172,73 @@ class MyChartsViewController: UIViewController {
             print("Invalid button tab tapped")
             break;
         }
+        setupLineChart(dataType: selectedDataType)
     }
     
     func setupLineChart(dataType: Int) {
         
         switch dataType {
         case 0 : // Mood Score by Hour
+            moodScoresByHour(filter: selectedFilter)
             break;
         case 1:  // Mood Score By Day
             moodScoresByDay(filter: selectedFilter)
             break;
         case 2:  // Depression Screen scores
+            depressionScores()
             break;
         default: // Shouldn't happen.
             break;
         }
 
+    }
+    
+    func moodScoresByHour(filter: Int) {
+        
+    }
+    
+    func depressionScores() {
+        let scoresDict = achievements.screenScores
+        
+        data = []
+        dataKeys = []
+        var dateStrings: [String] = []
+        
+        // Convert each key to date, then to a shorter string
+        // And add to data array
+        for score in scoresDict {
+            let date = g_dateFormatter.date(from: score.key)!
+            dateStrings.append(chartDateFormatter.string(from: date))
+            data.append(Double(score.value))
+        }
+        lineChartView.xAxis.axisMaximum = Double(data.count)
+        
+        chartsButton.setTitle("Depression Scores", for: .normal)
+        
+        
+        
+        let formatter = LineChartFormatter(dayKeys: dateStrings)
+        let xAxis = XAxis()
+
+        var lineChartEntry  = [ChartDataEntry]()
+
+        for i in 0..<data.count {
+            let point = ChartDataEntry(x: Double(i), y: data[i])
+            lineChartEntry.append(point)
+        }
+        xAxis.valueFormatter = formatter
+        lineChartView.xAxis.valueFormatter = xAxis.valueFormatter
+        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
+        
+        line1.colors = [NSUIColor.white]
+        line1.valueTextColor = UIColor.clear
+        
+        let dataSet = LineChartData()
+        dataSet.addDataSet(line1)
+        
+        //line1.circleRadius = 0.0
+        lineChartView.data = dataSet
+        customizeLineChart(lineChartView: lineChartView, dataType: selectedDataType)
     }
     
     func moodScoresByDay(filter: Int) {
@@ -238,8 +295,6 @@ class MyChartsViewController: UIViewController {
         // Now both data and the keys are sorted correctly.
         
         // Now re-format the keys to a smaller string
-        let chartDateFormatter = DateFormatter()
-        chartDateFormatter.dateFormat = "M/d"
         for date in filteredDates {
             dateStrings.append(chartDateFormatter.string(from: date))
         }
@@ -251,7 +306,6 @@ class MyChartsViewController: UIViewController {
         let formatter = LineChartFormatter(dayKeys: dateStrings)
         
         let xAxis = XAxis()
-        
         var lineChartEntry  = [ChartDataEntry]()
         
         for i in 0..<data.count {
@@ -270,27 +324,56 @@ class MyChartsViewController: UIViewController {
         dataSet.addDataSet(line1)
         
         line1.circleRadius = 0.0
-        
         lineChartView.data = dataSet
+        
+        customizeLineChart(lineChartView: lineChartView, dataType: selectedDataType)
+    }
+    
+    func customizeLineChart(lineChartView: LineChartView, dataType: Int) {
+
+        switch dataType {
+        case 0:
+            lineChartView.rightAxis.axisMaximum = 10
+            lineChartView.leftAxis.axisMaximum = 10
+            break;
+        case 1:
+            lineChartView.rightAxis.axisMaximum = 10
+            lineChartView.leftAxis.axisMaximum = 10
+
+            break;
+        case 2:
+            lineChartView.rightAxis.axisMaximum = 90
+            lineChartView.leftAxis.axisMaximum = 90
+            lineChartView.rightAxis.xOffset = -10
+            lineChartView.leftAxis.xOffset = 20
+            
+
+
+            break;
+        default:
+            break;
+        }
+        
         lineChartView.xAxis.gridColor = Styles.white80Percent
         lineChartView.xAxis.labelPosition = .bottom
-        lineChartView.point
         lineChartView.legend.textColor = UIColor.white
         lineChartView.legend.enabled = false
         lineChartView.xAxis.labelTextColor = UIColor.white
         lineChartView.rightAxis.labelTextColor = UIColor.white
-        lineChartView.rightAxis.axisMaximum = 10
         lineChartView.rightAxis.gridColor = Styles.white80Percent
         lineChartView.leftAxis.gridColor = Styles.white80Percent
         lineChartView.leftAxis.labelTextColor = UIColor.white
-        lineChartView.leftAxis.axisMaximum = 10
         lineChartView.xAxis.axisLineColor = Styles.white80Percent
         lineChartView.xAxis.labelTextColor = UIColor.white
         lineChartView.borderColor = Styles.white80Percent
         lineChartView.gridBackgroundColor = UIColor.clear
+        lineChartView.dragEnabled = false
+        lineChartView.dragXEnabled = false
+        lineChartView.dragYEnabled = false
         
         lineChartView.chartDescription?.text = ""
         lineChartView.noDataText = "No data available"
+        lineChartView.fitScreen()
     }
     
     @objc func handleHome(_ sender: UIButton){

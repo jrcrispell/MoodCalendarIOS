@@ -14,12 +14,22 @@ import Charts
 public class LineChartFormatter: NSObject, IAxisValueFormatter {
     
     var days = ["MON", "TUE", "WED", "THUR", "FRI", "SAT", "SUN"]
+    var dayKeys: [String] = []
+    
+    init(dayKeys: [String]) {
+        super.init()
+        self.dayKeys = dayKeys
+    }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-        if value < 7 {
-        return days[Int(value)]
-        }
-        else {return ""}
+        
+
+        print("checkaroni")
+
+        
+
+        return dayKeys[Int(value)]
+
     }
 }
 

@@ -174,6 +174,21 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
         
+        //createExampleData()
+    }
+    
+    func createExampleData() {
+        
+        let secondsInADay = 86400.0
+        var date = Date(timeIntervalSinceNow: -180 * 86400)
+        
+        for _ in 0...180 {
+            date = date.addingTimeInterval(secondsInADay)
+            for i in 0...23 {
+                let rand = arc4random_uniform(11)
+                Utils.saveNewActivity(startTime: Double(i), endTime: Double(i+1), eventDescription: "Randomized Activity", moodScore: Int(rand), dateKey: g_dateFormatter.string(from: date), viewController: self)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,6 +223,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         else if segue.identifier == "toCharts" {
             guard let chartsView = segue.destination as? MyChartsViewController else {return}
             chartsView.oldSnapshot = menuView.snapshotView.image
+            chartsView.achievements = self.achievements
         }
         else if segue.identifier == "toStats" {
             guard let statsView = segue.destination as? StatsViewController else {return}

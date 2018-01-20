@@ -269,6 +269,8 @@ class Achievements: NSObject {
         
     }
     
+    
+    
     // See if first time using date picker give achievement
     func usedDatePicker() {
         achievementsRef.observeSingleEvent(of: .value) { (snapshot) in

@@ -22,7 +22,15 @@ class MyChartsViewController: UIViewController {
     var snapshotView: UIImageView!
     var menuView: MenuView!
     
-    let data: [Double] = [5, 3, 7, 9, 1, 5, 10]
+    var data: [Double] = [5, 3, 7, 9, 1, 5, 10]
+    var dataKeys: [String] = []
+    
+    var achievements: Achievements!
+    
+    @IBOutlet weak var daysHighlighter: UIView!
+    @IBOutlet weak var screensHighlighter: UIView!
+    @IBOutlet weak var hoursHighlighter: UIView!
+    
     
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -40,6 +48,7 @@ class MyChartsViewController: UIViewController {
         
         setupLineChart()
         
+        // Menu
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         menuView = xibViews?.first as! MenuView
         
@@ -76,12 +85,64 @@ class MyChartsViewController: UIViewController {
         menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
     }
     
+    
+    @IBAction func bottomTabTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            print("Hours")
+            break;
+        case 1:
+            print("Days")
+            break;
+        case 2:
+            print("Screens")
+            break;
+        default:
+            print("Invalid button tab tapped")
+            break;
+        }
+    }
+    
     func setupLineChart() {
         
-        chartsButton.setTitle("Poop", for: .normal
+        data = []
+        dataKeys = []
+        
+        var dates: [Date] = []
+        var dateStrings: [String] = []
+        
+        // Sort the data first
+        // Get dictionary from achievements
+        let scoresDict = achievements.avgMoodScores
+        
+        // Convert each key to a date
+        for day in scoresDict {
+            dates.append(g_dateFormatter.date(from: day.key)!)
+        }
+
+        // Now we can sort the keys
+        dates = dates.sorted()
+
+        // Now use this to sort the data
+        for date in dates {
+            let value = scoresDict[g_dateFormatter.string(from: date)]
+            data.append(value!)
+        }
+        
+        // Now both data and the keys are sorted correctly.
+
+        // Now re-format the keys to a smaller string
+        let chartDateFormatter = DateFormatter()
+        chartDateFormatter.dateFormat = "M/d"
+        for date in dates {
+            dateStrings.append(chartDateFormatter.string(from: date))
+        }
+        
+        
+        chartsButton.setTitle("Average Mood Score", for: .normal
         )
         
-        let formatter = LineChartFormatter()
+        let formatter = LineChartFormatter(dayKeys: dateStrings)
         
         let xAxis = XAxis()
         
@@ -105,13 +166,14 @@ class MyChartsViewController: UIViewController {
         let dataSet = LineChartData()
         dataSet.addDataSet(line1)
         
+        line1.circleRadius = 0.0
+        
         
         
         lineChartView.data = dataSet
         lineChartView.xAxis.gridColor = Styles.white80Percent
         lineChartView.xAxis.labelPosition = .bottom
-        //lineChartView.xAxis.axisMinimum = 0
-        //lineChartView.xAxis.axisMaximum = 10
+        lineChartView.point
         lineChartView.legend.textColor = UIColor.white
         lineChartView.legend.enabled = false
         lineChartView.xAxis.labelTextColor = UIColor.white

@@ -688,11 +688,11 @@ add an activity</string>
                                             <action selector="bottomTabTapped:" destination="Qrx-RK-jKf" eventType="touchUpInside" id="BZ7-r5-qsC"/>
                                         </connections>
                                     </button>
-                                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Ye-19F" userLabel="Tab Bar">
+                                    <view userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7re-Ye-19F" userLabel="Tab Bar">
                                         <rect key="frame" x="0.0" y="591" width="375" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter" customClass="UIButton">
+                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter" customClass="UIButton">
                                         <rect key="frame" x="125" y="591" width="125.5" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -704,7 +704,7 @@ add an activity</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view alpha="0.20000000298023224" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMZ-8L-Teh" userLabel="ScreensHighlighter" customClass="UIButton">
+                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rMZ-8L-Teh" userLabel="ScreensHighlighter" customClass="UIButton">
                                         <rect key="frame" x="249.5" y="591" width="125.5" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -761,7 +761,7 @@ add an activity</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H2-F7-pi3" userLabel="LineChartView" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="16" y="92" width="343" height="503"/>
                             </view>
-                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K07-0u-rHm" userLabel="HoursHighlighter" customClass="UIButton">
+                            <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K07-0u-rHm" userLabel="HoursHighlighter" customClass="UIButton">
                                 <rect key="frame" x="0.0" y="611" width="125.5" height="56"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

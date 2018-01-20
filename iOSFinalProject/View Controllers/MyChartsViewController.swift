@@ -90,12 +90,21 @@ class MyChartsViewController: UIViewController {
         switch sender.tag {
         case 0:
             print("Hours")
+            hoursHighlighter.isHidden = false
+            daysHighlighter.isHidden = true
+            screensHighlighter.isHidden = true
             break;
         case 1:
             print("Days")
+            hoursHighlighter.isHidden = true
+            daysHighlighter.isHidden = false
+            screensHighlighter.isHidden = true
             break;
         case 2:
             print("Screens")
+            hoursHighlighter.isHidden = true
+            daysHighlighter.isHidden = true
+            screensHighlighter.isHidden = false
             break;
         default:
             print("Invalid button tab tapped")

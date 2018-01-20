@@ -51,9 +51,10 @@ class Achievements: NSObject {
     var preventOverflow = false
     
     var daysLogged = 0
-    var moodScores: [Int] = []
+    var avgMoodScores: [String:Double] = [:]
     var moodScoreSum = 0
     var hoursLogged = 0.0
+    var moodScores: [Int] = []
 
     
     
@@ -167,14 +168,17 @@ class Achievements: NSObject {
             guard let daysArray = snapshot.value as? [String:Any] else {return}
             
             self.daysLogged = 0
-            self.moodScores = []
-            self.moodScoreSum = 0
+            self.avgMoodScores = [:]
             self.hoursLogged = 0.0
             
             for day in daysArray {
                 if day.key == "Achievements" {continue}
                 else {
                     self.daysLogged += 1
+        
+                    var daysMoodScoreCount: Double = 0
+                    var daysMoodScoreSum: Double = 0
+                
                     
                     guard let activitiesArray = daysArray[day.key] as? [String:Any] else {return}
                     for activity in activitiesArray {
@@ -184,10 +188,11 @@ class Achievements: NSObject {
                             let endTime = valuesArray["endTime"] as? Double else {return}
                         self.hoursLogged += endTime - startTime
                         self.moodScores.append(moodScore)
+                        daysMoodScoreCount += 1
+                        daysMoodScoreSum += Double(moodScore)
                         self.moodScoreSum += moodScore
                     }
-                    
-
+                    self.avgMoodScores[day.key] = daysMoodScoreSum/daysMoodScoreCount
                     }
                 }
             

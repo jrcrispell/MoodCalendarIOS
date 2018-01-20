@@ -175,6 +175,7 @@ class Achievements: NSObject {
             self.daysLogged = 0
             self.avgMoodScores = [:]
             self.hoursLogged = 0.0
+            self.moodScores = []
             
             
             for day in daysArray {

@@ -56,6 +56,7 @@ class Achievements: NSObject {
     var hoursLogged = 0.0
     var moodScores: [Int] = []
     var screenScores: [String:Int] = [:]
+    var hourScores: [Int:[Int]] = [:]
 
     
     
@@ -175,6 +176,7 @@ class Achievements: NSObject {
             self.avgMoodScores = [:]
             self.hoursLogged = 0.0
             
+            
             for day in daysArray {
                 if day.key == "Achievements" {continue}
                 else {
@@ -190,11 +192,22 @@ class Achievements: NSObject {
                             let moodScore = valuesArray["moodScore"] as? Int,
                             let startTime = valuesArray["startTime"] as? Double,
                             let endTime = valuesArray["endTime"] as? Double else {return}
+                        
                         self.hoursLogged += endTime - startTime
                         self.moodScores.append(moodScore)
                         daysMoodScoreCount += 1
                         daysMoodScoreSum += Double(moodScore)
                         self.moodScoreSum += moodScore
+                        
+                        // Populate hourScoresDict to detect average mood score for each hour
+                        let endHour = Int(endTime)
+                        if self.hourScores[endHour] != nil {
+                            self.hourScores[endHour]!.append(moodScore)
+                        }
+                        else {
+                            self.hourScores[endHour] = [moodScore]
+                        }
+                        
                     }
                     self.avgMoodScores[day.key] = daysMoodScoreSum/daysMoodScoreCount
                     }

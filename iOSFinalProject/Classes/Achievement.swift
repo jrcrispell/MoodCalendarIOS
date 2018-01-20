@@ -55,6 +55,7 @@ class Achievements: NSObject {
     var moodScoreSum = 0
     var hoursLogged = 0.0
     var moodScores: [Int] = []
+    var screenScores: [String:Int] = [:]
 
     
     
@@ -128,6 +129,9 @@ class Achievements: NSObject {
                     if achievement.value as! String == "None" {
                         self.expShower.takeDepressionScreen()
                     }
+                }
+                else if achievement.key == "Depression Scores" {
+                    self.screenScores = achievementsDict[achievement.key] as! [String:Int]
                 }
             }
 

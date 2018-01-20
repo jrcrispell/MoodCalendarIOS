@@ -51,6 +51,9 @@ class LoggerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: Hiding emojipicker for now in case I forget to get to it.
+        emojiPicker.isHidden = true
+        
         
         // Database references
         user = Auth.auth().currentUser

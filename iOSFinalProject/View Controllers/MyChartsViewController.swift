@@ -25,6 +25,8 @@ class MyChartsViewController: UIViewController {
     var data: [Double] = [5, 3, 7, 9, 1, 5, 10]
     var dataKeys: [String] = []
     
+    var selectedFilter: Int = 1
+    
     var achievements: Achievements!
     
     @IBOutlet weak var daysHighlighter: UIView!
@@ -33,6 +35,13 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var weekFilterHighlighter: UIView!
     @IBOutlet weak var monthFilterHighlighter: UIView!
     @IBOutlet weak var allFilterHighlighter: UIView!
+    
+    @IBOutlet weak var weekButton: UIButton!
+    @IBOutlet weak var monthButton: UIButton!
+    
+    
+    
+    
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -47,7 +56,7 @@ class MyChartsViewController: UIViewController {
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
         
         
-        setupLineChart()
+        setupLineChart(dataType: 1)
         
         // Menu
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
@@ -94,18 +103,21 @@ class MyChartsViewController: UIViewController {
             monthFilterHighlighter.isHidden = true
             allFilterHighlighter
                 .isHidden = true
+            selectedFilter = 0
             break;
         case 1:
             print("Month")
             weekFilterHighlighter.isHidden = true
             monthFilterHighlighter.isHidden = false
             allFilterHighlighter.isHidden = true
+            selectedFilter = 1
             break;
         case 2:
             print("All")
             weekFilterHighlighter.isHidden = true
             monthFilterHighlighter.isHidden = true
             allFilterHighlighter.isHidden = false
+            selectedFilter = 2
             break;
         default:
             print("Invalid filter button tab tapped")
@@ -122,18 +134,29 @@ class MyChartsViewController: UIViewController {
             hoursHighlighter.isHidden = false
             daysHighlighter.isHidden = true
             screensHighlighter.isHidden = true
+            screensHighlighter.isHidden = true
+            weekButton.isHidden = false
+            monthButton.isHidden = false
             break;
         case 1:
             print("Days")
             hoursHighlighter.isHidden = true
             daysHighlighter.isHidden = false
             screensHighlighter.isHidden = true
+            weekButton.isHidden = false
+            monthButton.isHidden = false
             break;
         case 2:
             print("Screens")
             hoursHighlighter.isHidden = true
             daysHighlighter.isHidden = true
             screensHighlighter.isHidden = false
+            weekButton.isHidden = true
+            monthButton.isHidden = true
+            allFilterHighlighter.isHidden = false
+            selectedFilter = 2
+            weekFilterHighlighter.isHidden = true
+            monthFilterHighlighter.isHidden = true
             break;
         default:
             print("Invalid button tab tapped")
@@ -141,14 +164,28 @@ class MyChartsViewController: UIViewController {
         }
     }
     
-    func setupLineChart() {
+    func setupLineChart(dataType: Int) {
         
-        data = []
-        dataKeys = []
-        
+        switch dataType {
+        case 0 : // Mood Score by Hour
+            break;
+        case 1:  // Mood Score By Day
+            moodScoresByDay()
+            break;
+        case 2:  // Depression Screen scores
+            break;
+        default: // Shouldn't happen.
+            break;
+        }
+
+    }
+    
+    func moodScoresByDay() {
         var dates: [Date] = []
         var dateStrings: [String] = []
         
+        data = []
+        dataKeys = []
         // Sort the data first
         // Get dictionary from achievements
         let scoresDict = achievements.avgMoodScores
@@ -157,10 +194,10 @@ class MyChartsViewController: UIViewController {
         for day in scoresDict {
             dates.append(g_dateFormatter.date(from: day.key)!)
         }
-
+        
         // Now we can sort the keys
         dates = dates.sorted()
-
+        
         // Now use this to sort the data
         for date in dates {
             let value = scoresDict[g_dateFormatter.string(from: date)]
@@ -168,7 +205,7 @@ class MyChartsViewController: UIViewController {
         }
         
         // Now both data and the keys are sorted correctly.
-
+        
         // Now re-format the keys to a smaller string
         let chartDateFormatter = DateFormatter()
         chartDateFormatter.dateFormat = "M/d"
@@ -198,15 +235,10 @@ class MyChartsViewController: UIViewController {
         line1.colors = [NSUIColor.white]
         line1.valueTextColor = UIColor.clear
         
-
-        
-        
         let dataSet = LineChartData()
         dataSet.addDataSet(line1)
         
         line1.circleRadius = 0.0
-        
-        
         
         lineChartView.data = dataSet
         lineChartView.xAxis.gridColor = Styles.white80Percent
@@ -228,7 +260,6 @@ class MyChartsViewController: UIViewController {
         
         lineChartView.chartDescription?.text = ""
         lineChartView.noDataText = "No data available"
-        //lineChartView.drawBordersEnabled = false
     }
     
     @objc func handleHome(_ sender: UIButton){

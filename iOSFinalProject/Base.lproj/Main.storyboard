@@ -692,7 +692,7 @@ add an activity</string>
                                         <rect key="frame" x="0.0" y="591" width="375" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter" customClass="UIButton">
+                                    <view userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3W-rX-b5Z" userLabel="DaysHighlighter" customClass="UIButton">
                                         <rect key="frame" x="125" y="591" width="125.5" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -742,7 +742,7 @@ add an activity</string>
                                         <rect key="frame" x="56" y="56" width="87.5" height="39"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <view hidden="YES" userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gV0-jh-pcJ" userLabel="MonthHighlighter">
+                                    <view userInteractionEnabled="NO" alpha="0.20000000298023224" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gV0-jh-pcJ" userLabel="MonthHighlighter">
                                         <rect key="frame" x="143" y="56" width="87.5" height="39"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -869,8 +869,10 @@ add an activity</string>
                         <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
                         <outlet property="hoursHighlighter" destination="K07-0u-rHm" id="Aoh-LQ-SFh"/>
                         <outlet property="lineChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>
+                        <outlet property="monthButton" destination="hTb-0v-jty" id="zdz-Ze-vHz"/>
                         <outlet property="monthFilterHighlighter" destination="gV0-jh-pcJ" id="hSW-0i-QNs"/>
                         <outlet property="screensHighlighter" destination="rMZ-8L-Teh" id="wQN-g2-05I"/>
+                        <outlet property="weekButton" destination="FlD-VA-jnP" id="Gib-21-e9e"/>
                         <outlet property="weekFilterHighlighter" destination="6L4-bp-weO" id="xb9-VP-7Ut"/>
                     </connections>
                 </viewController>

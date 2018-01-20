@@ -179,11 +179,10 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     
     func createExampleData() {
         
-        let secondsInADay = 86400.0
-        var date = Date(timeIntervalSinceNow: -180 * 86400)
+        var date = Date(timeIntervalSinceNow: -180 * Utils.secondsInADay)
         
         for _ in 0...180 {
-            date = date.addingTimeInterval(secondsInADay)
+            date = date.addingTimeInterval(Utils.secondsInADay)
             for i in 0...23 {
                 let rand = arc4random_uniform(11)
                 Utils.saveNewActivity(startTime: Double(i), endTime: Double(i+1), eventDescription: "Randomized Activity", moodScore: Int(rand), dateKey: g_dateFormatter.string(from: date), viewController: self)

@@ -26,6 +26,7 @@ class MyChartsViewController: UIViewController {
     var dataKeys: [String] = []
     
     var selectedFilter: Int = 1
+    var selectedDataType: Int = 1
     
     var achievements: Achievements!
     
@@ -38,6 +39,8 @@ class MyChartsViewController: UIViewController {
     
     @IBOutlet weak var weekButton: UIButton!
     @IBOutlet weak var monthButton: UIButton!
+    
+    
     
     
     
@@ -123,6 +126,7 @@ class MyChartsViewController: UIViewController {
             print("Invalid filter button tab tapped")
             break;
         }
+        setupLineChart(dataType: selectedDataType)
     }
     
     
@@ -170,7 +174,7 @@ class MyChartsViewController: UIViewController {
         case 0 : // Mood Score by Hour
             break;
         case 1:  // Mood Score By Day
-            moodScoresByDay()
+            moodScoresByDay(filter: selectedFilter)
             break;
         case 2:  // Depression Screen scores
             break;
@@ -180,7 +184,7 @@ class MyChartsViewController: UIViewController {
 
     }
     
-    func moodScoresByDay() {
+    func moodScoresByDay(filter: Int) {
         var dates: [Date] = []
         var dateStrings: [String] = []
         
@@ -198,8 +202,35 @@ class MyChartsViewController: UIViewController {
         // Now we can sort the keys
         dates = dates.sorted()
         
+        var filteredDates: [Date] = []
+        
+        // Now apply the filter
+        switch filter {
+        case 0: // Week
+            for date in dates {
+                if date >= Date(timeIntervalSinceNow: -7*Utils.secondsInADay) {
+                    filteredDates.append(date)
+                }
+            }
+            break;
+        case 1: // Month
+            for date in dates {
+                if date >= Date(timeIntervalSinceNow: -30*Utils.secondsInADay) {
+                    filteredDates.append(date)
+                }
+            }
+            break;
+        case 2: // All time
+            for date in dates {
+                    filteredDates.append(date)
+            }
+            break;
+        default: // Should not happen
+            break;
+        }
+        
         // Now use this to sort the data
-        for date in dates {
+        for date in filteredDates {
             let value = scoresDict[g_dateFormatter.string(from: date)]
             data.append(value!)
         }
@@ -209,7 +240,7 @@ class MyChartsViewController: UIViewController {
         // Now re-format the keys to a smaller string
         let chartDateFormatter = DateFormatter()
         chartDateFormatter.dateFormat = "M/d"
-        for date in dates {
+        for date in filteredDates {
             dateStrings.append(chartDateFormatter.string(from: date))
         }
         

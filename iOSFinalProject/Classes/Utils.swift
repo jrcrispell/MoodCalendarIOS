@@ -12,6 +12,9 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class Utils {
+    
+    static let secondsInADay = 86400.0
+    
     static func makeSimpleAlert(title: String, message: String) -> UIAlertController {
         let errorAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)

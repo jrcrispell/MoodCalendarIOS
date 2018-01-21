@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import FirebaseAuth
 
 class MyChartsViewController: UIViewController {
     
@@ -19,9 +20,7 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var hamburger: UIButton!
     @IBOutlet weak var chartsButton: UIButton!
     
-    var oldSnapshotView: UIImageView!
-    var snapshotView: UIImageView!
-    var menuView: MenuView!
+
     
     var data: [Double] = [5, 3, 7, 9, 1, 5, 10]
     var dataKeys: [String] = []
@@ -47,9 +46,19 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var monthButton: UIButton!
     @IBOutlet weak var allButton: UIButton!
     
+    // Menu
+    var menuView: MenuView!
+    var menuOutsideButton: UIButton!
+    var snapshotView: UIImageView!
+    var backgroundView: UIImageView!
+    var smallSnapshotWidth: CGFloat!
+    var smallSnapshotHeight: CGFloat!
+    var oldSnapshotView: UIImageView!
+
+    
     
     @IBAction func hamburgerTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        makeMenu()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,40 +74,7 @@ class MyChartsViewController: UIViewController {
         setupLineChart(dataType: 1)
         
         // Menu
-        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
-        menuView = xibViews?.first as! MenuView
-        
-        // Set up menu to close
-        let views = menuView.makeViews(superView: view)
-        menuView.homeIcon.alpha = 1.0
-        menuView.homeButton.alpha = 1.0
-        
-        menuView.frame = CGRect(x: 0, y: view.bounds.height / 2 - menuView.smallSnapshotHeight / 2, width: view.bounds.width * 0.6, height: view.bounds.height)
-        
-        view.addSubview(views.0)
-        view.addSubview(views.1)
-        view.addSubview(views.3)
-        view.addSubview(menuView)
-        
-        snapshotView = views.2
-        
-        oldSnapshotView = UIImageView(image: oldSnapshot)
-        
-        menuView.shrinkSnapshot(snapshotView: snapshotView, superViewBounds: view.bounds)
-        
-        menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
-        
-        let containerView = UIView(frame: snapshotView.frame)
-        snapshotView.frame = CGRect(x: 0, y: 0, width: snapshotView.frame.width, height: snapshotView.frame.height)
-        oldSnapshotView.frame = snapshotView.frame
-        
-        containerView.addSubview(snapshotView)
-        containerView.addSubview(oldSnapshotView)
-        menuView.containerView = containerView
-        view.addSubview(containerView)
-        
-        
-        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        animateFromMenu()
     }
     
     @IBAction func filterTabTapped(_ sender: UIButton) {
@@ -474,8 +450,111 @@ class MyChartsViewController: UIViewController {
         lineChartView.fitScreen()
     }
     
+    //MARK: Menu
+    func makeMenu() {
+        
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        
+        menuView = xibViews?.first as! MenuView
+        
+        menuView.setInitialPosition(superViewBounds: view.bounds)
+        
+        let backgroundViews = menuView.makeViews(superView: view)
+        snapshotView = backgroundViews.2
+        
+        self.view.addSubview(backgroundViews.0)
+        self.view.addSubview(backgroundViews.1)
+        self.view.addSubview(backgroundViews.2)
+        self.view.addSubview(backgroundViews.3)
+        self.view.addSubview(menuView)
+        
+        // Set up buttons
+        menuView.homeButton.addTarget(self, action: #selector(handleHome(_:)), for: .touchUpInside)
+        menuView.homeButton.alpha = 1.0
+        menuView.homeIcon.alpha = 1.0
+        menuView.dataVisButton.addTarget(self, action: #selector(handleCharts(_:)), for: .touchUpInside)
+        menuView.settingsButton.addTarget(self, action: #selector(handleSettings(_:)), for: .touchUpInside)
+        menuView.logOutButton.addTarget(self, action: #selector(handleLogOut(_: )), for: .touchUpInside)
+        menuView.menuOutsideButton.addTarget(self, action: #selector(handleMenuOutsideButtonSend(_: ) ), for: .touchUpInside)
+        
+        hamburger.isHidden = true
+        
+        menuView.animateIn()
+    }
+    
+    func closeMenu() {
+        menuView.closeMenu()
+        hamburger.isHidden = false
+    }
+    
+    func animateFromMenu() {
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        menuView = xibViews?.first as! MenuView
+        
+        // Set up menu to close
+        let views = menuView.makeViews(superView: view)
+        menuView.homeIcon.alpha = 1.0
+        menuView.homeButton.alpha = 1.0
+        
+        menuView.frame = CGRect(x: 0, y: view.bounds.height / 2 - menuView.smallSnapshotHeight / 2, width: view.bounds.width * 0.6, height: view.bounds.height)
+        
+        view.addSubview(views.0)
+        view.addSubview(views.1)
+        view.addSubview(views.3)
+        view.addSubview(menuView)
+        
+        snapshotView = views.2
+        
+        oldSnapshotView = UIImageView(image: oldSnapshot)
+        
+        menuView.shrinkSnapshot(snapshotView: snapshotView, superViewBounds: view.bounds)
+        
+        menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
+        
+        let containerView = UIView(frame: snapshotView.frame)
+        snapshotView.frame = CGRect(x: 0, y: 0, width: snapshotView.frame.width, height: snapshotView.frame.height)
+        oldSnapshotView.frame = snapshotView.frame
+        
+        containerView.addSubview(snapshotView)
+        containerView.addSubview(oldSnapshotView)
+        menuView.containerView = containerView
+        view.addSubview(containerView)
+        
+    }
+    
+    //MARK: Menu Selectors
+    @objc func handleLogOut(_ sender: UIButton){
+        closeMenu()
+        logOutTapped(sender)
+    }
+    
+    @objc func handleSettings(_ sender: UIButton){
+        UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+        closeMenu()
+        
+    }
+    
+    @objc func handleCharts(_ sender: UIButton){
+        closeMenu()
+    }
+    
+    @objc func handleMenuOutsideButtonSend(_ sender: UIButton){
+        closeMenu()
+    }
+    
     @objc func handleHome(_ sender: UIButton){
-        dismiss(animated: true, completion: nil)
+        let root = presentingViewController as! CalendarViewController
+        root.oldSnapshot = menuView.snapshotView.image
+        dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func logOutTapped(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        }
+        catch let error as NSError {
+            self.present(Utils.makeSimpleAlert(title: "Sign out error", message: error.localizedDescription), animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

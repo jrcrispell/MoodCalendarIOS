@@ -112,6 +112,9 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     var backgroundView: UIImageView!
     var smallSnapshotWidth: CGFloat!
     var smallSnapshotHeight: CGFloat!
+    var oldSnapshotView: UIImageView!
+    var oldSnapshot: UIImage?
+
     
     @IBOutlet weak var backArrowButton: UIButton!
     
@@ -190,6 +193,15 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if oldSnapshot != nil {
+        UIView.transition(from: oldSnapshotView, to: snapshotView, duration: 0.3, options: .transitionFlipFromLeft) { (finished) in
+            self.menuView.closeAfterFlip()
+            self.oldSnapshot = nil
+        }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         tipView = nil
         editingActivity = nil
@@ -199,6 +211,11 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         precedingEndTime = 0.0
         followingStartTime = 24.0
         hamburger.isHidden = false
+        
+        
+        if oldSnapshot != nil {
+            animateFromMenu()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -234,7 +251,6 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     //MARK: Menu
     
     func makeMenu() {
-        
         
         let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
         
@@ -285,6 +301,41 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
         achievements.expCardVisible = true
         
         animateExpGain(newAchievements: newAchievements)
+        
+    }
+    
+    func animateFromMenu() {
+        let xibViews = Bundle.main.loadNibNamed("MenuView", owner: self, options: nil)
+        menuView = xibViews?.first as! MenuView
+        
+        // Set up menu to close
+        let views = menuView.makeViews(superView: view)
+        menuView.homeIcon.alpha = 1.0
+        menuView.homeButton.alpha = 1.0
+        
+        menuView.frame = CGRect(x: 0, y: view.bounds.height / 2 - menuView.smallSnapshotHeight / 2, width: view.bounds.width * 0.6, height: view.bounds.height)
+        
+        view.addSubview(views.0)
+        view.addSubview(views.1)
+        view.addSubview(views.3)
+        view.addSubview(menuView)
+        
+        snapshotView = views.2
+        
+        oldSnapshotView = UIImageView(image: oldSnapshot)
+        
+        menuView.shrinkSnapshot(snapshotView: snapshotView, superViewBounds: view.bounds)
+        
+        menuView.shrinkSnapshot(snapshotView: oldSnapshotView, superViewBounds: view.bounds)
+        
+        let containerView = UIView(frame: snapshotView.frame)
+        snapshotView.frame = CGRect(x: 0, y: 0, width: snapshotView.frame.width, height: snapshotView.frame.height)
+        oldSnapshotView.frame = snapshotView.frame
+        
+        containerView.addSubview(snapshotView)
+        containerView.addSubview(oldSnapshotView)
+        menuView.containerView = containerView
+        view.addSubview(containerView)
         
     }
     

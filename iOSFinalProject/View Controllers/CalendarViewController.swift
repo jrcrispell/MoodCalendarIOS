@@ -203,6 +203,7 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        updateDate()
         tipView = nil
         editingActivity = nil
         loadEvents()
@@ -631,6 +632,14 @@ class CalendarViewController: UIViewController, ViewControllerDelegate, UIPicker
     func updateDate() {
         datePicker.date = displayedDate
         dateString = g_dateFormatter.string(from: displayedDate)
+        
+        // Check to see if current day, if so add current time line to calendar view
+        if g_dateFormatter.string(from: Date()) == dateString {
+            calendarView.today = true
+        }
+        else {
+            calendarView.today = false
+        }
         dateButton.setTitle(dateString, for: .normal)
     }
     

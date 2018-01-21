@@ -31,8 +31,7 @@ class CalendarView: UIView {
     var hourLabels: [NSString] = []
     
     var daysActivities: [CalendarActivity]?
-
-    
+    var today = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,6 +95,22 @@ class CalendarView: UIView {
         for drawable in activityDrawables {
             drawable.draw()
         }
+        
+        if (today) {
+        
+        let calendar = Calendar.current
+        let currentTime = Utils.dateToTime(calendar: calendar, date: Date())
+        let timeY = Utils.converHourToY(time: currentTime)
+        
+        let currentTimeRectangle = CGRect(x: 0.0, y: timeY, width: Double(self.bounds.width), height: 1)
+        
+        let rectanglePath = UIBezierPath(roundedRect: currentTimeRectangle, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 0, height: 0))
+        rectanglePath.close()
+            UIColor.green.set()
+            rectanglePath.fill()
+        }
+        
+        
     }
 
     public func makeActivityDrawables() {

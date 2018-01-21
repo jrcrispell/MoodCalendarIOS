@@ -331,6 +331,12 @@ add an activity</string>
                                     <!--2017-11-07 21:40:21 +0000-->
                                 </date>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csf-M8-TTa">
+                                <rect key="frame" x="181.5" y="264" width="12" height="31.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Activity Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ie5-Jp-XQw">
                                 <rect key="frame" x="16" y="126.5" width="343" height="30"/>
                                 <nil key="textColor"/>
@@ -340,8 +346,8 @@ add an activity</string>
                                     <outlet property="delegate" destination="vKY-3Z-Ll0" id="i6E-cq-d8h"/>
                                 </connections>
                             </textField>
-                            <pickerView tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6z-Nl-gGb">
-                                <rect key="frame" x="-4" y="401" width="379" height="216"/>
+                            <pickerView tag="2" contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="J6z-Nl-gGb">
+                                <rect key="frame" x="-4" y="451" width="379" height="120"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vKY-3Z-Ll0" id="cGz-Yp-IsI"/>
                                     <outlet property="delegate" destination="vKY-3Z-Ll0" id="tSL-yA-6zW"/>
@@ -399,7 +405,7 @@ add an activity</string>
                                     <action selector="deleteTapped:" destination="vKY-3Z-Ll0" eventType="touchUpInside" id="amR-BB-MC4"/>
                                 </connections>
                             </button>
-                            <pickerView tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-s1-Kdl">
+                            <pickerView hidden="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-s1-Kdl">
                                 <rect key="frame" x="0.0" y="441" width="106" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -407,19 +413,26 @@ add an activity</string>
                                     <outlet property="delegate" destination="vKY-3Z-Ll0" id="Hxg-HY-rvO"/>
                                 </connections>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csf-M8-TTa">
-                                <rect key="frame" x="181.5" y="264" width="12" height="31.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
-                                <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="0.79807898119999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HappyFace" translatesAutoresizingMaskIntoConstraints="NO" id="xEV-Qh-LpD">
+                                <rect key="frame" x="174.5" y="421" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="BdV-ZE-dVv"/>
+                                    <constraint firstAttribute="width" constant="30" id="bAi-BR-Aan"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SangryFace" translatesAutoresizingMaskIntoConstraints="NO" id="H1x-4K-nVC">
+                                <rect key="frame" x="174.5" y="571" width="30" height="30"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="trailing" secondItem="ie5-Jp-XQw" secondAttribute="trailing" id="2Ky-OP-FNM"/>
                             <constraint firstItem="fJg-Qi-gAR" firstAttribute="leading" secondItem="HoO-HJ-Zd3" secondAttribute="trailing" constant="-379" id="4gX-MV-9q9"/>
                             <constraint firstItem="J6z-Nl-gGb" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" constant="-4" id="5ep-i9-DOL"/>
+                            <constraint firstItem="J6z-Nl-gGb" firstAttribute="top" secondItem="xEV-Qh-LpD" secondAttribute="bottom" id="63d-De-wTZ"/>
                             <constraint firstItem="5CG-im-HGe" firstAttribute="top" secondItem="LSQ-rQ-joE" secondAttribute="bottom" id="6Xq-C9-Zv8"/>
+                            <constraint firstItem="H1x-4K-nVC" firstAttribute="height" secondItem="xEV-Qh-LpD" secondAttribute="height" id="6fQ-Ot-uKi"/>
+                            <constraint firstItem="H1x-4K-nVC" firstAttribute="width" secondItem="xEV-Qh-LpD" secondAttribute="width" id="6gd-f5-Ofk"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="width" secondItem="fJg-Qi-gAR" secondAttribute="width" id="9TP-6Q-sEa"/>
                             <constraint firstItem="ie5-Jp-XQw" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" constant="16" id="9mV-Yw-js3"/>
                             <constraint firstItem="SqN-4O-YzF" firstAttribute="centerX" secondItem="EZW-Ix-PFs" secondAttribute="centerX" id="Bsr-Gv-xuN"/>
@@ -430,6 +443,7 @@ add an activity</string>
                             <constraint firstItem="SqN-4O-YzF" firstAttribute="centerY" secondItem="EZW-Ix-PFs" secondAttribute="centerY" id="GSc-cr-IHz"/>
                             <constraint firstItem="6Iy-1Y-pUn" firstAttribute="top" secondItem="fJg-Qi-gAR" secondAttribute="bottom" constant="42" id="H7k-vs-AED"/>
                             <constraint firstItem="cvE-mJ-4ZQ" firstAttribute="centerY" secondItem="czK-nS-pMk" secondAttribute="centerY" id="I23-X5-Lvb"/>
+                            <constraint firstItem="H1x-4K-nVC" firstAttribute="top" secondItem="J6z-Nl-gGb" secondAttribute="bottom" id="J3p-gp-YKh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6Iy-1Y-pUn" secondAttribute="trailing" constant="16" id="LhN-sY-yzM"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="N1U-mi-vG6"/>
                             <constraint firstItem="csf-M8-TTa" firstAttribute="centerY" secondItem="fJg-Qi-gAR" secondAttribute="centerY" id="NSR-pi-0td"/>
@@ -443,14 +457,17 @@ add an activity</string>
                             <constraint firstItem="6Mh-FD-Jev" firstAttribute="top" secondItem="bhb-re-UU0" secondAttribute="bottom" constant="16" id="a5e-ce-LeV"/>
                             <constraint firstAttribute="trailing" secondItem="HoO-HJ-Zd3" secondAttribute="trailing" id="aaB-wl-f6b"/>
                             <constraint firstAttribute="trailing" secondItem="LSQ-rQ-joE" secondAttribute="trailing" id="dVU-BH-70B"/>
+                            <constraint firstItem="xEV-Qh-LpD" firstAttribute="top" secondItem="6Iy-1Y-pUn" secondAttribute="bottom" constant="8" id="edO-kO-hoI"/>
                             <constraint firstItem="EZW-Ix-PFs" firstAttribute="centerX" secondItem="R3P-AX-ygC" secondAttribute="centerX" id="jU8-EL-BXo"/>
                             <constraint firstAttribute="trailing" secondItem="ie5-Jp-XQw" secondAttribute="trailing" constant="16" id="jhm-3v-sUJ"/>
                             <constraint firstItem="fJg-Qi-gAR" firstAttribute="width" secondItem="LSQ-rQ-joE" secondAttribute="width" multiplier="0.4" id="kdK-rz-qdQ"/>
+                            <constraint firstItem="xEV-Qh-LpD" firstAttribute="centerX" secondItem="J6z-Nl-gGb" secondAttribute="centerX" constant="4" id="kgT-re-iUo"/>
                             <constraint firstItem="6Iy-1Y-pUn" firstAttribute="leading" secondItem="R3P-AX-ygC" secondAttribute="leading" constant="16" id="pb2-QC-xaS"/>
                             <constraint firstItem="czK-nS-pMk" firstAttribute="top" secondItem="ie5-Jp-XQw" secondAttribute="bottom" constant="42" id="qFy-yG-d74"/>
+                            <constraint firstItem="EZW-Ix-PFs" firstAttribute="top" secondItem="H1x-4K-nVC" secondAttribute="bottom" constant="10" id="r4e-qO-j7z"/>
+                            <constraint firstItem="H1x-4K-nVC" firstAttribute="centerX" secondItem="xEV-Qh-LpD" secondAttribute="centerX" id="rJR-6t-WCF"/>
                             <constraint firstItem="fJg-Qi-gAR" firstAttribute="top" secondItem="czK-nS-pMk" secondAttribute="bottom" constant="-12" id="sPE-XV-qTM"/>
                             <constraint firstItem="bhb-re-UU0" firstAttribute="top" secondItem="yth-1i-OGv" secondAttribute="bottom" id="sn5-UW-yZ5"/>
-                            <constraint firstItem="J6z-Nl-gGb" firstAttribute="top" secondItem="6Iy-1Y-pUn" secondAttribute="bottom" constant="-12" id="stf-5Q-zwC"/>
                             <constraint firstItem="HoO-HJ-Zd3" firstAttribute="height" secondItem="fJg-Qi-gAR" secondAttribute="height" id="u4O-Xh-LsN"/>
                             <constraint firstItem="csf-M8-TTa" firstAttribute="centerX" secondItem="LSQ-rQ-joE" secondAttribute="centerX" id="umc-XO-yfM"/>
                             <constraint firstItem="czK-nS-pMk" firstAttribute="centerX" secondItem="fJg-Qi-gAR" secondAttribute="centerX" id="vo8-xK-iZY"/>
@@ -1208,7 +1225,9 @@ add an activity</string>
     </scenes>
     <resources>
         <image name="Date Arrows" width="1019" height="500"/>
+        <image name="HappyFace" width="130" height="130"/>
         <image name="Middle Arrow" width="99" height="500"/>
+        <image name="SangryFace" width="130" height="130"/>
         <image name="background" width="1200" height="1900"/>
     </resources>
     <inferredMetricsTieBreakers>

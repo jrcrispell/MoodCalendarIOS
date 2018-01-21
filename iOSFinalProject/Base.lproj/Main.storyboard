@@ -872,9 +872,11 @@ add an activity</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allButton" destination="Ia7-zO-RiD" id="UiL-Hs-h7D"/>
                         <outlet property="allFilterHighlighter" destination="5Gp-oj-Uf1" id="whl-D7-zAR"/>
                         <outlet property="chartsButton" destination="Wjr-o2-Es0" id="VfY-n3-3wB"/>
                         <outlet property="daysHighlighter" destination="P3W-rX-b5Z" id="ZIg-bM-cYz"/>
+                        <outlet property="filterView" destination="pf7-ne-Lfy" id="3im-H3-rNy"/>
                         <outlet property="hamburger" destination="Lg3-0D-7i2" id="sCb-Im-VeZ"/>
                         <outlet property="hoursHighlighter" destination="K07-0u-rHm" id="Aoh-LQ-SFh"/>
                         <outlet property="lineChartView" destination="2H2-F7-pi3" id="8Zt-gg-Oto"/>

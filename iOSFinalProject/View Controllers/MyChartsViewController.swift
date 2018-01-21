@@ -40,9 +40,13 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var weekFilterHighlighter: UIView!
     @IBOutlet weak var monthFilterHighlighter: UIView!
     @IBOutlet weak var allFilterHighlighter: UIView!
+    @IBOutlet weak var filterView: UIView!
+    
     
     @IBOutlet weak var weekButton: UIButton!
     @IBOutlet weak var monthButton: UIButton!
+    @IBOutlet weak var allButton: UIButton!
+    
     
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -141,14 +145,26 @@ class MyChartsViewController: UIViewController {
             screensHighlighter.isHidden = true
             weekButton.isHidden = false
             monthButton.isHidden = false
+            weekButton.isHidden = true
+            monthButton.isHidden = true
+            allButton.isHidden = true
+            allFilterHighlighter.isHidden = true
+            weekFilterHighlighter.isHidden = true
+            monthFilterHighlighter.isHidden = true
+            filterView.isHidden = true
             break;
         case 1:
             print("Days")
+            selectedFilter = 1
             hoursHighlighter.isHidden = true
             daysHighlighter.isHidden = false
             screensHighlighter.isHidden = true
+            monthFilterHighlighter.isHidden = false
             weekButton.isHidden = false
             monthButton.isHidden = false
+            allButton.isHidden = false
+            filterView.isHidden = false
+
             break;
         case 2:
             print("Screens")
@@ -157,10 +173,12 @@ class MyChartsViewController: UIViewController {
             screensHighlighter.isHidden = false
             weekButton.isHidden = true
             monthButton.isHidden = true
-            allFilterHighlighter.isHidden = false
-            selectedFilter = 2
+            allButton.isHidden = true
+            allFilterHighlighter.isHidden = true
             weekFilterHighlighter.isHidden = true
             monthFilterHighlighter.isHidden = true
+            filterView.isHidden = true
+
             break;
         default:
             print("Invalid button tab tapped")
@@ -190,6 +208,75 @@ class MyChartsViewController: UIViewController {
         lineChartView.isHidden = true
         lineChartView2.isHidden = true
         lineChartView3.isHidden = false
+        
+        let scoresDict = achievements.hourScores
+        data = []
+        dataKeys = []
+        var hourStrings: [String] = []
+        
+        var scoreKeys: [Int] = []
+        for score in scoresDict {
+            scoreKeys.append(score.key)
+        }
+        scoreKeys = scoreKeys.sorted()
+        
+        for key in scoreKeys {
+            let scoreArray = scoresDict[key]!
+            var scoreSum = 0
+            for scoreValue in scoreArray {
+                scoreSum += scoreValue
+            }
+            data.append(Double(scoreSum)/Double(scoreArray.count))
+        
+            
+            var hourString = ""
+            if key == 0 {
+                hourString = "12am"
+            }
+            else if key == 12 {
+                hourString = "12pm"
+            }
+            else if key == 11 || key == 10 {
+                hourString = key.description + "am"
+            }
+                
+                // Adding a space at the beginning so the hours are right-aligned
+            else if key < 10 {
+                hourString = "  " + key.description + "am"
+            }
+            else if key < 22 {
+                hourString = "  " + (key - 12).description + "pm"
+            }
+            else {
+                hourString = (key - 12).description + "pm"
+            }
+            hourStrings.append(hourString)
+    }
+        
+            chartsButton.setTitle("Average Mood Score", for: .normal)
+        
+        let formatter = LineChartFormatter(dayKeys: hourStrings)
+        let xAxis = XAxis()
+        
+        var lineChartEntry  = [ChartDataEntry]()
+        
+        for i in 0..<data.count {
+            let point = ChartDataEntry(x: Double(i), y: data[i])
+            lineChartEntry.append(point)
+        }
+        xAxis.valueFormatter = formatter
+        lineChartView3.xAxis.valueFormatter = xAxis.valueFormatter
+        let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
+        
+        line1.circleRadius = 0.0
+        line1.colors = [NSUIColor.white]
+        line1.valueTextColor = UIColor.clear
+        
+        let dataSet = LineChartData()
+        dataSet.addDataSet(line1)
+        lineChartView3.data = dataSet
+        customizeLineChart(lineChartView: lineChartView3, dataType: selectedDataType)
+
     }
     
     func depressionScores() {
@@ -237,7 +324,7 @@ class MyChartsViewController: UIViewController {
         let dataSet = LineChartData()
         dataSet.addDataSet(line1)
         
-        //line1.circleRadius = 0.0
+        
         lineChartView2.data = dataSet
 
         customizeLineChart(lineChartView: lineChartView2, dataType: selectedDataType)
@@ -327,6 +414,7 @@ class MyChartsViewController: UIViewController {
         
         let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
         
+        line1.circleRadius = 0.0
         line1.colors = [NSUIColor.white]
         line1.valueTextColor = UIColor.clear
         
@@ -341,6 +429,8 @@ class MyChartsViewController: UIViewController {
     }
     
     func customizeLineChart(lineChartView: LineChartView, dataType: Int) {
+        
+        lineChartView.leftAxis.xOffset = 10
 
         switch dataType {
         case 0:
@@ -350,15 +440,12 @@ class MyChartsViewController: UIViewController {
         case 1:
             lineChartView.rightAxis.axisMaximum = 10
             lineChartView.leftAxis.axisMaximum = 10
-
             break;
         case 2:
             lineChartView.rightAxis.axisMaximum = 90
             lineChartView.leftAxis.axisMaximum = 90
-            lineChartView.rightAxis.xOffset = -10
-            lineChartView.leftAxis.xOffset = 20
-            
-
+            lineChartView.leftAxis.xOffset = 9.5
+            lineChartView.rightAxis.xOffset = 4.5
 
             break;
         default:
@@ -370,7 +457,7 @@ class MyChartsViewController: UIViewController {
         lineChartView.legend.textColor = UIColor.white
         lineChartView.legend.enabled = false
         lineChartView.xAxis.labelTextColor = UIColor.white
-        lineChartView.rightAxis.labelTextColor = UIColor.white
+        lineChartView.rightAxis.labelTextColor = UIColor.clear
         lineChartView.rightAxis.gridColor = Styles.white80Percent
         lineChartView.leftAxis.gridColor = Styles.white80Percent
         lineChartView.leftAxis.labelTextColor = UIColor.white

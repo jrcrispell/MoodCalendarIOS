@@ -21,7 +21,15 @@ public class LineChartFormatter: NSObject, IAxisValueFormatter {
     }
     
     public func stringForValue(_ value: Double, axis: AxisBase?) -> String {
-
+        // This fixes depression scores bug (sorta) but breaks mood scores charts.
+        //TODO: - alsdkfjlkasdjf
+        
+        print("stringForValue - value: \(value)")
+        print("dayKeys count: " + dayKeys.count.description)
+    
+        if value > Double(dayKeys.count-1) {
+            return ""
+        }
         return dayKeys[Int(value)]
     }
 }

@@ -14,7 +14,8 @@ class MyChartsViewController: UIViewController {
     var oldSnapshot: UIImage!
     
     @IBOutlet weak var lineChartView: LineChartView!
-    
+    @IBOutlet weak var lineChartView2: LineChartView!
+    @IBOutlet weak var lineChartView3: LineChartView!
     @IBOutlet weak var hamburger: UIButton!
     @IBOutlet weak var chartsButton: UIButton!
     
@@ -43,11 +44,6 @@ class MyChartsViewController: UIViewController {
     @IBOutlet weak var weekButton: UIButton!
     @IBOutlet weak var monthButton: UIButton!
     
-    
-    
-    
-    
-    
     @IBAction func hamburgerTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -62,8 +58,6 @@ class MyChartsViewController: UIViewController {
         }
         
         hamburger.setImage(Utils.defaultMenuImage(), for: UIControlState.normal)
-        
-        
         setupLineChart(dataType: 1)
         
         // Menu
@@ -190,14 +184,20 @@ class MyChartsViewController: UIViewController {
         default: // Shouldn't happen.
             break;
         }
-
     }
     
     func moodScoresByHour(filter: Int) {
-        
+        lineChartView.isHidden = true
+        lineChartView2.isHidden = true
+        lineChartView3.isHidden = false
     }
     
     func depressionScores() {
+        
+        lineChartView.isHidden = true
+        lineChartView2.isHidden = false
+        lineChartView3.isHidden = true
+        
         let scoresDict = achievements.screenScores
         
         data = []
@@ -211,7 +211,8 @@ class MyChartsViewController: UIViewController {
             dateStrings.append(chartDateFormatter.string(from: date))
             data.append(Double(score.value))
         }
-        lineChartView.xAxis.axisMaximum = Double(data.count)
+        lineChartView2.xAxis.axisMaximum = Double(data.count)
+        lineChartView2.xAxis.granularity = 1
         
         chartsButton.setTitle("Depression Scores", for: .normal)
         
@@ -227,7 +228,7 @@ class MyChartsViewController: UIViewController {
             lineChartEntry.append(point)
         }
         xAxis.valueFormatter = formatter
-        lineChartView.xAxis.valueFormatter = xAxis.valueFormatter
+        lineChartView2.xAxis.valueFormatter = xAxis.valueFormatter
         let line1 = LineChartDataSet(values: lineChartEntry, label: "Mood Score")
         
         line1.colors = [NSUIColor.white]
@@ -237,11 +238,20 @@ class MyChartsViewController: UIViewController {
         dataSet.addDataSet(line1)
         
         //line1.circleRadius = 0.0
-        lineChartView.data = dataSet
-        customizeLineChart(lineChartView: lineChartView, dataType: selectedDataType)
+        lineChartView2.data = dataSet
+
+        customizeLineChart(lineChartView: lineChartView2, dataType: selectedDataType)
     }
     
     func moodScoresByDay(filter: Int) {
+        lineChartView.isHidden = false
+        lineChartView2.isHidden = true
+        lineChartView3.isHidden = true
+
+        
+        lineChartView.xAxis.granularity = 1
+
+        
         var dates: [Date] = []
         var dateStrings: [String] = []
         
@@ -325,6 +335,7 @@ class MyChartsViewController: UIViewController {
         
         line1.circleRadius = 0.0
         lineChartView.data = dataSet
+
         
         customizeLineChart(lineChartView: lineChartView, dataType: selectedDataType)
     }

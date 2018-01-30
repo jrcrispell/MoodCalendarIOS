@@ -228,7 +228,7 @@
 				TargetAttributes = {
 					86E242021F7C1A5700C1B63C = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 4KG8K63RLZ;
+						DevelopmentTeam = 3G3E4J52ZN;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
@@ -482,11 +482,14 @@
 			baseConfigurationReference = 350036251DFAE520990B9FC6 /* Pods-iOSFinalProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4KG8K63RLZ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3G3E4J52ZN;
 				INFOPLIST_FILE = iOSFinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lagweaver.MoodCalendarIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lagweaver.MoodCalendarIOS-D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -497,11 +500,14 @@
 			baseConfigurationReference = 47C1A6EB4A75376348F9B7CA /* Pods-iOSFinalProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 4KG8K63RLZ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3G3E4J52ZN;
 				INFOPLIST_FILE = iOSFinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lagweaver.MoodCalendarIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lagweaver.MoodCalendarIOS-D";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
